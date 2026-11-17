@@ -1,0 +1,826 @@
+{
+  "screenshots": [
+    {
+      "theme": "light",
+      "box": [
+        340,
+        262.7265625
+      ],
+      "caption": "New files, templates and folder presets in one place. Actual macOS development build, following your light or dark appearance.",
+      "height": 844,
+      "image": "http://127.0.0.1:4387/images/new-files-light.png",
+      "natural": [
+        2200,
+        1700
+      ],
+      "overflow": false,
+      "width": 390
+    },
+    {
+      "theme": "light",
+      "box": [
+        670,
+        517.7265625
+      ],
+      "caption": "New files, templates and folder presets in one place. Actual macOS development build, following your light or dark appearance.",
+      "height": 1024,
+      "image": "http://127.0.0.1:4387/images/new-files-light.png",
+      "natural": [
+        2200,
+        1700
+      ],
+      "overflow": false,
+      "width": 768
+    },
+    {
+      "theme": "light",
+      "box": [
+        974,
+        752.6328125
+      ],
+      "caption": "New files, templates and folder presets in one place. Actual macOS development build, following your light or dark appearance.",
+      "height": 768,
+      "image": "http://127.0.0.1:4387/images/new-files-light.png",
+      "natural": [
+        2200,
+        1700
+      ],
+      "overflow": false,
+      "width": 1366
+    },
+    {
+      "theme": "light",
+      "box": [
+        974,
+        752.6328125
+      ],
+      "caption": "New files, templates and folder presets in one place. Actual macOS development build, following your light or dark appearance.",
+      "height": 1080,
+      "image": "http://127.0.0.1:4387/images/new-files-light.png",
+      "natural": [
+        2200,
+        1700
+      ],
+      "overflow": false,
+      "width": 1920
+    },
+    {
+      "theme": "dark",
+      "box": [
+        340,
+        262.7265625
+      ],
+      "caption": "New files, templates and folder presets in one place. Actual macOS development build, following your light or dark appearance.",
+      "height": 844,
+      "image": "http://127.0.0.1:4387/images/new-files-dark.png",
+      "natural": [
+        2200,
+        1700
+      ],
+      "overflow": false,
+      "width": 390
+    },
+    {
+      "theme": "dark",
+      "box": [
+        670,
+        517.7265625
+      ],
+      "caption": "New files, templates and folder presets in one place. Actual macOS development build, following your light or dark appearance.",
+      "height": 1024,
+      "image": "http://127.0.0.1:4387/images/new-files-dark.png",
+      "natural": [
+        2200,
+        1700
+      ],
+      "overflow": false,
+      "width": 768
+    },
+    {
+      "theme": "dark",
+      "box": [
+        974,
+        752.6328125
+      ],
+      "caption": "New files, templates and folder presets in one place. Actual macOS development build, following your light or dark appearance.",
+      "height": 768,
+      "image": "http://127.0.0.1:4387/images/new-files-dark.png",
+      "natural": [
+        2200,
+        1700
+      ],
+      "overflow": false,
+      "width": 1366
+    },
+    {
+      "theme": "dark",
+      "box": [
+        974,
+        752.6328125
+      ],
+      "caption": "New files, templates and folder presets in one place. Actual macOS development build, following your light or dark appearance.",
+      "height": 1080,
+      "image": "http://127.0.0.1:4387/images/new-files-dark.png",
+      "natural": [
+        2200,
+        1700
+      ],
+      "overflow": false,
+      "width": 1920
+    }
+  ],
+  "routes": [
+    {
+      "theme": "light",
+      "width": 390,
+      "height": 844,
+      "route": "/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "CloakTools — Small tasks. Less friction."
+    },
+    {
+      "theme": "light",
+      "width": 390,
+      "height": 844,
+      "route": "/install/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Install — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 390,
+      "height": 844,
+      "route": "/privacy/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Privacy policy — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 390,
+      "height": 844,
+      "route": "/support/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Support — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 390,
+      "height": 844,
+      "route": "/source/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Source — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 390,
+      "height": 844,
+      "route": "/license/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "MIT License — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 390,
+      "height": 844,
+      "route": "/404.html",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Page not found — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 768,
+      "height": 1024,
+      "route": "/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "CloakTools — Small tasks. Less friction."
+    },
+    {
+      "theme": "light",
+      "width": 768,
+      "height": 1024,
+      "route": "/install/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Install — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 768,
+      "height": 1024,
+      "route": "/privacy/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Privacy policy — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 768,
+      "height": 1024,
+      "route": "/support/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Support — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 768,
+      "height": 1024,
+      "route": "/source/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Source — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 768,
+      "height": 1024,
+      "route": "/license/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "MIT License — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 768,
+      "height": 1024,
+      "route": "/404.html",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Page not found — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 1366,
+      "height": 768,
+      "route": "/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "CloakTools — Small tasks. Less friction."
+    },
+    {
+      "theme": "light",
+      "width": 1366,
+      "height": 768,
+      "route": "/install/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Install — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 1366,
+      "height": 768,
+      "route": "/privacy/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Privacy policy — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 1366,
+      "height": 768,
+      "route": "/support/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Support — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 1366,
+      "height": 768,
+      "route": "/source/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Source — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 1366,
+      "height": 768,
+      "route": "/license/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "MIT License — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 1366,
+      "height": 768,
+      "route": "/404.html",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Page not found — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "route": "/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "CloakTools — Small tasks. Less friction."
+    },
+    {
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "route": "/install/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Install — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "route": "/privacy/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Privacy policy — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "route": "/support/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Support — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "route": "/source/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Source — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "route": "/license/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "MIT License — CloakTools"
+    },
+    {
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "route": "/404.html",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Page not found — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 390,
+      "height": 844,
+      "route": "/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "CloakTools — Small tasks. Less friction."
+    },
+    {
+      "theme": "dark",
+      "width": 390,
+      "height": 844,
+      "route": "/install/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Install — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 390,
+      "height": 844,
+      "route": "/privacy/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Privacy policy — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 390,
+      "height": 844,
+      "route": "/support/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Support — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 390,
+      "height": 844,
+      "route": "/source/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Source — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 390,
+      "height": 844,
+      "route": "/license/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "MIT License — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 390,
+      "height": 844,
+      "route": "/404.html",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Page not found — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 768,
+      "height": 1024,
+      "route": "/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "CloakTools — Small tasks. Less friction."
+    },
+    {
+      "theme": "dark",
+      "width": 768,
+      "height": 1024,
+      "route": "/install/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Install — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 768,
+      "height": 1024,
+      "route": "/privacy/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Privacy policy — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 768,
+      "height": 1024,
+      "route": "/support/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Support — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 768,
+      "height": 1024,
+      "route": "/source/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Source — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 768,
+      "height": 1024,
+      "route": "/license/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "MIT License — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 768,
+      "height": 1024,
+      "route": "/404.html",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Page not found — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 1366,
+      "height": 768,
+      "route": "/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "CloakTools — Small tasks. Less friction."
+    },
+    {
+      "theme": "dark",
+      "width": 1366,
+      "height": 768,
+      "route": "/install/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Install — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 1366,
+      "height": 768,
+      "route": "/privacy/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Privacy policy — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 1366,
+      "height": 768,
+      "route": "/support/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Support — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 1366,
+      "height": 768,
+      "route": "/source/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Source — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 1366,
+      "height": 768,
+      "route": "/license/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "MIT License — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 1366,
+      "height": 768,
+      "route": "/404.html",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Page not found — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 1920,
+      "height": 1080,
+      "route": "/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "CloakTools — Small tasks. Less friction."
+    },
+    {
+      "theme": "dark",
+      "width": 1920,
+      "height": 1080,
+      "route": "/install/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Install — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 1920,
+      "height": 1080,
+      "route": "/privacy/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Privacy policy — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 1920,
+      "height": 1080,
+      "route": "/support/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Support — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 1920,
+      "height": 1080,
+      "route": "/source/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Source — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 1920,
+      "height": 1080,
+      "route": "/license/",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "MIT License — CloakTools"
+    },
+    {
+      "theme": "dark",
+      "width": 1920,
+      "height": 1080,
+      "route": "/404.html",
+      "badEagerImages": [],
+      "brokenAria": [],
+      "h1": 1,
+      "overflow": false,
+      "title": "Page not found — CloakTools"
+    }
+  ],
+  "enlarged": [
+    {
+      "theme": "light",
+      "width": 320,
+      "height": 568,
+      "captionFits": true,
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 390,
+      "height": 844,
+      "captionFits": true,
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 768,
+      "height": 1024,
+      "captionFits": true,
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1366,
+      "height": 768,
+      "captionFits": true,
+      "overflow": false
+    },
+    {
+      "theme": "dark",
+      "width": 320,
+      "height": 568,
+      "captionFits": true,
+      "overflow": false
+    },
+    {
+      "theme": "dark",
+      "width": 390,
+      "height": 844,
+      "captionFits": true,
+      "overflow": false
+    },
+    {
+      "theme": "dark",
+      "width": 768,
+      "height": 1024,
+      "captionFits": true,
+      "overflow": false
+    },
+    {
+      "theme": "dark",
+      "width": 1366,
+      "height": 768,
+      "captionFits": true,
+      "overflow": false
+    }
+  ],
+  "keyboard": {
+    "enterOpens": true,
+    "escapeCloses": true,
+    "focusReturns": "Menu"
+  },
+  "touch": {
+    "emulated": true,
+    "menuRowHeights": [
+      44,
+      44,
+      44,
+      44,
+      44
+    ]
+  },
+  "scriptDisabled": {
+    "newCaptionPresent": true
+  }
+}

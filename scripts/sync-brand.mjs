@@ -13,6 +13,6 @@ for(const path of ['assets/logo/cloaktools-mark.svg','apps/site/public/cloaktool
 copyFileSync(resolve(root,'assets/icon/Previews/Default-512.png'),resolve(root,'apps/site/public/cloaktools.png'));
 console.log('Synced circular web mark from the native icon layers.');
 
-for (const appearance of ['light', 'dark']) copyFileSync(resolve(root, `assets/screenshots/roadmap-${appearance}.png`), resolve(root, `apps/site/public/images/settings-${appearance}.png`));
+for (const appearance of ['light', 'dark']) copyFileSync(resolve(root, `assets/screenshots/new-files-${appearance}.png`), resolve(root, `apps/site/public/images/new-files-${appearance}.png`));
 // The social card is checked in; regeneration is an explicit design task.
 if (existsSync(resolve(root, 'assets/social/og.png'))) copyFileSync(resolve(root, 'assets/social/og.png'), resolve(root, 'apps/site/public/og.png'));
