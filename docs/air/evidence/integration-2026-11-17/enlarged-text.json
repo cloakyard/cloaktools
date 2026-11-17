@@ -1,0 +1,6450 @@
+[
+  {
+    "route": "/",
+    "theme": "light",
+    "mode": "200% root font",
+    "art": "reduced",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 320,
+      "x": 0,
+      "y": 12670.7734375
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Small tasks.Less friction.",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 568,
+    "issues": [],
+    "links": 21,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 320
+  },
+  {
+    "route": "/",
+    "theme": "light",
+    "mode": "200% root font",
+    "art": "reduced",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 390,
+      "x": 0,
+      "y": 10658.2734375
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Small tasks.Less friction.",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 844,
+    "issues": [],
+    "links": 21,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 390
+  },
+  {
+    "route": "/",
+    "theme": "light",
+    "mode": "200% root font",
+    "art": "reduced",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 21
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 768,
+      "x": 0,
+      "y": 7013.9921875
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Small tasks.Less friction.",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "72px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 1024,
+    "issues": [],
+    "links": 21,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 768
+  },
+  {
+    "route": "/",
+    "theme": "light",
+    "mode": "200% root font",
+    "art": "reduced",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 112,
+      "y": 23
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 24px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 1264,
+      "x": 88,
+      "y": 6494.765625
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Small tasks.Less friction.",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "24px",
+      "minHeight": "72px",
+      "padding": "12px 24px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 900,
+    "issues": [],
+    "links": 21,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 1440
+  },
+  {
+    "route": "/install/",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 320,
+      "x": 0,
+      "y": 83889.3125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Install",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 568,
+    "issues": [],
+    "links": 47,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 320
+  },
+  {
+    "route": "/install/",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 390,
+      "x": 0,
+      "y": 67020.1953125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Install",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 844,
+    "issues": [],
+    "links": 47,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 390
+  },
+  {
+    "route": "/install/",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 21
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 768,
+      "x": 0,
+      "y": 36576.328125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Install",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "72px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 1024,
+    "issues": [],
+    "links": 47,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 768
+  },
+  {
+    "route": "/install/",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 112,
+      "y": 23
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 24px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 1264,
+      "x": 88,
+      "y": 24736.359375
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Install",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "24px",
+      "minHeight": "72px",
+      "padding": "12px 24px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 900,
+    "issues": [],
+    "links": 47,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 1440
+  },
+  {
+    "route": "/privacy/",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 320,
+      "x": 0,
+      "y": 60230.15625
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Privacy policy",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 568,
+    "issues": [],
+    "links": 32,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 320
+  },
+  {
+    "route": "/privacy/",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 390,
+      "x": 0,
+      "y": 48266.234375
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Privacy policy",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 844,
+    "issues": [],
+    "links": 32,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 390
+  },
+  {
+    "route": "/privacy/",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 21
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 768,
+      "x": 0,
+      "y": 25377.2890625
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Privacy policy",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "72px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 1024,
+    "issues": [],
+    "links": 32,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 768
+  },
+  {
+    "route": "/privacy/",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 112,
+      "y": 23
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 24px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 1264,
+      "x": 88,
+      "y": 16726.0546875
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Privacy policy",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "24px",
+      "minHeight": "72px",
+      "padding": "12px 24px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 900,
+    "issues": [],
+    "links": 32,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 1440
+  },
+  {
+    "route": "/support/",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 320,
+      "x": 0,
+      "y": 78359.765625
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Support",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 568,
+    "issues": [],
+    "links": 49,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 320
+  },
+  {
+    "route": "/support/",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 390,
+      "x": 0,
+      "y": 62412.125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Support",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 844,
+    "issues": [],
+    "links": 49,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 390
+  },
+  {
+    "route": "/support/",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 21
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 768,
+      "x": 0,
+      "y": 32942.4609375
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Support",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "72px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 1024,
+    "issues": [],
+    "links": 49,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 768
+  },
+  {
+    "route": "/support/",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 112,
+      "y": 23
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 24px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 1264,
+      "x": 88,
+      "y": 22622.3359375
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Support",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "24px",
+      "minHeight": "72px",
+      "padding": "12px 24px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 900,
+    "issues": [],
+    "links": 49,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 1440
+  },
+  {
+    "route": "/source/",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 320,
+      "x": 0,
+      "y": 19686.578125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Source",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 568,
+    "issues": [],
+    "links": 25,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 320
+  },
+  {
+    "route": "/source/",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 390,
+      "x": 0,
+      "y": 15507.34375
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Source",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 844,
+    "issues": [],
+    "links": 25,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 390
+  },
+  {
+    "route": "/source/",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 21
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 768,
+      "x": 0,
+      "y": 8151
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Source",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "72px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 1024,
+    "issues": [],
+    "links": 25,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 768
+  },
+  {
+    "route": "/source/",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 112,
+      "y": 23
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 24px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 1264,
+      "x": 88,
+      "y": 5603.828125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Source",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "24px",
+      "minHeight": "72px",
+      "padding": "12px 24px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 900,
+    "issues": [],
+    "links": 25,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 1440
+  },
+  {
+    "route": "/license/",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 320,
+      "x": 0,
+      "y": 4225.2578125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "MIT License",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 568,
+    "issues": [],
+    "links": 14,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 320
+  },
+  {
+    "route": "/license/",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 390,
+      "x": 0,
+      "y": 3429.328125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "MIT License",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 844,
+    "issues": [],
+    "links": 14,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 390
+  },
+  {
+    "route": "/license/",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 21
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 768,
+      "x": 0,
+      "y": 1885.265625
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "MIT License",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "72px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 1024,
+    "issues": [],
+    "links": 14,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 768
+  },
+  {
+    "route": "/license/",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 112,
+      "y": 23
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 24px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 1264,
+      "x": 88,
+      "y": 1441.3125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "MIT License",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "24px",
+      "minHeight": "72px",
+      "padding": "12px 24px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 900,
+    "issues": [],
+    "links": 14,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 1440
+  },
+  {
+    "route": "/404.html",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 320,
+      "x": 0,
+      "y": 807.953125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "This page isn’t here.",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 568,
+    "issues": [],
+    "links": 14,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 320
+  },
+  {
+    "route": "/404.html",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 390,
+      "x": 0,
+      "y": 756.7578125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "This page isn’t here.",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 844,
+    "issues": [],
+    "links": 14,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 390
+  },
+  {
+    "route": "/404.html",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 21
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 768,
+      "x": 0,
+      "y": 695.59375
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "This page isn’t here.",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "72px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 1024,
+    "issues": [],
+    "links": 14,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 768
+  },
+  {
+    "route": "/404.html",
+    "theme": "light",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 112,
+      "y": 23
+    },
+    "footer": {
+      "color": "rgb(100, 107, 118)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 24px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 1264,
+      "x": 88,
+      "y": 622
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(82, 91, 104)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "This page isn’t here.",
+    "header": {
+      "color": "rgb(32, 35, 41)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "24px",
+      "minHeight": "72px",
+      "padding": "12px 24px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 900,
+    "issues": [],
+    "links": 14,
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 1440
+  },
+  {
+    "route": "/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "art": "reduced",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 320,
+      "x": 0,
+      "y": 12670.7734375
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Small tasks.Less friction.",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 568,
+    "issues": [],
+    "links": 21,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 320
+  },
+  {
+    "route": "/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "art": "reduced",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 390,
+      "x": 0,
+      "y": 10658.2734375
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Small tasks.Less friction.",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 844,
+    "issues": [],
+    "links": 21,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 390
+  },
+  {
+    "route": "/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "art": "reduced",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 21
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 768,
+      "x": 0,
+      "y": 7013.9921875
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Small tasks.Less friction.",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "72px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 1024,
+    "issues": [],
+    "links": 21,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 768
+  },
+  {
+    "route": "/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "art": "reduced",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 112,
+      "y": 23
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 24px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 1264,
+      "x": 88,
+      "y": 6494.765625
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Small tasks.Less friction.",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "24px",
+      "minHeight": "72px",
+      "padding": "12px 24px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 900,
+    "issues": [],
+    "links": 21,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 1440
+  },
+  {
+    "route": "/install/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 320,
+      "x": 0,
+      "y": 83889.3125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Install",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 568,
+    "issues": [],
+    "links": 47,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 320
+  },
+  {
+    "route": "/install/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 390,
+      "x": 0,
+      "y": 67020.1953125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Install",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 844,
+    "issues": [],
+    "links": 47,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 390
+  },
+  {
+    "route": "/install/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 21
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 768,
+      "x": 0,
+      "y": 36576.328125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Install",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "72px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 1024,
+    "issues": [],
+    "links": 47,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 768
+  },
+  {
+    "route": "/install/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 112,
+      "y": 23
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 24px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 1264,
+      "x": 88,
+      "y": 24736.359375
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Install",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "24px",
+      "minHeight": "72px",
+      "padding": "12px 24px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 900,
+    "issues": [],
+    "links": 47,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 1440
+  },
+  {
+    "route": "/privacy/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 320,
+      "x": 0,
+      "y": 60230.15625
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Privacy policy",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 568,
+    "issues": [],
+    "links": 32,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 320
+  },
+  {
+    "route": "/privacy/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 390,
+      "x": 0,
+      "y": 48266.234375
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Privacy policy",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 844,
+    "issues": [],
+    "links": 32,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 390
+  },
+  {
+    "route": "/privacy/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 21
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 768,
+      "x": 0,
+      "y": 25377.2890625
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Privacy policy",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "72px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 1024,
+    "issues": [],
+    "links": 32,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 768
+  },
+  {
+    "route": "/privacy/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 112,
+      "y": 23
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 24px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 1264,
+      "x": 88,
+      "y": 16726.0546875
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Privacy policy",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "24px",
+      "minHeight": "72px",
+      "padding": "12px 24px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 900,
+    "issues": [],
+    "links": 32,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 1440
+  },
+  {
+    "route": "/support/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 320,
+      "x": 0,
+      "y": 78359.765625
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Support",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 568,
+    "issues": [],
+    "links": 49,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 320
+  },
+  {
+    "route": "/support/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 390,
+      "x": 0,
+      "y": 62412.125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Support",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 844,
+    "issues": [],
+    "links": 49,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 390
+  },
+  {
+    "route": "/support/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 21
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 768,
+      "x": 0,
+      "y": 32942.4609375
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Support",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "72px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 1024,
+    "issues": [],
+    "links": 49,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 768
+  },
+  {
+    "route": "/support/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 112,
+      "y": 23
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 24px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 1264,
+      "x": 88,
+      "y": 22622.3359375
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Support",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "24px",
+      "minHeight": "72px",
+      "padding": "12px 24px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 900,
+    "issues": [],
+    "links": 49,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 1440
+  },
+  {
+    "route": "/source/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 320,
+      "x": 0,
+      "y": 19686.578125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Source",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 568,
+    "issues": [],
+    "links": 25,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 320
+  },
+  {
+    "route": "/source/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 390,
+      "x": 0,
+      "y": 15507.34375
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Source",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 844,
+    "issues": [],
+    "links": 25,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 390
+  },
+  {
+    "route": "/source/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 21
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 768,
+      "x": 0,
+      "y": 8151
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Source",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "72px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 1024,
+    "issues": [],
+    "links": 25,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 768
+  },
+  {
+    "route": "/source/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 112,
+      "y": 23
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 24px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 1264,
+      "x": 88,
+      "y": 5603.828125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "Source",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "24px",
+      "minHeight": "72px",
+      "padding": "12px 24px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 900,
+    "issues": [],
+    "links": 25,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 1440
+  },
+  {
+    "route": "/license/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 320,
+      "x": 0,
+      "y": 4225.2578125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "MIT License",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 568,
+    "issues": [],
+    "links": 14,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 320
+  },
+  {
+    "route": "/license/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 390,
+      "x": 0,
+      "y": 3429.328125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "MIT License",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 844,
+    "issues": [],
+    "links": 14,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 390
+  },
+  {
+    "route": "/license/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 21
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 768,
+      "x": 0,
+      "y": 1885.265625
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "MIT License",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "72px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 1024,
+    "issues": [],
+    "links": 14,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 768
+  },
+  {
+    "route": "/license/",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 112,
+      "y": 23
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 24px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 1264,
+      "x": 88,
+      "y": 1441.3125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "MIT License",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "24px",
+      "minHeight": "72px",
+      "padding": "12px 24px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 900,
+    "issues": [],
+    "links": 14,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 1440
+  },
+  {
+    "route": "/404.html",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 320,
+      "x": 0,
+      "y": 807.953125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "This page isn’t here.",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 568,
+    "issues": [],
+    "links": 14,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 320
+  },
+  {
+    "route": "/404.html",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 16
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 487,
+      "width": 390,
+      "x": 0,
+      "y": 756.7578125
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "This page isn’t here.",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "64px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 844,
+    "issues": [],
+    "links": 14,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 390
+  },
+  {
+    "route": "/404.html",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 16,
+      "y": 21
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 16px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 768,
+      "x": 0,
+      "y": 695.59375
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "This page isn’t here.",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "72px",
+      "padding": "12px 16px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 1024,
+    "issues": [],
+    "links": 14,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 768
+  },
+  {
+    "route": "/404.html",
+    "theme": "dark",
+    "mode": "200% root font",
+    "brand": {
+      "height": 36,
+      "width": 36,
+      "x": 112,
+      "y": 23
+    },
+    "footer": {
+      "color": "rgb(167, 175, 188)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "16px 32px",
+      "minHeight": "0px",
+      "padding": "32px 24px",
+      "radius": "0px",
+      "size": "28px",
+      "weight": "400"
+    },
+    "footerBox": {
+      "height": 355,
+      "width": 1264,
+      "x": 88,
+      "y": 622
+    },
+    "footerLinks": [
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "/privacy/",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Privacy",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Source",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "MIT license",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://cloakyard.com",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Cloakyard",
+        "weight": "500"
+      },
+      {
+        "color": "rgb(182, 190, 203)",
+        "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "gap": "8px",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "minHeight": "44px",
+        "padding": "8px 0px",
+        "radius": "0px",
+        "size": "28px",
+        "text": "Buy me a coffee",
+        "weight": "500"
+      }
+    ],
+    "h1": "This page isn’t here.",
+    "header": {
+      "color": "rgb(241, 243, 247)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "24px",
+      "minHeight": "72px",
+      "padding": "12px 24px",
+      "radius": "0px",
+      "size": "32px",
+      "weight": "400"
+    },
+    "height": 900,
+    "issues": [],
+    "links": 14,
+    "primary": {
+      "color": "rgb(24, 33, 46)",
+      "font": "-apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "gap": "8px",
+      "minHeight": "40px",
+      "padding": "8px 16px",
+      "radius": "10px",
+      "size": "28px",
+      "weight": "500"
+    },
+    "touch": false,
+    "width": 1440
+  }
+]

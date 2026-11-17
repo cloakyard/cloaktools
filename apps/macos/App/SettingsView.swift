@@ -272,6 +272,9 @@ struct SettingsView: View {
             }
             Section("Learn more") {
                 Link("tools.cloakyard.com", destination: URL(string: "https://tools.cloakyard.com")!)
+                Link(destination: AppLinks.support) {
+                    Label("Buy me a coffee", systemImage: "cup.and.saucer")
+                }
                 Text("MIT License. See the repository for source, privacy, contributions, and the roadmap.")
             }
         }

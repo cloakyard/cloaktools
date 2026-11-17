@@ -1,4 +1,5 @@
 @import "./air.css";
+@import "./artwork.css";
 
 /* Site composition. The portable Air stylesheet owns all shared visual values. */
 *,
@@ -171,8 +172,6 @@ summary:focus-visible {
 .product-preview img {
   width: 100%;
   height: auto;
-  /* Match the captured window corners as the screenshot scales on smaller screens. */
-  border-radius: 2% / 3%;
 }
 figcaption {
   margin-top: var(--air-space-12);
@@ -406,24 +405,5 @@ h3 {
 .privacy-copy p + p, .privacy-copy > a { margin-top: var(--air-space-24); }
 .install > .detail + .detail { margin-top: var(--air-space-16); }
 .reading-body pre { overflow-x: auto; padding: var(--air-space-16); background: var(--air-surface-soft); border-radius: var(--air-radius-panel); }
-.reading-body table { display: block; max-width: 100%; overflow-x: auto; }
-.reading-body :is(th,td) { padding: var(--air-space-8); border-bottom: 1px solid var(--air-line); text-align: start; }
 .release-note { margin-top: var(--air-space-16); }
 @container (max-width: 40rem) { .wide-break { display: none; } }
-
-/* Original, finite file-preparation artwork. No simulated app controls. */
-.tools-artwork { height: 250px; position: relative; margin-top: var(--air-space-8); overflow: clip; }
-.tools-scene { position: absolute; width: 468px; height: 210px; left: 50%; top: 50%; transform: translate(-50%,-50%) scale(var(--tools-scale,1)); }
-.tool-paper { position: absolute; width: 116px; height: 148px; top: 18px; border: 1px solid var(--air-paper-line); border-radius: 5px 22px 5px 5px; background: #fff; box-shadow: 0 6px 14px #15243c0b; display: grid; place-content: center; gap: 12px; }
-.tool-paper::after { content: ''; position: absolute; right: -1px; top: -1px; width: 22px; height: 22px; background: #f0f2f6; border-left: 1px solid var(--air-paper-line); border-bottom: 1px solid var(--air-paper-line); border-radius: 0 20px 0 4px; }
-.tool-paper svg { width: 46px; height: 46px; margin: auto; }
-.tool-paper span { font: 500 12px/1.4 var(--air-font-mono); color: var(--air-paper-ink); }
-.paper-create { left: 28px; transform: translateY(9px) rotate(-7deg); }
-.paper-image { left: 176px; transform: translateY(-3px); }
-.paper-link { left: 324px; transform: translateY(9px) rotate(7deg); }
-.tools-track { position: absolute; bottom: 14px; left: 24px; right: 24px; height: 18px; border: 1px solid var(--air-line); border-top: 0; border-radius: 0 0 12px 12px; }
-.tools-track::before { content: ''; position: absolute; top: 5px; height: 2px; width: 40px; left: calc(50% - 20px); background: var(--air-accent); border-radius: 2px; }
-@container (max-width: 40rem) { .tools-artwork { height: 195px; } .tools-scene { --tools-scale: .7; } }
-@container (max-width: 24rem) { .tools-scene { --tools-scale: .6; } }
-@media (max-height: 500px) and (orientation: landscape) { .tools-artwork { height: 150px; } .tools-scene { --tools-scale: .65; } }
-@media (forced-colors: active) { .tool-paper, .tools-track { border-color: CanvasText; } .tools-track::before { background: Highlight; } }

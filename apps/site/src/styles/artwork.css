@@ -1,0 +1,19 @@
+/* Decorative content exception; see DESIGN.md and the surface inventory. */
+.tools-artwork { height: 250px; position: relative; margin-top: var(--air-space-8); overflow: clip; }
+.tools-scene { position: absolute; width: 468px; height: 210px; left: 50%; top: 50%; transform: translate(-50%,-50%) scale(var(--tools-scale,1)); }
+.tool-paper { position: absolute; width: 116px; height: 148px; top: 18px; border: 1px solid var(--air-paper-line); border-radius: 5px 22px 5px 5px; background: #fff; box-shadow: 0 6px 14px #15243c0b; display: grid; place-content: center; gap: 12px; }
+.tool-paper::after { content: ''; position: absolute; right: -1px; top: -1px; width: 22px; height: 22px; background: #f0f2f6; border-left: 1px solid var(--air-paper-line); border-bottom: 1px solid var(--air-paper-line); border-radius: 0 20px 0 4px; }
+.tool-paper svg { width: 46px; height: 46px; margin: auto; }
+.tool-paper span { font: 500 12px/1.4 var(--air-font-mono); color: var(--air-paper-ink); }
+.paper-create { left: 28px; transform: translateY(9px) rotate(-7deg); }
+.paper-image { left: 176px; transform: translateY(-3px); }
+.paper-link { left: 324px; transform: translateY(9px) rotate(7deg); }
+.tools-track { position: absolute; bottom: 14px; left: 24px; right: 24px; height: 18px; border: 1px solid var(--air-line); border-top: 0; border-radius: 0 0 12px 12px; }
+.tools-track::before { content: ''; position: absolute; top: 5px; height: 2px; width: 40px; left: calc(50% - 20px); background: var(--air-accent); border-radius: 2px; }
+@container (max-width: 40rem) { .tools-artwork { height: 195px; } .tools-scene { --tools-scale: .7; } }
+@container (max-width: 24rem) { .tools-scene { --tools-scale: .6; } }
+@media (max-height: 500px) and (orientation: landscape) { .tools-artwork { height: 150px; } .tools-scene { --tools-scale: .65; } }
+@media (forced-colors: active) { .tool-paper, .tools-track { border-color: CanvasText; } .tools-track::before { background: Highlight; } }
+
+/* Native screenshot pixels retain their actual window corner proportions. */
+.product-preview img { border-radius: 2% / 3%; }
