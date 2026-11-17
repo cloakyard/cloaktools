@@ -1,0 +1,3628 @@
+[
+  {
+    "app": "tools",
+    "route": "/",
+    "theme": "light",
+    "links": [
+      {
+        "label": "Skip to content",
+        "href": "#main",
+        "normal": "rgb(255, 255, 255)",
+        "focus": "rgb(255, 255, 255)",
+        "neutral": true
+      },
+      {
+        "label": "CloakTools",
+        "href": "/",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "Product",
+        "href": "#product",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Craft",
+        "href": "#provenance",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "#privacy",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Download",
+        "href": "#download",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Get CloakTools",
+        "href": "#download",
+        "normal": "rgb(255, 255, 255)",
+        "focus": "rgb(255, 255, 255)",
+        "neutral": true
+      },
+      {
+        "label": "Explore features",
+        "href": "#product",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "See what’s being built",
+        "href": "/source/",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "Read the privacy policy",
+        "href": "/privacy/",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "Build the development preview",
+        "href": "/install/",
+        "normal": "rgb(255, 255, 255)",
+        "focus": "rgb(255, 255, 255)",
+        "neutral": true
+      },
+      {
+        "label": "local build instructions",
+        "href": "/install/",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Get setup help",
+        "href": "/support/",
+        "normal": "rgb(100, 107, 118)",
+        "focus": "rgb(100, 107, 118)",
+        "neutral": true
+      },
+      {
+        "label": "Source and roadmap",
+        "href": "/source/",
+        "normal": "rgb(100, 107, 118)",
+        "focus": "rgb(100, 107, 118)",
+        "neutral": true
+      },
+      {
+        "label": "Sumit Sahoo",
+        "href": "https://github.com/sumitsahoo",
+        "normal": "rgb(100, 107, 118)",
+        "focus": "rgb(100, 107, 118)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/privacy/",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "MIT license",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Cloakyard",
+        "href": "https://cloakyard.com",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Buy me a coffee",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      }
+    ]
+  },
+  {
+    "app": "tools",
+    "route": "/install/",
+    "theme": "light",
+    "links": [
+      {
+        "label": "Skip to content",
+        "href": "#main",
+        "normal": "rgb(255, 255, 255)",
+        "focus": "rgb(255, 255, 255)",
+        "neutral": true
+      },
+      {
+        "label": "CloakTools",
+        "href": "/",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "Product",
+        "href": "/#product",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Craft",
+        "href": "/#provenance",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/#privacy",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Download",
+        "href": "/#download",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Back to CloakTools",
+        "href": "/",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Requirements",
+        "href": "#requirements",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Build and launch",
+        "href": "#build-and-launch",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Choose your tools",
+        "href": "#choose-your-tools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Find your tools",
+        "href": "#find-your-tools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "JSON and Base64",
+        "href": "#json-and-base64",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Sample files",
+        "href": "#sample-files",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Example copies",
+        "href": "#example-copies",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Finder",
+        "href": "#finder",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Saved templates",
+        "href": "#saved-templates",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Folder presets",
+        "href": "#folder-presets",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Create a file set",
+        "href": "#create-a-file-set",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Create QR codes",
+        "href": "#create-qr-codes",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Read QR codes",
+        "href": "#read-qr-codes",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Text cleanup",
+        "href": "#text-cleanup",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Markdown digests",
+        "href": "#markdown-digests",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Save what you copied",
+        "href": "#save-what-you-copied",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Prepare an image",
+        "href": "#prepare-an-image",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Make an image fit",
+        "href": "#make-an-image-fit",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Assemble a PDF",
+        "href": "#assemble-a-pdf",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Organize PDF pages",
+        "href": "#organize-pdf-pages",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Export video or audio",
+        "href": "#export-video-or-audio",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Recreate an export",
+        "href": "#recreate-an-export",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "File lists",
+        "href": "#file-lists",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Copy names and paths",
+        "href": "#copy-names-and-paths",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Links",
+        "href": "#links",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Rules and link testing",
+        "href": "#rules-and-link-testing",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Your apps and fallback",
+        "href": "#your-apps-and-fallback",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Make CloakTools your link handler",
+        "href": "#make-cloaktools-your-link-handler",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "What comes next",
+        "href": "#what-comes-next",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Package a local preview",
+        "href": "#package-a-local-preview",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "source repository",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "/source/",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Support",
+        "href": "/support/",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Sumit Sahoo",
+        "href": "https://github.com/sumitsahoo",
+        "normal": "rgb(100, 107, 118)",
+        "focus": "rgb(100, 107, 118)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/privacy/",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "MIT license",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Cloakyard",
+        "href": "https://cloakyard.com",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Buy me a coffee",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      }
+    ]
+  },
+  {
+    "app": "tools",
+    "route": "/privacy/",
+    "theme": "light",
+    "links": [
+      {
+        "label": "Skip to content",
+        "href": "#main",
+        "normal": "rgb(255, 255, 255)",
+        "focus": "rgb(255, 255, 255)",
+        "neutral": true
+      },
+      {
+        "label": "CloakTools",
+        "href": "/",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "Product",
+        "href": "/#product",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Craft",
+        "href": "/#provenance",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/#privacy",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Download",
+        "href": "/#download",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Back to CloakTools",
+        "href": "/",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Files and settings",
+        "href": "#files-and-settings",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "QR creation",
+        "href": "#qr-creation",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "File lists",
+        "href": "#file-lists",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Developer text tools",
+        "href": "#developer-text-tools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Sample files",
+        "href": "#sample-files",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Example copies",
+        "href": "#example-copies",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Text cleanup",
+        "href": "#text-cleanup",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Markdown digests",
+        "href": "#markdown-digests",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Folder presets",
+        "href": "#folder-presets",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "File sets",
+        "href": "#file-sets",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Export recipes",
+        "href": "#export-recipes",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Shortcuts and Finder folder choices",
+        "href": "#shortcuts-and-finder-folder-choices",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Links and email",
+        "href": "#links-and-email",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Network and diagnostics",
+        "href": "#network-and-diagnostics",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "This website",
+        "href": "#this-website",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Control and removal",
+        "href": "#control-and-removal",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Questions",
+        "href": "#questions",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "QR reading",
+        "href": "#qr-reading",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Sumit Sahoo",
+        "href": "https://github.com/sumitsahoo",
+        "normal": "rgb(100, 107, 118)",
+        "focus": "rgb(100, 107, 118)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/privacy/",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "MIT license",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Cloakyard",
+        "href": "https://cloakyard.com",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Buy me a coffee",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      }
+    ]
+  },
+  {
+    "app": "tools",
+    "route": "/support/",
+    "theme": "light",
+    "links": [
+      {
+        "label": "Skip to content",
+        "href": "#main",
+        "normal": "rgb(255, 255, 255)",
+        "focus": "rgb(255, 255, 255)",
+        "neutral": true
+      },
+      {
+        "label": "CloakTools",
+        "href": "/",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "Product",
+        "href": "/#product",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Craft",
+        "href": "/#provenance",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/#privacy",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Download",
+        "href": "/#download",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Back to CloakTools",
+        "href": "/",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "A tool has moved",
+        "href": "#a-tool-has-moved",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Developer tools or saved items are hidden",
+        "href": "#developer-tools-or-saved-items-are-hidden",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "JSON or Base64 needs attention",
+        "href": "#json-or-base64-needs-attention",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Base64 image could not be decoded or saved",
+        "href": "#base64-image-could-not-be-decoded-or-saved",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Sample Files needs attention",
+        "href": "#sample-files-needs-attention",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Example Copy needs attention",
+        "href": "#example-copy-needs-attention",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "A QR code needs attention",
+        "href": "#a-qr-code-needs-attention",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "A QR code could not be read",
+        "href": "#a-qr-code-could-not-be-read",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Text Cleanup needs attention",
+        "href": "#text-cleanup-needs-attention",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Markdown Digest needs attention",
+        "href": "#markdown-digest-needs-attention",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Finder actions are missing",
+        "href": "#finder-actions-are-missing",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "A file could not be created",
+        "href": "#a-file-could-not-be-created",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "A template could not be imported",
+        "href": "#a-template-could-not-be-imported",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "A folder preset needs attention",
+        "href": "#a-folder-preset-needs-attention",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "A file set needs attention",
+        "href": "#a-file-set-needs-attention",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Clipboard content could not be read",
+        "href": "#clipboard-content-could-not-be-read",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "An image could not be converted",
+        "href": "#an-image-could-not-be-converted",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "An image cannot meet the size limit",
+        "href": "#an-image-cannot-meet-the-size-limit",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "A PDF could not be assembled",
+        "href": "#a-pdf-could-not-be-assembled",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "PDF pages do not match the intended selection",
+        "href": "#pdf-pages-do-not-match-the-intended-selection",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "A media export is unavailable or failed",
+        "href": "#a-media-export-is-unavailable-or-failed",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "An export recipe needs attention",
+        "href": "#an-export-recipe-needs-attention",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "File List needs attention",
+        "href": "#file-list-needs-attention",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "A copied list looks different",
+        "href": "#a-copied-list-looks-different",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "A destination app is missing",
+        "href": "#a-destination-app-is-missing",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "A rule did not open the expected app",
+        "href": "#a-rule-did-not-open-the-expected-app",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "A fallback or pinned app is unavailable",
+        "href": "#a-fallback-or-pinned-app-is-unavailable",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "A default-app change did not complete",
+        "href": "#a-default-app-change-did-not-complete",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "An operation was cancelled",
+        "href": "#an-operation-was-cancelled",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Report a problem",
+        "href": "#report-a-problem",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Shortcuts in the local preview",
+        "href": "#shortcuts-in-the-local-preview",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "GitHub issues",
+        "href": "https://github.com/cloakyard/cloaktools/issues",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "contribution guidance",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/CONTRIBUTING.md",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "security reporting",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/SECURITY.md",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source and release status",
+        "href": "/source/",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Sumit Sahoo",
+        "href": "https://github.com/sumitsahoo",
+        "normal": "rgb(100, 107, 118)",
+        "focus": "rgb(100, 107, 118)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/privacy/",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "MIT license",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Cloakyard",
+        "href": "https://cloakyard.com",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Buy me a coffee",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      }
+    ]
+  },
+  {
+    "app": "tools",
+    "route": "/source/",
+    "theme": "light",
+    "links": [
+      {
+        "label": "Skip to content",
+        "href": "#main",
+        "normal": "rgb(255, 255, 255)",
+        "focus": "rgb(255, 255, 255)",
+        "neutral": true
+      },
+      {
+        "label": "CloakTools",
+        "href": "/",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "Product",
+        "href": "/#product",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Craft",
+        "href": "/#provenance",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/#privacy",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Download",
+        "href": "/#download",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Back to CloakTools",
+        "href": "/",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source is available",
+        "href": "#source-is-available",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Project structure",
+        "href": "#project-structure",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Roadmap",
+        "href": "#roadmap",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Build on what macOS does well",
+        "href": "#build-on-what-macos-does-well",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "License and contributions",
+        "href": "#license-and-contributions",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "CloakTools source repository",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "build guide",
+        "href": "/install/",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "copies text from images with Live Text",
+        "href": "https://support.apple.com/en-gb/guide/preview/prvw625a5b2c/11.0/mac/27",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "batch renaming",
+        "href": "https://support.apple.com/guide/mac-help/rename-files-folders-and-disks-on-mac-mchlp1144/27/mac/27",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "ZIP archives",
+        "href": "https://support.apple.com/guide/mac-help/zip-and-unzip-files-and-folders-on-mac-mchlp2528/mac",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "MIT License",
+        "href": "/license/",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Sumit Sahoo",
+        "href": "https://github.com/sumitsahoo",
+        "normal": "rgb(100, 107, 118)",
+        "focus": "rgb(100, 107, 118)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/privacy/",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "MIT license",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Cloakyard",
+        "href": "https://cloakyard.com",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Buy me a coffee",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      }
+    ]
+  },
+  {
+    "app": "tools",
+    "route": "/license/",
+    "theme": "light",
+    "links": [
+      {
+        "label": "Skip to content",
+        "href": "#main",
+        "normal": "rgb(255, 255, 255)",
+        "focus": "rgb(255, 255, 255)",
+        "neutral": true
+      },
+      {
+        "label": "CloakTools",
+        "href": "/",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "Product",
+        "href": "/#product",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Craft",
+        "href": "/#provenance",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/#privacy",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Download",
+        "href": "/#download",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Back to CloakTools",
+        "href": "/",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Sumit Sahoo",
+        "href": "https://github.com/sumitsahoo",
+        "normal": "rgb(100, 107, 118)",
+        "focus": "rgb(100, 107, 118)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/privacy/",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "MIT license",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Cloakyard",
+        "href": "https://cloakyard.com",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Buy me a coffee",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      }
+    ]
+  },
+  {
+    "app": "tools",
+    "route": "/404.html",
+    "theme": "light",
+    "links": [
+      {
+        "label": "Skip to content",
+        "href": "#main",
+        "normal": "rgb(255, 255, 255)",
+        "focus": "rgb(255, 255, 255)",
+        "neutral": true
+      },
+      {
+        "label": "CloakTools",
+        "href": "/",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "Product",
+        "href": "/#product",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Craft",
+        "href": "/#provenance",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/#privacy",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Download",
+        "href": "/#download",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Back to CloakTools",
+        "href": "/",
+        "normal": "rgb(255, 255, 255)",
+        "focus": "rgb(255, 255, 255)",
+        "neutral": true
+      },
+      {
+        "label": "Sumit Sahoo",
+        "href": "https://github.com/sumitsahoo",
+        "normal": "rgb(100, 107, 118)",
+        "focus": "rgb(100, 107, 118)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/privacy/",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "MIT license",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Cloakyard",
+        "href": "https://cloakyard.com",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Buy me a coffee",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      }
+    ]
+  },
+  {
+    "app": "tools",
+    "route": "/",
+    "theme": "dark",
+    "links": [
+      {
+        "label": "Skip to content",
+        "href": "#main",
+        "normal": "rgb(24, 33, 46)",
+        "focus": "rgb(24, 33, 46)",
+        "neutral": true
+      },
+      {
+        "label": "CloakTools",
+        "href": "/",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "Product",
+        "href": "#product",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Craft",
+        "href": "#provenance",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "#privacy",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Download",
+        "href": "#download",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Get CloakTools",
+        "href": "#download",
+        "normal": "rgb(24, 33, 46)",
+        "focus": "rgb(24, 33, 46)",
+        "neutral": true
+      },
+      {
+        "label": "Explore features",
+        "href": "#product",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "See what’s being built",
+        "href": "/source/",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "Read the privacy policy",
+        "href": "/privacy/",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "Build the development preview",
+        "href": "/install/",
+        "normal": "rgb(24, 33, 46)",
+        "focus": "rgb(24, 33, 46)",
+        "neutral": true
+      },
+      {
+        "label": "local build instructions",
+        "href": "/install/",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Get setup help",
+        "href": "/support/",
+        "normal": "rgb(167, 175, 188)",
+        "focus": "rgb(167, 175, 188)",
+        "neutral": true
+      },
+      {
+        "label": "Source and roadmap",
+        "href": "/source/",
+        "normal": "rgb(167, 175, 188)",
+        "focus": "rgb(167, 175, 188)",
+        "neutral": true
+      },
+      {
+        "label": "Sumit Sahoo",
+        "href": "https://github.com/sumitsahoo",
+        "normal": "rgb(167, 175, 188)",
+        "focus": "rgb(167, 175, 188)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/privacy/",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "MIT license",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Cloakyard",
+        "href": "https://cloakyard.com",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Buy me a coffee",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      }
+    ]
+  },
+  {
+    "app": "tools",
+    "route": "/install/",
+    "theme": "dark",
+    "links": [
+      {
+        "label": "Skip to content",
+        "href": "#main",
+        "normal": "rgb(24, 33, 46)",
+        "focus": "rgb(24, 33, 46)",
+        "neutral": true
+      },
+      {
+        "label": "CloakTools",
+        "href": "/",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "Product",
+        "href": "/#product",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Craft",
+        "href": "/#provenance",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/#privacy",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Download",
+        "href": "/#download",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Back to CloakTools",
+        "href": "/",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Requirements",
+        "href": "#requirements",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Build and launch",
+        "href": "#build-and-launch",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Choose your tools",
+        "href": "#choose-your-tools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Find your tools",
+        "href": "#find-your-tools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "JSON and Base64",
+        "href": "#json-and-base64",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Sample files",
+        "href": "#sample-files",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Example copies",
+        "href": "#example-copies",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Finder",
+        "href": "#finder",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Saved templates",
+        "href": "#saved-templates",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Folder presets",
+        "href": "#folder-presets",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Create a file set",
+        "href": "#create-a-file-set",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Create QR codes",
+        "href": "#create-qr-codes",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Read QR codes",
+        "href": "#read-qr-codes",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Text cleanup",
+        "href": "#text-cleanup",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Markdown digests",
+        "href": "#markdown-digests",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Save what you copied",
+        "href": "#save-what-you-copied",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Prepare an image",
+        "href": "#prepare-an-image",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Make an image fit",
+        "href": "#make-an-image-fit",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Assemble a PDF",
+        "href": "#assemble-a-pdf",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Organize PDF pages",
+        "href": "#organize-pdf-pages",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Export video or audio",
+        "href": "#export-video-or-audio",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Recreate an export",
+        "href": "#recreate-an-export",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "File lists",
+        "href": "#file-lists",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Copy names and paths",
+        "href": "#copy-names-and-paths",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Links",
+        "href": "#links",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Rules and link testing",
+        "href": "#rules-and-link-testing",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Your apps and fallback",
+        "href": "#your-apps-and-fallback",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Make CloakTools your link handler",
+        "href": "#make-cloaktools-your-link-handler",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "What comes next",
+        "href": "#what-comes-next",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Package a local preview",
+        "href": "#package-a-local-preview",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "source repository",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "/source/",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Support",
+        "href": "/support/",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Sumit Sahoo",
+        "href": "https://github.com/sumitsahoo",
+        "normal": "rgb(167, 175, 188)",
+        "focus": "rgb(167, 175, 188)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/privacy/",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "MIT license",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Cloakyard",
+        "href": "https://cloakyard.com",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Buy me a coffee",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      }
+    ]
+  },
+  {
+    "app": "tools",
+    "route": "/privacy/",
+    "theme": "dark",
+    "links": [
+      {
+        "label": "Skip to content",
+        "href": "#main",
+        "normal": "rgb(24, 33, 46)",
+        "focus": "rgb(24, 33, 46)",
+        "neutral": true
+      },
+      {
+        "label": "CloakTools",
+        "href": "/",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "Product",
+        "href": "/#product",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Craft",
+        "href": "/#provenance",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/#privacy",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Download",
+        "href": "/#download",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Back to CloakTools",
+        "href": "/",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Files and settings",
+        "href": "#files-and-settings",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "QR creation",
+        "href": "#qr-creation",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "File lists",
+        "href": "#file-lists",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Developer text tools",
+        "href": "#developer-text-tools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Sample files",
+        "href": "#sample-files",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Example copies",
+        "href": "#example-copies",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Text cleanup",
+        "href": "#text-cleanup",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Markdown digests",
+        "href": "#markdown-digests",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Folder presets",
+        "href": "#folder-presets",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "File sets",
+        "href": "#file-sets",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Export recipes",
+        "href": "#export-recipes",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Shortcuts and Finder folder choices",
+        "href": "#shortcuts-and-finder-folder-choices",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Links and email",
+        "href": "#links-and-email",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Network and diagnostics",
+        "href": "#network-and-diagnostics",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "This website",
+        "href": "#this-website",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Control and removal",
+        "href": "#control-and-removal",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Questions",
+        "href": "#questions",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "QR reading",
+        "href": "#qr-reading",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Sumit Sahoo",
+        "href": "https://github.com/sumitsahoo",
+        "normal": "rgb(167, 175, 188)",
+        "focus": "rgb(167, 175, 188)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/privacy/",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "MIT license",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Cloakyard",
+        "href": "https://cloakyard.com",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Buy me a coffee",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      }
+    ]
+  },
+  {
+    "app": "tools",
+    "route": "/support/",
+    "theme": "dark",
+    "links": [
+      {
+        "label": "Skip to content",
+        "href": "#main",
+        "normal": "rgb(24, 33, 46)",
+        "focus": "rgb(24, 33, 46)",
+        "neutral": true
+      },
+      {
+        "label": "CloakTools",
+        "href": "/",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "Product",
+        "href": "/#product",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Craft",
+        "href": "/#provenance",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/#privacy",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Download",
+        "href": "/#download",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Back to CloakTools",
+        "href": "/",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "A tool has moved",
+        "href": "#a-tool-has-moved",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Developer tools or saved items are hidden",
+        "href": "#developer-tools-or-saved-items-are-hidden",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "JSON or Base64 needs attention",
+        "href": "#json-or-base64-needs-attention",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Base64 image could not be decoded or saved",
+        "href": "#base64-image-could-not-be-decoded-or-saved",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Sample Files needs attention",
+        "href": "#sample-files-needs-attention",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Example Copy needs attention",
+        "href": "#example-copy-needs-attention",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "A QR code needs attention",
+        "href": "#a-qr-code-needs-attention",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "A QR code could not be read",
+        "href": "#a-qr-code-could-not-be-read",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Text Cleanup needs attention",
+        "href": "#text-cleanup-needs-attention",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Markdown Digest needs attention",
+        "href": "#markdown-digest-needs-attention",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Finder actions are missing",
+        "href": "#finder-actions-are-missing",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "A file could not be created",
+        "href": "#a-file-could-not-be-created",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "A template could not be imported",
+        "href": "#a-template-could-not-be-imported",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "A folder preset needs attention",
+        "href": "#a-folder-preset-needs-attention",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "A file set needs attention",
+        "href": "#a-file-set-needs-attention",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Clipboard content could not be read",
+        "href": "#clipboard-content-could-not-be-read",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "An image could not be converted",
+        "href": "#an-image-could-not-be-converted",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "An image cannot meet the size limit",
+        "href": "#an-image-cannot-meet-the-size-limit",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "A PDF could not be assembled",
+        "href": "#a-pdf-could-not-be-assembled",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "PDF pages do not match the intended selection",
+        "href": "#pdf-pages-do-not-match-the-intended-selection",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "A media export is unavailable or failed",
+        "href": "#a-media-export-is-unavailable-or-failed",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "An export recipe needs attention",
+        "href": "#an-export-recipe-needs-attention",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "File List needs attention",
+        "href": "#file-list-needs-attention",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "A copied list looks different",
+        "href": "#a-copied-list-looks-different",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "A destination app is missing",
+        "href": "#a-destination-app-is-missing",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "A rule did not open the expected app",
+        "href": "#a-rule-did-not-open-the-expected-app",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "A fallback or pinned app is unavailable",
+        "href": "#a-fallback-or-pinned-app-is-unavailable",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "A default-app change did not complete",
+        "href": "#a-default-app-change-did-not-complete",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "An operation was cancelled",
+        "href": "#an-operation-was-cancelled",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Report a problem",
+        "href": "#report-a-problem",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Shortcuts in the local preview",
+        "href": "#shortcuts-in-the-local-preview",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "GitHub issues",
+        "href": "https://github.com/cloakyard/cloaktools/issues",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "contribution guidance",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/CONTRIBUTING.md",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "security reporting",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/SECURITY.md",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source and release status",
+        "href": "/source/",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Sumit Sahoo",
+        "href": "https://github.com/sumitsahoo",
+        "normal": "rgb(167, 175, 188)",
+        "focus": "rgb(167, 175, 188)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/privacy/",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "MIT license",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Cloakyard",
+        "href": "https://cloakyard.com",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Buy me a coffee",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      }
+    ]
+  },
+  {
+    "app": "tools",
+    "route": "/source/",
+    "theme": "dark",
+    "links": [
+      {
+        "label": "Skip to content",
+        "href": "#main",
+        "normal": "rgb(24, 33, 46)",
+        "focus": "rgb(24, 33, 46)",
+        "neutral": true
+      },
+      {
+        "label": "CloakTools",
+        "href": "/",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "Product",
+        "href": "/#product",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Craft",
+        "href": "/#provenance",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/#privacy",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Download",
+        "href": "/#download",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Back to CloakTools",
+        "href": "/",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source is available",
+        "href": "#source-is-available",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Project structure",
+        "href": "#project-structure",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Roadmap",
+        "href": "#roadmap",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Build on what macOS does well",
+        "href": "#build-on-what-macos-does-well",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "License and contributions",
+        "href": "#license-and-contributions",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "CloakTools source repository",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "build guide",
+        "href": "/install/",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "copies text from images with Live Text",
+        "href": "https://support.apple.com/en-gb/guide/preview/prvw625a5b2c/11.0/mac/27",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "batch renaming",
+        "href": "https://support.apple.com/guide/mac-help/rename-files-folders-and-disks-on-mac-mchlp1144/27/mac/27",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "ZIP archives",
+        "href": "https://support.apple.com/guide/mac-help/zip-and-unzip-files-and-folders-on-mac-mchlp2528/mac",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "MIT License",
+        "href": "/license/",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Sumit Sahoo",
+        "href": "https://github.com/sumitsahoo",
+        "normal": "rgb(167, 175, 188)",
+        "focus": "rgb(167, 175, 188)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/privacy/",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "MIT license",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Cloakyard",
+        "href": "https://cloakyard.com",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Buy me a coffee",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      }
+    ]
+  },
+  {
+    "app": "tools",
+    "route": "/license/",
+    "theme": "dark",
+    "links": [
+      {
+        "label": "Skip to content",
+        "href": "#main",
+        "normal": "rgb(24, 33, 46)",
+        "focus": "rgb(24, 33, 46)",
+        "neutral": true
+      },
+      {
+        "label": "CloakTools",
+        "href": "/",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "Product",
+        "href": "/#product",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Craft",
+        "href": "/#provenance",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/#privacy",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Download",
+        "href": "/#download",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Back to CloakTools",
+        "href": "/",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Sumit Sahoo",
+        "href": "https://github.com/sumitsahoo",
+        "normal": "rgb(167, 175, 188)",
+        "focus": "rgb(167, 175, 188)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/privacy/",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "MIT license",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Cloakyard",
+        "href": "https://cloakyard.com",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Buy me a coffee",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      }
+    ]
+  },
+  {
+    "app": "tools",
+    "route": "/404.html",
+    "theme": "dark",
+    "links": [
+      {
+        "label": "Skip to content",
+        "href": "#main",
+        "normal": "rgb(24, 33, 46)",
+        "focus": "rgb(24, 33, 46)",
+        "neutral": true
+      },
+      {
+        "label": "CloakTools",
+        "href": "/",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "Product",
+        "href": "/#product",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Craft",
+        "href": "/#provenance",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/#privacy",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Download",
+        "href": "/#download",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Back to CloakTools",
+        "href": "/",
+        "normal": "rgb(24, 33, 46)",
+        "focus": "rgb(24, 33, 46)",
+        "neutral": true
+      },
+      {
+        "label": "Sumit Sahoo",
+        "href": "https://github.com/sumitsahoo",
+        "normal": "rgb(167, 175, 188)",
+        "focus": "rgb(167, 175, 188)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/privacy/",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "MIT license",
+        "href": "https://github.com/cloakyard/cloaktools/blob/main/LICENSE",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Cloakyard",
+        "href": "https://cloakyard.com",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Buy me a coffee",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      }
+    ]
+  },
+  {
+    "app": "yard",
+    "route": "/",
+    "theme": "light",
+    "links": [
+      {
+        "label": "Skip to content",
+        "href": "#main",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "Cloakyard",
+        "href": "/",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "The tools",
+        "href": "#tools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Curiosity",
+        "href": "#experiments",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Our approach",
+        "href": "#principles",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloakyard",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Find your flow",
+        "href": "#tools",
+        "normal": "rgb(255, 255, 255)",
+        "focus": "rgb(255, 255, 255)",
+        "neutral": true
+      },
+      {
+        "label": "Our approach",
+        "href": "#principles",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "Open CloakPDF",
+        "href": "https://pdf.cloakyard.com",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "View CloakPDF source on GitHub",
+        "href": "https://github.com/cloakyard/cloakpdf",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "Open CloakResume",
+        "href": "https://resume.cloakyard.com",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "View CloakResume source on GitHub",
+        "href": "https://github.com/cloakyard/cloakresume",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "Open CloakIMG",
+        "href": "https://img.cloakyard.com",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "View CloakIMG source on GitHub",
+        "href": "https://github.com/cloakyard/cloakimg",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "Open CloakDrop",
+        "href": "https://drop.cloakyard.com",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "View CloakDrop source on GitHub",
+        "href": "https://github.com/cloakyard/cloakdrop",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "Open CloakRoll",
+        "href": "https://roll.cloakyard.com",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "View CloakRoll source on GitHub",
+        "href": "https://github.com/cloakyard/cloakroll",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "Open CloakTools",
+        "href": "https://tools.cloakyard.com",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "View CloakTools source on GitHub",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "Explore KERR",
+        "href": "https://kerr.cloakyard.com",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/kerr",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Build with us",
+        "href": "https://github.com/cloakyard",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "Sumit Sahoo",
+        "href": "https://github.com/sumitsahoo",
+        "normal": "rgb(100, 107, 118)",
+        "focus": "rgb(100, 107, 118)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/?view=privacy",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloakyard",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "MIT license",
+        "href": "https://github.com/cloakyard/cloakyard/blob/main/LICENSE",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "All apps",
+        "href": "/#tools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Buy me a coffee",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      }
+    ]
+  },
+  {
+    "app": "yard",
+    "route": "/?view=privacy",
+    "theme": "light",
+    "links": [
+      {
+        "label": "Skip to content",
+        "href": "#main",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "Cloakyard",
+        "href": "/",
+        "normal": "rgb(32, 35, 41)",
+        "focus": "rgb(32, 35, 41)",
+        "neutral": true
+      },
+      {
+        "label": "The tools",
+        "href": "/#tools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Curiosity",
+        "href": "/#experiments",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Our approach",
+        "href": "/#principles",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloakyard",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Back to Cloakyard",
+        "href": "/",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "What this website does",
+        "href": "#website",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Requests that serve the website",
+        "href": "#requests",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Each app has its own policy",
+        "href": "#apps",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source and questions",
+        "href": "#source",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "website source",
+        "href": "https://github.com/cloakyard/cloakyard",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "ask a question",
+        "href": "https://github.com/cloakyard/cloakyard/issues",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Sumit Sahoo",
+        "href": "https://github.com/sumitsahoo",
+        "normal": "rgb(100, 107, 118)",
+        "focus": "rgb(100, 107, 118)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/?view=privacy",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloakyard",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "MIT license",
+        "href": "https://github.com/cloakyard/cloakyard/blob/main/LICENSE",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "All apps",
+        "href": "/#tools",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      },
+      {
+        "label": "Buy me a coffee",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "normal": "rgb(82, 91, 104)",
+        "focus": "rgb(82, 91, 104)",
+        "neutral": true
+      }
+    ]
+  },
+  {
+    "app": "yard",
+    "route": "/",
+    "theme": "dark",
+    "links": [
+      {
+        "label": "Skip to content",
+        "href": "#main",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "Cloakyard",
+        "href": "/",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "The tools",
+        "href": "#tools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Curiosity",
+        "href": "#experiments",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Our approach",
+        "href": "#principles",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloakyard",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Find your flow",
+        "href": "#tools",
+        "normal": "rgb(24, 33, 46)",
+        "focus": "rgb(24, 33, 46)",
+        "neutral": true
+      },
+      {
+        "label": "Our approach",
+        "href": "#principles",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "Open CloakPDF",
+        "href": "https://pdf.cloakyard.com",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "View CloakPDF source on GitHub",
+        "href": "https://github.com/cloakyard/cloakpdf",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "Open CloakResume",
+        "href": "https://resume.cloakyard.com",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "View CloakResume source on GitHub",
+        "href": "https://github.com/cloakyard/cloakresume",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "Open CloakIMG",
+        "href": "https://img.cloakyard.com",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "View CloakIMG source on GitHub",
+        "href": "https://github.com/cloakyard/cloakimg",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "Open CloakDrop",
+        "href": "https://drop.cloakyard.com",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "View CloakDrop source on GitHub",
+        "href": "https://github.com/cloakyard/cloakdrop",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "Open CloakRoll",
+        "href": "https://roll.cloakyard.com",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "View CloakRoll source on GitHub",
+        "href": "https://github.com/cloakyard/cloakroll",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "Open CloakTools",
+        "href": "https://tools.cloakyard.com",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "View CloakTools source on GitHub",
+        "href": "https://github.com/cloakyard/cloaktools",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "Explore KERR",
+        "href": "https://kerr.cloakyard.com",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/kerr",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Build with us",
+        "href": "https://github.com/cloakyard",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "Sumit Sahoo",
+        "href": "https://github.com/sumitsahoo",
+        "normal": "rgb(167, 175, 188)",
+        "focus": "rgb(167, 175, 188)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/?view=privacy",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloakyard",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "MIT license",
+        "href": "https://github.com/cloakyard/cloakyard/blob/main/LICENSE",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "All apps",
+        "href": "/#tools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Buy me a coffee",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      }
+    ]
+  },
+  {
+    "app": "yard",
+    "route": "/?view=privacy",
+    "theme": "dark",
+    "links": [
+      {
+        "label": "Skip to content",
+        "href": "#main",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "Cloakyard",
+        "href": "/",
+        "normal": "rgb(241, 243, 247)",
+        "focus": "rgb(241, 243, 247)",
+        "neutral": true
+      },
+      {
+        "label": "The tools",
+        "href": "/#tools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Curiosity",
+        "href": "/#experiments",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Our approach",
+        "href": "/#principles",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloakyard",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Back to Cloakyard",
+        "href": "/",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "What this website does",
+        "href": "#website",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Requests that serve the website",
+        "href": "#requests",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Each app has its own policy",
+        "href": "#apps",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source and questions",
+        "href": "#source",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "website source",
+        "href": "https://github.com/cloakyard/cloakyard",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "ask a question",
+        "href": "https://github.com/cloakyard/cloakyard/issues",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Sumit Sahoo",
+        "href": "https://github.com/sumitsahoo",
+        "normal": "rgb(167, 175, 188)",
+        "focus": "rgb(167, 175, 188)",
+        "neutral": true
+      },
+      {
+        "label": "Privacy",
+        "href": "/?view=privacy",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Source",
+        "href": "https://github.com/cloakyard/cloakyard",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "MIT license",
+        "href": "https://github.com/cloakyard/cloakyard/blob/main/LICENSE",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "All apps",
+        "href": "/#tools",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      },
+      {
+        "label": "Buy me a coffee",
+        "href": "https://ko-fi.com/sumitsahoo21",
+        "normal": "rgb(182, 190, 203)",
+        "focus": "rgb(182, 190, 203)",
+        "neutral": true
+      }
+    ]
+  }
+]

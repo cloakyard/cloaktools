@@ -1,6 +1,5 @@
 {
-  "version": "1.7.5",
-  "verification": "AUDIT-2026-11-17.md",
+  "verification": "INTEGRATION-2026-11-17.md",
   "routes": [
     "/",
     "/install/",
@@ -10,7 +9,51 @@
     "/license/",
     "/404.html"
   ],
-  "surfaces": {
+  "states": [
+    "light",
+    "dark",
+    "fine pointer",
+    "coarse pointer",
+    "native menu closed/open",
+    "contents closed/open",
+    "focus-visible",
+    "current location/page",
+    "200% browser zoom",
+    "200% root font",
+    "reduced motion",
+    "forced colors",
+    "no JavaScript",
+    "animation playing/complete/replay",
+    "long prose/code",
+    "minimum width",
+    "short landscape"
+  ],
+  "notApplicable": [
+    "File upload/drop: native app only",
+    "Conversion progress, cancellation and save errors: native app only",
+    "Editor controls and nested dialogs: no web editor",
+    "PWA updates: no service worker",
+    "Shader/WebGPU fallback: no shader dependency"
+  ],
+  "exceptions": [
+    {
+      "scope": "decorative product artwork",
+      "detail": "Fixed white document paper, folded corners, tray geometry and literal illustration colors; no alternate UI skins.",
+      "owner": "maintainer"
+    },
+    {
+      "scope": "actual native captures",
+      "detail": "Native system pixels and window corners remain content; website shell uses Air.",
+      "owner": "maintainer"
+    }
+  ],
+  "remaining": [
+    "Physical devices and additional browser engines",
+    "Spoken screen-reader acceptance",
+    "Native release, signing and tool acceptance remain tracked separately"
+  ],
+  "contractVersion": "1.7.5",
+  "viewCoverage": {
     "identity": [
       "36px mark",
       "18px wordmark",
@@ -61,47 +104,248 @@
       "shared OG/Twitter metadata"
     ]
   },
-  "states": [
-    "light",
-    "dark",
-    "fine pointer",
-    "coarse pointer",
-    "native menu closed/open",
-    "contents closed/open",
-    "focus-visible",
-    "current location/page",
-    "200% browser zoom",
-    "200% root font",
-    "reduced motion",
-    "forced colors",
-    "no JavaScript",
-    "animation playing/complete/replay",
-    "long prose/code",
-    "minimum width",
-    "short landscape"
-  ],
-  "notApplicable": [
-    "File upload/drop: native app only",
-    "Conversion progress, cancellation and save errors: native app only",
-    "Editor controls and nested dialogs: no web editor",
-    "PWA updates: no service worker",
-    "Shader/WebGPU fallback: no shader dependency"
-  ],
-  "exceptions": [
+  "surfaces": [
     {
-      "scope": "decorative product artwork",
-      "detail": "Fixed white document paper, folded corners, tray geometry and literal illustration colors; no alternate UI skins.",
-      "owner": "maintainer"
+      "path": "apps/site/src/components/Brand.astro",
+      "kind": "web-ui",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
     },
     {
-      "scope": "actual native captures",
-      "detail": "Native system pixels and window corners remain content; website shell uses Air.",
-      "owner": "maintainer"
+      "path": "apps/site/src/components/Contents.astro",
+      "kind": "web-ui",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
+    },
+    {
+      "path": "apps/site/src/components/Footer.astro",
+      "kind": "web-ui",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
+    },
+    {
+      "path": "apps/site/src/components/Header.astro",
+      "kind": "web-ui",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
+    },
+    {
+      "path": "apps/site/src/components/Icon.astro",
+      "kind": "web-ui",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
+    },
+    {
+      "path": "apps/site/src/components/ToolArtwork.astro",
+      "kind": "output-preservation",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
+    },
+    {
+      "path": "apps/site/src/data/site.ts",
+      "kind": "web-ui",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
+    },
+    {
+      "path": "apps/site/src/layouts/Base.astro",
+      "kind": "web-ui",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
+    },
+    {
+      "path": "apps/site/src/layouts/BaseLayout.astro",
+      "kind": "web-ui",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
+    },
+    {
+      "path": "apps/site/src/layouts/Reading.astro",
+      "kind": "web-ui",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
+    },
+    {
+      "path": "apps/site/src/lib/reading.ts",
+      "kind": "web-ui",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
+    },
+    {
+      "path": "apps/site/src/pages/404.astro",
+      "kind": "web-ui",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
+    },
+    {
+      "path": "apps/site/src/pages/index.astro",
+      "kind": "web-ui",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
+    },
+    {
+      "path": "apps/site/src/pages/install.md",
+      "kind": "web-ui",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
+    },
+    {
+      "path": "apps/site/src/pages/license.astro",
+      "kind": "web-ui",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
+    },
+    {
+      "path": "apps/site/src/pages/privacy.astro",
+      "kind": "web-ui",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
+    },
+    {
+      "path": "apps/site/src/pages/source.md",
+      "kind": "web-ui",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
+    },
+    {
+      "path": "apps/site/src/pages/support.md",
+      "kind": "web-ui",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
+    },
+    {
+      "path": "apps/site/src/scripts/navigation.ts",
+      "kind": "web-ui",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
+    },
+    {
+      "path": "apps/site/src/styles/air.css",
+      "kind": "web-ui",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
+    },
+    {
+      "path": "apps/site/src/styles/global.css",
+      "kind": "web-ui",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
+    },
+    {
+      "path": "apps/site/src/styles/artwork.css",
+      "kind": "output-preservation",
+      "sourceReviewed": true,
+      "airImplemented": true,
+      "validated": true,
+      "evidence": [
+        "docs/air/AUDIT-2026-11-17.md",
+        "docs/air/INTEGRATION-2026-11-17.md"
+      ]
     }
-  ],
-  "remaining": [
-    "Physical devices and additional browser engines",
-    "Spoken screen-reader acceptance",
-    "Deployment host status codes and live social-crawler refresh"
   ]
 }

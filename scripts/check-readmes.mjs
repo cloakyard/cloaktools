@@ -21,10 +21,10 @@ assert(
 );
 const root = args.length ? resolve(args[1]) : resolve(import.meta.dirname, "..");
 const files = args.length
-  ? ["cloakyard", "cloakpdf", "cloakimg", "cloakresume", "cloakdrop", "cloakroll"].flatMap(
+  ? ["cloakyard", "cloakpdf", "cloakimg", "cloakresume", "cloakdrop", "cloakroll", "cloaktools"].flatMap(
       (app) => [
         `${app}/README.md`,
-        ...(["cloakdrop", "cloakroll"].includes(app) ? [`${app}/apps/site/README.md`] : []),
+        ...(["cloakdrop", "cloakroll", "cloaktools"].includes(app) ? [`${app}/apps/site/README.md`] : []),
       ],
     )
   : ["README.md", "apps/site/README.md"];

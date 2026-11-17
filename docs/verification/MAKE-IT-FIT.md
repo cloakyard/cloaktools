@@ -43,7 +43,7 @@ Home, Install, Support, Source and Privacy describe the fitting workflow and lim
 
 ![Make It Fit setup guide](../../assets/screenshots/make-fit-site-desktop.jpg)
 
-The [format contract](../FORMATS.md), [architecture](../../ARCHITECTURE.md), [design](../../DESIGN.md) and [README](../../README.md) distinguish normal conversion settings from per-operation fitting requirements.
+The [format contract](../FORMATS.md), [architecture](../../ARCHITECTURE.md), [design](../../NATIVE_DESIGN.md) and [README](../../README.md) distinguish normal conversion settings from per-operation fitting requirements.
 
 ## Remaining boundaries
 

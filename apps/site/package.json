@@ -9,10 +9,13 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "verify": "npm run check && npm run build && node scripts/verify-site.mjs && node ../../docs/air/check-social.mjs",
+    "verify": "node ../../scripts/check-air-design.mjs && node ../../scripts/check-air-portability.mjs && npm run check && npm run build && node scripts/verify-site.mjs && node ../../docs/air/check-social.mjs",
     "sync:assets": "node ../../scripts/sync-brand.mjs",
     "predev": "npm run sync:assets",
-    "prebuild": "npm run sync:assets"
+    "prebuild": "npm run sync:assets",
+    "check:worker": "wrangler deploy --dry-run --outdir build/worker",
+    "deploy": "npm run verify && wrangler deploy",
+    "test:air-links": "node ../../scripts/test-air-links.mjs"
   },
   "dependencies": {
     "astro": "7.4.12",
@@ -20,9 +23,11 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
-    "typescript": "6.0.3"
+    "typescript": "6.0.3",
+    "wrangler": "4.162.0"
   },
   "engines": {
     "node": ">=26.0.0"
-  }
+  },
+  "packageManager": "npm@12.2.2"
 }

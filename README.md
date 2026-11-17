@@ -23,7 +23,7 @@
 
 A native macOS toolkit for creating files, preparing copies and opening links in the right app. Everyday tools are included; Developer Tools is an optional first-run choice. The SwiftUI app is separate from its Air website. The capture above shows the actual development app with no personal files.
 
-The source is **0.6.0, build 26**, a local development preview. A public installer and website deployment are still pending. The website link above is the intended canonical address. See [release instructions](docs/RELEASE.md) for the signing boundary and [the usage guide](docs/USAGE.md) for every implemented workflow.
+The source is **0.6.0, build 26**, a local development preview. The website is live at tools.cloakyard.com; a public installer is still pending. See [release instructions](docs/RELEASE.md) for the signing boundary and [the usage guide](docs/USAGE.md) for every implemented workflow.
 
 ## Features
 
@@ -92,6 +92,8 @@ Builds are locally ad-hoc signed and not notarized. Current recorded runtime che
 (cd apps/macos/Packages/CloakToolsCore && GIT_CONFIG_COUNT=0 swift test)
 (cd apps/site && npm ci && npm run verify)
 node scripts/check-readmes.mjs
+node scripts/check-air-design.mjs
+node scripts/check-air-portability.mjs
 ```
 
 The **November 16, 2026** native audit passed **224 core tests and 8 hosted app tests**. This is dated evidence, not a claim that browser checks revalidate native behavior. See [the native audit](docs/verification/ROADMAP-IMPLEMENTATION.md) for exact coverage and remaining gates. Website verification is recorded separately in [the Air audit](docs/air/AUDIT-2026-11-17.md).
@@ -102,7 +104,7 @@ The static website lives in [`apps/site`](apps/site/README.md), with its own ins
 
 ## Design and assets
 
-The website follows the complete portable [Air contract and product appendix](apps/site/DESIGN.md), with a pinned local Air 1.7.5 bundle. [Native design](DESIGN.md) preserves SwiftUI, SF Symbols and macOS conventions.
+The website follows the complete portable [Air contract and product appendix](apps/site/DESIGN.md), with a pinned local Air 1.7.5 bundle. [Native design](NATIVE_DESIGN.md) preserves SwiftUI, SF Symbols and macOS conventions.
 
 [Asset documentation](assets/README.md) owns the editable Icon Composer source, circular web mark, actual light/dark app captures and shared Air social card. The unique finite animation fans three documents into a tool tray, with a static fallback and deliberate replay. Social metadata uses the same 1200 × 630 card recipe as CloakDrop and CloakRoll.
 
@@ -122,15 +124,17 @@ See [architecture](ARCHITECTURE.md), [supported formats](docs/FORMATS.md) and [t
 
 ## Deployment and releases
 
-Maintain only `dev` and `main`. Work on `dev`, verify, then promote the same reviewed changes to `main`. The initial publication keeps both branches at the same verified commit; later pushes and deployment are explicit maintainer actions.
+Maintain only `dev` and `main`. Work on `dev`, verify, then promote the same reviewed changes to `main`. Keep `dev` synchronized with the published revision after each release; pushes and deployment are explicit maintainer actions.
 
-Website hosting and DNS setup are pending. The deployable output is `apps/site/dist`; the host must serve the custom 404 page with HTTP 404. Do not confuse source publication with website deployment.
+The website is hosted on Cloudflare Workers at tools.cloakyard.com. `apps/site/wrangler.jsonc` pins the existing custom domain, static output and HTTP 404 handling. Workers Builds uses `main`, root `apps/site`, build command `npm ci && npm run verify` and deploy command `npx wrangler deploy`. Verified changes promoted from `dev` to `main` publish automatically. `npm run check:worker` in `apps/site` validates the deployment bundle without publishing.
+
+Nonproduction branch builds use `npx wrangler preview` with the checked-in `previews` configuration. Cloudflare publishes the same static site to a branch Preview; only `main` updates tools.cloakyard.com. Production version URLs and workers.dev remain disabled.
 
 Native releases are separate. `python3 scripts/release.py --preview` creates a verified local ZIP; Developer ID signing and notarization remain deferred. See [Release](docs/RELEASE.md). Keep release binaries and generated build output out of source control. Updates are manual.
 
 ## Contributing
 
-Read [Contributing](CONTRIBUTING.md), [native design](DESIGN.md) and the [website design contract](apps/site/DESIGN.md). Preserve user files, keep changes bounded and record actual verification. Compare all applicable website views across phone, tablet, laptop and desktop layouts in both themes. Use [GitHub issues](https://github.com/cloakyard/cloaktools/issues) for reproducible bugs without private data.
+Read [Contributing](CONTRIBUTING.md), [native design](NATIVE_DESIGN.md) and the [website design contract](apps/site/DESIGN.md). Preserve user files, keep changes bounded and record actual verification. Compare all applicable website views across phone, tablet, laptop and desktop layouts in both themes. The About pane’s **Buy me a coffee** link uses the same [Ko-fi destination](https://ko-fi.com/sumitsahoo21) as the family websites and GitHub Sponsor button. Use [GitHub issues](https://github.com/cloakyard/cloaktools/issues) for reproducible bugs without private data.
 
 The [family README standard](https://github.com/cloakyard/cloakyard/blob/main/docs/README_STANDARD.md) defines this section order. Support development through [Buy me a coffee](https://ko-fi.com/sumitsahoo21). Commit messages must not include co-author trailers.
 

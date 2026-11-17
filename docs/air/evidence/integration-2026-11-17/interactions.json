@@ -1,0 +1,4 @@
+{
+  "menu": "Enter opens; Escape closes and returns focus, 44px rows",
+  "contents": "Enter opens; section link updates hash and focuses heading; Escape returns summary focus"
+}

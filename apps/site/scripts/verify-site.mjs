@@ -1,13 +1,10 @@
 import {readFileSync, existsSync} from 'node:fs';
 import {resolve} from 'node:path';
-import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 const root = resolve(import.meta.dirname, '../../..');
-const bundle = JSON.parse(readFileSync(resolve(root, 'docs/air/bundle.json'), 'utf8'));
-for (const [file, hash] of Object.entries(bundle.files)) {
-  assert.equal(createHash('sha256').update(readFileSync(resolve(root, file))).digest('hex'), hash, `Air drift: ${file}`);
-}
-assert.ok(readFileSync(resolve(root, 'apps/site/DESIGN.md'), 'utf8').startsWith(readFileSync(resolve(root, 'docs/air/contract.md'), 'utf8')), 'Standalone website design must contain the complete pinned contract');
+// The canonical standalone checker validates complete contract and bundle provenance.
+const design = readFileSync(resolve(root, 'apps/site/DESIGN.md'), 'utf8');
+assert.equal(design, readFileSync(resolve(root, 'DESIGN.md'), 'utf8'), 'Root and website Air contracts must match');
 assert.doesNotMatch(readFileSync(resolve(root, 'apps/site/src/styles/global.css'), 'utf8'), /--air-[\w-]+\s*:/, 'Product CSS must not override shared Air tokens');
 const dist = resolve(import.meta.dirname, '../dist');
 const pages = ['index.html', 'install/index.html', 'privacy/index.html', 'support/index.html', 'source/index.html', 'license/index.html', '404.html'];
@@ -24,6 +21,9 @@ for (const page of pages) {
   assert.equal((html.match(/<h1[ >]/g) || []).length, 1, `one h1: ${page}`);
   assert.equal((html.match(/<main[ >]/g) || []).length, 1, `one main: ${page}`);
   assert.equal(ids(html).length, new Set(ids(html)).size, `duplicate IDs: ${page}`);
+  for (const [, references] of html.matchAll(/aria-(?:labelledby|describedby)="([^"]+)"/g)) {
+    for (const id of references.split(/\s+/)) assert.ok(ids(html).includes(id), `${page}: dangling ARIA reference ${id}`);
+  }
   assert.match(html, /aria-label="Primary navigation"/);
   assert.match(html, /aria-label="Footer navigation"/);
   assert.equal(html.match(/<footer\b[\s\S]*?<\/footer>/)[0].replace(/ aria-current="page"/g, ''), footer, `Shared footer: ${page}`);
