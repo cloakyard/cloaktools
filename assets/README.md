@@ -1,21 +1,23 @@
 # CloakTools identity and captures
 
-The icon is an original tool tray containing a silver spanner and amber screwdriver, on an ice-colored ground with a cobalt tray. Bold filled shapes and a distinct palette follow Cloakyard's app family without reusing a sibling's pictogram.
+The icon is an original cobalt tool case containing a beveled silver spanner and fluted amber screwdriver, on an ice-colored ground. A recessed rear tray, raised front rim, darker case return and brushed latch give the silhouette depth. Bold filled shapes and a distinct palette follow Cloakyard's app family without reusing a sibling's pictogram.
 
 ## Canonical native source
 
-`icon/CloakTools.icon` is an editable Icon Composer document: six full-canvas 1024 × 1024 SVG foreground layers, native background fill, material/shadow configuration, and dark fill specializations. The artwork is not pre-masked or baked into a rounded PNG. Xcode compiles it directly as the `CloakTools` app icon. macOS supplies its mask, material and lighting.
+`icon/CloakTools.icon` is an editable Icon Composer document: eleven full-canvas 1024 × 1024 SVG layers in three independently shaded depth groups, native background fill, material/shadow configuration, and dark fill specializations. Front-to-back, the groups contain the case/rim/latch, the tools and their facets, and the recessed tray. The artwork is not pre-masked or baked into a rounded PNG. Xcode compiles it directly as the `CloakTools` app icon. macOS supplies its mask, material and lighting.
 
 ```sh
 swift scripts/make-app-icon.swift
 node scripts/sync-brand.mjs
 ```
 
-Run from the repository root. The first command uses Xcode's `ictool` to produce Default, Dark, Clear Light/Dark and Tinted Light/Dark appearance previews, small-size previews and the app's About image set. Native icon compilation does not require manually rerunning the preview generator. The second derives the circular web SVG from those same foreground paths and copies the native default PNG for web metadata. Site `predev` and `prebuild` run this synchronization automatically. Neither command reads a sibling repository.
+Run from the repository root. The first command uses Xcode's `ictool` to produce Default, Dark, Clear Light/Dark and Tinted Light/Dark appearance previews, small-size previews and the app's About image set. Native icon compilation does not require manually rerunning the preview generator. The second derives the circular web SVG from every group's paths in back-to-front paint order and copies the native default PNG for web metadata. Site `predev` and `prebuild` run this synchronization automatically. Neither command reads a sibling repository.
 
 - `icon/Previews`: native exports, including 16/32/64/128 pt legibility checks.
 - `logo/cloaktools-mark.svg`: derived circular family web mark.
 - `screenshots`: actual app and local-browser captures. Older MVP 0 captures remain historical evidence.
+
+The [November 17 icon verification](../docs/air/ICON-2026-11-17.md) records the layered refinement, before/after comparison, appearance exports, native build and website regression coverage.
 
 ## Reference study
 

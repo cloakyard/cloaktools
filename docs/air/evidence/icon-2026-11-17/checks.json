@@ -1,0 +1,1552 @@
+{
+  "matrix": [
+    {
+      "route": "/",
+      "theme": "light",
+      "size": [
+        390,
+        844
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 16,
+        "y": 16
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/install/",
+      "theme": "light",
+      "size": [
+        390,
+        844
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 16,
+        "y": 16
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/privacy/",
+      "theme": "light",
+      "size": [
+        390,
+        844
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 16,
+        "y": 16
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/support/",
+      "theme": "light",
+      "size": [
+        390,
+        844
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 16,
+        "y": 16
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/source/",
+      "theme": "light",
+      "size": [
+        390,
+        844
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 16,
+        "y": 16
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/license/",
+      "theme": "light",
+      "size": [
+        390,
+        844
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 16,
+        "y": 16
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/404.html",
+      "theme": "light",
+      "size": [
+        390,
+        844
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 16,
+        "y": 16
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/",
+      "theme": "light",
+      "size": [
+        768,
+        1024
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 24,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/install/",
+      "theme": "light",
+      "size": [
+        768,
+        1024
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 24,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/privacy/",
+      "theme": "light",
+      "size": [
+        768,
+        1024
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 24,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/support/",
+      "theme": "light",
+      "size": [
+        768,
+        1024
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 24,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/source/",
+      "theme": "light",
+      "size": [
+        768,
+        1024
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 24,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/license/",
+      "theme": "light",
+      "size": [
+        768,
+        1024
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 24,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/404.html",
+      "theme": "light",
+      "size": [
+        768,
+        1024
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 24,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/",
+      "theme": "light",
+      "size": [
+        1280,
+        720
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 40,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/install/",
+      "theme": "light",
+      "size": [
+        1280,
+        720
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 40,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/privacy/",
+      "theme": "light",
+      "size": [
+        1280,
+        720
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 40,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/support/",
+      "theme": "light",
+      "size": [
+        1280,
+        720
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 40,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/source/",
+      "theme": "light",
+      "size": [
+        1280,
+        720
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 40,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/license/",
+      "theme": "light",
+      "size": [
+        1280,
+        720
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 40,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/404.html",
+      "theme": "light",
+      "size": [
+        1280,
+        720
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 40,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/",
+      "theme": "light",
+      "size": [
+        1920,
+        1080
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 360,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/install/",
+      "theme": "light",
+      "size": [
+        1920,
+        1080
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 360,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/privacy/",
+      "theme": "light",
+      "size": [
+        1920,
+        1080
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 360,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/support/",
+      "theme": "light",
+      "size": [
+        1920,
+        1080
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 360,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/source/",
+      "theme": "light",
+      "size": [
+        1920,
+        1080
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 360,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/license/",
+      "theme": "light",
+      "size": [
+        1920,
+        1080
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 360,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/404.html",
+      "theme": "light",
+      "size": [
+        1920,
+        1080
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 360,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/",
+      "theme": "dark",
+      "size": [
+        390,
+        844
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 16,
+        "y": 16
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/install/",
+      "theme": "dark",
+      "size": [
+        390,
+        844
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 16,
+        "y": 16
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/privacy/",
+      "theme": "dark",
+      "size": [
+        390,
+        844
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 16,
+        "y": 16
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/support/",
+      "theme": "dark",
+      "size": [
+        390,
+        844
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 16,
+        "y": 16
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/source/",
+      "theme": "dark",
+      "size": [
+        390,
+        844
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 16,
+        "y": 16
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/license/",
+      "theme": "dark",
+      "size": [
+        390,
+        844
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 16,
+        "y": 16
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/404.html",
+      "theme": "dark",
+      "size": [
+        390,
+        844
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 16,
+        "y": 16
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/",
+      "theme": "dark",
+      "size": [
+        768,
+        1024
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 24,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/install/",
+      "theme": "dark",
+      "size": [
+        768,
+        1024
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 24,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/privacy/",
+      "theme": "dark",
+      "size": [
+        768,
+        1024
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 24,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/support/",
+      "theme": "dark",
+      "size": [
+        768,
+        1024
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 24,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/source/",
+      "theme": "dark",
+      "size": [
+        768,
+        1024
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 24,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/license/",
+      "theme": "dark",
+      "size": [
+        768,
+        1024
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 24,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/404.html",
+      "theme": "dark",
+      "size": [
+        768,
+        1024
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 24,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": true
+    },
+    {
+      "route": "/",
+      "theme": "dark",
+      "size": [
+        1280,
+        720
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 40,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/install/",
+      "theme": "dark",
+      "size": [
+        1280,
+        720
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 40,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/privacy/",
+      "theme": "dark",
+      "size": [
+        1280,
+        720
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 40,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/support/",
+      "theme": "dark",
+      "size": [
+        1280,
+        720
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 40,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/source/",
+      "theme": "dark",
+      "size": [
+        1280,
+        720
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 40,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/license/",
+      "theme": "dark",
+      "size": [
+        1280,
+        720
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 40,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/404.html",
+      "theme": "dark",
+      "size": [
+        1280,
+        720
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 40,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/",
+      "theme": "dark",
+      "size": [
+        1920,
+        1080
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 360,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/install/",
+      "theme": "dark",
+      "size": [
+        1920,
+        1080
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 360,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/privacy/",
+      "theme": "dark",
+      "size": [
+        1920,
+        1080
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 360,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/support/",
+      "theme": "dark",
+      "size": [
+        1920,
+        1080
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 360,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/source/",
+      "theme": "dark",
+      "size": [
+        1920,
+        1080
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 360,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/license/",
+      "theme": "dark",
+      "size": [
+        1920,
+        1080
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 360,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    },
+    {
+      "route": "/404.html",
+      "theme": "dark",
+      "size": [
+        1920,
+        1080
+      ],
+      "brokenImages": 0,
+      "footer": 5,
+      "h1": 1,
+      "main": 1,
+      "mark": {
+        "height": 36,
+        "loaded": true,
+        "src": "/cloaktools-mark.svg",
+        "width": 36,
+        "x": 360,
+        "y": 18
+      },
+      "overflow": false,
+      "touch": false
+    }
+  ],
+  "enlarged": [
+    {
+      "route": "/",
+      "theme": "light",
+      "width": 320,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/install/",
+      "theme": "light",
+      "width": 320,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/privacy/",
+      "theme": "light",
+      "width": 320,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/support/",
+      "theme": "light",
+      "width": 320,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/source/",
+      "theme": "light",
+      "width": 320,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/license/",
+      "theme": "light",
+      "width": 320,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/404.html",
+      "theme": "light",
+      "width": 320,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "theme": "light",
+      "width": 1440,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/install/",
+      "theme": "light",
+      "width": 1440,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/privacy/",
+      "theme": "light",
+      "width": 1440,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/support/",
+      "theme": "light",
+      "width": 1440,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/source/",
+      "theme": "light",
+      "width": 1440,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/license/",
+      "theme": "light",
+      "width": 1440,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/404.html",
+      "theme": "light",
+      "width": 1440,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "theme": "dark",
+      "width": 320,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/install/",
+      "theme": "dark",
+      "width": 320,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/privacy/",
+      "theme": "dark",
+      "width": 320,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/support/",
+      "theme": "dark",
+      "width": 320,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/source/",
+      "theme": "dark",
+      "width": 320,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/license/",
+      "theme": "dark",
+      "width": 320,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/404.html",
+      "theme": "dark",
+      "width": 320,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "theme": "dark",
+      "width": 1440,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/install/",
+      "theme": "dark",
+      "width": 1440,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/privacy/",
+      "theme": "dark",
+      "width": 1440,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/support/",
+      "theme": "dark",
+      "width": 1440,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/source/",
+      "theme": "dark",
+      "width": 1440,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/license/",
+      "theme": "dark",
+      "width": 1440,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    },
+    {
+      "route": "/404.html",
+      "theme": "dark",
+      "width": 1440,
+      "font": "32px",
+      "markWidth": 36,
+      "overflow": false
+    }
+  ],
+  "noJS": [
+    {
+      "route": "/",
+      "contentsOpen": null,
+      "mark": 64,
+      "overflow": false
+    },
+    {
+      "route": "/install/",
+      "contentsOpen": true,
+      "mark": 64,
+      "overflow": false
+    },
+    {
+      "route": "/privacy/",
+      "contentsOpen": true,
+      "mark": 64,
+      "overflow": false
+    },
+    {
+      "route": "/support/",
+      "contentsOpen": true,
+      "mark": 64,
+      "overflow": false
+    },
+    {
+      "route": "/source/",
+      "contentsOpen": true,
+      "mark": 64,
+      "overflow": false
+    },
+    {
+      "route": "/license/",
+      "contentsOpen": null,
+      "mark": 64,
+      "overflow": false
+    },
+    {
+      "route": "/404.html",
+      "contentsOpen": null,
+      "mark": 64,
+      "overflow": false
+    }
+  ],
+  "staticState": {
+    "art": [],
+    "replayVisible": false
+  },
+  "socialLayout": [
+    {
+      "element": "HEADER",
+      "height": 36,
+      "overflow": false,
+      "width": 1088,
+      "x": 56,
+      "y": 48
+    },
+    {
+      "element": "H1",
+      "height": 138.234375,
+      "overflow": false,
+      "width": 544,
+      "x": 56,
+      "y": 207.8828125
+    },
+    {
+      "element": "P",
+      "height": 66,
+      "overflow": false,
+      "width": 543.4140625,
+      "x": 56,
+      "y": 374.1171875
+    },
+    {
+      "element": "IMG",
+      "height": 328,
+      "overflow": false,
+      "width": 480,
+      "x": 664,
+      "y": 160
+    },
+    {
+      "element": "FOOTER",
+      "height": 46.5,
+      "overflow": false,
+      "width": 1088,
+      "x": 56,
+      "y": 543.5
+    }
+  ]
+}
