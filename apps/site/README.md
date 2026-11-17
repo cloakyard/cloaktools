@@ -65,7 +65,7 @@ scripts/          Static acceptance checks
 
 Run `npm run check:worker` for a non-publishing deployment check. An authorized local deployment uses `npm run deploy` after browser acceptance; the normal release path promotes verified `dev` changes to `main` and follows the connected build to completion.
 
-Cloudflare's preview-branch command is `npx wrangler versions upload`, so branch builds upload a version without promoting it. The site's configuration keeps version URLs and workers.dev disabled; it does not provision separate Preview environments.
+Cloudflare's preview-branch command is `npx wrangler preview`. The empty `previews` block uses the same static assets in a branch Preview without promoting them to tools.cloakyard.com. Production version URLs and workers.dev remain disabled.
 
 Maintain `dev` and `main`, promote verified changes together, and deploy the approved `main` revision. Native signing, installers and releases are separate from website publication.
 
