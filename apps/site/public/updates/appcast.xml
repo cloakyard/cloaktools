@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><!-- sparkle-sign-warning:
+IMPORTANT: This file was signed by Sparkle. Any modifications to this file requires re-signing this file with generate_appcast or sign_update! The signed signature will be embedded at the end of this file.
+--><rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+  <channel>
+    <title>CloakTools Updates</title>
+    <link>https://tools.cloakyard.com/updates/appcast.xml</link>
+    <description>Signed updates for CloakTools.</description>
+    <language>en</language>
+  </channel>
+</rss><!-- sparkle-signatures:
+edSignature: j9lXxLx74hB51qFhjY5r/3L9ktR0HyVP4N2hbekWnYkst6jjX+9wxt/+F5jWQrOfnQALTe9JMGD8CTaAv7M6CA==
+length: 603
+-->

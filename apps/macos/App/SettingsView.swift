@@ -39,6 +39,7 @@ struct SettingsView: View {
                     case .conversions: conversions
                     case .developer: developer
                     case .openWith: RoutingSettingsView(model: model, routing: model.routing)
+                    case .privacy: PrivacySettingsView()
                     case .about: about
                     }
                 }
@@ -102,7 +103,7 @@ struct SettingsView: View {
             }
             Section {
                 LabeledContent("Release", value: "Development preview")
-                Text("No account, analytics, background update checks, or cloud processing.").foregroundStyle(.secondary)
+                Text("No account, analytics or cloud processing. Automatic updates are optional.").foregroundStyle(.secondary)
             }
         }
     }
@@ -270,6 +271,7 @@ struct SettingsView: View {
                 LabeledContent("Platform", value: "macOS 27 · Apple silicon")
                 Text("A local development build. No public installer is available yet.").foregroundStyle(.secondary)
             }
+            UpdateSettingsSection()
             Section("Learn more") {
                 Link("tools.cloakyard.com", destination: URL(string: "https://tools.cloakyard.com")!)
                 Link(destination: AppLinks.support) {
@@ -282,6 +284,7 @@ struct SettingsView: View {
     private func categoryColor(_ category: SettingsCategory) -> Color {
         switch category {
         case .general, .about: .gray
+        case .privacy: .green
         case .finder: .blue
         case .newFiles: .indigo
         case .conversions: .orange
@@ -292,6 +295,7 @@ struct SettingsView: View {
     private func symbol(_ category: SettingsCategory) -> String {
         switch category {
         case .general: "gearshape"; case .finder: "folder"; case .newFiles: "doc.badge.plus"
+        case .privacy: "lock.shield"
         case .developer: "chevron.left.forwardslash.chevron.right"
         case .conversions: "arrow.triangle.2.circlepath"; case .openWith: "arrow.up.forward.app"; case .about: "info.circle"
         }

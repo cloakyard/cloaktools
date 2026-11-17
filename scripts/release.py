@@ -121,14 +121,14 @@ def main():
     manifest = {"version": version, "build": info["CFBundleVersion"], "minimumOS": info["LSMinimumSystemVersion"],
                 "architecture": "arm64", "signedWithDeveloperID": not args.preview, "notarized": bool(args.notarize),
                 "archive": package.name, "bytes": package.stat().st_size, "sha256": checksum,
-                "updatePolicy": "Manual downloads; no background update checks", "publicRelease": False}
+                "updatePolicy": "Sparkle; manual checks by default, automatic checks/downloads opt-in", "publicRelease": False}
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     (output / "README.txt").write_text("CloakTools " + version + "\n\n" +
         ("LOCAL DEVELOPMENT PREVIEW. Ad-hoc signed and not notarized. This is not a public installer.\n" if args.preview else
          "Developer ID build. Check manifest.json for notarization status. Publication and release QA are separate.\n") +
         "Unzip to review the app. Quit an older copy before moving it to Applications.\n"
         "Restore any CloakTools web/mail defaults before removing the app.\n"
-        "Updates are manual; no updater runs in the background.\n")
+        "Use Check for Updates; automatic checks/downloads are optional in About settings.\n")
     print(json.dumps({"status": "packaged", "directory": str(output), **manifest}, indent=2))
     return 0
 

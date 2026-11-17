@@ -53,7 +53,7 @@ If a destination app or default change is unavailable, use **Open With → Refre
 
 ## Privacy
 
-No accounts, analytics, app-operated cloud service, automatic updater, link prefetch or browsing-history persistence. Processing and settings stay local. Cloud-managed folders and chosen destination apps follow their own policies. Files are published as new copies, with explicit review and bounded inputs. Read [Privacy](PRIVACY.md) and [Security](SECURITY.md) for exact storage and reporting boundaries.
+No accounts, analytics, cloud processing, link prefetch or browsing-history persistence. Processing and settings stay local. Sparkle update checks/downloads are manual unless you enable them in About. See [update publishing](docs/UPDATES.md). Cloud-managed folders and chosen destination apps follow their own policies. Files are published as new copies, with explicit review and bounded inputs. Read [Privacy](PRIVACY.md) and [Security](SECURITY.md) for exact storage and reporting boundaries.
 
 ## Getting started
 
@@ -75,7 +75,7 @@ Builds are locally ad-hoc signed and not notarized. Current recorded runtime che
 
 ### Native app
 
-`apps/macos/project.yml` is authoritative; XcodeGen creates the ignored Xcode project. The build is arm64-only, has no hardcoded Team ID and uses local ad-hoc signing. Development uses Xcode 27, Swift 6 and macOS system frameworks, with no third-party Swift dependencies.
+`apps/macos/project.yml` is authoritative; XcodeGen creates the ignored Xcode project. The build is arm64-only, has no hardcoded Team ID and uses local ad-hoc signing. Development uses Xcode 27, Swift 6 and macOS system frameworks, with Sparkle 2 as an app-only dependency; the headless core has no third-party dependencies.
 
 | Layer | Choice |
 |---|---|

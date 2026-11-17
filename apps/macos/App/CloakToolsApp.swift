@@ -4,17 +4,27 @@ import CloakToolsCore
 
 @main
 struct CloakToolsApp: App {
+    @StateObject private var updater = AppUpdater()
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var delegate
     @Environment(\.openWindow) private var openWindow
     var body: some Scene {
         Window("CloakTools", id: "settings") {
             SettingsView(model: AppModel.shared)
+                .environmentObject(updater)
                 .onAppear { AppDelegate.showMain = { openWindow(id: "settings") } }
                 .frame(minWidth: 720, minHeight: 520)
         }
         .defaultSize(width: 900, height: 650)
         .windowResizability(.contentMinSize)
         .commands {
+            CommandGroup(replacing: .appInfo) {
+                Button("About CloakTools") {
+                    AppModel.shared.update { $0.lastCategory = .about }
+                    openWindow(id: "settings")
+                    NSApp.activate()
+                }
+            }
+            UpdateCommands(updater: updater)
             CommandGroup(replacing: .appSettings) {
                 Button("Settings…") { openWindow(id: "settings"); NSApp.activate() }
                     .keyboardShortcut(",", modifiers: .command)

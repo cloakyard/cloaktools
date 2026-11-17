@@ -1,5 +1,5 @@
 # Only scripts/release.py's signed path uses this spec. Team and identity come from
-# explicit xcodebuild settings; the normal local build stays ad-hoc and unentitled.
+# explicit xcodebuild settings; the normal local build stays ad-hoc without App Groups.
 include: [project.yml]
 settings:
   base:

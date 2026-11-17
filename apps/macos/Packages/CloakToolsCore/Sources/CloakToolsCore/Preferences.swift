@@ -1,7 +1,7 @@
 import Foundation
 
 public enum SettingsCategory: String, CaseIterable, Codable, Sendable, Identifiable {
-    case general, finder, newFiles, conversions, developer, openWith, about
+    case general, finder, newFiles, conversions, developer, openWith, privacy, about
     public var id: String { rawValue }
     public var title: String {
         switch self {
@@ -11,6 +11,7 @@ public enum SettingsCategory: String, CaseIterable, Codable, Sendable, Identifia
         case .conversions: "Conversions"
         case .developer: "Developer Tools"
         case .openWith: "Open With"
+        case .privacy: "Privacy"
         case .about: "About"
         }
     }
