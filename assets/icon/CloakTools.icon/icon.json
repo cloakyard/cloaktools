@@ -1,0 +1,78 @@
+{
+  "fill": {
+    "solid": "extended-srgb:0.94902,0.96471,0.98824,1.00000"
+  },
+  "groups": [
+    {
+      "layers": [
+        {
+          "image-name": "06-latch.svg",
+          "name": "Latch"
+        },
+        {
+          "image-name": "05-rim.svg",
+          "name": "Toolbox rim",
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "extended-srgb:0.44706,0.64706,0.95686,1.00000"
+              }
+            }
+          ]
+        },
+        {
+          "image-name": "04-toolbox.svg",
+          "name": "Toolbox body",
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "extended-srgb:0.26667,0.47451,0.84314,1.00000"
+              }
+            }
+          ]
+        },
+        {
+          "image-name": "03-driver.svg",
+          "name": "Screwdriver handle"
+        },
+        {
+          "image-name": "02-driver-shaft.svg",
+          "name": "Screwdriver shaft",
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "extended-srgb:0.80392,0.86275,0.92549,1.00000"
+              }
+            }
+          ]
+        },
+        {
+          "image-name": "01-wrench.svg",
+          "name": "Spanner",
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "extended-srgb:0.82353,0.87451,0.94510,1.00000"
+              }
+            }
+          ]
+        }
+      ],
+      "shadow": {
+        "kind": "neutral",
+        "opacity": 0.22
+      },
+      "translucency": {
+        "enabled": true,
+        "value": 0.12
+      }
+    }
+  ],
+  "supported-platforms": {
+    "squares": "shared"
+  }
+}

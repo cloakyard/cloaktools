@@ -1,0 +1,86 @@
+[
+  {
+    "route": "/",
+    "theme": "light",
+    "checked": 70,
+    "failures": []
+  },
+  {
+    "route": "/install/",
+    "theme": "light",
+    "checked": 211,
+    "failures": []
+  },
+  {
+    "route": "/privacy/",
+    "theme": "light",
+    "checked": 111,
+    "failures": []
+  },
+  {
+    "route": "/support/",
+    "theme": "light",
+    "checked": 182,
+    "failures": []
+  },
+  {
+    "route": "/source/",
+    "theme": "light",
+    "checked": 61,
+    "failures": []
+  },
+  {
+    "route": "/license/",
+    "theme": "light",
+    "checked": 25,
+    "failures": []
+  },
+  {
+    "route": "/404.html",
+    "theme": "light",
+    "checked": 21,
+    "failures": []
+  },
+  {
+    "route": "/",
+    "theme": "dark",
+    "checked": 70,
+    "failures": []
+  },
+  {
+    "route": "/install/",
+    "theme": "dark",
+    "checked": 211,
+    "failures": []
+  },
+  {
+    "route": "/privacy/",
+    "theme": "dark",
+    "checked": 111,
+    "failures": []
+  },
+  {
+    "route": "/support/",
+    "theme": "dark",
+    "checked": 182,
+    "failures": []
+  },
+  {
+    "route": "/source/",
+    "theme": "dark",
+    "checked": 61,
+    "failures": []
+  },
+  {
+    "route": "/license/",
+    "theme": "dark",
+    "checked": 25,
+    "failures": []
+  },
+  {
+    "route": "/404.html",
+    "theme": "dark",
+    "checked": 21,
+    "failures": []
+  }
+]

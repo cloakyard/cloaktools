@@ -1,0 +1,6 @@
+Command: ./scripts/build-native.sh
+Debug arm64, host and embedded Finder extension
+note: Disabling hardened runtime with ad-hoc codesigning. (in target 'CloakToolsFinder' from project 'CloakTools')
+2026-11-15 20:01:49.565 appintentsmetadataprocessor[54920:709829] warning: Metadata extraction skipped, no AppIntents.framework dependency found
+note: Disabling hardened runtime with ad-hoc codesigning. (in target 'CloakTools' from project 'CloakTools')
+** BUILD SUCCEEDED **

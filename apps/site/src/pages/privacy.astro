@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Contents from '../components/Contents.astro';
+import {readingSections} from '../lib/reading';
+import {compiledContent, getHeadings} from '../../../../PRIVACY.md';
+const policy = readingSections((await compiledContent()).replace(/^<h1[^>]*>[\s\S]*?<\/h1>\s*/, '').replace(/<p><strong>CloakTools · Updated[^<]+<\/strong><\/p>/, '').replace(/<details>[\s\S]*?<\/details>/,''));
+const headings = getHeadings().filter(heading => heading.depth === 2);
+---
+<Base title="Privacy policy — CloakTools" description="Your files belong to you. Here is what CloakTools reads, where it saves data, and what you control.">
+<main id="main" tabindex="-1" class="air-page air-policy frame">
+  <a class="air-policy-back" href="/"><Icon name="back" size={16}/>Back to CloakTools</a>
+  <header class="air-policy-intro"><p class="air-page-eyebrow">CloakTools · Privacy</p><h1>Privacy policy</h1><p class="air-page-lede">Your files belong to you. Here is what CloakTools reads, where it saves data, and what you control.</p><p class="air-page-meta">Last updated <time datetime="2026-11-16">November 16, 2026</time></p></header>
+  <div class="air-reading-layout"><Contents headings={headings}/><article class="air-prose" aria-label="CloakTools privacy policy"><Fragment set:html={policy}/></article></div>
+</main>
+</Base>

@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import license from '../../../../LICENSE?raw';
+const paragraphs = license.trim().split(/\n\s*\n/).slice(1).map(text => text.replace(/\s*\n\s*/g, ' '));
+---
+<Base title="MIT License — CloakTools">
+<main id="main" tabindex="-1" class="air-page air-policy frame">
+<a class="air-policy-back" href="/"><Icon name="back" size={16}/>Back to CloakTools</a>
+<header class="air-policy-intro reading-intro"><p class="air-page-eyebrow">CloakTools · License</p><h1>MIT License</h1><p class="air-page-lede">Free to use, study, modify, and share.</p></header>
+<article class="air-prose">{paragraphs.map(text => <p>{text}</p>)}</article>
+</main>
+</Base>

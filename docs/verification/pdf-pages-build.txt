@@ -1,0 +1,8 @@
+Command: GIT_CONFIG_COUNT=0 ./scripts/build-native.sh
+Configuration: Debug, arm64, ad-hoc signed
+Version: 0.3.1 (11)
+2026-11-15 21:41:46.423 appintentsmetadataprocessor[61305:812184] warning: Metadata extraction skipped, no AppIntents.framework dependency found
+2026-11-15 21:41:48.495 appintentsmetadataprocessor[61324:812281] warning: Metadata extraction skipped, no AppIntents.framework dependency found
+note: Disabling hardened runtime with ad-hoc codesigning. (in target 'CloakToolsFinder' from project 'CloakTools')
+note: Disabling hardened runtime with ad-hoc codesigning. (in target 'CloakTools' from project 'CloakTools')
+** BUILD SUCCEEDED **

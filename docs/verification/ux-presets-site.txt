@@ -1,0 +1,54 @@
+
+> cloaktools-site@0.0.1 verify
+> npm run check && npm run build && node scripts/verify-site.mjs
+
+
+> cloaktools-site@0.0.1 check
+> astro check
+
+22:36:39 [types] Generated 30ms
+22:36:39 [check] Getting diagnostics for Astro files in /Users/sumitsahoo/Developer/cloaktools/apps/site...
+Result (18 files): 
+- 0 errors
+- 0 warnings
+- 0 hints
+
+
+> cloaktools-site@0.0.1 prebuild
+> npm run sync:assets
+
+
+> cloaktools-site@0.0.1 sync:assets
+> node ../../scripts/sync-brand.mjs
+
+Synced circular web mark from the native icon layers.
+
+> cloaktools-site@0.0.1 build
+> astro build
+
+22:36:41 [types] Generated 32ms
+22:36:41 [build] output: "static"
+22:36:41 [build] mode: "static"
+22:36:41 [build] directory: /Users/sumitsahoo/Developer/cloaktools/apps/site/dist/
+22:36:41 [build] Collecting build info...
+22:36:41 [build] ✓ Completed in 41ms.
+22:36:41 [build] Building static entrypoints...
+22:36:41 [vite] ✓ built in 131ms
+22:36:41 [vite] ✓ built in 12ms
+22:36:41 [build] Rearranging server assets...
+
+ generating static routes 
+22:36:41   ├─ /404.html (+9ms) 
+22:36:41   ├─ /install/index.html (+2ms) 
+22:36:41   ├─ /license/index.html (+1ms) 
+22:36:41   ├─ /privacy/index.html (+2ms) 
+22:36:41   ├─ /source/index.html (+1ms) 
+22:36:41   ├─ /support/index.html (+1ms) 
+22:36:41   ├─ /index.html (+1ms) 
+22:36:41 ✓ Completed in 22ms.
+
+22:36:41 [build] ✓ Completed in 187ms.
+22:36:41 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+22:36:41 [build] 7 page(s) built in 235ms
+22:36:41 [build] Complete!
+Verified 7 pages, local links/assets, canonical metadata, landmarks, and pinned Air hashes.

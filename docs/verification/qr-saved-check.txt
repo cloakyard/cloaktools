@@ -1,0 +1,3 @@
+QR code.png verified 512 px 6233 bytes; scanned payload exact UTF-8
+QR code 2.png verified 1024 px 20693 bytes; scanned payload exact UTF-8
+Native screenshot QR preview decoded to exact Unicode payload.

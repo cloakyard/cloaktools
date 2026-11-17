@@ -1,0 +1,19 @@
+{
+  "name": "CloakTools",
+  "url": "https://tools.cloakyard.com/",
+  "dist": "apps/site/dist",
+  "logo": "apps/site/public/cloaktools-mark.svg",
+  "output": "assets/social/og.png",
+  "artwork": ".tools-scene",
+  "headline": [
+    "Small tasks.",
+    "Less friction."
+  ],
+  "description": [
+    "Create files. Prepare images.",
+    "Open links in the right app."
+  ],
+  "artAlt": "Three folded documents for source code, an image and an outgoing link, arranged in a tool tray.",
+  "imageAlt": "CloakTools \u2014 Small tasks. Less friction. A native Mac toolkit, with three folded documents arranged in a tool tray.",
+  "imagePath": "/og.png?v=air-1.7.5"
+}

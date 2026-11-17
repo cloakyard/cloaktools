@@ -1,0 +1,5 @@
+[
+  "https://example.com/destinations-cold?token=a%26b&token=c+d#fragment",
+  "mailto:hello@example.com?cc=other%40example.com&subject=destinations-running&body=One%0D%0ATwo%2Bthree%26four",
+  "https://example.com/cloaktools-loop-proof?synthetic=destinations"
+]

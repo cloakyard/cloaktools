@@ -1,0 +1,107 @@
+{
+  "version": "1.7.5",
+  "verification": "AUDIT-2026-11-17.md",
+  "routes": [
+    "/",
+    "/install/",
+    "/privacy/",
+    "/support/",
+    "/source/",
+    "/license/",
+    "/404.html"
+  ],
+  "surfaces": {
+    "identity": [
+      "36px mark",
+      "18px wordmark",
+      "favicons",
+      "canonical and social metadata"
+    ],
+    "navigation": [
+      "desktop primary links",
+      "source link",
+      "native compact disclosure",
+      "skip link",
+      "footer identity and five links",
+      "active section and page links"
+    ],
+    "home": [
+      "eyebrow and two-line hero",
+      "primary and quiet actions",
+      "availability",
+      "finite artwork and replay",
+      "light/dark native screenshot with frame/caption",
+      "three feature columns",
+      "craft principles",
+      "privacy copy",
+      "download/build instructions"
+    ],
+    "reading": [
+      "back link",
+      "title/lede/date",
+      "native contents disclosure",
+      "complete heading links/current state",
+      "65ch prose",
+      "headings/paragraphs/lists/inline links",
+      "keyboard-scrollable code example",
+      "flowing license paragraphs"
+    ],
+    "recovery": [
+      "404 with home action"
+    ],
+    "repository": [
+      "root README",
+      "website README",
+      "usage guide",
+      "source/license links"
+    ],
+    "social": [
+      "canonical 1200x630 card",
+      "600/320 previews",
+      "shared OG/Twitter metadata"
+    ]
+  },
+  "states": [
+    "light",
+    "dark",
+    "fine pointer",
+    "coarse pointer",
+    "native menu closed/open",
+    "contents closed/open",
+    "focus-visible",
+    "current location/page",
+    "200% browser zoom",
+    "200% root font",
+    "reduced motion",
+    "forced colors",
+    "no JavaScript",
+    "animation playing/complete/replay",
+    "long prose/code",
+    "minimum width",
+    "short landscape"
+  ],
+  "notApplicable": [
+    "File upload/drop: native app only",
+    "Conversion progress, cancellation and save errors: native app only",
+    "Editor controls and nested dialogs: no web editor",
+    "PWA updates: no service worker",
+    "Shader/WebGPU fallback: no shader dependency"
+  ],
+  "exceptions": [
+    {
+      "scope": "decorative product artwork",
+      "detail": "Fixed white document paper, folded corners, tray geometry and literal illustration colors; no alternate UI skins.",
+      "owner": "maintainer"
+    },
+    {
+      "scope": "actual native captures",
+      "detail": "Native system pixels and window corners remain content; website shell uses Air.",
+      "owner": "maintainer"
+    }
+  ],
+  "remaining": [
+    "Physical devices and additional browser engines",
+    "Spoken screen-reader acceptance",
+    "Deployment host status codes and live social-crawler refresh"
+  ]
+}

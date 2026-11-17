@@ -1,0 +1,283 @@
+Building for debugging...
+[Planning deferred tasks]
+[8 / 29] CloakToolsCore
+[10 / 31] CloakToolsCore
+[17 / 28] CloakToolsCore
+[19 / 28] CloakToolsCoreTests-product
+[32 / 41] CloakToolsCoreTests-product
+[36 / 40] CloakToolsCoreTests-product
+[38 / 40] CloakToolsCoreTests-product
+Build complete! (3.21 secs)
+Test Suite 'All tests' started at 2026-11-15 22:43:41.485.
+Test Suite 'All tests' passed at 2026-11-15 22:43:41.486.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+◇ Test run started.
+↳ Testing Library Version: 2403
+↳ Target Platform: arm64e-apple-macos14.0
+◇ Test PDFAssemblyCancellationDoesNotPublish() started.
+◇ Test PDFPagesCancellationDoesNotPrepareOrPublish() started.
+◇ Test clipboardPNGPreservesTransparencyAndBoundsThumbnail() started.
+◇ Test importsExactContentAndSnapshotsSurviveEditsAndRemoval() started.
+◇ Test mediaCaptureLifetimeAndCancellationCleanup() started.
+◇ Test templateFinderIntentRoundTrips() started.
+◇ Test fileSetRejectsMissingTemplatesAndWrongExtensions() started.
+◇ Test nativeImageFormatMatrix() started.
+◇ Test fitTriesQualityBeforeFurtherReductionAndHonorsFloor() started.
+◇ Test routingEncodedPathsAreLiteralAndCaseSensitive() started.
+◇ Test unsafeNames(_:) started.
+◇ Test URLPreservation() started.
+◇ Test clipboardImageAppliesOrientationAndDropsSourceMetadata() started.
+◇ Test selfExclusionAndLoopPrevention() started.
+◇ Test unavailableAndUnwritableFolder() started.
+◇ Test imageCancellationDoesNotPublish() started.
+◇ Test fileSetCreatesValidStructuredDocuments() started.
+◇ Test finderIntentValidation() started.
+◇ Test PDFAssemblyPreservesPageOrderTextRotationAndAnnotations() started.
+◇ Test catalogCoversRequestedLanguages() started.
+◇ Test folderPresetHonorsEveryHelloWorldPrecedence() started.
+◇ Test copyAsIntentValidationAndOrder() started.
+◇ Test routingPreservesOriginalWithoutReadingOrRewriting() started.
+◇ Test missingPresetFolderIsReviewableButCannotPublish() started.
+◇ Test fitCanReducePNGToMeasuredBudgetWithoutWriting() started.
+◇ Test structuredDocumentsAreValidWithEitherMasterSetting() started.
+◇ Test collisionWithFileDirectorySymlink() started.
+◇ Test destinationStorePersistsChoicesRejectsStaleEditsAndKeepsOtherRole() started.
+◇ Test concurrentFileSetsAndSymlinkCollisionsNeverMerge() started.
+◇ Test imageRejectsMalformedAndMultipleFrames() started.
+◇ Test fitPublishesExactPreviewBytesAfterSourceChangesWithSafeCollisions() started.
+◇ Test fitPreservesPreparedOrientationAndStripsSourceMetadata() started.
+◇ Test routingSnapshotIsIndependentOfLaterEdits() started.
+◇ Test everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test helloWorldPrecedenceAndRetainedChoices() started.
+◇ Test mediaInvalidSourcesAndUnavailablePresetsPublishNothing() started.
+◇ Test defaultConcurrentRequestsAreSerializedAcrossConsent() started.
+◇ Test defaultMissingPreviousAppRequiresAnExplicitAvailableAlternative() started.
+◇ Test defaultRestoreRespectsExternalChangesAndIndependentRoles() started.
+◇ Test routingHostsUseBoundariesAndIDNA() started.
+◇ Test PDFAssemblyCapturesBeforeChangesAndAddsAtomically() started.
+◇ Test defaultPersistenceFailureBeforeAndAfterMutation() started.
+◇ Test fileSetLibraryBoundsAndFailedWritesPreservePriorLibrary() started.
+◇ Test copyAsDoesNotReadOrResolveFiles() started.
+◇ Test fitUsesMaximumDimensionsWithoutEnlargingOrDistorting() started.
+◇ Test fileSetCreatesNestedFilesAndEmptyFoldersWithoutOverwriting() started.
+◇ Test imageQualityValidationAndEncoding() started.
+◇ Test routingMailOnlyMatchesPlainToAddresses() started.
+◇ Test routingAllAnyRoleAndUnknownSource() started.
+◇ Test PDFAssemblyRejectsEncryptedAndForms() started.
+◇ Test defaultConcurrentHistoryEditIsPreserved() started.
+◇ Test fallbackHonorsRulePriorityAndExplicitOverride() started.
+◇ Test fileSetPrecedenceAndSnapshotsPreserveExactContent() started.
+◇ Test defaultCoupledWebSetupSkipsRedundantSystemRequest() started.
+◇ Test destinationPinsOrderAvailableAppsWithoutHidingOthersOrRouting() started.
+◇ Test copyAsQuotesShellArgumentsWithoutRunningCode() started.
+◇ Test mediaRejectsMultipleAudioTracks() started.
+◇ Test defaultPartialFailureRetryAndRestorationKeepOriginalApps() started.
+◇ Test fileSetCancellationRemovesPartialStaging() started.
+◇ Test copyAsMarkdownEscapesLabelsAndDestinations() started.
+◇ Test copyAsRejectsInvalidAndOversizedSelections() started.
+◇ Test missingOrInvalidFallbackExplainsChooserWithoutChangingLink() started.
+◇ Test finderRequestsRejectAmbiguousURLComponents() started.
+◇ Test destinationSnapshotsRetainOriginalChoicesAndPinOrder() started.
+◇ Test defaultConsentDeclinedDoesNotContinueOrClaimSuccess() started.
+◇ Test destinationReferencesRejectSelfUnsafeIDsAndLabels() started.
+◇ Test defaultStaleReviewAndChangedHistoryCannotOverwriteNewChoices() started.
+◇ Test rejectsUnsafeAndOversizedTemplatesBeforeSaving() started.
+◇ Test defaultMovedAppResolvesIdentityAndDisappearingTargetBlocksWrite() started.
+◇ Test imageOutputsCanRecoverToAnotherFolderWithoutRecapturing() started.
+◇ Test destinationStoreBoundsAndCorruptionFailClosed() started.
+◇ Test folderPresetStructuredFilesStayValid() started.
+◇ Test case passing 1 argument name → "" to unsafeNames(_:) started.
+◇ Test defaultSetupReviewIsReadOnlyAndCapturesBothSchemesBeforeWriting() started.
+◇ Test routingRejectsAmbiguousOrUnsafeConditions() started.
+◇ Test clipboardRejectsMalformedAndMultiframeImages() started.
+◇ Test routingPriorityDisabledAndMissingDestination() started.
+◇ Test imagePreferencesMigrationAndSnapshot() started.
+◇ Test case passing 1 argument name → "../evil" to unsafeNames(_:) started.
+◇ Test imageTransparencyAndLossyBackgrounds() started.
+◇ Test folderPresetSnapshotsContentNameAndSettings() started.
+◇ Test mediaMovieWithAudioExportsBothVideoAndAudioOnly() started.
+◇ Test clipboardTextKeepsUnicodeLineEndingsAndSafeCollisions() started.
+◇ Test folderPresetLibraryRoundTripsAndRejectsUnsafeChanges() started.
+◇ Test case passing 1 argument name → ".hidden" to unsafeNames(_:) started.
+◇ Test defaultNoPriorAppAndOtherCopyAreNotInventedRestorePoints() started.
+◇ Test mediaAACInputCanExportAgain() started.
+◇ Test fitCancellationDoesNotPublishPreviewOrSavedOutput() started.
+◇ Test case passing 1 argument name → "bad/name" to unsafeNames(_:) started.
+◇ Test PDFAssemblyIntentPreservesOrderAndRejectsInvalidPaths() started.
+◇ Test clipboardCancellationDoesNotPublish() started.
+◇ Test PDFPagesSnapshotsSurviveSourceDeletionAndNameCollision() started.
+◇ Test defaultUnconfirmedSystemSuccessDoesNotContinue() started.
+◇ Test PDFPagesRejectFormsEncryptionMalformedAndOversize() started.
+◇ Test case passing 1 argument name → "bad:name" to unsafeNames(_:) started.
+◇ Test fitPNGTransparencyAndLossyBackgroundsUseActualEncodedPixels() started.
+◇ Test defaultHistoryRoundTripBoundsAndCorruption() started.
+◇ Test defaultUnexpectedChangesDuringConsentStopRemainingSteps() started.
+◇ Test PDFPagesThumbnailsRespectRotationAndBoundedSize() started.
+◇ Test PDFPagesExportSelectionOrderRelativeRotationAndContent() started.
+◇ Test concurrentPublication() started.
+◇ Test case passing 1 argument name → "bad
+name" to unsafeNames(_:) started.
+◇ Test mediaAudioExportKeepsCaptureAndResolvesCollisions() started.
+◇ Test PDFAssemblyImagesUseOrientedA4Pages() started.
+◇ Test clipboardFinderIntentOnlyCarriesDestination() started.
+◇ Test fitImpossibleBudgetIsReviewableButCannotBePublished() started.
+◇ Test PDFPagesRangeSelectionIsBoundedAndUnambiguous() started.
+◇ Test fitDisablingFurtherReductionKeepsInitialFitWithinDimensions() started.
+◇ Test case passing 1 argument name → " name" to unsafeNames(_:) started.
+◇ Test imageOrientationAndMetadataRemoval() started.
+◇ Test persistenceReloadAndSnapshot() started.
+◇ Test mediaDownsizes1080VideoTo720AndChecksProgress() started.
+◇ Test PDFPagesInvalidPlansNeverPublish() started.
+◇ Test copyAsPreservesSelectionAndEncodesURLs() started.
+◇ Test routingStoreRoundTripValidationAndCorruption() started.
+◇ Test case passing 1 argument name → "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" to unsafeNames(_:) started.
+◇ Test preparedImageDoesNotRereadChangedOrDeletedSource() started.
+◇ Test fitRejectsInvalidBoundsAndNonFiniteQuality() started.
+◇ Test fallbackStartsWithChooserAndSeparatesWebFromEmail() started.
+◇ Test fallbackNeverRescuesAnUnavailableOrInvalidMatchingRule() started.
+◇ Test cancellationDoesNotPublish() started.
+◇ Test mediaVideoMatrixPreservesOrientationAndDecodesOutput() started.
+◇ Test clipboardImagesBecomeValidPNG(_:) started.
+◇ Test migratesExistingPreferencesWithoutLosingChoices() started.
+◇ Test PDFAssemblyBoundsMalformedAndEmptyInputs() started.
+◇ Test nativeImageConversion() started.
+◇ Test fileSetRejectsUnsafeAndAmbiguousPaths() started.
+◇ Test clipboardTextBoundsPreviewAndRejectsInvalidInput() started.
+◇ Test case passing 1 argument template → .python to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .javascript to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .typescript to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .swift to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .rust to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .c to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .cpp to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .csharp to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .java to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .go to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .ruby to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .php to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .kotlin to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+✔ Test templateFinderIntentRoundTrips() passed after 0.041 seconds.
+✔ Test routingEncodedPathsAreLiteralAndCaseSensitive() passed after 0.041 seconds.
+✔ Test unsafeNames(_:) with 8 test cases passed after 0.042 seconds.
+✔ Test URLPreservation() passed after 0.042 seconds.
+✔ Test fileSetRejectsMissingTemplatesAndWrongExtensions() passed after 0.043 seconds.
+✔ Test selfExclusionAndLoopPrevention() passed after 0.069 seconds.
+CoreGraphics PDF has logged an error. Set environment variable "CG_PDF_VERBOSE" to learn more.
+✔ Test finderIntentValidation() passed after 0.078 seconds.
+✔ Test importsExactContentAndSnapshotsSurviveEditsAndRemoval() passed after 0.164 seconds.
+✔ Test catalogCoversRequestedLanguages() passed after 0.166 seconds.
+◇ Test case passing 1 argument type → public.png to clipboardImagesBecomeValidPNG(_:) started.
+◇ Test case passing 1 argument type → public.jpeg to clipboardImagesBecomeValidPNG(_:) started.
+◇ Test case passing 1 argument type → public.tiff to clipboardImagesBecomeValidPNG(_:) started.
+✔ Test copyAsIntentValidationAndOrder() passed after 0.168 seconds.
+✔ Test routingPreservesOriginalWithoutReadingOrRewriting() passed after 0.183 seconds.
+✔ Test missingPresetFolderIsReviewableButCannotPublish() passed after 0.183 seconds.
+✔ Test folderPresetHonorsEveryHelloWorldPrecedence() passed after 0.183 seconds.
+✔ Test unavailableAndUnwritableFolder() passed after 0.183 seconds.
+✔ Test fileSetCreatesValidStructuredDocuments() passed after 0.183 seconds.
+✔ Test destinationStorePersistsChoicesRejectsStaleEditsAndKeepsOtherRole() passed after 0.189 seconds.
+✔ Test clipboardImageAppliesOrientationAndDropsSourceMetadata() passed after 0.189 seconds.
+✔ Test collisionWithFileDirectorySymlink() passed after 0.189 seconds.
+✔ Test routingSnapshotIsIndependentOfLaterEdits() passed after 0.189 seconds.
+✔ Test helloWorldPrecedenceAndRetainedChoices() passed after 0.189 seconds.
+✔ Test everyLanguageHonorsMasterAndRetainedChoice(_:) with 13 test cases passed after 0.189 seconds.
+✔ Test structuredDocumentsAreValidWithEitherMasterSetting() passed after 0.189 seconds.
+✔ Test routingHostsUseBoundariesAndIDNA() passed after 0.189 seconds.
+✔ Test imageRejectsMalformedAndMultipleFrames() passed after 0.189 seconds.
+✔ Test clipboardPNGPreservesTransparencyAndBoundsThumbnail() passed after 0.189 seconds.
+✔ Test copyAsDoesNotReadOrResolveFiles() passed after 0.189 seconds.
+✔ Test fileSetCreatesNestedFilesAndEmptyFoldersWithoutOverwriting() passed after 0.190 seconds.
+✔ Test routingMailOnlyMatchesPlainToAddresses() passed after 0.190 seconds.
+✔ Test routingAllAnyRoleAndUnknownSource() passed after 0.190 seconds.
+✔ Test fallbackHonorsRulePriorityAndExplicitOverride() passed after 0.190 seconds.
+✔ Test fileSetPrecedenceAndSnapshotsPreserveExactContent() passed after 0.190 seconds.
+✔ Test copyAsQuotesShellArgumentsWithoutRunningCode() passed after 0.190 seconds.
+✔ Test destinationPinsOrderAvailableAppsWithoutHidingOthersOrRouting() passed after 0.190 seconds.
+✔ Test fitTriesQualityBeforeFurtherReductionAndHonorsFloor() passed after 0.191 seconds.
+✔ Test copyAsMarkdownEscapesLabelsAndDestinations() passed after 0.190 seconds.
+✔ Test fitPublishesExactPreviewBytesAfterSourceChangesWithSafeCollisions() passed after 0.191 seconds.
+✔ Test missingOrInvalidFallbackExplainsChooserWithoutChangingLink() passed after 0.190 seconds.
+✔ Test finderRequestsRejectAmbiguousURLComponents() passed after 0.190 seconds.
+✔ Test destinationSnapshotsRetainOriginalChoicesAndPinOrder() passed after 0.190 seconds.
+✔ Test destinationReferencesRejectSelfUnsafeIDsAndLabels() passed after 0.190 seconds.
+✔ Test rejectsUnsafeAndOversizedTemplatesBeforeSaving() passed after 0.190 seconds.
+✔ Test imageOutputsCanRecoverToAnotherFolderWithoutRecapturing() passed after 0.190 seconds.
+✔ Test destinationStoreBoundsAndCorruptionFailClosed() passed after 0.191 seconds.
+✔ Test folderPresetStructuredFilesStayValid() passed after 0.190 seconds.
+✔ Test fitUsesMaximumDimensionsWithoutEnlargingOrDistorting() passed after 0.191 seconds.
+✔ Test routingRejectsAmbiguousOrUnsafeConditions() passed after 0.190 seconds.
+✔ Test clipboardRejectsMalformedAndMultiframeImages() passed after 0.190 seconds.
+✔ Test routingPriorityDisabledAndMissingDestination() passed after 0.190 seconds.
+✔ Test imagePreferencesMigrationAndSnapshot() passed after 0.190 seconds.
+✔ Test folderPresetSnapshotsContentNameAndSettings() passed after 0.190 seconds.
+✔ Test clipboardTextKeepsUnicodeLineEndingsAndSafeCollisions() passed after 0.190 seconds.
+✔ Test folderPresetLibraryRoundTripsAndRejectsUnsafeChanges() passed after 0.190 seconds.
+✔ Test PDFAssemblyCapturesBeforeChangesAndAddsAtomically() passed after 0.191 seconds.
+✔ Test PDFAssemblyIntentPreservesOrderAndRejectsInvalidPaths() passed after 0.190 seconds.
+✔ Test PDFPagesSnapshotsSurviveSourceDeletionAndNameCollision() passed after 0.190 seconds.
+✔ Test defaultHistoryRoundTripBoundsAndCorruption() passed after 0.190 seconds.
+✔ Test PDFPagesThumbnailsRespectRotationAndBoundedSize() passed after 0.197 seconds.
+✔ Test clipboardFinderIntentOnlyCarriesDestination() passed after 0.197 seconds.
+✔ Test PDFAssemblyImagesUseOrientedA4Pages() passed after 0.197 seconds.
+✔ Test PDFPagesRangeSelectionIsBoundedAndUnambiguous() passed after 0.197 seconds.
+✔ Test persistenceReloadAndSnapshot() passed after 0.197 seconds.
+✔ Test imageQualityValidationAndEncoding() passed after 0.199 seconds.
+✔ Test fitPreservesPreparedOrientationAndStripsSourceMetadata() passed after 0.199 seconds.
+✔ Test PDFPagesInvalidPlansNeverPublish() passed after 0.197 seconds.
+✔ Test copyAsPreservesSelectionAndEncodesURLs() passed after 0.197 seconds.
+✔ Test routingStoreRoundTripValidationAndCorruption() passed after 0.197 seconds.
+✔ Test fitRejectsInvalidBoundsAndNonFiniteQuality() passed after 0.197 seconds.
+✔ Test fallbackStartsWithChooserAndSeparatesWebFromEmail() passed after 0.197 seconds.
+✔ Test fallbackNeverRescuesAnUnavailableOrInvalidMatchingRule() passed after 0.197 seconds.
+✔ Test preparedImageDoesNotRereadChangedOrDeletedSource() passed after 0.197 seconds.
+✔ Test migratesExistingPreferencesWithoutLosingChoices() passed after 0.195 seconds.
+✔ Test clipboardImagesBecomeValidPNG(_:) with 3 test cases passed after 0.195 seconds.
+✔ Test PDFAssemblyBoundsMalformedAndEmptyInputs() passed after 0.194 seconds.
+✔ Test nativeImageConversion() passed after 0.194 seconds.
+✔ Test fileSetRejectsUnsafeAndAmbiguousPaths() passed after 0.194 seconds.
+✔ Test imageOrientationAndMetadataRemoval() passed after 0.200 seconds.
+✔ Test defaultMissingPreviousAppRequiresAnExplicitAvailableAlternative() passed after 0.203 seconds.
+✔ Test defaultRestoreRespectsExternalChangesAndIndependentRoles() passed after 0.203 seconds.
+✔ Test PDFAssemblyRejectsEncryptedAndForms() passed after 0.203 seconds.
+✔ Test defaultConcurrentHistoryEditIsPreserved() passed after 0.203 seconds.
+✔ Test defaultCoupledWebSetupSkipsRedundantSystemRequest() passed after 0.203 seconds.
+✔ Test defaultPartialFailureRetryAndRestorationKeepOriginalApps() passed after 0.203 seconds.
+✔ Test defaultConsentDeclinedDoesNotContinueOrClaimSuccess() passed after 0.203 seconds.
+✔ Test defaultSetupReviewIsReadOnlyAndCapturesBothSchemesBeforeWriting() passed after 0.203 seconds.
+✔ Test defaultUnconfirmedSystemSuccessDoesNotContinue() passed after 0.202 seconds.
+✔ Test clipboardTextBoundsPreviewAndRejectsInvalidInput() passed after 0.199 seconds.
+✔ Test PDFPagesRejectFormsEncryptionMalformedAndOversize() passed after 0.203 seconds.
+✔ Test defaultUnexpectedChangesDuringConsentStopRemainingSteps() passed after 0.203 seconds.
+✔ Test fileSetCancellationRemovesPartialStaging() passed after 0.206 seconds.
+✔ Test PDFAssemblyCancellationDoesNotPublish() passed after 0.206 seconds.
+✔ Test clipboardCancellationDoesNotPublish() passed after 0.204 seconds.
+✔ Test defaultPersistenceFailureBeforeAndAfterMutation() passed after 0.206 seconds.
+✔ Test concurrentFileSetsAndSymlinkCollisionsNeverMerge() passed after 0.206 seconds.
+✔ Test defaultMovedAppResolvesIdentityAndDisappearingTargetBlocksWrite() passed after 0.206 seconds.
+✔ Test defaultNoPriorAppAndOtherCopyAreNotInventedRestorePoints() passed after 0.205 seconds.
+✔ Test cancellationDoesNotPublish() passed after 0.201 seconds.
+✔ Test defaultStaleReviewAndChangedHistoryCannotOverwriteNewChoices() passed after 0.208 seconds.
+✔ Test imageCancellationDoesNotPublish() passed after 0.209 seconds.
+✔ Test PDFPagesCancellationDoesNotPrepareOrPublish() passed after 0.209 seconds.
+✔ Test concurrentPublication() passed after 0.207 seconds.
+✔ Test fitCancellationDoesNotPublishPreviewOrSavedOutput() passed after 0.208 seconds.
+✔ Test defaultConcurrentRequestsAreSerializedAcrossConsent() passed after 0.209 seconds.
+✔ Test mediaInvalidSourcesAndUnavailablePresetsPublishNothing() passed after 0.212 seconds.
+✔ Test mediaCaptureLifetimeAndCancellationCleanup() passed after 0.214 seconds.
+✔ Test PDFAssemblyPreservesPageOrderTextRotationAndAnnotations() passed after 0.215 seconds.
+✔ Test copyAsRejectsInvalidAndOversizedSelections() passed after 0.214 seconds.
+✔ Test imageTransparencyAndLossyBackgrounds() passed after 0.214 seconds.
+✔ Test PDFPagesExportSelectionOrderRelativeRotationAndContent() passed after 0.218 seconds.
+✔ Test fitPNGTransparencyAndLossyBackgroundsUseActualEncodedPixels() passed after 0.241 seconds.
+✔ Test fitCanReducePNGToMeasuredBudgetWithoutWriting() passed after 0.251 seconds.
+✔ Test fileSetLibraryBoundsAndFailedWritesPreservePriorLibrary() passed after 0.265 seconds.
+✔ Test mediaAACInputCanExportAgain() passed after 0.295 seconds.
+✔ Test mediaAudioExportKeepsCaptureAndResolvesCollisions() passed after 0.299 seconds.
+✔ Test fitDisablingFurtherReductionKeepsInitialFitWithinDimensions() passed after 0.320 seconds.
+✔ Test fitImpossibleBudgetIsReviewableButCannotBePublished() passed after 0.322 seconds.
+✔ Test mediaRejectsMultipleAudioTracks() passed after 0.325 seconds.
+✔ Test nativeImageFormatMatrix() passed after 0.457 seconds.
+✔ Test mediaMovieWithAudioExportsBothVideoAndAudioOnly() passed after 0.567 seconds.
+✔ Test mediaDownsizes1080VideoTo720AndChecksProgress() passed after 0.677 seconds.
+✔ Test mediaVideoMatrixPreservesOrientationAndDecodesOutput() passed after 1.117 seconds.
+✔ Test run with 120 tests in 0 suites passed after 1.123 seconds.

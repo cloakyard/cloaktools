@@ -1,0 +1,28 @@
+{
+  "name": "cloaktools-site",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "CloakTools \u2014 tools.cloakyard.com",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "verify": "npm run check && npm run build && node scripts/verify-site.mjs && node ../../docs/air/check-social.mjs",
+    "sync:assets": "node ../../scripts/sync-brand.mjs",
+    "predev": "npm run sync:assets",
+    "prebuild": "npm run sync:assets"
+  },
+  "dependencies": {
+    "astro": "7.4.12",
+    "@astrojs/sitemap": "3.7.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "typescript": "6.0.3"
+  },
+  "engines": {
+    "node": ">=26.0.0"
+  }
+}

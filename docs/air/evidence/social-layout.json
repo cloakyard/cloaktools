@@ -1,0 +1,78 @@
+{
+  "layout": [
+    {
+      "box": {
+        "bottom": 84,
+        "height": 36,
+        "left": 56,
+        "right": 1144,
+        "top": 48,
+        "width": 1088,
+        "x": 56,
+        "y": 48
+      },
+      "overflow": false,
+      "tag": "HEADER"
+    },
+    {
+      "box": {
+        "bottom": 346.1171875,
+        "height": 138.234375,
+        "left": 56,
+        "right": 600,
+        "top": 207.8828125,
+        "width": 544,
+        "x": 56,
+        "y": 207.8828125
+      },
+      "overflow": false,
+      "tag": "H1"
+    },
+    {
+      "box": {
+        "bottom": 440.1171875,
+        "height": 66,
+        "left": 56,
+        "right": 599.4140625,
+        "top": 374.1171875,
+        "width": 543.4140625,
+        "x": 56,
+        "y": 374.1171875
+      },
+      "overflow": false,
+      "tag": "P"
+    },
+    {
+      "box": {
+        "bottom": 488,
+        "height": 328,
+        "left": 664,
+        "right": 1144,
+        "top": 160,
+        "width": 480,
+        "x": 664,
+        "y": 160
+      },
+      "overflow": false,
+      "tag": "IMG"
+    },
+    {
+      "box": {
+        "bottom": 590,
+        "height": 46.5,
+        "left": 56,
+        "right": 1144,
+        "top": 543.5,
+        "width": 1088,
+        "x": 56,
+        "y": 543.5
+      },
+      "overflow": false,
+      "tag": "FOOTER"
+    }
+  ],
+  "size": [
+    1200,
+    630
+  ]
+}

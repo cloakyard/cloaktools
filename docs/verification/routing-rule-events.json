@@ -1,0 +1,7 @@
+[
+  "http://example.com/rules-proof?value=a%26b&keep=c+d#part",
+  "mailto:hello@example.com?cc=copy@example.com&subject=Routing%20proof&body=Line%201%0D%0ALine%202%20%2B%20%26",
+  "https://example.com/cloaktools-loop-proof?synthetic=rules",
+  "http://example.com/rules-cold-proof?value=a%26b&keep=c+d#part",
+  "https://example.com/cloaktools-loop-proof?synthetic=rules2"
+]

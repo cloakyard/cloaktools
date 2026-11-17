@@ -1,0 +1,10 @@
+Native Debug arm64; macOS 27.2 SDK; bundle 0.4.0 (13).
+note: Building targets in dependency order
+note: Target dependency graph (4 targets)
+note: Disabling hardened runtime with ad-hoc codesigning. (in target 'CloakToolsFinder' from project 'CloakTools')
+note: Using stub executor library without Swift entry point. (in target 'CloakToolsFinder' from project 'CloakTools')
+2026-11-15 22:27:37.716 appintentsmetadataprocessor[65201:868476] warning: Metadata extraction skipped, no AppIntents.framework dependency found
+note: Using stub executor library with Swift entry point. (in target 'CloakTools' from project 'CloakTools')
+2026-11-15 22:27:38.749 appintentsmetadataprocessor[65210:868542] warning: Metadata extraction skipped, no AppIntents.framework dependency found
+note: Disabling hardened runtime with ad-hoc codesigning. (in target 'CloakTools' from project 'CloakTools')
+** BUILD SUCCEEDED **

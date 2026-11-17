@@ -1,0 +1,19 @@
+{
+  "version": "1.7.5",
+  "source": {
+    "repository": "https://github.com/cloakyard/cloakyard",
+    "directory": "design/air",
+    "commit": "b21c7ea974589c15f9647a9749697efe8a205015"
+  },
+  "files": {
+    "docs/air/contract.md": "f7a26aaffda90c8390e4a50e757c090acfd93d2e08f2f0fae9fbecbcf62299c6",
+    "apps/site/src/styles/air.css": "470d7e37feb7e900d64662e0e8116d67f0f9b86cfb0315d60f3f6fe7800065fe",
+    "docs/air/artwork.mjs": "932fc9f09a5b709e993de83296b6c8d4cdabfe6380db92124b5663088b02d7d2",
+    "docs/air/social.html": "441cfed178be614735d9f9b54163a07bff5b9af54a933fb55687a9357e01bd3c",
+    "docs/air/render-social.mjs": "c0936ee6afd53898c8dcf5cf7f71f970143108cb9a6a39b3183b493501d30974",
+    "docs/air/check-social.mjs": "93b4467b8ce043800a7aa7f7617f86916374a2b476bb9aa215a4492a3ce1f242",
+    "docs/air/social-previews.md": "89d5a5b8d9b23a09867ca0c2ab511ab5f753e142450b16136e278c2a31b27193",
+    "docs/air/artwork.d.mts": "a5638e0399776647ac1ed883a2026fa94e6515d47cd6054eb63ef27184cbf30f"
+  },
+  "stylesheet": "apps/site/src/styles/air.css"
+}

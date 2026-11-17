@@ -1,0 +1,15 @@
+{
+  "status": "packaged",
+  "directory": "/Users/sumitsahoo/Developer/cloaktools/apps/macos/build/Packages/20261116T165237Z",
+  "version": "0.6.0",
+  "build": "26",
+  "minimumOS": "27.0",
+  "architecture": "arm64",
+  "signedWithDeveloperID": false,
+  "notarized": false,
+  "archive": "CloakTools-0.6.0-local-preview.zip",
+  "bytes": 5514632,
+  "sha256": "61c5ba73aa937d5143ccfd00d01556cd46cf57886676c9d532d7f9b69ff0a123",
+  "updatePolicy": "Manual downloads; no background update checks",
+  "publicRelease": false
+}

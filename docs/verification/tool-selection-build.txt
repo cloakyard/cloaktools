@@ -1,0 +1,4 @@
+GIT_CONFIG_COUNT=0 ./scripts/build-native.sh
+Debug arm64; 0.5.0 (16)
+2026-11-16 17:36:59.907 appintentsmetadataprocessor[76417:1064122] warning: Metadata extraction skipped, no AppIntents.framework dependency found
+** BUILD SUCCEEDED **

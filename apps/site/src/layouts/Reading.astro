@@ -1,0 +1,19 @@
+---
+import Base from './Base.astro';
+import Icon from '../components/Icon.astro';
+import Contents from '../components/Contents.astro';
+import {readingSections} from '../lib/reading';
+const {frontmatter} = Astro.props;
+const headings = (Astro.props.headings ?? []).filter((heading: {depth: number}) => heading.depth === 2);
+const content = readingSections(await Astro.slots.render('default'));
+---
+<Base title={`${frontmatter.title} — CloakTools`} description={frontmatter.description} noindex={frontmatter.noindex}>
+<main id="main" tabindex="-1" class="air-page air-policy frame">
+  <a class="air-policy-back" href="/"><Icon name="back" size={16}/>Back to CloakTools</a>
+  <header class="air-policy-intro reading-intro"><p class="air-page-eyebrow">CloakTools · {frontmatter.title}</p><h1>{frontmatter.title}</h1><p class="air-page-lede">{frontmatter.description}</p></header>
+  <div class="air-reading-layout">
+    <Contents headings={headings}/>
+    <article class="air-prose reading-body"><Fragment set:html={content}/></article>
+  </div>
+</main>
+</Base>

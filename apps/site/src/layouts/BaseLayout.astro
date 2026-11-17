@@ -1,0 +1,87 @@
+---
+import { site } from '../data/site';
+import social from '../../../../artwork/social.json';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = `${site.name} — ${site.tagline}`,
+  description = site.description,
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = new URL(social.imagePath, site.url).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: site.name,
+  applicationCategory: 'UtilitiesApplication',
+  operatingSystem: 'macOS 27 or later',
+  description: site.description,
+  url: site.url,
+  isAccessibleForFree: true,
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical} />
+
+    <!-- Canonical circular family favicon; the larger touch rendition stays separate. -->
+    <link rel="icon" href="/cloaktools-mark.svg" type="image/svg+xml" />
+    <link rel="icon" href="/cloaktools.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" href="/cloaktools.png" />
+
+    <meta
+      name="theme-color"
+      content="#fafbfc"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#101216"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta name="color-scheme" content="light dark" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={social.imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={social.imageAlt} />
+
+    <meta name="generator" content={Astro.generator} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+  </head>
+  <body>
+    <a class="skip-link air-button air-button--primary" href="#main">Skip to content</a>
+    <div class="site-shell"><slot /></div>
+    <script>
+      import '../scripts/navigation.ts';
+    </script>
+  </body>
+</html>

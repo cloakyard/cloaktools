@@ -1,0 +1,3 @@
+# Preserve dated command output and literal fixture line endings.
+docs/verification/*.txt -whitespace
+scripts/fixtures/* -text -whitespace

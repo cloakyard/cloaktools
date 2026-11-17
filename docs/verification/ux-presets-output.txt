@@ -1,0 +1,8 @@
+Preset saved without creating a file.
+Persisted across app relaunch.
+Cancelled edit retained identical SHA256: 6109b22893d69b5681d6c6bf9cd4f94960d29fa209cb60af86e285eccf461a26
+Use opened review with Rust, main.rs and the chosen folder.
+Global Hello World Off: main.rs = 0 bytes; repeated File menu use: main 2.rs = 0 bytes.
+Existing main.rs retained; no overwrite.
+Synthetic preset library removed after exact-hash verification; no prior preset library existed.
+Bundle 0.4.0 (13)

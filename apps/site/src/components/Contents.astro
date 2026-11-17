@@ -1,0 +1,18 @@
+---
+import Icon from './Icon.astro';
+interface Props { headings: {slug: string; text: string}[]; }
+const {headings} = Astro.props;
+---
+<details class="air-contents" open>
+  <summary>On this page <Icon name="chevron" size={18}/></summary>
+  <nav aria-label="On this page">
+    {headings.map(({slug, text}) => <a href={`#${slug}`}>{text}</a>)}
+  </nav>
+</details>
+{headings.length > 8 && <script is:inline>
+  // Choose the initial state before the article is parsed. User changes remain native.
+  if (matchMedia('(max-width: 60rem)').matches) {
+    const contents = document.currentScript.previousElementSibling;
+    if (contents instanceof HTMLDetailsElement) contents.open = false;
+  }
+</script>}

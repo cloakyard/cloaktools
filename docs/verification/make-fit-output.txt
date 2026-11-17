@@ -1,0 +1,6 @@
+Source SHA-256 unchanged: b14bb87e925c7dfd344685cc70dd0423020983abb8b81bd6d47b20ac3bb086fd
+Source: 3410448 bytes, 1920 x 1280
+Requested: JPEG, <= 80000 bytes, within 1200 x 800, quality >= 60%, reduction allowed
+Native saved output: 78328 bytes, 709 x 472
+Decoded type: public.jpeg
+Output opened successfully in Preview.

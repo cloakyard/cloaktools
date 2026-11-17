@@ -1,0 +1,7 @@
+Source SHA256 unchanged: fc4d88190eea8566b923af092e8baf57406b31ec4472b434396bd6a9b8ae46a7
+Source: 137276 bytes; output: 135962 bytes
+Output pages: 3; source page order: 3, 1, 4; rotations: 90, 0, 0
+Page 1 media box: (0.0, 0.0, 420.0, 595.0); text: CloakTools | Project overview | Native PDF assembly verification | Page 1 - original text remains selectable
+Page 2 media box: (0.0, 0.0, 420.0, 595.0); text: CloakTools | Implementation notes | Native PDF assembly verification | Page 1 - original text remains selectable
+Page 3 media box: (0.0, 0.0, 595.2760000000001, 841.89); text: 
+Excluded source page 2 text absent; remaining text extraction passed.

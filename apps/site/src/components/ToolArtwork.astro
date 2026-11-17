@@ -1,0 +1,39 @@
+<div class="tools-artwork air-artwork">
+  <div class="tools-scene" aria-hidden="true">
+    <div class="tools-track"></div>
+    <div class="tool-paper paper-create">
+      <svg viewBox="0 0 48 48" fill="none"><path d="m17 13-10 11 10 11m14-22 10 11-10 11m-4-26-6 30" stroke="#3975B8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>hello.rs</span>
+    </div>
+    <div class="tool-paper paper-image">
+      <svg viewBox="0 0 48 48" fill="none"><rect x="5" y="7" width="38" height="34" rx="5" fill="#F8E4CD"/><circle cx="33" cy="17" r="5" fill="#D9984D"/><path d="m5 34 12-15 10 11 7-7 9 11v2a5 5 0 0 1-5 5H10a5 5 0 0 1-5-5Z" fill="#B37749"/></svg>
+      <span>photo.png</span>
+    </div>
+    <div class="tool-paper paper-link">
+      <svg viewBox="0 0 48 48" fill="none"><path d="M27 9h12v12M20 28 39 9M21 10H12a5 5 0 0 0-5 5v21a5 5 0 0 0 5 5h21a5 5 0 0 0 5-5v-9" stroke="#8762BE" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>https://</span>
+    </div>
+  </div>
+  <button class="air-artwork-replay" type="button" aria-label="Replay CloakTools animation" hidden />
+</div>
+<script>
+  import { mountAirArtwork } from '../../../../docs/air/artwork.mjs';
+  const root = document.querySelector<HTMLElement>('.tools-artwork');
+  if (root) {
+    const papers = [...root.querySelectorAll<HTMLElement>('.tool-paper')];
+    mountAirArtwork(root, {
+      settle() { /* CSS always renders the complete final arrangement. */ },
+      async run(animate: (entries: {element: Element; keyframes: Keyframe[]; options: KeyframeAnimationOptions}[]) => Promise<void>) {
+        await animate(papers.map((element, index) => ({
+          element,
+          keyframes: [
+            { transform: `translate(${(1-index)*148}px,35px) rotate(${(index-1)*3}deg) scale(.88)`, opacity: .25, offset: 0 },
+            { transform: `translate(${(1-index)*48}px,-16px) rotate(${(index-1)*12}deg) scale(1)`, opacity: 1, offset: .55 },
+            { transform: `translate(0,${index === 1 ? -3 : 9}px) rotate(${(index-1)*7}deg) scale(1)`, opacity: 1, offset: 1 },
+          ],
+          options: { duration: 2200, delay: index*130, easing: getComputedStyle(root).getPropertyValue('--air-ease-out').trim() },
+        })));
+      },
+    });
+  }
+</script>

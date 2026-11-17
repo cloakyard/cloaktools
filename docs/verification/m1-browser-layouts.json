@@ -1,0 +1,103 @@
+{
+  "layouts": [
+    {
+      "width": 320,
+      "height": 740,
+      "pageWidth": 320,
+      "overflow": false,
+      "hero": 288
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "pageWidth": 390,
+      "overflow": false,
+      "hero": 358
+    },
+    {
+      "width": 768,
+      "height": 900,
+      "pageWidth": 768,
+      "overflow": false,
+      "hero": 720
+    },
+    {
+      "width": 1024,
+      "height": 900,
+      "pageWidth": 1024,
+      "overflow": false,
+      "hero": 960
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "pageWidth": 1440,
+      "overflow": false,
+      "hero": 1200
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "pageWidth": 1920,
+      "overflow": false,
+      "hero": 1200
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "pageWidth": 844,
+      "overflow": false,
+      "hero": 796
+    }
+  ],
+  "routes": [
+    {
+      "path": "/install/",
+      "title": "Install — CloakTools",
+      "h1": "Install",
+      "overflow": false,
+      "main": true,
+      "missingImages": 0
+    },
+    {
+      "path": "/privacy/",
+      "title": "Privacy policy — CloakTools",
+      "h1": "Privacy policy",
+      "overflow": false,
+      "main": true,
+      "missingImages": 0
+    },
+    {
+      "path": "/support/",
+      "title": "Support — CloakTools",
+      "h1": "Support",
+      "overflow": false,
+      "main": true,
+      "missingImages": 0
+    },
+    {
+      "path": "/source/",
+      "title": "Source — CloakTools",
+      "h1": "Source",
+      "overflow": false,
+      "main": true,
+      "missingImages": 0
+    },
+    {
+      "path": "/license/",
+      "title": "MIT License — CloakTools",
+      "h1": "MIT License",
+      "overflow": false,
+      "main": true,
+      "missingImages": 0
+    },
+    {
+      "path": "/404.html",
+      "title": "Page not found — CloakTools",
+      "h1": "This page isn’t here.",
+      "overflow": false,
+      "main": true,
+      "missingImages": 0
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+Building for debugging...
+[1 / 5]
+[2 / 6] CloakToolsCore
+[3 / 7] CloakToolsCore
+[8 / 10] CloakToolsCore
+[9 / 11] CloakToolsCore
+[12 / 15] CloakToolsCoreTests-product
+[15 / 18] CloakToolsCoreTests-product
+[17 / 18] CloakToolsCoreTests-product
+Build complete! (2.10 secs)
+Test Suite 'All tests' started at 2026-11-15 18:27:21.254.
+Test Suite 'All tests' passed at 2026-11-15 18:27:21.255.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+◇ Test run started.
+↳ Testing Library Version: 2403
+↳ Target Platform: arm64e-apple-macos14.0
+◇ Test rejectsUnsafeAndOversizedTemplatesBeforeSaving() started.
+◇ Test unavailableAndUnwritableFolder() started.
+◇ Test persistenceReloadAndSnapshot() started.
+◇ Test importsExactContentAndSnapshotsSurviveEditsAndRemoval() started.
+◇ Test finderIntentValidation() started.
+◇ Test templateFinderIntentRoundTrips() started.
+◇ Test structuredDocumentsAreValidWithEitherMasterSetting() started.
+◇ Test cancellationDoesNotPublish() started.
+◇ Test unsafeNames(_:) started.
+◇ Test migratesExistingPreferencesWithoutLosingChoices() started.
+◇ Test URLPreservation() started.
+◇ Test catalogCoversRequestedLanguages() started.
+◇ Test concurrentPublication() started.
+◇ Test collisionWithFileDirectorySymlink() started.
+◇ Test nativeImageConversion() started.
+◇ Test selfExclusionAndLoopPrevention() started.
+◇ Test helloWorldPrecedenceAndRetainedChoices() started.
+◇ Test everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument name → "" to unsafeNames(_:) started.
+◇ Test case passing 1 argument name → "../evil" to unsafeNames(_:) started.
+◇ Test case passing 1 argument name → ".hidden" to unsafeNames(_:) started.
+◇ Test case passing 1 argument name → "bad/name" to unsafeNames(_:) started.
+◇ Test case passing 1 argument name → "bad
+name" to unsafeNames(_:) started.
+◇ Test case passing 1 argument name → "bad:name" to unsafeNames(_:) started.
+◇ Test case passing 1 argument name → " name" to unsafeNames(_:) started.
+◇ Test case passing 1 argument name → "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" to unsafeNames(_:) started.
+◇ Test case passing 1 argument template → .python to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .javascript to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .typescript to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .swift to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .rust to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .c to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .cpp to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .csharp to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .java to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .go to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .ruby to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .php to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .kotlin to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+✔ Test unsafeNames(_:) with 8 test cases passed after 0.005 seconds.
+✔ Test templateFinderIntentRoundTrips() passed after 0.004 seconds.
+✔ Test catalogCoversRequestedLanguages() passed after 0.004 seconds.
+✔ Test migratesExistingPreferencesWithoutLosingChoices() passed after 0.005 seconds.
+✔ Test URLPreservation() passed after 0.005 seconds.
+✔ Test finderIntentValidation() passed after 0.005 seconds.
+✔ Test helloWorldPrecedenceAndRetainedChoices() passed after 0.005 seconds.
+✔ Test selfExclusionAndLoopPrevention() passed after 0.004 seconds.
+✔ Test rejectsUnsafeAndOversizedTemplatesBeforeSaving() passed after 0.008 seconds.
+✔ Test everyLanguageHonorsMasterAndRetainedChoice(_:) with 13 test cases passed after 0.008 seconds.
+✔ Test collisionWithFileDirectorySymlink() passed after 0.008 seconds.
+✔ Test persistenceReloadAndSnapshot() passed after 0.008 seconds.
+✔ Test importsExactContentAndSnapshotsSurviveEditsAndRemoval() passed after 0.009 seconds.
+✔ Test cancellationDoesNotPublish() passed after 0.009 seconds.
+✔ Test unavailableAndUnwritableFolder() passed after 0.010 seconds.
+✔ Test structuredDocumentsAreValidWithEitherMasterSetting() passed after 0.011 seconds.
+✔ Test nativeImageConversion() passed after 0.012 seconds.
+✔ Test concurrentPublication() passed after 0.012 seconds.
+✔ Test run with 18 tests in 0 suites passed after 0.012 seconds.

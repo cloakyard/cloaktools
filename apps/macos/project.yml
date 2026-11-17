@@ -1,0 +1,133 @@
+name: CloakTools
+options:
+  bundleIdPrefix: com.cloakyard
+  deploymentTarget:
+    macOS: "27.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    ARCHS: arm64
+    SWIFT_VERSION: "6.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+    MACOSX_DEPLOYMENT_TARGET: "27.0"
+    CODE_SIGN_STYLE: Manual
+    CODE_SIGN_IDENTITY: "-"
+    ENABLE_HARDENED_RUNTIME: YES
+    MARKETING_VERSION: "0.6.0"
+    CURRENT_PROJECT_VERSION: "26"
+    CLOAKTOOLS_APP_GROUP: ""
+    CLOAKTOOLS_SOURCE_ROOT: $(SRCROOT)
+packages:
+  CloakToolsCore:
+    path: Packages/CloakToolsCore
+targets:
+  CloakTools:
+    type: application
+    platform: macOS
+    sources:
+      - path: App
+        excludes: [Info.plist, CloakTools.Release.entitlements]
+      - path: ../../assets/icon/CloakTools.icon
+        buildPhase: resources
+      - path: ../../LICENSE
+        buildPhase: resources
+    dependencies:
+      - package: CloakToolsCore
+      - target: CloakToolsFinder
+        embed: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.cloakyard.cloaktools
+        PRODUCT_NAME: CloakTools
+        ASSETCATALOG_COMPILER_APPICON_NAME: CloakTools
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleDisplayName: CloakTools
+        CloakToolsAppGroupIdentifier: $(CLOAKTOOLS_APP_GROUP)
+        LSMinimumSystemVersion: "27.0"
+        LSApplicationCategoryType: public.app-category.utilities
+        NSHumanReadableCopyright: "Copyright © 2026 Sumit Sahoo. MIT License."
+        CFBundleURLTypes:
+          - CFBundleURLName: Web and email links
+            CFBundleTypeRole: Viewer
+            CFBundleURLSchemes: [http, https, mailto]
+          - CFBundleURLName: Finder action requests
+            CFBundleTypeRole: Viewer
+            CFBundleURLSchemes: [cloaktools-action]
+        NSServices:
+          - NSMenuItem:
+              default: New File with CloakTools
+            NSMessage: createFile
+            NSPortName: CloakTools
+            NSSendTypes: [public.file-url]
+            NSRequiredContext:
+              NSApplicationIdentifier: com.apple.finder
+          - NSMenuItem:
+              default: Convert Image with CloakTools
+            NSMessage: convertImage
+            NSPortName: CloakTools
+            NSSendTypes: [public.file-url]
+            NSRequiredContext:
+              NSApplicationIdentifier: com.apple.finder
+          - NSMenuItem:
+              default: Assemble PDF with CloakTools
+            NSMessage: assemblePDF
+            NSPortName: CloakTools
+            NSSendTypes: [public.file-url]
+            NSRequiredContext:
+              NSApplicationIdentifier: com.apple.finder
+          - NSMenuItem:
+              default: Copy As with CloakTools
+            NSMessage: copyAs
+            NSPortName: CloakTools
+            NSSendTypes: [public.file-url]
+            NSRequiredContext:
+              NSApplicationIdentifier: com.apple.finder
+  CloakToolsFinder:
+    type: app-extension
+    platform: macOS
+    sources:
+      - path: FinderExtension
+        excludes: [Info.plist, FinderExtension.entitlements, FinderExtension.Release.entitlements]
+    dependencies:
+      - package: CloakToolsCore
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.cloakyard.cloaktools.finder
+        PRODUCT_NAME: CloakToolsFinder
+        CODE_SIGN_ENTITLEMENTS: $(CLOAKTOOLS_SOURCE_ROOT)/FinderExtension/FinderExtension.entitlements
+        APPLICATION_EXTENSION_API_ONLY: YES
+        SKIP_INSTALL: YES
+    info:
+      path: FinderExtension/Info.plist
+      properties:
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleDisplayName: CloakTools Finder
+        CloakToolsAppGroupIdentifier: $(CLOAKTOOLS_APP_GROUP)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.FinderSync
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).FinderSync
+  CloakToolsTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources: [Tests]
+    dependencies:
+      - target: CloakTools
+      - package: CloakToolsCore
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.cloakyard.cloaktools.tests
+schemes:
+  CloakTools:
+    build:
+      targets:
+        CloakTools: all
+    run:
+      config: Debug
+    test:
+      targets: [CloakToolsTests]

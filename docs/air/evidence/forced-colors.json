@@ -1,0 +1,268 @@
+[
+  {
+    "route": "/",
+    "bg": "rgb(0, 0, 0)",
+    "bodyColor": "rgb(255, 255, 255)",
+    "brokenImages": [],
+    "clipped": [],
+    "coarse": false,
+    "controls": 17,
+    "documentWidth": 390,
+    "headings": 12,
+    "height": 900,
+    "mark": [
+      36,
+      36
+    ],
+    "theme": "dark",
+    "unlabelled": [],
+    "width": 390
+  },
+  {
+    "route": "/install/",
+    "bg": "rgb(0, 0, 0)",
+    "bodyColor": "rgb(255, 255, 255)",
+    "brokenImages": [],
+    "clipped": [],
+    "coarse": false,
+    "controls": 14,
+    "documentWidth": 390,
+    "headings": 32,
+    "height": 900,
+    "mark": [
+      36,
+      36
+    ],
+    "theme": "dark",
+    "unlabelled": [],
+    "width": 390
+  },
+  {
+    "route": "/privacy/",
+    "bg": "rgb(0, 0, 0)",
+    "bodyColor": "rgb(255, 255, 255)",
+    "brokenImages": [],
+    "clipped": [],
+    "coarse": false,
+    "controls": 11,
+    "documentWidth": 390,
+    "headings": 19,
+    "height": 900,
+    "mark": [
+      36,
+      36
+    ],
+    "theme": "dark",
+    "unlabelled": [],
+    "width": 390
+  },
+  {
+    "route": "/support/",
+    "bg": "rgb(0, 0, 0)",
+    "bodyColor": "rgb(255, 255, 255)",
+    "brokenImages": [],
+    "clipped": [],
+    "coarse": false,
+    "controls": 15,
+    "documentWidth": 390,
+    "headings": 32,
+    "height": 900,
+    "mark": [
+      36,
+      36
+    ],
+    "theme": "dark",
+    "unlabelled": [],
+    "width": 390
+  },
+  {
+    "route": "/source/",
+    "bg": "rgb(0, 0, 0)",
+    "bodyColor": "rgb(255, 255, 255)",
+    "brokenImages": [],
+    "clipped": [],
+    "coarse": false,
+    "controls": 22,
+    "documentWidth": 390,
+    "headings": 6,
+    "height": 900,
+    "mark": [
+      36,
+      36
+    ],
+    "theme": "dark",
+    "unlabelled": [],
+    "width": 390
+  },
+  {
+    "route": "/license/",
+    "bg": "rgb(0, 0, 0)",
+    "bodyColor": "rgb(255, 255, 255)",
+    "brokenImages": [],
+    "clipped": [],
+    "coarse": false,
+    "controls": 10,
+    "documentWidth": 390,
+    "headings": 1,
+    "height": 900,
+    "mark": [
+      36,
+      36
+    ],
+    "theme": "dark",
+    "unlabelled": [],
+    "width": 390
+  },
+  {
+    "route": "/404.html",
+    "bg": "rgb(0, 0, 0)",
+    "bodyColor": "rgb(255, 255, 255)",
+    "brokenImages": [],
+    "clipped": [],
+    "coarse": false,
+    "controls": 10,
+    "documentWidth": 390,
+    "headings": 1,
+    "height": 900,
+    "mark": [
+      36,
+      36
+    ],
+    "theme": "dark",
+    "unlabelled": [],
+    "width": 390
+  },
+  {
+    "route": "/",
+    "bg": "rgb(0, 0, 0)",
+    "bodyColor": "rgb(255, 255, 255)",
+    "brokenImages": [],
+    "clipped": [],
+    "coarse": false,
+    "controls": 21,
+    "documentWidth": 1440,
+    "headings": 12,
+    "height": 900,
+    "mark": [
+      36,
+      36
+    ],
+    "theme": "dark",
+    "unlabelled": [],
+    "width": 1440
+  },
+  {
+    "route": "/install/",
+    "bg": "rgb(0, 0, 0)",
+    "bodyColor": "rgb(255, 255, 255)",
+    "brokenImages": [],
+    "clipped": [],
+    "coarse": false,
+    "controls": 48,
+    "documentWidth": 1440,
+    "headings": 32,
+    "height": 900,
+    "mark": [
+      36,
+      36
+    ],
+    "theme": "dark",
+    "unlabelled": [],
+    "width": 1440
+  },
+  {
+    "route": "/privacy/",
+    "bg": "rgb(0, 0, 0)",
+    "bodyColor": "rgb(255, 255, 255)",
+    "brokenImages": [],
+    "clipped": [],
+    "coarse": false,
+    "controls": 33,
+    "documentWidth": 1440,
+    "headings": 19,
+    "height": 900,
+    "mark": [
+      36,
+      36
+    ],
+    "theme": "dark",
+    "unlabelled": [],
+    "width": 1440
+  },
+  {
+    "route": "/support/",
+    "bg": "rgb(0, 0, 0)",
+    "bodyColor": "rgb(255, 255, 255)",
+    "brokenImages": [],
+    "clipped": [],
+    "coarse": false,
+    "controls": 50,
+    "documentWidth": 1440,
+    "headings": 32,
+    "height": 900,
+    "mark": [
+      36,
+      36
+    ],
+    "theme": "dark",
+    "unlabelled": [],
+    "width": 1440
+  },
+  {
+    "route": "/source/",
+    "bg": "rgb(0, 0, 0)",
+    "bodyColor": "rgb(255, 255, 255)",
+    "brokenImages": [],
+    "clipped": [],
+    "coarse": false,
+    "controls": 26,
+    "documentWidth": 1440,
+    "headings": 6,
+    "height": 900,
+    "mark": [
+      36,
+      36
+    ],
+    "theme": "dark",
+    "unlabelled": [],
+    "width": 1440
+  },
+  {
+    "route": "/license/",
+    "bg": "rgb(0, 0, 0)",
+    "bodyColor": "rgb(255, 255, 255)",
+    "brokenImages": [],
+    "clipped": [],
+    "coarse": false,
+    "controls": 14,
+    "documentWidth": 1440,
+    "headings": 1,
+    "height": 900,
+    "mark": [
+      36,
+      36
+    ],
+    "theme": "dark",
+    "unlabelled": [],
+    "width": 1440
+  },
+  {
+    "route": "/404.html",
+    "bg": "rgb(0, 0, 0)",
+    "bodyColor": "rgb(255, 255, 255)",
+    "brokenImages": [],
+    "clipped": [],
+    "coarse": false,
+    "controls": 14,
+    "documentWidth": 1440,
+    "headings": 1,
+    "height": 900,
+    "mark": [
+      36,
+      36
+    ],
+    "theme": "dark",
+    "unlabelled": [],
+    "width": 1440
+  }
+]

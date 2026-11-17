@@ -1,0 +1,6 @@
+Command: GIT_CONFIG_COUNT=0 ./scripts/build-native.sh
+CloakTools 0.2.0 (7), Debug arm64, macOS 27.2 SDK
+note: Disabling hardened runtime with ad-hoc codesigning. (in target 'CloakToolsFinder' from project 'CloakTools')
+2026-11-15 20:25:21.588 appintentsmetadataprocessor[56009:732184] warning: Metadata extraction skipped, no AppIntents.framework dependency found
+note: Disabling hardened runtime with ad-hoc codesigning. (in target 'CloakTools' from project 'CloakTools')
+** BUILD SUCCEEDED **

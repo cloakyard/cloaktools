@@ -1,0 +1,13 @@
+Bundle 0.4.1 (14)
+Saved Studio verification without creating output.
+Saved set persisted across relaunch.
+Review-only destination stayed empty.
+Studio contained README.md, notes/Notes.md and src/main.rs (all 0 bytes), plus assets/.
+Modified only the synthetic Studio/README.md to test overwrite protection.
+Second create published Studio 2, including the draft-only assets/images/ folder.
+Original README marker unchanged; second README and Rust remain empty.
+Saved-set name edit cancelled; library SHA256 unchanged: 0c7dc825135e5e407e370096016bcd6b5bc651a466b89d1f8d61b79f8d016bfd
+Review destination changed to Studio 2 without losing the prepared review; Back retained draft.
+Final draft cancelled without Rust notebook output.
+No .cloaktools-set staging remained.
+Removed the synthetic saved-set entry after exact original-byte hash validation; library is empty.

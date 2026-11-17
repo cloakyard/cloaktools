@@ -1,0 +1,17 @@
+# Only scripts/release.py's signed path uses this spec. Team and identity come from
+# explicit xcodebuild settings; the normal local build stays ad-hoc and unentitled.
+include: [project.yml]
+settings:
+  base:
+    CLOAKTOOLS_APP_GROUP: $(DEVELOPMENT_TEAM).com.cloakyard.cloaktools
+    ENABLE_HARDENED_RUNTIME: YES
+    OTHER_CODE_SIGN_FLAGS: --timestamp
+targets:
+  CloakTools:
+    settings:
+      base:
+        CODE_SIGN_ENTITLEMENTS: $(CLOAKTOOLS_SOURCE_ROOT)/App/CloakTools.Release.entitlements
+  CloakToolsFinder:
+    settings:
+      base:
+        CODE_SIGN_ENTITLEMENTS: $(CLOAKTOOLS_SOURCE_ROOT)/FinderExtension/FinderExtension.Release.entitlements

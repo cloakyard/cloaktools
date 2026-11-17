@@ -1,0 +1,14 @@
+---
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+---
+<footer class="air-page-footer site-footer frame">
+    <p class="air-page-identity"><span translate="no">CloakTools</span><span>Built by <a href="https://github.com/sumitsahoo">Sumit Sahoo</a></span></p>
+    <nav aria-label="Footer navigation">
+      <a href={site.privacyPolicy} aria-current={Astro.url.pathname === '/privacy/' ? 'page' : undefined}>Privacy</a>
+      <a href={site.repo}>Source <Icon name="link" size={16} /></a>
+      <a href={site.license}>MIT license <Icon name="link" size={16} /></a>
+      <a href="https://cloakyard.com">Cloakyard <Icon name="link" size={16} /></a>
+      <a href="https://ko-fi.com/sumitsahoo21" target="_blank" rel="noopener noreferrer">Buy me a coffee <Icon name="link" size={16} /></a>
+    </nav>
+</footer>

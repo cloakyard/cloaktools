@@ -1,0 +1,107 @@
+Building for debugging...
+[Planning deferred tasks]
+[6 / 15] CloakToolsCoreTests-product
+[8 / 17] CloakToolsCoreTests-product
+[12 / 16] CloakToolsCoreTests-product
+[14 / 16] CloakToolsCoreTests-product
+Build complete! (1.36 secs)
+Test Suite 'All tests' started at 2026-11-15 19:28:28.435.
+Test Suite 'All tests' passed at 2026-11-15 19:28:28.436.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+◇ Test run started.
+↳ Testing Library Version: 2403
+↳ Target Platform: arm64e-apple-macos14.0
+◇ Test templateFinderIntentRoundTrips() started.
+◇ Test preparedImageDoesNotRereadChangedOrDeletedSource() started.
+◇ Test imagePreferencesMigrationAndSnapshot() started.
+◇ Test concurrentPublication() started.
+◇ Test clipboardCancellationDoesNotPublish() started.
+◇ Test migratesExistingPreferencesWithoutLosingChoices() started.
+◇ Test unsafeNames(_:) started.
+◇ Test clipboardRejectsMalformedAndMultiframeImages() started.
+◇ Test imageOrientationAndMetadataRemoval() started.
+◇ Test clipboardImagesBecomeValidPNG(_:) started.
+◇ Test unavailableAndUnwritableFolder() started.
+◇ Test importsExactContentAndSnapshotsSurviveEditsAndRemoval() started.
+◇ Test clipboardPNGPreservesTransparencyAndBoundsThumbnail() started.
+◇ Test imageQualityValidationAndEncoding() started.
+◇ Test structuredDocumentsAreValidWithEitherMasterSetting() started.
+◇ Test imageRejectsMalformedAndMultipleFrames() started.
+◇ Test finderIntentValidation() started.
+◇ Test URLPreservation() started.
+◇ Test selfExclusionAndLoopPrevention() started.
+◇ Test everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test clipboardTextBoundsPreviewAndRejectsInvalidInput() started.
+◇ Test nativeImageFormatMatrix() started.
+◇ Test imageCancellationDoesNotPublish() started.
+◇ Test persistenceReloadAndSnapshot() started.
+◇ Test clipboardTextKeepsUnicodeLineEndingsAndSafeCollisions() started.
+◇ Test collisionWithFileDirectorySymlink() started.
+◇ Test cancellationDoesNotPublish() started.
+◇ Test clipboardFinderIntentOnlyCarriesDestination() started.
+◇ Test catalogCoversRequestedLanguages() started.
+◇ Test helloWorldPrecedenceAndRetainedChoices() started.
+◇ Test imageTransparencyAndLossyBackgrounds() started.
+◇ Test clipboardImageAppliesOrientationAndDropsSourceMetadata() started.
+◇ Test nativeImageConversion() started.
+◇ Test rejectsUnsafeAndOversizedTemplatesBeforeSaving() started.
+◇ Test case passing 1 argument name → ".hidden" to unsafeNames(_:) started.
+◇ Test case passing 1 argument name → "../evil" to unsafeNames(_:) started.
+◇ Test case passing 1 argument name → "bad/name" to unsafeNames(_:) started.
+◇ Test case passing 1 argument name → "" to unsafeNames(_:) started.
+◇ Test case passing 1 argument name → "bad:name" to unsafeNames(_:) started.
+◇ Test case passing 1 argument name → " name" to unsafeNames(_:) started.
+◇ Test case passing 1 argument name → "bad
+name" to unsafeNames(_:) started.
+◇ Test case passing 1 argument type → public.png to clipboardImagesBecomeValidPNG(_:) started.
+◇ Test case passing 1 argument name → "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" to unsafeNames(_:) started.
+◇ Test case passing 1 argument type → public.jpeg to clipboardImagesBecomeValidPNG(_:) started.
+◇ Test case passing 1 argument type → public.tiff to clipboardImagesBecomeValidPNG(_:) started.
+◇ Test case passing 1 argument template → .python to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .javascript to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .typescript to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .swift to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .rust to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .c to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .cpp to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .csharp to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .java to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .go to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .ruby to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .php to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .kotlin to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+✔ Test unsafeNames(_:) with 8 test cases passed after 0.012 seconds.
+✔ Test migratesExistingPreferencesWithoutLosingChoices() passed after 0.012 seconds.
+✔ Test templateFinderIntentRoundTrips() passed after 0.012 seconds.
+✔ Test imagePreferencesMigrationAndSnapshot() passed after 0.012 seconds.
+✔ Test importsExactContentAndSnapshotsSurviveEditsAndRemoval() passed after 0.017 seconds.
+✔ Test finderIntentValidation() passed after 0.017 seconds.
+✔ Test URLPreservation() passed after 0.017 seconds.
+✔ Test selfExclusionAndLoopPrevention() passed after 0.017 seconds.
+✔ Test clipboardRejectsMalformedAndMultiframeImages() passed after 0.017 seconds.
+✔ Test unavailableAndUnwritableFolder() passed after 0.017 seconds.
+✔ Test clipboardImagesBecomeValidPNG(_:) with 3 test cases passed after 0.017 seconds.
+✔ Test structuredDocumentsAreValidWithEitherMasterSetting() passed after 0.017 seconds.
+✔ Test everyLanguageHonorsMasterAndRetainedChoice(_:) with 13 test cases passed after 0.017 seconds.
+✔ Test persistenceReloadAndSnapshot() passed after 0.017 seconds.
+✔ Test clipboardFinderIntentOnlyCarriesDestination() passed after 0.017 seconds.
+✔ Test catalogCoversRequestedLanguages() passed after 0.017 seconds.
+✔ Test helloWorldPrecedenceAndRetainedChoices() passed after 0.017 seconds.
+✔ Test clipboardTextKeepsUnicodeLineEndingsAndSafeCollisions() passed after 0.017 seconds.
+✔ Test collisionWithFileDirectorySymlink() passed after 0.017 seconds.
+✔ Test rejectsUnsafeAndOversizedTemplatesBeforeSaving() passed after 0.017 seconds.
+✔ Test clipboardImageAppliesOrientationAndDropsSourceMetadata() passed after 0.017 seconds.
+✔ Test nativeImageConversion() passed after 0.017 seconds.
+✔ Test clipboardPNGPreservesTransparencyAndBoundsThumbnail() passed after 0.017 seconds.
+✔ Test clipboardCancellationDoesNotPublish() passed after 0.018 seconds.
+✔ Test cancellationDoesNotPublish() passed after 0.017 seconds.
+✔ Test clipboardTextBoundsPreviewAndRejectsInvalidInput() passed after 0.019 seconds.
+✔ Test concurrentPublication() passed after 0.019 seconds.
+✔ Test imageRejectsMalformedAndMultipleFrames() passed after 0.022 seconds.
+✔ Test preparedImageDoesNotRereadChangedOrDeletedSource() passed after 0.023 seconds.
+✔ Test imageCancellationDoesNotPublish() passed after 0.023 seconds.
+✔ Test imageOrientationAndMetadataRemoval() passed after 0.113 seconds.
+✔ Test imageQualityValidationAndEncoding() passed after 0.176 seconds.
+✔ Test imageTransparencyAndLossyBackgrounds() passed after 0.222 seconds.
+✔ Test nativeImageFormatMatrix() passed after 0.396 seconds.
+✔ Test run with 34 tests in 0 suites passed after 0.396 seconds.

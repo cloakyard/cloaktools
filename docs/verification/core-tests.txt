@@ -1,0 +1,65 @@
+Building for debugging...
+[1 / 6]
+[2 / 7] CloakToolsCore
+[5 / 11]
+[6 / 11] CloakToolsCore
+[14 / 18] CloakToolsCore
+[17 / 19] CloakToolsCoreTests-product
+[19 / 21] CloakToolsCoreTests-product
+[25 / 26] CloakToolsCoreTests-product
+Build complete! (2.55 secs)
+Test Suite 'All tests' started at 2026-11-15 17:46:07.747.
+Test Suite 'All tests' passed at 2026-11-15 17:46:07.748.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+◇ Test run started.
+↳ Testing Library Version: 2403
+↳ Target Platform: arm64e-apple-macos14.0
+◇ Test everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test unavailableAndUnwritableFolder() started.
+◇ Test URLPreservation() started.
+◇ Test concurrentPublication() started.
+◇ Test finderIntentValidation() started.
+◇ Test persistenceReloadAndSnapshot() started.
+◇ Test collisionWithFileDirectorySymlink() started.
+◇ Test selfExclusionAndLoopPrevention() started.
+◇ Test helloWorldPrecedenceAndRetainedChoices() started.
+◇ Test cancellationDoesNotPublish() started.
+◇ Test nativeImageConversion() started.
+◇ Test catalogCoversRequestedLanguages() started.
+◇ Test case passing 1 argument template → .c to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test unsafeNames(_:) started.
+◇ Test case passing 1 argument template → .typescript to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .swift to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .cpp to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .python to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .rust to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .javascript to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .csharp to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .go to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .java to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .ruby to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .kotlin to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument template → .php to everyLanguageHonorsMasterAndRetainedChoice(_:) started.
+◇ Test case passing 1 argument name → "" to unsafeNames(_:) started.
+◇ Test case passing 1 argument name → "../evil" to unsafeNames(_:) started.
+◇ Test case passing 1 argument name → ".hidden" to unsafeNames(_:) started.
+◇ Test case passing 1 argument name → "bad/name" to unsafeNames(_:) started.
+◇ Test case passing 1 argument name → "bad:name" to unsafeNames(_:) started.
+◇ Test case passing 1 argument name → " name" to unsafeNames(_:) started.
+◇ Test case passing 1 argument name → "bad
+name" to unsafeNames(_:) started.
+◇ Test case passing 1 argument name → "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" to unsafeNames(_:) started.
+✔ Test URLPreservation() passed after 0.005 seconds.
+✔ Test finderIntentValidation() passed after 0.005 seconds.
+✔ Test everyLanguageHonorsMasterAndRetainedChoice(_:) with 13 test cases passed after 0.008 seconds.
+✔ Test helloWorldPrecedenceAndRetainedChoices() passed after 0.008 seconds.
+✔ Test catalogCoversRequestedLanguages() passed after 0.008 seconds.
+✔ Test unsafeNames(_:) with 8 test cases passed after 0.008 seconds.
+✔ Test selfExclusionAndLoopPrevention() passed after 0.008 seconds.
+✔ Test persistenceReloadAndSnapshot() passed after 0.009 seconds.
+✔ Test collisionWithFileDirectorySymlink() passed after 0.008 seconds.
+✔ Test cancellationDoesNotPublish() passed after 0.009 seconds.
+✔ Test concurrentPublication() passed after 0.012 seconds.
+✔ Test unavailableAndUnwritableFolder() passed after 0.014 seconds.
+✔ Test nativeImageConversion() passed after 0.018 seconds.
+✔ Test run with 13 tests in 0 suites passed after 0.018 seconds.

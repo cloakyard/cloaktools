@@ -1,0 +1,12 @@
+Tone.mp3 -> M4A · Audio only: 12.024 s, 367228 bytes; Tone-mp3-audio.m4a
+Tone.aiff -> M4A · Audio only: 12.0 s, 368930 bytes; Tone-aiff-audio.m4a
+Tone.caf -> M4A · Audio only: 12.0 s, 368930 bytes; Tone-caf-audio.m4a
+Tone.wav -> M4A · Audio only: 12.0 s, 302466 bytes; Tone-wav-audio.m4a
+Motion 720.mp4 -> MP4 · Up to 720p: 12.0 s, 1263387 bytes; Motion 720-mp4-video720.mp4
+Motion 720.mp4 -> MP4 · Up to 1080p: 12.0 s, 1263387 bytes; Motion 720-mp4-video1080.mp4
+Motion 720.mp4 -> M4A · Audio only: 12.0 s, 302466 bytes; Motion 720-mp4-audio.m4a
+Motion and tone.mov -> MP4 · Up to 720p: 12.0 s, 1263375 bytes; Motion and tone-mov-video720.mp4
+Motion and tone.mov -> MP4 · Up to 1080p: 12.0 s, 1441353 bytes; Motion and tone-mov-video1080.mp4
+Motion and tone.mov -> M4A · Audio only: 12.0 s, 302466 bytes; Motion and tone-mov-audio.m4a
+Portrait HEVC.mov -> MP4 · Up to 720p: 4.0 s, 321665 bytes; Portrait HEVC-mov-video720.mp4
+Portrait HEVC.mov -> MP4 · Up to 1080p: 4.0 s, 322020 bytes; Portrait HEVC-mov-video1080.mp4
