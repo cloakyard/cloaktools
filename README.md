@@ -128,6 +128,8 @@ Maintain only `dev` and `main`. Work on `dev`, verify, then promote the same rev
 
 The website is hosted on Cloudflare Workers at tools.cloakyard.com. `apps/site/wrangler.jsonc` pins the existing custom domain, static output and HTTP 404 handling. Workers Builds uses `main`, root `apps/site`, build command `npm ci && npm run verify` and deploy command `npx wrangler deploy`. Verified changes promoted from `dev` to `main` publish automatically. `npm run check:worker` in `apps/site` validates the deployment bundle without publishing.
 
+Nonproduction branch builds use `npx wrangler versions upload`. They upload a version without promoting it to production; version URLs and workers.dev remain disabled in the checked-in configuration.
+
 Native releases are separate. `python3 scripts/release.py --preview` creates a verified local ZIP; Developer ID signing and notarization remain deferred. See [Release](docs/RELEASE.md). Keep release binaries and generated build output out of source control. Updates are manual.
 
 ## Contributing

@@ -96,6 +96,13 @@ remain disabled. Promote verified `dev` through a PR and follow the connected
 production build. Release PR checks record the deployment result; verify live
 HTML, assets, policy routes, social PNG bytes and a missing path's HTTP 404.
 
+The first branch build passed verification but failed at Cloudflare's default
+`wrangler preview` command, which requires a separate `previews` configuration.
+The dashboard's preview-branch command was corrected to `npx wrangler versions
+upload`, the documented version-upload workflow. This leaves production
+promotion on `main`, with version URLs and workers.dev disabled. See
+[Cloudflare build configuration](https://developers.cloudflare.com/workers/ci-cd/builds/configuration/#preview-command).
+
 No web editor, batch/library workspace, file processing, progress, transactional
 dialog or PWA notice exists in CloakTools' website. These are native workflows,
 not missing web surfaces. Other apps' editors, standalone tools, libraries,
