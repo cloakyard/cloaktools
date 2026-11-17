@@ -20,8 +20,10 @@ its historical observations are preserved. The app remains a development preview
 - Updated stale hosting and native-design references, repository guidance and
   release wording. Public installers remain unavailable; a web deploy does not
   publish a native release.
-- Removed unused `Arrow.astro`, unused reading-table CSS and the redundant old
-  contract copy. Kept `Reading.astro`: Markdown frontmatter uses it, so the Knip
+- Removed unused `Arrow.astro`, unused reading-table CSS, two obsolete public
+  screenshot copies and the redundant old contract copy. Historical screenshots
+  referenced by native documentation remain in `assets/screenshots/`.
+  Kept `Reading.astro`: Markdown frontmatter uses it, so the Knip
   configuration names that real entry instead of suppressing unused-file checks.
 - Isolated decorative paper and native screenshot geometry in `artwork.css`.
   The canonical Air CSS is byte-identical. Fixed the missing `install-title`
