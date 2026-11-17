@@ -1,0 +1,18 @@
+{
+  "assets": [
+    {
+      "file": "assets/screenshots/new-files-dark.png",
+      "bytes": 374958,
+      "sha256": "0d047bc4cc8377c5bbd930ed53839794e478df201d4eed421ad53ce25ff654ad",
+      "width": 2200,
+      "height": 1700
+    },
+    {
+      "file": "assets/screenshots/new-files-light.png",
+      "bytes": 336180,
+      "sha256": "fdf9528f354fac59d4ad4b52af97a0698bebd1fe793ffd6784692e6a10b85e04",
+      "width": 2200,
+      "height": 1700
+    }
+  ]
+}

@@ -14,8 +14,8 @@
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/roadmap-dark.png">
-    <img src="assets/screenshots/roadmap-light.png" alt="CloakTools’ native Conversions settings with image fitting, media export, reusable recipes and expandable image and PDF tools." width="800">
+    <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/new-files-dark.png">
+    <img src="assets/screenshots/new-files-light.png" alt="CloakTools’ native New Files settings with file creation, saved templates, file sets, folder presets and text tools." width="800">
   </picture>
 </p>
 
