@@ -9,7 +9,7 @@ CloakTools targets **macOS 27 or later on Apple silicon**. Development requires 
 
 ## Install the public beta
 
-1. Download the [CloakTools 0.6.0 beta DMG](https://github.com/cloakyard/cloaktools/releases/download/v0.6.0-beta.20261118.2/CloakTools-v0.6.0-beta.20261118.2.dmg). The [release notes](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-beta.20261118.2) include the build number and SHA-256 checksums.
+1. Download the [CloakTools 0.6.0 beta DMG](https://github.com/cloakyard/cloaktools/releases/download/v0.6.0-beta.20261118.6/CloakTools-v0.6.0-beta.20261118.6.dmg). The [release notes](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-beta.20261118.6) include the build number and SHA-256 checksums.
 2. Open the disk image, drag CloakTools to Applications, eject the image and open the installed copy.
 3. This beta is ad-hoc signed and unnotarized. If macOS blocks first launch, review [Apple’s instructions](https://support.apple.com/en-us/102445) before choosing whether to open it.
 4. Choose **Settings → About → Check for Updates**. Automatic checks and downloads are optional. Future updates arrive through a signed feed.
@@ -27,8 +27,6 @@ open apps/macos/build/Verify/Build/Products/Debug/CloakTools.app
 
 This produces a local ad-hoc signed development app. It is not a notarized public release. No developer Team ID is built into the project.
 
-The homepage screenshot shows the upcoming Workbench. In that build, Finder Services accept selected files for QR reading, size-limited images and file lists. Folder Actions uses the folder you clicked, and the menu-bar collection holds files while you browse. The instructions below describe the downloadable 0.6.0 beta, build 20261118.2.
-
 ## Choose your tools
 
 On a fresh installation, CloakTools asks which tools you want. **Everyday tools** are always included. Leave **Developer Tools** Off for a simpler catalog, or turn it On to include JSON, Base64, Sample Files and Example Copy, code files, language starters and technical copy formats. Choose **Start Using CloakTools**. The welcome screen appears once.
@@ -39,11 +37,11 @@ Older installations keep Developer Tools On so their existing catalog stays avai
 
 ## Find your tools
 
-**General → Quick actions** offers New File, New File Set and Make It Fit. **New Files** puts creation and saved templates first, followed by file sets and folder presets. Expand **Built-in file types** for the small document catalog. Programming choices remain in New File when Developer Tools is enabled.
+Choose **Finder Tools**, **Files & Templates**, **Images, PDFs & Media**, **Text & Sharing**, **Open Links**, or the optional **Developer Tools**. Each page groups related actions and describes what each tool produces. Press **⌘F** to reveal the search field and search across visible categories. “PDF” lists PDF assembly and page organization first. “Merge PDF” narrows it to assembly, which you can open with **⌘Return**. When several results match, choose the one you want.
 
-**Conversions** starts with Make It Fit and Export Media, followed by saved export recipes. Expand **Image & PDF tools** for Convert Image, Assemble PDF and Organize PDF. Image conversion defaults and supported-file limits have their own expandable rows.
+Select an action to open its editor. A Finder selection enters the review with its files already supplied. **Back (⌘[)** returns to the category or search results you came from. Choose **Resume** in the results or select the draft under **In Progress** to continue editing. Cancel, Close or Done releases that draft. A second incoming request for the same tool can open an independent review window.
 
-Markdown Digest stays visible under **New Files → Text & sharing**. Expand **More text tools** for QR Code, Text Cleanup and Clipboard to File. The File menu groups these actions under **Text & Sharing**, with conversion and PDF actions under **Images & PDFs**. Existing keyboard shortcuts still work without opening the groups.
+Open **Settings** from the sidebar or with **⌘,**. General holds the tool choice and file-opening preferences. Finder holds workspace and extension setup, Images holds conversion defaults, and Links holds rules and destinations. Language starters live in the optional Developer tab. Privacy and About have their own tabs.
 
 ## JSON and Base64
 
@@ -83,57 +81,60 @@ Previews show up to 65,536 characters. JSON supports 128 nesting levels and up t
 
 ## Finder
 
-In **Finder Integration**, open the Finder workspace and enable **CloakTools Finder** through Manage Finder Extension. Its menus cover `~/CloakTools Files` and subfolders. Right-click empty space to create a file, a folder to create inside it, or one PNG/JPEG/TIFF/HEIC to convert a copy. Review the destination before confirming.
+Open **Finder Tools → Finder Setup…** to open the CloakTools Files workspace or manage the Finder extension. Inside the workspace, right-click a folder to create files or start a saved file set.
 
-For other locations, select a folder or image and use the matching **Finder → Services** command. Hidden services can be enabled in System Settings → Keyboard → Keyboard Shortcuts → Services. Protected folders may require macOS access approval. Search results, virtual locations, and cloud-provider views have different menu availability.
-
-Finder’s New File menu offers Plain Text, Markdown and PDF directly. **Choose File Type or Template…** opens the current catalog, including programming and JSON files when Developer Tools is On.
+For files and folders elsewhere, open **Finder → Services**. **Folder Actions with CloakTools** offers creation, folder reuse or comparison for one folder and starts comparison directly for two. Select files for **Collect Copies for Sharing** or **Copy or Export File List**. From a still image, choose **Read QR Code from Image** or, for supported photos, **Make It Fit**. For ordinary image conversion or PDF combination, use Finder’s **Quick Actions**. If a Service is hidden, enable it in System Settings → Keyboard → Keyboard Shortcuts → Services.
 
 ## Saved templates
 
-In **New Files**, import a UTF-8 text/source template, star your favorites, and set its default filename from the template menu. Finder’s **Choose File Type or Template…** opens the same compact creator. JSON starts with a valid empty object and PDF creates one blank A4 page.
+In **Files & Templates**, import a UTF-8 text/source template, star your favorites, and set its default filename from the template menu. Finder’s **Choose Template or File Set…** opens the same compact creator. JSON starts with a valid empty object and PDF creates one blank A4 page.
 
 **General → Open after creation** optionally opens text/source files in TextEdit and PDFs and clipboard images in Preview. It starts Off and never executes generated source code.
 
 ## Folder presets
 
-In **New Files → Folder presets**, choose **Add Folder Preset…**. Select a folder, name the preset, choose a file type or saved template, and enter a filename without the extension. **Save Preset** saves choices only. Use the row’s **Use…** button or **File → New File from Preset** to review and create a file. The review can change name, type or destination for that one file.
+In **Files & Templates → Folder presets**, choose **Add Folder Preset…**. Select a folder, name the preset, choose a file type or saved template, and enter a filename without the extension. **Save Preset** saves choices only. Use the row’s **Use…** button or **File → New File from Preset** to review and create a file. The review can change name, type or destination for that one file.
 
 Programming content follows global/language settings or stays blank. Global Hello World Off always wins; custom templates keep their saved content. JSON and PDF retain valid blank structures. The row menu edits/removes a preset without touching its folder or files. Up to 32 presets stay on this Mac. They are explicit starting points, separate from Finder’s monitored workspace. If a folder moves, choose its new location; if a template is removed, edit the preset to select another.
 
 ## Create a file set
 
-Choose **File → New File Set… (⇧⌘N)** or **New Files → File sets & folder templates**. Select a parent folder, name the new folder, and review the list of files and subfolders. **Start with…** offers Notes, Python, Rust and C++ examples; they are file collections, without a generated build system or installed dependencies.
+Choose **File → New File Set… (⇧⌘N)** or **Files & Templates → Create a folder with a set of files**. Select a parent folder, name the new folder, and review the list of files and subfolders. **Start with…** offers Notes, Python, Rust and C++ examples; they are file collections, without a generated build system or installed dependencies.
 
 Use the pencil to change an item’s relative path or file type, or add files and folders. Changing type adjusts the extension. Parent folders are created automatically. Built-in programming files follow the captured global/language settings, or **Always blank**. Imported templates keep their exact content. JSON and PDF retain valid blank structures.
 
 **Review…** prepares the content without writing files. Check every path, the total bytes and destination, then **Create Folder**. A name collision creates a numbered folder; existing folders are never merged. Change the parent destination from either step, or go Back to revise the set. The created folder can be revealed in Finder; its files are never automatically opened or run.
 
-**Save Set…** stores a reusable structure without creating files. Use it from New Files later; **Save Changes** updates an existing saved set. Removing a saved set leaves created files alone. Sets support up to 32 items, 8 path levels and 16 MiB of prepared content; up to 32 sets stay on this Mac. Hidden names, traversal and conflicting paths are rejected. This does not import existing folder trees or create symbolic links.
+**Save Set…** stores a reusable structure without creating files. Use it from Files & Templates later; **Save Changes** updates an existing saved set. Removing a saved set leaves created files alone. Sets support up to 32 items, 8 path levels and 16 MiB of prepared content; up to 32 sets stay on this Mac. Hidden names, traversal and conflicting paths are rejected. This does not import existing folder trees or create symbolic links.
 
 ## Create QR codes
 
-Open **New Files → More text tools → QR Code → Create** or **File → Text & Sharing → Create QR Code…**. Type or paste text or a link, or choose **Try Example**. Pick a 512, 1024 or 2048-pixel image and Standard or High error correction, then **Create QR Code**. The image appears beside your input so you can review both.
+Open **Text & Sharing → Create a QR code**. Choose what someone will scan from **Content**.
 
-Choose **Copy Image**, or enter a name and **Save PNG…** to a folder. Existing names receive numbered copies. Editing the input or options clears the old code; changing the filename keeps the image. **⌘Return** creates or saves; **Return** closes the completed operation.
+| Content | What to enter |
+| --- | --- |
+| Text or Web link | Paste a message exactly as you want it to appear, or enter a full HTTP or HTTPS address. |
+| Contact card (vCard) | Enter a first or last name. Add a phone number, email, organization or website as needed. |
+| Wi-Fi network | Enter the exact network name and choose WPA/WPA2 Personal, WEP or Open. For a protected network, enter its password. Select **Hidden network** if applicable. |
+| Email, Phone call or Text message | Enter one email address or a phone number with its country code. Email supports a subject and message. Text message supports a prefilled message. |
+| Map location | Enter latitude and longitude in decimal degrees. |
+| Calendar event | Give the event a title, choose local start and end times, and optionally add a location. |
 
-This everyday tool accepts up to 1,024 UTF-8 bytes and encodes the text without trimming spaces or rewriting links. PNGs are black on white with a clear scanning border. If a code is too dense, choose a larger image or shorter text. High correction tolerates more damage but increases density; test with your scanner before sharing or printing.
+Choose **Create QR Code** (⌘Return) to preview the image. **Copy Image** puts the PNG on the clipboard. **Save PNG…** writes the reviewed image into the folder you choose, adding a number if the name is taken. Switch types to work on another code and return to your entries while the window stays open.
 
-Everything stays local. Links are not opened, and no QR history is kept. Anyone with a code can read its contents. Use Read mode to inspect codes from an image.
+**Image settings** defaults to 512 pixels and Standard correction. Choose 1024 or 2048 pixels for denser codes, or High correction for greater damage tolerance. The 1,024-byte limit includes the encoded contact, network or event fields. Anyone with a Wi-Fi QR code can read its encoded password.
 
 ## Read QR codes
 
-Open **New Files → More text tools → QR Code → Read** or **File → Text & Sharing → Read QR Code…**, then **Choose Image…**. Review the image beside its decoded text. If several codes are found, click a numbered outline or choose **Code 1**, **Code 2**, and so on. Links are shown as plain text and never opened automatically.
+Open **Text & Sharing → Read a QR code from an image**, or switch to **Read** in the QR window. In Finder, **Services → Read QR Code from Image with CloakTools** starts with the selected image. Choose a still image. If it contains multiple codes, click a numbered outline or choose its number above the preview. The reader identifies the selected content. For Wi-Fi, choose **Show encoded text** to reveal the network details.
 
-**Copy Text** copies the selected result. Enter a name and choose **Save Text…**, then a folder, to create a UTF-8 `.txt` file. Existing names receive numbered copies. Nothing is added to the decoded string. **⌘Return** chooses or saves; **Return** closes the completed operation. Switching between Create and Read keeps both drafts until the window closes.
+**Copy Text** copies the entire result. **Save Text…** writes it as UTF-8. For a contact card or calendar document, use the format picker to save a **.vcf** or **.ics** file that you can open separately. Each export preserves the complete decoded text and adds a number if the name is taken. The reader leaves opening links, joining a network and importing a file up to you.
 
-Choose one still PNG, JPEG, GIF, WebP, TIFF or HEIC/HEIF image, up to 10 MiB and 40 megapixels. Up to 16 codes can be reviewed. Large images are reduced for reading; if a code is missed, try a sharper image or a closer crop. Animation, multi-page images, PDF and SVG are unsupported.
-
-Everything is processed on your Mac, without camera access, automatic clipboard reads, uploads or QR history. Readers can interpret encoding markers, so this exports decoded text rather than raw binary payloads.
+PNG, JPEG, GIF, WebP, TIFF and HEIC/HEIF are accepted as single still images, up to 10 MiB and 40 megapixels. Reading is bounded to a 4096-pixel long edge, 16 codes and 32 KiB of decoded text per code. If a code is missed, try a sharper image or a closer crop. Animations, multi-page images, PDF and SVG are unsupported. No camera access, automatic clipboard reads, uploads or QR history are used.
 
 ## Text cleanup
 
-Open **New Files → More text tools → Text Cleanup** or **File → Text & Sharing → Text Cleanup…**. Type or paste text, or choose **Try Example**. Select line-edge trimming, space/tab collapsing and whether to keep or remove empty lines. **Preview Changes** prepares a separate result. Only Trim line ends is enabled initially.
+Open **Text & Sharing → Clean up text** or **File → Text & Sharing → Text Cleanup…**. Type or paste text, or choose **Try Example**. Select line-edge trimming, space/tab collapsing and whether to keep or remove empty lines. **Preview Changes** prepares a separate result. Only Trim line ends is enabled initially.
 
 Compare **Input** and **Result** and review the changed-line count. **Copy Result** and **Save Text…** always use the complete cleaned result, even while Input is selected. Saving asks for a folder and creates a new `.txt` file; existing filenames receive numbered copies. Editing input or options requires a fresh preview. An empty result can be saved as a blank file.
 
@@ -141,7 +142,7 @@ This everyday tool accepts up to 1 MiB of text. It changes ordinary spaces and t
 
 ## Markdown digests
 
-Open **New Files → Markdown Digest** or **File → Markdown Digest…**. Choose text files, inspect their captured contents and use the arrows or Remove to arrange them. **Preview Digest** prepares one Markdown document before anything is written. This everyday tool is available with Developer Tools Off or On.
+Open **Text & Sharing → Combine text files into Markdown** or **File → Markdown Digest…**. Choose text files, inspect their captured contents and use the arrows or Remove to arrange them. **Preview Digest** prepares one Markdown document before anything is written. This everyday tool is available with Developer Tools Off or On.
 
 Switch between **File** and **Digest**, then **Copy Digest** or **Save Digest…** to a chosen folder. Both actions use the complete digest and return the preview to Digest. Existing names receive a numbered copy; originals stay unchanged. Changing the name, file selection or order requires another preview.
 
@@ -155,11 +156,11 @@ The action keeps the copy it started with; copying something else afterward does
 
 ## Prepare an image
 
-Choose **File → Images & PDFs → Convert Image… (⇧⌘K)** or Finder’s **Convert Image with CloakTools…**. Review the preview, then choose PNG, JPEG or HEIC. PNG keeps transparency; JPEG and HEIC offer quality and a white or black background. Save your usual choices in **Conversions → Image conversion defaults**. Each copy starts beside the original and can be opened in Preview. **Change…** chooses another destination without restarting the conversion.
+Choose **File → Images & PDFs → Convert Image… (⇧⌘K)** or **Images, PDFs & Media → Convert an image**. Review the preview, then choose PNG, JPEG or HEIC. PNG keeps transparency; JPEG and HEIC offer quality and a white or black background. Save your usual choices in **Settings → Images**. Each copy starts beside the original and can be opened in Preview. **Change…** chooses another destination without restarting the conversion.
 
 ## Make an image fit
 
-Choose **File → Make It Fit… (⌥⌘K)** or **Conversions → Make It Fit**. Choose PNG, JPEG or HEIC, a maximum size in KB, and dimensions to fit within. **Preview Fit** shows actual encoded bytes and pixels before anything is saved. A KB means 1,000 bytes.
+Choose **File → Make It Fit… (⌥⌘K)** or **Images, PDFs & Media → Make an image fit a size limit**. Choose PNG, JPEG or HEIC, a maximum size in KB, and dimensions to fit within. **Preview Fit** shows actual encoded bytes and pixels before anything is saved. A KB means 1,000 bytes.
 
 Images keep their proportions and never enlarge. JPEG/HEIC try quality down to your chosen floor first. **Reduce further to meet size** allows smaller dimensions, stopping at a 320 px long edge or your smaller starting size. PNG keeps transparency and reduces size through dimensions. The quality/background disclosure shows the current floor and transparency background.
 
@@ -171,13 +172,13 @@ Choose **File → Images & PDFs → Assemble PDF… (⇧⌘P)** or select PDFs/i
 
 ## Organize PDF pages
 
-Choose **File → Images & PDFs → Organize PDF… (⌥⌘P)** or **Conversions → Image & PDF tools → Organize PDF**. Check the pages you want to include, or enter original page numbers such as `1, 3–5` and choose **Apply**. The list is the export order. Click a page to preview it, move it with the arrows, or rotate it in 90-degree steps. All/None change inclusion; Reset restores the original order, rotations and all pages.
+Choose **File → Images & PDFs → Organize PDF… (⌥⌘P)** or **Images, PDFs & Media → Organize PDF pages**. Check the pages you want to include, or enter original page numbers such as `1, 3–5` and choose **Apply**. The list is the export order. Click a page to preview it, move it with the arrows, or rotate it in 90-degree steps. All/None change inclusion; Reset restores the original order, rotations and all pages.
 
 Choose a name and folder, then **Export Copy**. The footer shows how many pages will be exported; an empty selection cannot be saved. Original page numbers stay fixed when you reorder. The source stays unchanged, and a name collision creates a numbered copy. The action accepts one ordinary PDF, up to 200 pages and 100 MB. Bookmarks and internal navigation may not carry over. It is currently available from the app, without a dedicated Finder action.
 
 ## Export video or audio
 
-Choose **File → Export Media… (⌥⌘E)** or **Conversions → Export Media**. Select a local movie or audio file and review its duration and dimensions. Native playback controls let you preview it; nothing plays automatically. Choose an available output: **MP4 · Up to 720p**, **MP4 · Up to 1080p**, or **M4A · Audio only**.
+Choose **File → Export Media… (⌥⌘E)** or **Images, PDFs & Media → Export video or audio**. Select a local movie or audio file and review its duration and dimensions. Native playback controls let you preview it; nothing plays automatically. Choose an available output: **MP4 · Up to 720p**, **MP4 · Up to 1080p**, or **M4A · Audio only**.
 
 Video exports use H.264 and AAC audio when present, keep proportions and orientation, and do not enlarge smaller movies. M4A extracts or converts audio to AAC. Choose a name and folder, then **Export Copy**. Progress and Cancel stay visible. The result is checked before saving and can be opened explicitly in QuickTime. Existing files receive a numbered copy rather than being replaced.
 
@@ -187,13 +188,13 @@ This exports the full clip, without trimming or a promised file size. Inputs are
 
 Choose **Save Recipe…** in Convert Image, Make It Fit or Export Media. Name the recipe, review its output settings, then **Save Recipe**. This saves choices only; it does not export a file or change your conversion defaults. Source paths, destinations and output filenames are not saved.
 
-Use **File → Recreate Export** or **Conversions → Export recipes → Use…**. Choose a fresh source and review the normal operation window. Convert Image needs **Convert**; Make It Fit needs a fresh **Preview Fit**, then **Save Copy**; media needs **Export Copy**. If a source cannot use a saved media preset, choose an available format explicitly or cancel and choose another source. Nothing plays or exports automatically.
+Use **File → Recreate Export** or **Images, PDFs & Media → Saved export recipes**. Choose a fresh source and review the normal operation window. Convert Image needs **Convert**; Make It Fit needs a fresh **Preview Fit**, then **Save Copy**; media needs **Export Copy**. If a source cannot use a saved media preset, choose an available format explicitly or cancel and choose another source. Nothing plays or exports automatically.
 
 The row menu renames or removes a recipe. In a reused operation, **Save Recipe…** offers **Save Changes** or **Save as a new recipe**. Cancel keeps the saved definition unchanged. An older draft cannot replace a changed or removed recipe; reopen it or save a new copy. Up to 32 recipes stay on this Mac. Removing one leaves output files intact. PDF recipes and batch processing are not included yet.
 
 ## File lists
 
-Open **Finder Integration → File List** or **File → File List…**. Choose up to 200 files or folders, arrange their order, then select CSV or Markdown. Expand **Columns** for kind, size in bytes, modified date in UTC and full path. Names are always included; dates and full paths start off.
+Open **Finder Tools → Copy or export a file list** or **File → File List…**. Choose up to 200 files or folders, arrange their order, then select CSV or Markdown. Expand **Columns** for kind, size in bytes, modified date in UTC and full path. Names are always included; dates and full paths start off.
 
 **Preview Export** prepares the exact output. Switch between **Items** and **Export**, then explicitly **Copy List** or name and **Save List…**. Both actions use the complete export. Saving creates a new file with a numbered name if needed. Changes to columns or item order require another preview.
 
@@ -201,11 +202,11 @@ This everyday tool reads selected metadata without opening file contents or scan
 
 ## Copy names and paths
 
-Choose **File → Copy As… (⌥⌘C)** or **Copy As with CloakTools…** in Finder. Preview paths, names, file URLs, shell arguments, Markdown links or JSON, then press Copy. Changing the preview or cancelling leaves the clipboard alone. The action uses names and paths only; it does not read file contents or run commands.
+Choose **File → Copy As… (⌥⌘C)** or **Copy or Export File List** in Finder. Preview paths, names, file URLs, shell arguments, Markdown links or JSON, then press Copy. Changing the preview or cancelling leaves the clipboard alone. The action uses names and paths only; it does not read file contents or run commands.
 
 ## Links
 
-CloakTools does not change defaults on launch. **Open With** can deliver a test URL through the real macOS event path. You can also target the app directly without changing a default:
+CloakTools does not change defaults on launch. **Settings → Links** can deliver a test URL through the real macOS event path. You can also target the app directly without changing a default:
 
 ```sh
 open -a /path/to/CloakTools.app 'https://example.com/'
@@ -216,7 +217,7 @@ Choose a compatible application and select **Open Once**. Email links only prepa
 
 ## Rules and link testing
 
-In **Open With → Add Rule…**, name the rule, choose Web or Email and its destination, then add conditions. Match all conditions or any one; rules run top to bottom and the first enabled match wins. Use the row menu to edit, reorder or delete a rule. A missing app returns to the chooser with an explanation.
+In **Settings → Links → Add Rule…**, name the rule, choose Web or Email and its destination, then add conditions. Match all conditions or any one; rules run top to bottom and the first enabled match wins. Use the row menu to edit, reorder or delete a rule. A missing app returns to the chooser with an explanation.
 
 Web rules support exact hosts, explicit subdomains, URL-encoded path prefixes, schemes and source bundle IDs. Email rules support plain To-recipient domains, scheme and source. Unknown source never matches a source condition. A path prefix is literal and case-sensitive: `/work` also matches `/workshop`; use `/work/` for that folder prefix.
 
@@ -224,13 +225,13 @@ Web rules support exact hosts, explicit subdomains, URL-encoded path prefixes, s
 
 ## Your apps and fallback
 
-Open **Open With → Destinations & fallback → Manage…** for Web or Email. Pin your usual apps, then use a pin’s menu to move it up/down or unpin it. Other compatible apps stay available. Missing pinned apps remain listed until you remove the pin.
+Open **Settings → Links → Destinations & fallback → Manage…** for Web or Email. Pin your usual apps, then use a pin’s menu to move it up/down or unpin it. Other compatible apps stay available. Missing pinned apps remain listed until you remove the pin.
 
 **When no rule matches** starts at **Show chooser**. Choose a fallback app only if you want unmatched links to open there automatically, then **Save Changes**. Rules take priority. If a rule or fallback app is unavailable, the chooser explains why. Web and email choices are independent; they do not change your Mac’s defaults. **Test a Link** includes fallback, and **Open a Link Once** bypasses both rules and fallback.
 
 ## Make CloakTools your link handler
 
-In **Open With → Default link apps**, choose **Set Up…** for Web links or Email links. Review the current app, choose **Use CloakTools**, then respond to any macOS confirmation. Web setup covers HTTP and HTTPS; email setup covers mailto. They are independent. Nothing changes merely by opening the review.
+In **Settings → Links → Default link apps**, choose **Set Up…** for Web links or Email links. Review the current app, choose **Use CloakTools**, then respond to any macOS confirmation. Web setup covers HTTP and HTTPS; email setup covers mailto. They are independent. Nothing changes merely by opening the review.
 
 Use **Restore…** to return to the previous available apps. If a previous app is missing or was not saved, select an installed alternative. Only link types still using this copy of CloakTools can change; choices made elsewhere are kept. A partial or declined change shows the actual current state and offers another review.
 
@@ -238,7 +239,7 @@ Restore your preferred defaults before uninstalling or deleting CloakTools’ se
 
 ## What comes next
 
-The first public beta includes Finder tools and web and email routing. Additional Finder folders and Shortcuts execution still require a provisioned build. See [Source](/source/) and [Support](/support/) for the current boundaries.
+The public beta includes Finder tools and web and email routing. Additional Finder folders and Shortcuts execution still require a provisioned build. See [Source](/source/) and [Support](/support/) for the current boundaries.
 
 ## Package a local preview
 
