@@ -25,62 +25,72 @@ struct WorkbenchView: View {
     }
     private var isCatalog: Bool { navigation.page == nil || linkSheet.wrappedValue != nil || navigation.isSearching }
 
+    private var sidebarHeader: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            HStack(spacing: 10) {
+                Image("AboutAppIcon").resizable().scaledToFit()
+                    .frame(width: 44, height: 44).accessibilityHidden(true)
+                Text("CloakTools").font(.title3.weight(.semibold)).accessibilityAddTraits(.isHeader)
+            }
+            SidebarSearchField(query: $navigation.query)
+                .fixedSize(horizontal: false, vertical: true)
+                .focused($searchFocused)
+        }
+        .padding(.horizontal, 16)
+        .padding(.top, 10)
+        .padding(.bottom, 12)
+    }
+
+    private var categoryList: some View {
+        List(selection: Binding<WorkbenchCategory?>(get: { navigation.category }, set: { if let category = $0 { navigation.browse(category) } })) {
+            Section("Categories") {
+                ForEach(categories) { category in
+                    Label(category.rawValue, systemImage: category.symbol)
+                        .frame(minHeight: 36)
+                        .tag(category)
+                }
+            }
+            if !otherDrafts.isEmpty {
+                Section("In Progress") {
+                    ForEach(otherDrafts) { tool in
+                        Button { navigation.show(tool, in: categories) } label: {
+                            Label {
+                                Text(tool.rawValue).lineLimit(2).fixedSize(horizontal: false, vertical: true)
+                            } icon: {
+                                Image(systemName: tool.symbol)
+                            }
+                            .frame(maxWidth: .infinity, minHeight: 36, alignment: .leading).contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        .help("Resume " + tool.rawValue)
+                    }
+                }
+            }
+        }
+        .listStyle(.sidebar)
+        .accessibilityLabel("Tool categories")
+    }
+
+    private var settingsFooter: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Divider().accessibilityHidden(true)
+            SettingsLink {
+                Label("Settings…", systemImage: "gearshape")
+                    .frame(maxWidth: .infinity, minHeight: 40, alignment: .leading)
+                    .contentShape(.rect)
+            }
+            .buttonStyle(.borderless)
+        }
+        .padding(.horizontal, 16)
+        .padding(.bottom, 6)
+    }
+
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
-            List(selection: Binding<WorkbenchCategory?>(get: { navigation.category }, set: { if let category = $0 { navigation.browse(category) } })) {
-                Section("Categories") {
-                    ForEach(categories) { category in
-                        Label(category.rawValue, systemImage: category.symbol)
-                            .frame(minHeight: 36)
-                            .tag(category)
-                    }
-                }
-                if !otherDrafts.isEmpty {
-                    Section("In Progress") {
-                        ForEach(otherDrafts) { tool in
-                            Button { navigation.show(tool, in: categories) } label: {
-                                Label {
-                                    Text(tool.rawValue).lineLimit(2).fixedSize(horizontal: false, vertical: true)
-                                } icon: {
-                                    Image(systemName: tool.symbol)
-                                }
-                                .frame(maxWidth: .infinity, minHeight: 36, alignment: .leading).contentShape(Rectangle())
-                            }
-                            .buttonStyle(.plain)
-                            .help("Resume " + tool.rawValue)
-                        }
-                    }
-                }
-            }
-            .listStyle(.sidebar)
-            .accessibilityLabel("Tool categories")
-            .safeAreaInset(edge: .top, alignment: .leading, spacing: 0) {
-                VStack(alignment: .leading, spacing: 14) {
-                    HStack(spacing: 10) {
-                        Image("AboutAppIcon").resizable().scaledToFit()
-                            .frame(width: 44, height: 44).accessibilityHidden(true)
-                        Text("CloakTools").font(.title3.weight(.semibold)).accessibilityAddTraits(.isHeader)
-                    }
-                    SidebarSearchField(query: $navigation.query)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .focused($searchFocused)
-                }
-                .padding(.horizontal, 16)
-                .padding(.top, 10)
-                .padding(.bottom, 12)
-            }
-            .safeAreaInset(edge: .bottom, alignment: .leading) {
-                VStack(alignment: .leading, spacing: 0) {
-                    Divider().accessibilityHidden(true)
-                    SettingsLink {
-                        Label("Settings…", systemImage: "gearshape")
-                            .frame(maxWidth: .infinity, minHeight: 40, alignment: .leading)
-                            .contentShape(.rect)
-                    }
-                    .buttonStyle(.borderless)
-                }
-                .padding(.horizontal, 16)
-                .padding(.bottom, 6)
+            VStack(alignment: .leading, spacing: 0) {
+                sidebarHeader
+                categoryList.clipped()
+                settingsFooter
             }
             .navigationSplitViewColumnWidth(min: 208, ideal: 244, max: 300)
         } detail: {
