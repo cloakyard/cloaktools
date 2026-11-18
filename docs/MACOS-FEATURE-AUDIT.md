@@ -4,7 +4,7 @@ Reviewed 16 November 2026 against the CloakTools 0.5.8 catalog and roadmap, curr
 
 ## Finder selection audit, 18 November 2026
 
-Reviewed the development Workbench at `5986679`, Finder Sync menu construction, the eight Finder Services declarations and their host handlers. On macOS 27.2.1, inspected live menus using disposable items in the CloakTools Files workspace. The recommendations below describe proposed changes to the source build.
+Reviewed the development Workbench at `5986679`, Finder Sync menu construction, the eight Finder Services declarations and their host handlers. On macOS 27.2.1, inspected live menus using disposable items in the CloakTools Files workspace. The recommendations below record the audit before implementation. The [candidate verification](verification/FINDER-BETA-CANDIDATE.md) covers the resulting behavior.
 
 | Selection | What Finder offered on this Mac |
 | --- | --- |

@@ -146,46 +146,40 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         show()
         return false
     }
-    @objc func createFile(_ pasteboard: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString>) {
-        guard let url = serviceURL(pasteboard), (try? url.resourceValues(forKeys: [.isDirectoryKey]).isDirectory) == true else {
-            error.pointee = "Select exactly one folder in Finder."; return
-        }
-        AppModel.shared.present(.create(folder: url, template: .text))
-    }
-    @objc func convertImage(_ pasteboard: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString>) {
-        guard let url = serviceURL(pasteboard) else { error.pointee = "Select exactly one image in Finder."; return }
-        AppModel.shared.present(.convert(image: url))
-    }
-    private func serviceURL(_ pasteboard: NSPasteboard) -> URL? {
-        let urls = pasteboard.readObjects(forClasses: [NSURL.self], options: [.urlReadingFileURLsOnly: true]) as? [URL]
-        guard urls?.count == 1 else { return nil }
-        return urls?.first
-    }
-    @objc func assemblePDF(_ pasteboard: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString>) {
-        guard let files = pasteboard.readObjects(forClasses: [NSURL.self], options: [.urlReadingFileURLsOnly: true]) as? [URL],
-              (1...PDFAssembly.maximumFiles).contains(files.count) else { error.pointee = "Select 1–32 PDFs or images in Finder."; return }
-        AppModel.shared.present(.assemble(files: files.sorted { $0.lastPathComponent.localizedStandardCompare($1.lastPathComponent) == .orderedAscending }))
+    @objc func folderActions(_ board: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString>) {
+        let urls = selectedURLs(board)
+        guard !urls.isEmpty, urls.allSatisfy({ url in
+            let values = try? url.resourceValues(forKeys: [.isDirectoryKey, .isPackageKey, .isSymbolicLinkKey])
+            return values?.isDirectory == true && values?.isPackage != true && values?.isSymbolicLink != true
+        }) else { error.pointee = "Select ordinary folders in Finder."; return }
+        Task { @MainActor in await AppModel.shared.useSelectedFolders(urls) }
     }
     private func selectedURLs(_ board: NSPasteboard) -> [URL] {
         (board.readObjects(forClasses: [NSURL.self], options: [.urlReadingFileURLsOnly: true]) as? [URL]) ?? []
     }
     @objc func fitImage(_ board: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString>) {
-        guard let url = serviceURL(board) else { error.pointee = "Select one image."; return }
-        AppModel.shared.present(.fit(image: url))
+        let urls = selectedURLs(board)
+        Task { @MainActor in
+            if let url = await chooseFinderItem(urls, heading: "Which image should fit the size limit?") { AppModel.shared.present(.fit(image: url)) }
+        }
     }
-    @objc func reuseStructure(_ board: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString>) {
-        guard let url = serviceURL(board) else { error.pointee = "Select one folder."; return }
-        AppModel.shared.present(.structure(folder: url))
+    @objc func readQR(_ board: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString>) {
+        let urls = selectedURLs(board)
+        Task { @MainActor in
+            if let url = await chooseFinderItem(urls, heading: "Which image contains the QR code?") { AppModel.shared.presentQRReader(image: url) }
+        }
     }
     @objc func collectCopies(_ board: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString>) {
         let urls = selectedURLs(board)
         guard (1...SharingCollection.maximumFiles).contains(urls.count) else { error.pointee = "Select 1–200 files."; return }
         AppModel.shared.present(.collect(files: urls))
-    }
-    @objc func compareFolders(_ board: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString>) {
-        let urls = selectedURLs(board)
-        guard urls.count == 2 else { error.pointee = "Select exactly two folders."; return }
-        AppModel.shared.present(.compare(first: urls[0], second: urls[1]))
+        // Return focus after the Services callback has activated its provider.
+        Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(150))
+            guard NSApp.isActive, let finder = NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.finder").first else { return }
+            NSApp.yieldActivation(to: finder)
+            finder.activate(options: [])
+        }
     }
     @objc func copyAs(_ pasteboard: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString>) {
         guard let files = pasteboard.readObjects(forClasses: [NSURL.self], options: [.urlReadingFileURLsOnly: true]) as? [URL],

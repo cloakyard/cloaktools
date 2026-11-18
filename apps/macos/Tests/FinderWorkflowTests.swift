@@ -35,7 +35,9 @@ import Testing
     let review = try #require(model.sharingReview)
     model.workbench.browse(.media)
     model.present(.collect(files: [second]))
-    #expect(model.workbench.page == .collect && model.sharingReview === review)
+    #expect(model.workbench.page == nil && model.workbench.category == .media && model.sharingReview === review)
+    model.collectForSharing([])
+    #expect(model.workbench.page == .collect)
     func waitForReview() async throws {
         let clock = ContinuousClock()
         let limit = clock.now.advanced(by: .seconds(5))
@@ -57,8 +59,10 @@ import Testing
     let info = try #require(Bundle.main.infoDictionary)
     #expect(info["CloakToolsReleaseChannel"] as? String == "Beta")
     let services = try #require(info["NSServices"] as? [[String: Any]])
-    let types = ["fitImage": ImageConversion.inputTypes.map(\.identifier), "reuseStructure": ["public.folder"],
-                 "collectCopies": ["public.data"], "compareFolders": ["public.folder"]]
+    let types = ["fitImage": ImageConversion.inputTypes.map(\.identifier), "folderActions": ["public.folder"],
+                 "collectCopies": ["public.data"], "copyAs": ["public.item"], "readQR": QRCodeReading.inputTypes.map(\.identifier)]
+    #expect(services.count == types.count)
+    #expect(services.allSatisfy { $0["NSSendTypes"] == nil })
     for (message, identifiers) in types {
         let entry = try #require(services.first { $0["NSMessage"] as? String == message })
         #expect(entry["NSSendFileTypes"] as? [String] == identifiers)
@@ -71,6 +75,7 @@ import Testing
     let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
     try FileManager.default.createDirectory(at: root, withIntermediateDirectories: false)
     defer {
+        model.collectForSharing([])
         model.workbench.close(.collect)
         try? FileManager.default.removeItem(at: root)
     }
@@ -112,4 +117,33 @@ import Testing
     review.saveSet { try store.save([$0]) }
     let second = try #require(store.load().first)
     #expect(second.id == first.id && second.entries.map(\.path) == ["Assets/Photos", "Deliverables"])
+}
+
+@MainActor @Test func finderSelectionLoadsTheQRAndFileListWithoutAnotherPicker() async throws {
+    let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: false)
+    defer { try? FileManager.default.removeItem(at: folder) }
+    let image = try QRCodeCreation.save(QRCodeCreation.prepare("Fixture for Finder"), in: folder, stem: "QR")
+    let reader = QRCodeReadOperation()
+    let list = FileListOperation()
+    reader.read(image)
+    list.add([image, folder])
+    let clock = ContinuousClock()
+    let deadline = clock.now.advanced(by: .seconds(5))
+    while (reader.busy || list.busy), clock.now < deadline { try await Task.sleep(for: .milliseconds(10)) }
+    #expect(reader.selectedCode?.text == "Fixture for Finder")
+    #expect(list.items.map(\.url) == [image, folder].map(\.standardizedFileURL))
+}
+
+@MainActor @Test func savedFileSetCanStartInTheSelectedFinderDestination() throws {
+    let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString, isDirectory: true)
+    try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: false)
+    defer { try? FileManager.default.removeItem(at: folder) }
+    let model = AppModel()
+    var presentations = 0
+    model.workbench.showWindow = { presentations += 1 }
+    model.chooseFileSetFolder(.notes, destination: folder)
+    #expect(presentations == 1 && model.workbench.page == .fileSet)
+    #expect(try FileManager.default.contentsOfDirectory(atPath: folder.path).isEmpty)
+    model.workbench.close(.fileSet)
 }

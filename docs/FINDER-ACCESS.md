@@ -1,5 +1,9 @@
 # Finder context and access matrix
 
+The upcoming beta uses five selected-item Services. Folder Actions handles creation, reuse and comparison. Make It Fit and Read QR Code from Image accept their respective image formats. Collect Copies for Sharing adds regular files to a menu-bar collection. Copy or Export File List accepts files and folders. The scoped extension still offers direct actions on a matching selection. The Workbench retains advanced conversion and ordered PDF assembly. [Current Finder workflow guide](USAGE.md#work-with-selected-folders-and-files)
+
+## Historical context matrix
+
 Reviewed 16 November 2026 for the local macOS 27.2.1 / arm64 build. Scope is still `~/CloakTools Files` and its descendants. Scope selection is not a filesystem permission grant.
 
 | Context | Current entry point | Evidence / limitation |
@@ -18,9 +22,9 @@ Reviewed 16 November 2026 for the local macOS 27.2.1 / arm64 build. Scope is sti
 
 Runtime records: [MVP 0](verification/MVP-0.md), [Milestone 1](verification/MILESTONE-1.md), [clipboard](verification/CLIPBOARD.md), [image conversion](verification/IMAGE-CONVERSION.md), [PDF/Copy As](verification/PDF-COPY-AS.md).
 
-## Finder workflows in the source build
+## Earlier Finder workflows
 
-The post-0.6.0 Workbench adds Make It Fit for a selected photo, Reuse Folder Structure for a folder, Collect Copies for Sharing for regular files, and Compare Two Folders for two selected directories. Each also has a Finder Service and an in-app entry point. The extension sends the selection to the host for review. Multiple Collect requests append to the open collection. The four Services were exercised in Finder on macOS 27.2.1. The scoped extension menu was unavailable on that Mac. [Verification and coverage](verification/FINDER-WORKFLOWS.md).
+The post-0.6.0 Workbench adds Make It Fit for a selected photo, Reuse Folder Structure for a folder, Collect Copies for Sharing for regular files, and Compare Two Folders for two selected directories. Each originally had a Finder Service and an in-app entry point. The extension sends the selection to the host for review. Multiple Collect requests append to the open collection. The four Services were exercised in Finder on macOS 27.2.1. The scoped extension menu was unavailable on that Mac. [Verification and coverage](verification/FINDER-WORKFLOWS.md).
 
 ## Compact creation menu
 

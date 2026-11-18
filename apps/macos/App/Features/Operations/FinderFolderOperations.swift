@@ -98,6 +98,7 @@ final class SharingReview {
     var files: [SharingFile] = []
     var name = "Shared Copies"
     var output: URL?
+    var onChange: (() -> Void)?
     private var pending: [[URL]] = []
 
     func add(_ urls: [URL]) {
@@ -113,7 +114,7 @@ final class SharingReview {
         task.run("Adding files…", work: { try SharingCollection.adding(urls, to: existing) }, success: { items in
             self.files = items
             self.output = nil
-        }, finished: loadNext)
+        }, finished: { self.onChange?(); self.loadNext() })
     }
 
     func chooseFiles() {
@@ -127,7 +128,7 @@ final class SharingReview {
     func save(in folder: URL) {
         let items = files, name = name
         task.run("Copying files…", work: { try SharingCollection.save(items, named: name, in: folder) },
-                 success: { self.output = $0 }, finished: loadNext)
+                 success: { self.output = $0 }, finished: { self.onChange?(); self.loadNext() })
     }
 }
 

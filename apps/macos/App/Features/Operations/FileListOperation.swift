@@ -36,13 +36,17 @@ final class FileListOperation: Identifiable {
         let revision = revision
         let completion: (NSApplication.ModalResponse) -> Void = { [weak self] response in
             guard response == .OK, let self, self.revision == revision else { return }
-            let existing = self.items, urls = panel.urls.sorted { $0.path.localizedStandardCompare($1.path) == .orderedAscending }
-            self.start("Reading selected details…", work: { try FileListExport.adding(urls, to: existing) }) { model, items in
-                model.items = items; model.selectedID = items.last?.id; model.prepared = nil; model.savedURL = nil; model.copied = false; model.showExport = false
-            }
+            self.add(panel.urls.sorted { $0.path.localizedStandardCompare($1.path) == .orderedAscending })
         }
         if let window = NSApp.keyWindow { panel.beginSheetModal(for: window, completionHandler: completion) }
         else { panel.begin(completionHandler: completion) }
+    }
+    func add(_ urls: [URL]) {
+        guard !busy, !urls.isEmpty else { return }
+        let existing = items
+        start("Reading selected details…", work: { try FileListExport.adding(urls, to: existing) }) { model, items in
+            model.items = items; model.selectedID = items.last?.id; model.prepared = nil; model.savedURL = nil; model.copied = false; model.showExport = false
+        }
     }
     func refresh() {
         guard !busy, !items.isEmpty else { return }

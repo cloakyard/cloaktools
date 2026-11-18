@@ -297,7 +297,10 @@ extension FinderIntent {
             else if values?.isRegularFile == false { return [] }
         }
         if folders == files.count {
-            if folders == 1 { return [("Reuse Folder Structure…", .structure(folder: files[0]))] }
+            if folders == 1 {
+                return [("Reuse Folder Structure…", .structure(folder: files[0])),
+                        ("Compare with Another Folder…", .compare(first: files[0], second: nil))]
+            }
             if folders == 2 { return [("Compare Two Folders…", .compare(first: files[0], second: files[1]))] }
         }
         guard folders == 0 else { return [] }

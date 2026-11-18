@@ -134,7 +134,7 @@ Choose **Create QR Code** (⌘Return) to preview the image. **Copy Image** puts 
 
 ## Read QR codes
 
-Open **Text & Sharing → Read a QR code from an image**, or switch to **Read** in the QR window. Choose a still image. If it contains multiple codes, click a numbered outline or choose its number above the preview. The reader identifies the selected content. For Wi-Fi, choose **Show encoded text** to reveal the network details.
+Open **Text & Sharing → Read a QR code from an image**, or switch to **Read** in the QR window. In Finder, **Services → Read QR Code from Image with CloakTools** starts with the selected image. Choose a still image. If it contains multiple codes, click a numbered outline or choose its number above the preview. The reader identifies the selected content. For Wi-Fi, choose **Show encoded text** to reveal the network details.
 
 **Copy Text** copies the entire result. **Save Text…** writes it as UTF-8. For a contact card or calendar document, use the format picker to save a **.vcf** or **.ics** file that you can open separately. Each export preserves the complete decoded text and adds a number if the name is taken. The reader leaves opening links, joining a network and importing a file up to you.
 
@@ -166,13 +166,11 @@ pluginkit -e use -i com.cloakyard.cloaktools.finder
 pluginkit -m -v -i com.cloakyard.cloaktools.finder
 ```
 
-The Finder New File submenu stays compact with Plain Text, Markdown, PDF, **Choose File Type or Template…** and clipboard creation. The chooser reads current host preferences, so its developer catalog updates without restarting Finder.
+In the workspace, right-click the background or a folder for **New File with CloakTools**. Choose Plain Text, Markdown, PDF, **Choose Template or File Set…**, or clipboard creation. When eligible saved sets exist the creation review offers **Use Saved File Set…** with the current folder already selected.
 
-Within that folder and subfolders, right-click empty space for **New File with CloakTools**, a single folder to create *inside that folder*, or a single PNG/JPEG/TIFF/HEIC to **Convert Image with CloakTools…**. Select up to 32 PDFs/images for **Assemble PDF with CloakTools…**, or up to 200 files/folders for **Copy As with CloakTools…**. A native confirmation shows the destination or text preview before the action.
+In other accessible locations use **Finder → Services**. **Folder Actions with CloakTools** offers creation, folder reuse or comparison for one folder and starts comparison directly for two. Select files for **Collect Copies for Sharing** or **Copy or Export File List**. From a still image, choose **Read QR Code from Image** or, for supported photos, **Make It Fit**. For ordinary image conversion or PDF combination, use Finder’s **Quick Actions**. If a Service is hidden, enable it in System Settings → Keyboard → Keyboard Shortcuts → Services.
 
-For selected folders/images elsewhere, use **Finder → Services → New File with CloakTools / Convert Image with CloakTools**. If hidden, enable them in System Settings → Keyboard → Keyboard Shortcuts → Services. The app must have been launched at least once so Services can register.
-
-Finder Sync is not a universal file-manager hook. Search results, Recent items, cloud-provider views, virtual locations, and conflicts with other extensions may not expose menus. A menu’s presence does not grant write permission. The host honors macOS file permissions/TCC; select another writable folder when access is denied. No Full Disk Access is requested. The sandboxed extension passes intent; this local development **host is not sandboxed**. The local ad-hoc build has no App Group entitlement or provisioning requirement. The optional signed-build configuration is described in the release guide. [Architecture](ARCHITECTURE.md) explains the tradeoff.
+Finder Sync is not a universal file-manager hook. Search results, Recent items, cloud-provider views, virtual locations, and conflicts with other extensions may not expose menus. A menu’s presence does not grant write permission. The host honors macOS file permissions/TCC; select another writable folder when access is denied. No Full Disk Access is requested. The sandboxed extension passes intent; this local development **host is not sandboxed**. The local ad-hoc build has no App Group entitlement or provisioning requirement. The optional signed-build configuration is described in the release guide. [Architecture](../ARCHITECTURE.md) explains the tradeoff.
 
 ## Blank versus Hello World
 
@@ -191,7 +189,7 @@ Text/source files may validly contain zero bytes. JSON starts with an empty obje
 
 In **Files & Templates → Saved file templates**, import a UTF-8 text/source file up to 1 MiB. CloakTools copies its exact bytes into its local library; later changes to the original do not change the template. Use the star to favorite it, or the menu to edit its display title/default filename or remove its saved copy. Removing a template leaves the original and previously created files intact. The current library holds up to 64 templates and 16 MiB of content. Binary/document imports are not supported.
 
-Use Finder’s **Choose File Type or Template…** or the New File type picker. Favorites appear first in the next operation. Every operation snapshots content and preferences before confirmation. **Settings → General → Open after creation** is Off initially; when enabled it opens text/source files explicitly in TextEdit and built-in PDFs in Preview, without running code.
+Use Finder’s **Choose Template or File Set…** or the New File type picker. Favorites appear first in the next operation. Every operation snapshots content and preferences before confirmation. **Settings → General → Open after creation** is Off initially; when enabled it opens text/source files explicitly in TextEdit and built-in PDFs in Preview, without running code.
 
 ## Folder presets
 
@@ -206,8 +204,8 @@ Presets are explicit starting points, separate from Finder monitoring scopes. Th
 The source build offers these workflows in **Finder Tools**, the **File** menu and Finder. Right-click a selection inside a configured workspace, or use **Finder → Services** elsewhere. The work happens locally.
 
 - **Reuse Folder Structure…** takes one project folder. Check the visible subfolders to recreate. Selecting a branch includes its descendants. Select a nested folder to include its parents. Enter a new folder name, then **Create Folder** beside the source or use **Change…** to choose another location. The new folders are empty. **Save File Set** stores the selected layout in **Files & Templates → Saved file sets**. File-set limits apply when saving a reusable layout. Packages, hidden folders and symbolic links are skipped.
-- **Collect Copies for Sharing…** adds selected files to the same open collection. Keep the review open while you browse, or use **Add Files…** in the review. It accepts up to 200 regular files. Each row shows its source path and editable copy name. Duplicate names are numbered. Choose **Save Copies…** and pick a parent folder. Closing the review discards the in-memory list. If a source changes before copying, remove it and add it again.
-- **Compare Two Folders…** takes two selected folders. In the Workbench you can pick the folders separately, including folders on different volumes. The review lists missing entries, different types and changed contents by relative path. It includes hidden items, packages, file data, resource forks and symbolic-link targets. Permissions, dates and other extended attributes are outside the comparison. Use the reveal link for either available side, or **Compare Again** after making changes. An incomplete scan reports an error.
+- **Collect Copies for Sharing…** adds files while you browse. Click the collection count in the menu bar to review the list, or open **Finder Tools → Collect copies for sharing**. It accepts up to 200 regular files. Each row shows its source path and editable copy name. Duplicate names are numbered. Choose **Save Copies…** and pick a parent folder. Closing the review discards the in-memory list. If a source changes before copying, remove it and add it again.
+- **Compare Two Folders…** compares two selected folders directly. From one folder, choose **Compare with Another Folder** and pick the second. In the Workbench you can pick the folders separately, including folders on different volumes. The review lists missing entries, different types and changed contents by relative path. It includes hidden items, packages, file data, resource forks and symbolic-link targets. Permissions, dates and other extended attributes are outside the comparison. Use the reveal link for either available side, or **Compare Again** after making changes. An incomplete scan reports an error.
 
 Folder outputs use an available numbered name if the requested name already exists.
 
@@ -231,7 +229,7 @@ The host captures the clipboard only when you invoke the action, before the fold
 
 ## Convert an image
 
-Choose **File → Images & PDFs → Convert Image… (⇧⌘K)** or Finder’s **Convert Image with CloakTools…**. Review the thumbnail and select PNG, JPEG or HEIC. PNG preserves transparency; JPEG and HEIC flatten it onto white or black and offer 10–100% quality. Quality is a compression setting, not a target byte size. Unavailable native encoders are disabled.
+Choose **File → Images & PDFs → Convert Image… (⇧⌘K)** or **Images, PDFs & Media → Convert an image**. Review the thumbnail and select PNG, JPEG or HEIC. PNG preserves transparency; JPEG and HEIC flatten it onto white or black and offer 10–100% quality. Quality is a compression setting, not a target byte size. Unavailable native encoders are disabled.
 
 Set defaults in **Settings → Images → Image conversion defaults**. Each dialog captures those defaults and the source pixels; changing settings or editing the source afterward does not change a pending conversion. The output starts beside the original with a distinct name; **Change…** selects another folder without recapturing the image. **Open in Preview** is available after conversion.
 
@@ -247,7 +245,7 @@ Inputs use the normal 40-megapixel/100 MB single-frame limits. Output size accep
 
 ## Assemble a PDF
 
-Choose **File → Images & PDFs → Assemble PDF… (⇧⌘P)**, **Finder Tools → Combine files into a PDF**, or select PDFs/images in Finder. Files arrive in filename order from Finder; the dialog shows the actual order. Move selected files with the arrow controls, remove them, or add more. Pages within each PDF retain their original sequence. Choose a filename and destination, then **Create PDF**.
+Choose **File → Images & PDFs → Assemble PDF… (⇧⌘P)** or **Images, PDFs & Media → Combine files into a PDF**. Add files in the review and check their order. Move selected files with the arrow controls, remove them, or add more. Pages within each PDF retain their original sequence. Choose a filename and destination, then **Create PDF**.
 
 PDF pages retain size, crop, rotation, selectable text and page annotations. Images become centered A4 pages with a 24-point margin and white background, using portrait or landscape to suit the image. Source bytes are captured before confirmation, so changes to originals cannot alter the pending document. Existing files are never replaced. General Reveal/Open After Creation settings apply; the result can also be opened explicitly in Preview.
 
@@ -281,7 +279,9 @@ Up to 32 recipes, with 1–80-character names, are stored locally in `export-rec
 
 ## File lists
 
-Open **Finder Tools → Export a file list** or **File → File List…**. Choose up to 200 files or folders, review their order, and use the arrows or Remove to arrange them. CSV is selected initially; Markdown is also available. Expand **Columns** to choose kind, size in bytes, modified date in UTC or full path. Names are always included; dates and full paths start off.
+From Finder, select the items, choose **Copy or Export File List** and then **Export as CSV or Markdown…**. Both reviews reuse the selection.
+
+Open **Text & Sharing → Export a file list** or **File → File List…**. Choose up to 200 files or folders, review their order, and use the arrows or Remove to arrange them. CSV is selected initially; Markdown is also available. Expand **Columns** to choose kind, size in bytes, modified date in UTC or full path. Names are always included; dates and full paths start off.
 
 **Preview Export** (⌘Return) prepares the exact list. Switch between **Items** and **Export**, then explicitly **Copy List** or name and **Save List…**. Both actions use the complete prepared export, even while Items is visible. Saving makes a new `.csv` or `.md` file, with numbered names on collisions. Changing columns, order or selection requires a fresh preview.
 
@@ -289,7 +289,7 @@ Only selected metadata is read. File contents are not opened, folders are not sc
 
 ## Copy names and paths
 
-Choose **File → Copy As… (⌥⌘C)**, **Finder Tools → Copy file names or paths**, or Finder’s **Copy As with CloakTools…**. Select up to 200 files or folders and preview full paths, file names, file URLs, shell arguments, Markdown links or a JSON path list. Use the copy button for the selected format to replace the system clipboard. Changing formats only changes the preview; Cancel leaves the clipboard alone.
+Choose **File → Copy As… (⌥⌘C)**, **Finder Tools → Copy or export a file list**, or Finder’s **Copy or Export File List…**. Select up to 200 files or folders and preview full paths, file names, file URLs, shell arguments, Markdown links or a JSON path list. Use the copy button for the selected format to replace the system clipboard. Changing formats only changes the preview; Cancel leaves the clipboard alone.
 
 Only selected URLs are used: no file-content reads, folder traversal, symlink resolution, execution or clipboard history. Finder selections are sorted by filename. Shell arguments are quoted for sh/bash/zsh, without adding a command. Markdown targets are encoded local file URLs. Line-oriented names/paths can be ambiguous for names containing line breaks; JSON preserves those names unambiguously. Output is capped at 1 MiB, with an 8,192-character preview.
 

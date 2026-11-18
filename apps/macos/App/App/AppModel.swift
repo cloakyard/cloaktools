@@ -30,9 +30,11 @@ final class AppModel {
     let defaultHandlers = DefaultHandlerSettings()
     let finderScopes = FinderScopeSettings()
     private(set) var sharingReview: SharingReview?
+    private var sharingStatus: SharingStatus?
     private var operationWindows: [UUID: NSWindowController] = [:]
     private func hasRoomForOperation() -> Bool {
-        guard operationWindows.count + workbench.drafts.count < 8 else {
+        let backgroundCollection = sharingReview.map { workbench.drafts[.collect] == nil && operationWindows[$0.task.id] == nil } ?? false
+        guard operationWindows.count + workbench.drafts.count + (backgroundCollection ? 1 : 0) < 8 else {
             showError(NSError(domain: "CloakTools", code: 1, userInfo: [
                 NSLocalizedDescriptionKey: "Finish or close an open task before starting another. You can resume a task from In Progress."
             ]))
@@ -162,23 +164,26 @@ final class AppModel {
             try fileSetStore.save(updated); fileSets = updated; fileSetError = nil
         } catch { fileSetError = error.localizedDescription }
     }
-    func chooseFileSetFolder(_ definition: FileSetDefinition = .notes) {
+    func chooseFileSetFolder(_ definition: FileSetDefinition = .notes, destination: URL? = nil) {
         guard hasRoomForOperation() else { return }
         do {
             let preferences = try store.load()
             let allSources = FileTemplate.allCases.map(TemplateSource.builtIn) + (try library.load()).map(TemplateSource.custom)
             guard preferences.tools.includes(definition, sources: allSources) else { throw ToolAvailabilityError.developerToolsOff }
             let sources = allSources.filter { preferences.tools.includes($0) }
-            let panel = NSOpenPanel(); panel.title = "Create a file set in…"; panel.prompt = "Choose Folder"
-            panel.message = "A new folder will hold the files you review next. Existing folders are never merged."
-            panel.canChooseFiles = false; panel.canChooseDirectories = true; panel.allowsMultipleSelection = false
-            let completion: (NSApplication.ModalResponse) -> Void = { [weak self, panel] response in
-                guard let self, response == .OK, let destination = panel.url else { return }
+            func review(in folder: URL) {
                 guard self.hasRoomForOperation() else { return }
-                let operation = FileSetOperation(definition: definition, sources: sources, preferences: preferences, destination: destination)
+                let operation = FileSetOperation(definition: definition, sources: sources, preferences: preferences, destination: folder)
                 self.presentEditor(.fileSet, id: operation.id, busy: { operation.busy }, panel: FileSetWindow(operation: operation)) { close in
                     FileSetView(operation: operation, close: close)
                 }
+            }
+            if let destination { review(in: destination); return }
+            let panel = NSOpenPanel(); panel.title = "Create a file set in…"; panel.prompt = "Choose Folder"
+            panel.message = "A new folder will hold the files you review next. Existing folders are never merged."
+            panel.canChooseFiles = false; panel.canChooseDirectories = true; panel.canCreateDirectories = true
+            let completion: (NSApplication.ModalResponse) -> Void = { response in
+                if response == .OK, let folder = panel.url { review(in: folder) }
             }
             NSApp.activate()
             if let window = NSApp.keyWindow ?? NSApp.mainWindow, window.attachedSheet == nil {
@@ -261,6 +266,20 @@ final class AppModel {
             return
         case let .compare(first, second):
             guard hasRoomForOperation() else { return }
+            guard let second else {
+                let panel = NSOpenPanel()
+                panel.title = "Compare “\(first.lastPathComponent)” with…"
+                panel.message = panel.title
+                panel.prompt = "Compare Folders"
+                panel.canChooseDirectories = true
+                panel.canChooseFiles = false
+                panel.directoryURL = first.deletingLastPathComponent()
+                NSApp.activate()
+                panel.begin { [weak self] response in
+                    if response == .OK, let folder = panel.url { self?.present(.compare(first: first, second: folder)) }
+                }
+                return
+            }
             let review = ComparisonReview(first, second)
             showReview(.compare, task: review.task) { ComparisonReviewView(review: review, close: $0) }
             return
@@ -353,24 +372,28 @@ final class AppModel {
     }
     func presentQRCode() { presentQRWindow(reading: false) }
     func presentQRReader() { presentQRWindow(reading: true) }
-    private func presentQRWindow(reading: Bool) {
+    func presentQRReader(image: URL) { presentQRWindow(reading: true, image: image) }
+    private func presentQRWindow(reading: Bool, image: URL? = nil) {
         guard hasRoomForOperation() else { return }
         let operation = QRCodeOperation()
         operation.reading = reading
         let page: WorkbenchTool = reading ? .readQR : .createQR
         let reader = QRCodeReadOperation()
+        if let image { reader.read(image) }
         operation.onSaved = workbench.endEditingAfterSave(on: page)
         reader.onSaved = operation.onSaved
         presentEditor(page, id: operation.id, busy: { operation.saving || reader.saving }, finish: {
             operation.cancel()
             reader.cancel()
-        }, panel: QRCodeWindow(operation: operation)) { close in
+        }, panel: QRCodeWindow(operation: operation, reader: reader)) { close in
             QRCodeWorkspace(operation: operation, reader: reader, close: close)
         }
     }
-    func presentFileList() {
+    func presentFileList() { presentFileList([]) }
+    func presentFileList(_ urls: [URL]) {
         guard hasRoomForOperation() else { return }
         let operation = FileListOperation()
+        operation.add(urls)
         operation.onSaved = workbench.endEditingAfterSave(on: .fileList)
         presentEditor(.fileList, id: operation.id, busy: { operation.saving }, finish: operation.cancel, panel: FileListWindow(operation: operation)) { close in
             FileListView(operation: operation, close: close)
@@ -493,26 +516,38 @@ extension AppModel {
     }
 
     func chooseComparison() {
-        guard let first = chooseFinderFolder("Choose the first folder to compare"),
-              let second = chooseFinderFolder("Choose the folder to compare with “\(first.lastPathComponent)”",
-                                              startingAt: first.deletingLastPathComponent()) else { return }
-        present(.compare(first: first, second: second))
+        if let first = chooseFinderFolder("Choose the first folder to compare") { present(.compare(first: first, second: nil)) }
     }
 
     func collectForSharing(_ files: [URL]) {
-        if let review = sharingReview {
+        if sharingReview == nil {
+            guard hasRoomForOperation() else { return }
+            sharingReview = SharingReview()
+        }
+        guard let review = sharingReview else { return }
+        if !files.isEmpty {
+            if sharingStatus == nil {
+                sharingStatus = SharingStatus { [weak self] in self?.collectForSharing([]) }
+                review.onChange = { [weak self, weak review] in
+                    guard let review else { return }
+                    self?.sharingStatus?.update(count: review.files.count, error: review.task.error)
+                }
+                review.onChange?()
+            }
             review.add(files)
-            if let controller = operationWindows[review.task.id] { controller.window?.makeKeyAndOrderFront(nil) }
-            else { workbench.show(.collect); workbench.showWindow?() }
-            NSApp.activate()
             return
         }
-        guard hasRoomForOperation() else { return }
-        let review = SharingReview()
-        sharingReview = review
-        review.add(files)
-        showReview(.collect, task: review.task, finish: { [weak self] in self?.sharingReview = nil }) {
-            SharingReviewView(review: review, close: $0)
+        if let controller = operationWindows[review.task.id] {
+            controller.window?.makeKeyAndOrderFront(nil)
+            NSApp.activate()
+        } else if workbench.drafts[.collect] != nil {
+            workbench.show(.collect); workbench.showWindow?()
+        } else {
+            showReview(.collect, task: review.task, finish: { [weak self] in
+                self?.sharingStatus?.remove()
+                self?.sharingStatus = nil
+                self?.sharingReview = nil
+            }) { close in SharingReviewView(review: review, close: close) }
         }
     }
 }

@@ -30,10 +30,9 @@ enum WorkbenchCategory: String, CaseIterable, Identifiable {
     var groups: [WorkbenchGroup] {
         switch self {
         case .finder: [
-            .init(title: "Folders", tools: [.structure, .compare]),
-            .init(title: "Collect and list files", tools: [.collect, .copy, .fileList]),
-            .init(title: "Images and PDFs", tools: [.fit, .convert, .pdf]),
-            .init(title: "Create a file", tools: [.newFile, .clipboard])
+            .init(title: "Select a folder", tools: [.structure, .compare]),
+            .init(title: "Select files", tools: [.collect, .copy]),
+            .init(title: "Select an image", tools: [.fit, .readQR])
         ]
         case .files: [
             .init(title: "Create", tools: [.newFile, .fileSet]),
@@ -68,7 +67,7 @@ enum WorkbenchCategory: String, CaseIterable, Identifiable {
 enum WorkbenchTool: String, CaseIterable, Identifiable {
     case newFile = "Create a new file"
     case clipboard = "Create a file from the clipboard"
-    case copy = "Copy file names or paths"
+    case copy = "Copy or export a file list"
     case convert = "Convert an image"
     case pdf = "Combine files into a PDF"
     case fileList = "Export a file list"
@@ -101,7 +100,7 @@ enum WorkbenchTool: String, CaseIterable, Identifiable {
         switch self {
         case .newFile: "Start a text, Markdown or PDF file, or use a saved template."
         case .clipboard: "Save copied text as a text file or a copied image as a PNG."
-        case .copy: "Preview names, full paths or links before copying them."
+        case .copy: "Copy names, paths or links, or save a CSV or Markdown list."
         case .convert: "Save a copy as PNG, JPEG or HEIC."
         case .pdf: "Arrange documents and images in reading order."
         case .fileList: "Save names, sizes and other details as CSV or Markdown."

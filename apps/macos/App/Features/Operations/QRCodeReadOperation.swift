@@ -56,14 +56,18 @@ final class QRCodeReadOperation {
         let revision = revision
         let completion: (NSApplication.ModalResponse) -> Void = { [weak self] response in
             guard response == .OK, let url = panel.url, let self, self.revision == revision else { return }
-            self.cancel(); self.prepared = nil; self.previewImage = nil; self.selectedID = nil
-            self.savedURL = nil; self.copied = false; self.sourceName = url.lastPathComponent
-            self.start("Reading QR codes…", work: { try QRCodeReading.read(url) }) { model, result in
-                model.prepared = result; model.previewImage = NSImage(data: result.thumbnailPNG); model.selectedID = result.codes.first?.id
-            }
+            self.read(url)
         }
         if let window = NSApp.keyWindow { panel.beginSheetModal(for: window, completionHandler: completion) }
         else { panel.begin(completionHandler: completion) }
+    }
+    func read(_ url: URL) {
+        guard !saving else { return }
+        cancel(); prepared = nil; previewImage = nil; selectedID = nil
+        savedURL = nil; copied = false; sourceName = url.lastPathComponent
+        start("Reading QR codes…", work: { try QRCodeReading.read(url) }) { model, result in
+            model.prepared = result; model.previewImage = NSImage(data: result.thumbnailPNG); model.selectedID = result.codes.first?.id
+        }
     }
     func copyText() {
         guard !busy, let text = selectedCode?.text, !text.isEmpty else { return }

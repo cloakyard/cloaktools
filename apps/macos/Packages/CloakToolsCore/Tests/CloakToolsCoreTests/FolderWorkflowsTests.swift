@@ -153,9 +153,9 @@ private func file(_ root: URL, _ path: String, _ bytes: String) throws -> URL {
     try fixture { root in
         let a = try folder(root, "A & B"), b = try folder(root, "日本語 #2")
         let photo = try file(root, "25% + &.png", "sample")
-        let intents: [FinderIntent] = [.fit(image: photo), .structure(folder: a), .collect(files: [photo]), .compare(first: a, second: b)]
+        let intents: [FinderIntent] = [.fit(image: photo), .structure(folder: a), .collect(files: [photo]), .compare(first: a, second: nil), .compare(first: a, second: b)]
         for intent in intents { #expect(try FinderIntent(url: intent.url) == intent) }
-        for value in ["compare?path=/a", "compare?path=/a&path=/a", "compare?path=/a&path=/b&path=/c", "fit?path=/a&path=/b",
+        for value in ["compare?other=/a", "compare?path=/a&path=/a", "compare?path=/a&path=/b&path=/c", "fit?path=/a&path=/b",
                       "structure?path=relative", "collect?path=/a&other=/b"] {
             let url = try #require(URL(string: "cloaktools-action://" + value))
             #expect(throws: ToolError.self) { try FinderIntent(url: url) }
@@ -170,7 +170,7 @@ private func file(_ root: URL, _ path: String, _ bytes: String) throws -> URL {
         let link = root.appendingPathComponent("Link")
         try FileManager.default.createSymbolicLink(at: link, withDestinationURL: image)
         func actions(_ urls: [URL]) -> [FinderIntent] { FinderIntent.reviewActions(for: urls).map(\.intent) }
-        #expect(actions([first]) == [.structure(folder: first)])
+        #expect(actions([first]) == [.structure(folder: first), .compare(first: first, second: nil)])
         #expect(actions([first, second]) == [.compare(first: first, second: second)])
         #expect(actions([image]) == [.fit(image: image), .collect(files: [image])])
         #expect(actions([note, image]) == [.collect(files: [note, image])])

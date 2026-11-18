@@ -77,14 +77,11 @@ struct SettingsView: View {
             }
             FinderFoldersSection(model: model.finderScopes)
             Section {
-                LabeledContent("New File with CloakTools", value: "Select a folder")
-                LabeledContent("Convert Image with CloakTools", value: "Select one image")
-                LabeledContent("Assemble PDF with CloakTools", value: "Select PDFs or images")
-                LabeledContent("Copy As with CloakTools", value: "Select files or folders")
-                LabeledContent("Make It Fit with CloakTools", value: "Select one photo")
-                LabeledContent("Reuse Folder Structure with CloakTools", value: "Select a folder")
+                LabeledContent("Folder Actions with CloakTools", value: "Create, reuse or compare")
+                LabeledContent("Copy or Export File List with CloakTools", value: "Select files or folders")
+                LabeledContent("Make It Fit with CloakTools", value: "Select a photo")
+                LabeledContent("Read QR Code from Image with CloakTools", value: "Select a still image")
                 LabeledContent("Collect Copies for Sharing with CloakTools", value: "Select files")
-                LabeledContent("Compare Two Folders with CloakTools", value: "Select two folders")
             } header: { Text("Finder Services") } footer: {
                 Text("In other folders, select items and open Finder’s Services menu. Enable missing actions in System Settings → Keyboard → Keyboard Shortcuts → Services.")
             }

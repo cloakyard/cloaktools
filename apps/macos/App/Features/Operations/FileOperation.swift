@@ -166,6 +166,17 @@ struct OperationView: View {
                                 }
                             }
                         }.modifier(DialogCard()).disabled(operation.running || operation.output != nil)
+                        if operation.output == nil, !AppModel.shared.visibleFileSets.isEmpty {
+                            Menu("Use Saved File Set…") {
+                                ForEach(AppModel.shared.visibleFileSets) { set in
+                                    Button(set.title) {
+                                        let folder = operation.destination
+                                        close()
+                                        AppModel.shared.chooseFileSetFolder(set, destination: folder)
+                                    }
+                                }
+                            }.fixedSize().disabled(operation.busy)
+                        }
                         Label(operation.source.contentDescription(using: operation.preferences), systemImage: operation.source.isPDF ? "doc.richtext" : "doc")
                             .font(.callout).foregroundStyle(.secondary)
                     } else {

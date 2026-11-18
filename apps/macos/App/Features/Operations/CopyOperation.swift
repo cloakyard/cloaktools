@@ -81,6 +81,11 @@ struct CopyOperationView: View {
                     }.modifier(DialogCard())
                     Text(operation.truncated ? "Preview shows the first 8,192 characters. Copy includes the full text." : operation.format.detail)
                         .font(.caption).foregroundStyle(.secondary)
+                    Button("Export as CSV or Markdown…") {
+                        let files = operation.selection.files
+                        close()
+                        AppModel.shared.presentFileList(files)
+                    }.buttonStyle(.link)
                     if operation.copied { Label("Copied to clipboard.", systemImage: "checkmark.circle.fill").foregroundStyle(.green) }
                     if let error = operation.error { Label(error, systemImage: "exclamationmark.triangle").foregroundStyle(.red).font(.callout) }
                 }.frame(maxWidth: .infinity, alignment: .leading)

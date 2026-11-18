@@ -109,8 +109,9 @@ final class QRCodeOperation: Identifiable {
 final class QRCodeWindow: NSWindowController, NSWindowDelegate {
     var onClose: (() -> Void)?
     private let operation: QRCodeOperation
-    private let reader = QRCodeReadOperation()
-    init(operation: QRCodeOperation) {
+    private let reader: QRCodeReadOperation
+    init(operation: QRCodeOperation, reader: QRCodeReadOperation) {
+        self.reader = reader
         self.operation = operation
         let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 660, height: 600), styleMask: [.titled, .closable, .resizable, .miniaturizable], backing: .buffered, defer: false)
         window.title = "QR Code"; window.titleVisibility = .hidden; window.titlebarAppearsTransparent = true

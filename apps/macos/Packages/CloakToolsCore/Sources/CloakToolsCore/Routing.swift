@@ -47,7 +47,7 @@ public enum FinderIntent: Equatable, Sendable {
     case fit(image: URL)
     case structure(folder: URL)
     case collect(files: [URL])
-    case compare(first: URL, second: URL)
+    case compare(first: URL, second: URL?)
     public var url: URL {
         var parts = URLComponents()
         parts.scheme = "cloaktools-action"
@@ -59,7 +59,7 @@ public enum FinderIntent: Equatable, Sendable {
         case let .collect(files):
             parts.host = "collect"; parts.queryItems = files.map { .init(name: "path", value: $0.path) }
         case let .compare(first, second):
-            parts.host = "compare"; parts.queryItems = [first, second].map { .init(name: "path", value: $0.path) }
+            parts.host = "compare"; parts.queryItems = ([first] + [second].compactMap { $0 }).map { .init(name: "path", value: $0.path) }
         case let .assemble(files):
             parts.host = "assemble"; parts.queryItems = files.map { .init(name: "path", value: $0.path) }
         case let .copy(files):
@@ -84,7 +84,7 @@ public enum FinderIntent: Equatable, Sendable {
         if parts.host == "assemble" || parts.host == "copy" || parts.host == "collect" || parts.host == "compare" {
             let count: ClosedRange<Int>
             switch parts.host {
-            case "compare": count = 2...2
+            case "compare": count = 1...2
             case "assemble": count = 1...PDFAssembly.maximumFiles
             case "collect": count = 1...SharingCollection.maximumFiles
             default: count = 1...CopySelection.maximumItems
@@ -93,8 +93,9 @@ public enum FinderIntent: Equatable, Sendable {
             let files = items.map { URL(fileURLWithPath: $0.value!) }
             switch parts.host {
             case "compare":
-                guard files[0].standardizedFileURL != files[1].standardizedFileURL else { throw ToolError.invalidRequest }
-                self = .compare(first: files[0], second: files[1])
+                let second = files.dropFirst().first
+                guard files[0].standardizedFileURL != second?.standardizedFileURL else { throw ToolError.invalidRequest }
+                self = .compare(first: files[0], second: second)
             case "collect": self = .collect(files: files)
             case "assemble": self = .assemble(files: files)
             default: self = .copy(files: files)

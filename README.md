@@ -67,7 +67,7 @@ cd cloaktools
 open apps/macos/build/Verify/Build/Products/Debug/CloakTools.app
 ```
 
-In the development build, choose a category in the Workbench or press **⌘F** to find a tool. **Finder Tools → Finder Setup…** opens extension settings. **⌘,** opens the separate Settings window and **⌘N** creates a file. Developer Tools is optional at first launch and in **Settings → General**. The published 0.6.0 beta uses the earlier settings sidebar. In the source build, Finder Tools also opens a selected photo in Make It Fit, reuses an existing folder structure, collects copies from multiple locations and compares two folders by content.
+In the development build, choose a category in the Workbench or press **⌘F** to find a tool. **Finder Tools → Finder Setup…** opens extension settings. **⌘,** opens the separate Settings window and **⌘N** creates a file. Developer Tools is optional at first launch and in **Settings → General**. The published 0.6.0 beta uses the earlier settings sidebar. In the source build, right-click a selection to read a QR image, fit a photo, reuse or compare folders, or copy and export a file list. Collect Copies keeps a count in the menu bar as you browse Finder.
 
 Builds are locally ad-hoc signed and not notarized. Current recorded runtime checks used macOS 27.2.1; macOS 27.0 has not been exercised. Full tool instructions and shortcuts are in [the usage guide](docs/USAGE.md).
 

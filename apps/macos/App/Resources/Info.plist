@@ -61,10 +61,10 @@
 			<key>NSMenuItem</key>
 			<dict>
 				<key>default</key>
-				<string>New File with CloakTools</string>
+				<string>Folder Actions with CloakTools</string>
 			</dict>
 			<key>NSMessage</key>
-			<string>createFile</string>
+			<string>folderActions</string>
 			<key>NSPortName</key>
 			<string>CloakTools</string>
 			<key>NSRequiredContext</key>
@@ -72,56 +72,16 @@
 				<key>NSApplicationIdentifier</key>
 				<string>com.apple.finder</string>
 			</dict>
-			<key>NSSendTypes</key>
+			<key>NSSendFileTypes</key>
 			<array>
-				<string>public.file-url</string>
+				<string>public.folder</string>
 			</array>
 		</dict>
 		<dict>
 			<key>NSMenuItem</key>
 			<dict>
 				<key>default</key>
-				<string>Convert Image with CloakTools</string>
-			</dict>
-			<key>NSMessage</key>
-			<string>convertImage</string>
-			<key>NSPortName</key>
-			<string>CloakTools</string>
-			<key>NSRequiredContext</key>
-			<dict>
-				<key>NSApplicationIdentifier</key>
-				<string>com.apple.finder</string>
-			</dict>
-			<key>NSSendTypes</key>
-			<array>
-				<string>public.file-url</string>
-			</array>
-		</dict>
-		<dict>
-			<key>NSMenuItem</key>
-			<dict>
-				<key>default</key>
-				<string>Assemble PDF with CloakTools</string>
-			</dict>
-			<key>NSMessage</key>
-			<string>assemblePDF</string>
-			<key>NSPortName</key>
-			<string>CloakTools</string>
-			<key>NSRequiredContext</key>
-			<dict>
-				<key>NSApplicationIdentifier</key>
-				<string>com.apple.finder</string>
-			</dict>
-			<key>NSSendTypes</key>
-			<array>
-				<string>public.file-url</string>
-			</array>
-		</dict>
-		<dict>
-			<key>NSMenuItem</key>
-			<dict>
-				<key>default</key>
-				<string>Copy As with CloakTools</string>
+				<string>Copy or Export File List with CloakTools</string>
 			</dict>
 			<key>NSMessage</key>
 			<string>copyAs</string>
@@ -132,9 +92,9 @@
 				<key>NSApplicationIdentifier</key>
 				<string>com.apple.finder</string>
 			</dict>
-			<key>NSSendTypes</key>
+			<key>NSSendFileTypes</key>
 			<array>
-				<string>public.file-url</string>
+				<string>public.item</string>
 			</array>
 		</dict>
 		<dict>
@@ -165,10 +125,10 @@
 			<key>NSMenuItem</key>
 			<dict>
 				<key>default</key>
-				<string>Reuse Folder Structure with CloakTools</string>
+				<string>Read QR Code from Image with CloakTools</string>
 			</dict>
 			<key>NSMessage</key>
-			<string>reuseStructure</string>
+			<string>readQR</string>
 			<key>NSPortName</key>
 			<string>CloakTools</string>
 			<key>NSRequiredContext</key>
@@ -178,7 +138,13 @@
 			</dict>
 			<key>NSSendFileTypes</key>
 			<array>
-				<string>public.folder</string>
+				<string>public.png</string>
+				<string>public.jpeg</string>
+				<string>com.compuserve.gif</string>
+				<string>org.webmproject.webp</string>
+				<string>public.tiff</string>
+				<string>public.heic</string>
+				<string>public.heif</string>
 			</array>
 		</dict>
 		<dict>
@@ -199,26 +165,6 @@
 			<key>NSSendFileTypes</key>
 			<array>
 				<string>public.data</string>
-			</array>
-		</dict>
-		<dict>
-			<key>NSMenuItem</key>
-			<dict>
-				<key>default</key>
-				<string>Compare Two Folders with CloakTools</string>
-			</dict>
-			<key>NSMessage</key>
-			<string>compareFolders</string>
-			<key>NSPortName</key>
-			<string>CloakTools</string>
-			<key>NSRequiredContext</key>
-			<dict>
-				<key>NSApplicationIdentifier</key>
-				<string>com.apple.finder</string>
-			</dict>
-			<key>NSSendFileTypes</key>
-			<array>
-				<string>public.folder</string>
 			</array>
 		</dict>
 	</array>

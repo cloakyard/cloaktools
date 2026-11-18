@@ -169,6 +169,10 @@ struct WorkbenchView: View {
                         ForEach(matches) { tool in toolRow(tool, singleResult: matches.count == 1) }
                     }
                 } else {
+                    if navigation.category == .finder {
+                        Text("Right-click a selection in Finder and choose Services. You can also start a tool here.")
+                            .foregroundStyle(.secondary)
+                    }
                     ForEach(navigation.category.groups) { group in
                         Section(group.title) { ForEach(group.tools) { tool in toolRow(tool) } }
                     }
@@ -274,7 +278,7 @@ private struct SidebarSearchField: NSViewRepresentable {
         if field.stringValue != query { field.stringValue = query }
     }
 
-    final class Coordinator: NSObject {
+    @MainActor final class Coordinator: NSObject {
         @Binding var query: String
         init(query: Binding<String>) { _query = query }
 
