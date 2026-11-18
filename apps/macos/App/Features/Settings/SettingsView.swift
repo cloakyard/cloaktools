@@ -21,71 +21,69 @@ struct SettingsView: View {
                     settingsForm { developer }
                 }
             }
-            Tab("Privacy", systemImage: "lock.shield", value: SettingsCategory.privacy) { settingsForm { PrivacySettingsView() } }
+            Tab("Privacy", systemImage: "lock.shield", value: SettingsCategory.privacy) { PrivacySettingsView() }
             Tab("About", systemImage: "info.circle", value: SettingsCategory.about) { settingsForm { about } }
         }
-        .frame(minWidth: 640, idealWidth: 680, minHeight: 480, idealHeight: 600)
+        .safeAreaInset(edge: .top, spacing: 0) {
+            if let error = model.persistenceError { OperationFeedback(error: error).padding(.horizontal) }
+        }
+        .frame(minWidth: 640, idealWidth: 640, maxWidth: .infinity,
+               minHeight: 480, idealHeight: 600, maxHeight: .infinity)
         .onDisappear { model.settingsTab = .general }
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in model.refreshFinder() }
     }
     private func settingsForm<Content: View>(@ViewBuilder content: () -> Content) -> some View {
-        Form {
-            if let error = model.persistenceError {
-                OperationFeedback(error: error)
-            }
-            content()
-        }
-        .formStyle(.grouped)
-        .scrollBounceBehavior(.basedOnSize)
+        Form(content: content)
+            .formStyle(.grouped)
+            .scrollBounceBehavior(.basedOnSize)
     }
 
     private var general: some View {
         Group {
             Section {
-                Toggle(isOn: preference(\.developerToolsEnabled)) {
-                    Label("Developer Tools", systemImage: "chevron.left.forwardslash.chevron.right")
-                }
-                Text("Add JSON, Base64, sample and configuration tools, plus code, language starters and technical copy formats. Everyday tools are always available.").foregroundStyle(.secondary)
+                Toggle("Developer Tools", isOn: preference(\.developerToolsEnabled))
             } header: { Text("Your tools") } footer: {
-                Text("Turning this off hides developer choices. Saved templates, presets and language settings are kept. Open operations keep their original choices.")
+                Text("Adds JSON, Base64, code starters, sample files and developer copy formats. Turning it off preserves saved items, language choices and open drafts.")
             }
-            Section("After creating a file") {
+            Section {
                 Toggle("Reveal the new file in Finder", isOn: preference(\.revealCreatedFile))
                 Toggle("Open after creation", isOn: preference(\.openAfterCreation))
-                Text(model.preferences.developerToolsEnabled ? "Text and source files open in TextEdit; PDFs and clipboard images open in Preview. Generated code is never run." : "Text files open in TextEdit; PDFs and clipboard images open in Preview.").foregroundStyle(.secondary)
+            } header: { Text("After creating a file") } footer: {
+                Text(model.preferences.developerToolsEnabled ? "Text and source files open in TextEdit. PDFs and clipboard images open in Preview." : "Text files open in TextEdit. PDFs and clipboard images open in Preview.")
             }
-            Section("Use with Shortcuts") {
+            Section {
                 if AutomationAvailability.hasSigningIdentity {
-                    Text("Fit an image, collect a Markdown digest, or review a saved file set. Choose CloakTools in the Shortcuts action library.").font(.callout).foregroundStyle(.secondary)
                     Button("Open Shortcuts…", systemImage: "square.stack.3d.up") {
                         if let url = NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.apple.shortcuts") {
                             NSWorkspace.shared.openApplication(at: url, configuration: .init())
                         }
                     }
                 } else {
-                    Text("Shortcuts actions need a signed build. In this ad-hoc build, use Make It Fit, Markdown Digest and File Sets directly in CloakTools.").font(.callout).foregroundStyle(.secondary)
+                    LabeledContent("Shortcuts actions", value: "Unavailable in this build")
                 }
-            }
-            Section {
-                LabeledContent("Release", value: releaseChannel)
-                Text("No account, analytics or cloud processing. Automatic updates are optional.").foregroundStyle(.secondary)
+            } header: { Text("Use with Shortcuts") } footer: {
+                Text(AutomationAvailability.hasSigningIdentity ? "Choose CloakTools in the Shortcuts action library to fit an image, collect a Markdown digest or review a file set." : "Shortcuts requires a build with a signing identity. You can fit an image, collect a Markdown digest or review a file set in the Workbench.")
             }
         }
     }
     private var finder: some View {
         Group {
-            Section("Finder workspace") {
+            Section {
                 LabeledContent("Finder extension", value: model.finderEnabled ? "Enabled" : "Not enabled")
-                Text("Blank-space and selected-item menus are scoped to CloakTools Files in your home folder and its subfolders.").foregroundStyle(.secondary)
                 Button("Open Finder Workspace", systemImage: "folder", action: model.openWorkspace)
                 Button("Manage Finder Extension…") { FIFinderSyncController.showExtensionManagementInterface() }
-            }
-            Section("Selected items elsewhere") {
-                Text("Select a folder in Finder, then choose Services → New File with CloakTools. For a supported image, choose Services → Convert Image with CloakTools.")
-                Text("Select PDFs/images to Assemble PDF, or files/folders to Copy As. Both actions also appear in the scoped Finder workspace.")
-                Text("If hidden, enable these services in System Settings → Keyboard → Keyboard Shortcuts → Services.").foregroundStyle(.secondary)
+            } header: { Text("Finder workspace") } footer: {
+                Text("Right-click a file or an empty area in CloakTools Files in your home folder. The extension also works in its subfolders.")
             }
             FinderFoldersSection(model: model.finderScopes)
+            Section {
+                LabeledContent("New File with CloakTools", value: "Select a folder")
+                LabeledContent("Convert Image with CloakTools", value: "Select one image")
+                LabeledContent("Assemble PDF with CloakTools", value: "Select PDFs or images")
+                LabeledContent("Copy As with CloakTools", value: "Select files or folders")
+            } header: { Text("Finder Services") } footer: {
+                Text("In other folders, select items and open Finder’s Services menu. Enable missing actions in System Settings → Keyboard → Keyboard Shortcuts → Services.")
+            }
             Section("Access and scope") {
                 Text("Every action shows its destination before writing. macOS may request access to protected folders. Finder search results, cloud-provider views, and virtual locations may not offer extension menus.")
                 Text("The host runs outside App Sandbox. The Finder extension is sandboxed and only passes requests to the host; it does not write files or convert images.").foregroundStyle(.secondary)
@@ -114,9 +112,8 @@ struct SettingsView: View {
                 }.padding(.vertical, 6)
             }
             Section {
-                Text("Developer Tools can be turned off in General. Your language choices and saved workflows are kept.").foregroundStyle(.secondary)
                 Button("Manage Your Tools…") { model.settingsTab = .general }
-            }
+            } footer: { Text("Turn Developer Tools on or off in General. Your language choices and saved workflows are kept.") }
         }
     }
     private func imagePreference<Value>(_ key: WritableKeyPath<ImageConversionOptions, Value>) -> Binding<Value> {
@@ -124,7 +121,7 @@ struct SettingsView: View {
     }
     private var conversions: some View {
         Group {
-            Section("Image conversion defaults") {
+            Section {
                 ImageFormatPicker(title: "Format", selection: imagePreference(\.format))
                 if model.preferences.imageConversion.format.isLossy {
                     LabeledContent("Quality") { ImageQualitySlider(quality: imagePreference(\.quality)).frame(maxWidth: 240) }
@@ -134,29 +131,37 @@ struct SettingsView: View {
                 }
                 LabeledContent("Location", value: "Beside the original")
                 Toggle("Reveal the converted copy in Finder", isOn: preference(\.revealConvertedFile))
-                Text("Used for new image conversions. Each operation keeps its own settings and captured image.").font(.callout).foregroundStyle(.secondary)
+            } header: { Text("Image conversion defaults") } footer: {
+                Text("These defaults apply when you start a conversion. Open conversions keep their current settings.")
             }
         }
     }
     private var about: some View {
         Group {
             Section {
-                HStack(spacing: 14) { Image("AboutAppIcon").resizable().frame(width: 64, height: 64).accessibilityHidden(true); Text("CloakTools").font(.title) }
-                Text("Part of Cloakyard · Built by Sumit Sahoo")
-                LabeledContent("Version", value: versionLabel)
-                LabeledContent("Platform", value: "macOS 27 · Apple silicon")
-                if releaseChannel == "Development preview" {
-                    Text("Local development build").foregroundStyle(.secondary)
+                VStack(spacing: 12) {
+                    Image("AboutAppIcon").resizable().scaledToFit()
+                        .frame(width: 84, height: 84).accessibilityHidden(true)
+                    VStack(spacing: 3) {
+                        Text("Cloak\(Text("Tools").foregroundStyle(Color.accentColor))")
+                            .font(.title2.weight(.semibold)).accessibilityLabel("CloakTools")
+                            .accessibilityAddTraits(.isHeader)
+                        Text("Version \(versionLabel)").font(.callout).monospacedDigit().foregroundStyle(.secondary)
+                        Text("Created by Sumit Sahoo · Cloakyard").font(.footnote).foregroundStyle(.secondary)
+                            .padding(.top, 3)
+                    }
                 }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 20)
+                .listRowInsets(EdgeInsets())
             }
             UpdateSettingsSection()
-            Section("Learn more") {
-                Link("tools.cloakyard.com", destination: URL(string: "https://tools.cloakyard.com")!)
-                Link(destination: AppLinks.support) {
-                    Label("Buy me a coffee", systemImage: "cup.and.saucer")
-                }
-                Text("MIT License. See the repository for source, privacy, contributions, and the roadmap.")
-            }
+            Section {
+                SettingsExternalLink("tools.cloakyard.com", symbol: "globe", destination: AppLinks.website)
+                SettingsExternalLink("github.com/cloakyard/cloaktools", symbol: "chevron.left.forwardslash.chevron.right", destination: AppLinks.repository)
+                SettingsExternalLink("Report a Bug", symbol: "ladybug", destination: AppLinks.issues)
+                SettingsExternalLink("Buy me a coffee", symbol: "cup.and.saucer", destination: AppLinks.support)
+            } footer: { Text("macOS 27 · Apple silicon · MIT License") }
         }
     }
     private var releaseChannel: String {
@@ -170,4 +175,28 @@ struct SettingsView: View {
         return "\(version) (\(build)) · \(releaseChannel)"
     }
 
+}
+
+struct SettingsExternalLink: View {
+    let title: String
+    let symbol: String
+    let destination: URL
+
+    init(_ title: String, symbol: String, destination: URL) {
+        self.title = title
+        self.symbol = symbol
+        self.destination = destination
+    }
+
+    var body: some View {
+        Link(destination: destination) {
+            HStack(spacing: 10) {
+                Image(systemName: symbol).foregroundStyle(.tint).frame(width: 20).accessibilityHidden(true)
+                Text(title)
+                Spacer(minLength: 8)
+                Image(systemName: "arrow.up.forward").font(.caption).foregroundStyle(.tertiary).accessibilityHidden(true)
+            }.contentShape(.rect)
+        }
+        .buttonStyle(.plain)
+    }
 }

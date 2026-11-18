@@ -64,16 +64,11 @@ struct RoutingSettingsView: View {
     var body: some View {
         Group {
             Section {
-                HStack {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("The right app for each link.").font(.title3)
-                        Text("Rules run from top to bottom. The first match wins.").foregroundStyle(.secondary)
-                    }
-                    Spacer()
-                    Button("Test a Link…", systemImage: "link.badge.plus") { routing.showingTester = true }
-                }
+                Button("Test a Link…", systemImage: "link.badge.plus") { routing.showingTester = true }
                 Button("Open a Link Once…", systemImage: "arrow.up.forward.app") { routing.showingOneTime = true }
                 if let lastRoute = model.router.lastRoute { LabeledContent("Last opening this session", value: lastRoute) }
+            } header: { Text("Link handling") } footer: {
+                Text("Test a link to preview the first matching rule. Open a Link Once lets you choose an app for a single link.")
             }
             DefaultHandlerSection(settings: model.defaultHandlers, onRefresh: routing.reload)
             DestinationSettingsSection(routing: routing)
@@ -110,10 +105,11 @@ struct RoutingSettingsView: View {
             } header: { Text("Routing rules") } footer: {
                 Text("Rules apply only to links delivered to CloakTools. An unavailable destination returns to the chooser.")
             }
-            Section("Try an incoming link") {
+            Section {
                 Button("Send a Web Link to CloakTools") { deliver("https://example.com/?from=cloaktools") }
                 Button("Send an Email Link to CloakTools") { deliver("mailto:hello@example.com?subject=CloakTools%20test&body=Hello%2C%20World%21") }
-                Text("These buttons deliver a real URL event and apply enabled rules. They do not change your system defaults.").foregroundStyle(.secondary)
+            } header: { Text("Try an incoming link") } footer: {
+                Text("These examples deliver a real link to CloakTools and apply your enabled rules. Your system defaults stay the same.")
             }
             Section {
                 Text("Rules stay on this Mac. Tested and incoming links are not saved. Source identity is Unknown unless reliably supplied; it is never inferred from the frontmost app.")

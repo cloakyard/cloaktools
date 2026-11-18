@@ -28,8 +28,12 @@ struct WorkbenchView: View {
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
             List(selection: Binding<WorkbenchCategory?>(get: { navigation.category }, set: { if let category = $0 { navigation.browse(category) } })) {
-                ForEach(categories) { category in
-                    Label(category.rawValue, systemImage: category.symbol).tag(category)
+                Section("Categories") {
+                    ForEach(categories) { category in
+                        Label(category.rawValue, systemImage: category.symbol)
+                            .frame(minHeight: 36)
+                            .tag(category)
+                    }
                 }
                 if !otherDrafts.isEmpty {
                     Section("In Progress") {
@@ -40,7 +44,7 @@ struct WorkbenchView: View {
                                 } icon: {
                                     Image(systemName: tool.symbol)
                                 }
-                                .frame(maxWidth: .infinity, alignment: .leading).contentShape(Rectangle())
+                                .frame(maxWidth: .infinity, minHeight: 36, alignment: .leading).contentShape(Rectangle())
                             }
                             .buttonStyle(.plain)
                             .help("Resume " + tool.rawValue)
@@ -51,8 +55,8 @@ struct WorkbenchView: View {
             .listStyle(.sidebar)
             .accessibilityLabel("Tool categories")
             .safeAreaInset(edge: .top, alignment: .leading, spacing: 0) {
-                VStack(alignment: .leading, spacing: 8) {
-                    HStack(spacing: 8) {
+                VStack(alignment: .leading, spacing: 14) {
+                    HStack(spacing: 10) {
                         Image("AboutAppIcon").resizable().scaledToFit()
                             .frame(width: 44, height: 44).accessibilityHidden(true)
                         Text("CloakTools").font(.title3.weight(.semibold)).accessibilityAddTraits(.isHeader)
@@ -61,15 +65,24 @@ struct WorkbenchView: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .focused($searchFocused)
                 }
-                .padding(.horizontal, 10)
-                .padding(.top, 4)
-                .padding(.bottom, 8)
+                .padding(.horizontal, 16)
+                .padding(.top, 10)
+                .padding(.bottom, 12)
             }
             .safeAreaInset(edge: .bottom, alignment: .leading) {
-                SettingsLink { Label("Settings…", systemImage: "gearshape") }
-                    .buttonStyle(.borderless).padding(16)
+                VStack(alignment: .leading, spacing: 0) {
+                    Divider().accessibilityHidden(true)
+                    SettingsLink {
+                        Label("Settings…", systemImage: "gearshape")
+                            .frame(maxWidth: .infinity, minHeight: 40, alignment: .leading)
+                            .contentShape(.rect)
+                    }
+                    .buttonStyle(.borderless)
+                }
+                .padding(.horizontal, 16)
+                .padding(.bottom, 6)
             }
-            .navigationSplitViewColumnWidth(min: 190, ideal: 225, max: 300)
+            .navigationSplitViewColumnWidth(min: 208, ideal: 244, max: 300)
         } detail: {
             VStack(spacing: 0) {
                 if let error = model.persistenceError ?? model.templateLibraryError {

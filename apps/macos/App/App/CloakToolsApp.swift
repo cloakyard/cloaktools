@@ -20,7 +20,7 @@ struct CloakToolsApp: App {
         Settings {
             SettingsView(model: AppModel.shared).environmentObject(updater)
         }
-        .defaultSize(width: 680, height: 600)
+        .defaultSize(width: 640, height: 600)
     }
 }
 

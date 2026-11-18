@@ -23,3 +23,14 @@ Checked the ad-hoc Debug build on Apple silicon with macOS 27.2.1 and Xcode 27.2
 The native build succeeded. All 224 core tests and 14 hosted tests passed. The hosted suite covers catalog visibility and ranking, search restoration across reviews and developer visibility changes, draft ownership, and the nesting and byte counts in a file-set review.
 
 The scoped Finder extension was disabled on this Mac. Its contextual menu, spoken VoiceOver, and the full system accessibility-setting matrix remain live verification items. The Finder Services test above used Finder’s actual Services menu.
+
+## Sidebar and Settings comparison
+
+Inspected the installed CloakDrop 1.0.0 About window and ran its Debug sample catalog from a separate checkout to compare General, Rules, Privacy and About. The comparison covered the window, tab bar, control grouping, reading layout and external links.
+
+| Surface | Observed in CloakTools |
+| --- | --- |
+| Sidebar | Accessibility geometry measured category rows at 32 pt before and 44 pt after. At 1000 × 700 pt in light appearance and 800 × 652 pt in dark appearance, all six categories and the Settings button were visible. The compact window also showed an open PDF draft. |
+| Keyboard and entry points | ⌘F revealed a hidden sidebar and focused search. ⌘Return opened a PDF review, and ⌘[ restored its search. Finder Setup opened the Finder tab. Closing Settings and using the sidebar Settings button opened General. |
+| Preferences | Opened all seven tabs with Developer Tools enabled in light and dark appearance. Both apps showed their Settings windows at 640 × 600 pt. General used grouped controls and section footers. Finder listed the four Services by their registered macOS names. |
+| Privacy and About | Privacy showed a dated heading, a summary card and scrollable policy sections. About showed a centered icon, version and author above Updates. The accessibility tree exposed the website, repository, issue and support rows as links. |
