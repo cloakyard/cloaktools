@@ -5,13 +5,11 @@ description: Practical help for the CloakTools public beta.
 ---
 ## Installing and updating
 
-Download the [official beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-beta.20261118.2) and follow the [installation guide](/install/). In the installed app, open **Settings → About → Check for Updates**. If the feed cannot be reached, retry when you are online. The same release page provides the DMG for manual installation.
+Download the [official beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-beta.20261118.6) and follow the [installation guide](/install/). In the installed app, open **Settings → About → Check for Updates**. If the feed cannot be reached, retry when you are online. The same release page provides the DMG for manual installation.
 
 ## A tool has moved
 
-The 0.6.0 beta keeps existing tools in smaller groups. Expand **New Files → More text tools** for QR Code, Text Cleanup and Clipboard to File, or **Conversions → Image & PDF tools** for Convert Image, Assemble PDF and Organize PDF. Saved image defaults are under **Conversions → Image conversion defaults**.
-
-The same actions are in **File → Text & Sharing** and **File → Images & PDFs**. Keyboard shortcuts still work directly. Saved templates, recipes, presets and Developer Tools choices are kept.
+Open the Workbench and press **⌘F** to find a tool. QR creation, QR reading and text cleanup are in **Text & Sharing**. Image conversion and PDF tools are in **Images, PDFs & Media**. Open **Settings → Images** for conversion defaults. Your templates, recipes, presets and Developer Tools choices carry forward.
 
 ## Developer tools or saved items are hidden
 
@@ -89,7 +87,7 @@ Save to an existing writable folder with a valid visible filename. Existing file
 
 ## Finder actions are missing
 
-Check **Finder Integration → Manage Finder Extension** and open the scoped workspace from the app. Blank-space menus apply only inside that workspace. For a selected folder or image elsewhere, use Finder Services. Some cloud-provider and virtual views do not expose these menus.
+Check **Finder Tools → Finder Setup…** and open the scoped workspace from the app. Blank-space menus apply only inside that workspace. For a selected folder or image elsewhere, use Finder Services. Some cloud-provider and virtual views do not expose these menus.
 
 ## A file could not be created
 
@@ -183,7 +181,7 @@ Use **Test a Link** to distinguish a matched rule from a fallback. A matched rul
 
 ## A default-app change did not complete
 
-Open **Default link apps** in Open With and use **Refresh Status**. macOS may require a confirmation prompt for a browser change. If you decline or a change fails, CloakTools stops further requests and shows the actual current apps. HTTP and HTTPS may differ; the web review handles them separately. Use Review Again to inspect the new state before retrying.
+Open **Default link apps** in Settings → Links and use **Refresh Status**. macOS may require a confirmation prompt for a browser change. If you decline or a change fails, CloakTools stops further requests and shows the actual current apps. HTTP and HTTPS may differ; the web review handles them separately. Use Review Again to inspect the new state before retrying.
 
 **Restore…** changes only link types still handled by this copy of CloakTools. Defaults changed outside the app are kept. Missing prior apps require an explicit alternative. Setup and restoration are separate from rule editing; neither action creates a routing rule. macOS does not provide an atomic multi-scheme change, so avoid changing defaults in another app while a consent prompt is pending.
 

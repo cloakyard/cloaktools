@@ -5,7 +5,7 @@ description: A small native core, a thin app, and an independent website.
 ---
 ## Source is available
 
-The [CloakTools source repository](https://github.com/cloakyard/cloaktools) includes the native app, this website, build instructions and verification records. Download the [first public beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-beta.20261118.2) or follow the [installation and source build guide](/install/).
+The [CloakTools source repository](https://github.com/cloakyard/cloaktools) includes the native app, this website, build instructions and verification records. Download the [public beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-beta.20261118.6) or follow the [installation and source build guide](/install/).
 
 The app is written in Swift using SwiftUI, AppKit, FinderSync, Core Image, ImageIO, Vision, PDFKit and AVFoundation/AVKit. The app embeds Sparkle 2 for signed updates. Its headless core has no third-party dependencies, browser engine, bundled language runtime or cloud rules service. The website is a separate static Astro build using a pinned local copy of **Cloakyard Air 1.7.5**.
 
@@ -43,4 +43,4 @@ The local repository includes the full macOS feature audit and the revised roadm
 
 CloakTools uses the [MIT License](/license/). Contributions should include focused verification and preserve user files. Native app and website checks are independent. See the repository’s contribution and security documents before submitting a change.
 
-The 0.6.0 verification passed 224 core tests and 8 hosted app tests. Live checks cover light/dark and contrast/transparency layouts, reduced-motion navigation, keyboard-driven image fitting, Shortcuts action discovery and exact link delivery. All tested system settings were restored. Shortcuts execution is blocked by the ad-hoc signing identity; signed Finder-folder checks and notarization are deferred. Spoken VoiceOver, macOS 27.0 and broader installer/filesystem/codec checks remain open. The public beta includes signed Sparkle updates with optional automatic checks.
+The 0.6.0 verification passed 240 core tests and 23 hosted app tests. Live checks cover light/dark and contrast/transparency layouts, reduced-motion navigation, keyboard-driven image fitting, Shortcuts action discovery and exact link delivery. All tested system settings were restored. Shortcuts execution is blocked by the ad-hoc signing identity; signed Finder-folder checks and notarization are deferred. Spoken VoiceOver, macOS 27.0 and broader installer/filesystem/codec checks remain open. The public beta includes signed Sparkle updates with optional automatic checks.

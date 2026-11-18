@@ -21,9 +21,9 @@
 
 ## Overview
 
-A native macOS toolkit for creating files, preparing copies and opening links in the right app. Everyday tools are included; Developer Tools is an optional first-run choice. The SwiftUI app is separate from its Air website. The capture above shows Finder Tools in the development Workbench, with separate native Settings.
+A native macOS toolkit for creating files, preparing copies and opening links in the right app. Everyday tools are included; Developer Tools is an optional first-run choice. The SwiftUI app is separate from its Air website. The capture above shows Finder Tools in the Workbench, with separate native Settings.
 
-The [first public beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-beta.20261118.2) is **0.6.0, build 20261118.2**. Download the DMG from the release page or check for updates in About. See [release instructions](docs/RELEASE.md) for the signing boundary and [the usage guide](docs/USAGE.md) for every implemented workflow.
+The [public beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-beta.20261118.6) is **0.6.0, build 20261118.6**. Download the DMG from the release page or check for updates in About. See [release instructions](docs/RELEASE.md) for the signing boundary and [the usage guide](docs/USAGE.md) for every implemented workflow.
 
 ## Features
 
@@ -35,7 +35,7 @@ The [first public beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.
 | **Prepare images** | Convert PNG/JPEG/TIFF/HEIC input; Make It Fit measures an output against byte and dimension limits before saving the exact preview. |
 | **Reuse exports** | Saved image, size-budget and media recipes; full-clip MP4 or M4A export with native preview and cancellation. |
 | **Organize PDFs** | Assemble PDFs/images; select, reorder and rotate pages, then export an ordinary PDF without modifying its sources. |
-| **Handle text and sharing** | Clipboard to file, QR creation/reading, text cleanup, Markdown digests, reviewed CSV/Markdown file lists and Copy As formats. The source build adds QR forms for contacts, Wi-Fi, links, email, calls, messages, locations and events alongside plain text. |
+| **Handle text and sharing** | Clipboard to file, QR creation/reading, text cleanup, Markdown digests, reviewed CSV/Markdown file lists and Copy As formats. QR creation includes forms for contacts, Wi-Fi, links, email, calls, messages, locations and events alongside plain text. |
 | **Route links** | Separate web/email defaults with guarded restoration, ordered rules, pinned destinations, per-role fallback, an offline tester and explicit one-time bypass. |
 | **Work from Finder** | Workspace-scoped Finder menus, selected-item Services and compact native operation dialogs. |
 
@@ -57,7 +57,7 @@ No accounts, analytics, cloud processing, link prefetch or browsing-history pers
 
 ## Getting started
 
-Download the [beta DMG](https://github.com/cloakyard/cloaktools/releases/download/v0.6.0-beta.20261118.2/CloakTools-v0.6.0-beta.20261118.2.dmg) for **macOS 27 or later on Apple silicon**. Drag CloakTools to Applications. To build from source, install Xcode 27 and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
+Download the [beta DMG](https://github.com/cloakyard/cloaktools/releases/download/v0.6.0-beta.20261118.6/CloakTools-v0.6.0-beta.20261118.6.dmg) for **macOS 27 or later on Apple silicon**. Drag CloakTools to Applications. To build from source, install Xcode 27 and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
 
 ```sh
 brew install xcodegen
@@ -67,7 +67,7 @@ cd cloaktools
 open apps/macos/build/Verify/Build/Products/Debug/CloakTools.app
 ```
 
-In the development build, choose a category in the Workbench or press **⌘F** to find a tool. **Finder Tools → Finder Setup…** opens extension settings. **⌘,** opens the separate Settings window and **⌘N** creates a file. Developer Tools is optional at first launch and in **Settings → General**. The published 0.6.0 beta uses the earlier settings sidebar. In the source build, right-click a selection to read a QR image, fit a photo, reuse or compare folders, or copy and export a file list. Collect Copies keeps a count in the menu bar as you browse Finder.
+Choose a category in the Workbench or press **⌘F** to find a tool. **Finder Tools → Finder Setup…** opens extension settings. **⌘,** opens the separate Settings window and **⌘N** creates a file. Developer Tools is optional at first launch and in **Settings → General**. In Finder, right-click a selection to read a QR image, fit a photo, reuse or compare folders, or copy and export a file list. Collect Copies keeps a count in the menu bar as you browse Finder.
 
 Builds are locally ad-hoc signed and not notarized. Current recorded runtime checks used macOS 27.2.1; macOS 27.0 has not been exercised. Full tool instructions and shortcuts are in [the usage guide](docs/USAGE.md).
 
