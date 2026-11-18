@@ -8,7 +8,7 @@ struct ToolWelcomeView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             HStack(spacing: 14) {
-                Image("AboutAppIcon").resizable().frame(width: 54, height: 54).accessibilityHidden(true)
+                Image("AboutAppIcon").resizable().interpolation(.high).frame(width: 54, height: 54).accessibilityHidden(true)
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Welcome to CloakTools").font(.title2.weight(.semibold))
                     Text("Just the tools you need.").foregroundStyle(.secondary)

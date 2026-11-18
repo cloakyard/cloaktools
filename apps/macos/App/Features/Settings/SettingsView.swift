@@ -144,14 +144,15 @@ struct SettingsView: View {
         Group {
             Section {
                 VStack(spacing: 12) {
-                    Image("AboutAppIcon").resizable().scaledToFit()
+                    Image("AboutAppIcon").resizable().interpolation(.high).scaledToFit()
                         .frame(width: 84, height: 84).accessibilityHidden(true)
                     VStack(spacing: 3) {
                         Text("Cloak\(Text("Tools").foregroundStyle(Color.accentColor))")
                             .font(.title2.weight(.semibold)).accessibilityLabel("CloakTools")
                             .accessibilityAddTraits(.isHeader)
                         Text("Version \(versionLabel)").font(.callout).monospacedDigit().foregroundStyle(.secondary)
-                        Text("Created by Sumit Sahoo · Cloakyard").font(.footnote).foregroundStyle(.secondary)
+                            .textSelection(.enabled)
+                        Text("Created by Sumit Sahoo").font(.footnote).foregroundStyle(.secondary)
                             .padding(.top, 3)
                     }
                 }

@@ -28,7 +28,7 @@ struct WorkbenchView: View {
     private var sidebarHeader: some View {
         VStack(alignment: .leading, spacing: 14) {
             HStack(spacing: 10) {
-                Image("AboutAppIcon").resizable().scaledToFit()
+                Image("SidebarAppIcon").interpolation(.high)
                     .frame(width: 44, height: 44).accessibilityHidden(true)
                 Text("CloakTools").font(.title3.weight(.semibold)).accessibilityAddTraits(.isHeader)
             }

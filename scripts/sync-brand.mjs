@@ -1,4 +1,4 @@
-import {readFileSync,writeFileSync,copyFileSync,existsSync} from 'node:fs';
+import {readFileSync,writeFileSync,copyFileSync,existsSync,mkdirSync} from 'node:fs';
 import {resolve} from 'node:path';
 const root=resolve(import.meta.dirname,'..');
 const icon=resolve(root,'assets/icon/CloakTools.icon');
@@ -15,6 +15,7 @@ for(const path of ['assets/logo/cloaktools-mark.svg','apps/site/public/cloaktool
 copyFileSync(resolve(root,'assets/icon/Previews/Default-512.png'),resolve(root,'apps/site/public/cloaktools.png'));
 console.log('Synced circular web mark from the native icon layers.');
 
-for (const appearance of ['light', 'dark']) copyFileSync(resolve(root, `assets/screenshots/new-files-${appearance}.png`), resolve(root, `apps/site/public/images/new-files-${appearance}.png`));
+mkdirSync(resolve(root, 'apps/site/public/images'), { recursive: true });
+for (const appearance of ['light', 'dark']) copyFileSync(resolve(root, `assets/screenshots/workbench-${appearance}.png`), resolve(root, `apps/site/public/images/workbench-${appearance}.png`));
 // The social card is checked in; regeneration is an explicit design task.
 if (existsSync(resolve(root, 'assets/social/og.png'))) copyFileSync(resolve(root, 'assets/social/og.png'), resolve(root, 'apps/site/public/og.png'));

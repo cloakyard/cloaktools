@@ -14,14 +14,14 @@
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/new-files-dark.png">
-    <img src="assets/screenshots/new-files-light.png" alt="CloakTools’ native New Files settings with file creation, saved templates, file sets, folder presets and text tools." width="800">
+    <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/workbench-dark.png">
+    <img src="assets/screenshots/workbench-light.png" alt="CloakTools Workbench showing Finder Tools, tool search and Settings in the sidebar." width="800">
   </picture>
 </p>
 
 ## Overview
 
-A native macOS toolkit for creating files, preparing copies and opening links in the right app. Everyday tools are included; Developer Tools is an optional first-run choice. The SwiftUI app is separate from its Air website. The capture above shows the 0.6.0 interface with sample files. The development build opens a two-column Workbench with separate native Settings.
+A native macOS toolkit for creating files, preparing copies and opening links in the right app. Everyday tools are included; Developer Tools is an optional first-run choice. The SwiftUI app is separate from its Air website. The capture above shows Finder Tools in the development Workbench, with separate native Settings.
 
 The [first public beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-beta.20261118.2) is **0.6.0, build 20261118.2**. Download the DMG from the release page or check for updates in About. See [release instructions](docs/RELEASE.md) for the signing boundary and [the usage guide](docs/USAGE.md) for every implemented workflow.
 
