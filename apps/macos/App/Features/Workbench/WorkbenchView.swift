@@ -8,25 +8,25 @@ struct WorkbenchView: View {
     @Environment(\.openSettings) private var openSettings
     @Environment(\.openWindow) private var openWindow
     @State private var welcome = false
+    @State private var columnVisibility: NavigationSplitViewVisibility = .automatic
     @FocusState private var searchFocused: Bool
     private var otherDrafts: [WorkbenchTool] {
-        WorkbenchTool.allCases.filter { navigation.drafts[$0] != nil && $0 != navigation.page }
+        WorkbenchTool.allCases.filter { navigation.drafts[$0] != nil && ($0 != navigation.page || navigation.isSearching) }
     }
     private var categories: [WorkbenchCategory] {
         WorkbenchCategory.visible(developerEnabled: model.preferences.developerToolsEnabled)
     }
-    private var searching: Bool { !navigation.query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
-    private var tools: [WorkbenchTool] {
-        searching ? WorkbenchTool.matching(navigation.query, developerEnabled: model.preferences.developerToolsEnabled) : navigation.category.tools
+    private var searchResults: [WorkbenchTool] {
+        WorkbenchTool.matching(navigation.query, developerEnabled: model.preferences.developerToolsEnabled)
     }
     private var linkSheet: Binding<WorkbenchTool?> {
         Binding(get: { [.openLink, .testLink].contains(navigation.page) ? navigation.page : nil },
-                set: { navigation.page = $0 })
+                set: { if $0 == nil && [.openLink, .testLink].contains(navigation.page) { navigation.back() } })
     }
-    private var isCatalog: Bool { navigation.page == nil || linkSheet.wrappedValue != nil || searching }
+    private var isCatalog: Bool { navigation.page == nil || linkSheet.wrappedValue != nil || navigation.isSearching }
 
     var body: some View {
-        NavigationSplitView {
+        NavigationSplitView(columnVisibility: $columnVisibility) {
             List(selection: Binding<WorkbenchCategory?>(get: { navigation.category }, set: { if let category = $0 { navigation.browse(category) } })) {
                 Section {
                     ForEach(categories) { category in
@@ -41,12 +41,13 @@ struct WorkbenchView: View {
                 if !otherDrafts.isEmpty {
                     Section("In Progress") {
                         ForEach(otherDrafts) { tool in
-                            Button {
-                                if categories.contains(where: { $0.tools.contains(tool) }) { navigation.show(tool) }
-                                else { navigation.query = ""; navigation.page = tool }
-                            } label: {
-                                Label(tool.rawValue, systemImage: tool.symbol)
-                                    .frame(maxWidth: .infinity, alignment: .leading).contentShape(Rectangle())
+                            Button { navigation.show(tool, in: categories) } label: {
+                                Label {
+                                    Text(tool.rawValue).lineLimit(2).fixedSize(horizontal: false, vertical: true)
+                                } icon: {
+                                    Image(systemName: tool.symbol)
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading).contentShape(Rectangle())
                             }
                             .buttonStyle(.plain)
                             .help("Resume " + tool.rawValue)
@@ -56,8 +57,6 @@ struct WorkbenchView: View {
             }
             .listStyle(.sidebar)
             .accessibilityLabel("Tool categories")
-            .searchable(text: $navigation.query, placement: .sidebar, prompt: "Find a tool")
-            .searchFocused($searchFocused)
             .safeAreaInset(edge: .bottom, alignment: .leading) {
                 SettingsLink { Label("Settings…", systemImage: "gearshape") }
                     .buttonStyle(.borderless).padding(16)
@@ -75,14 +74,15 @@ struct WorkbenchView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .navigationTitle(searching ? "Search Results" : navigation.category.rawValue)
+            .navigationTitle(navigation.isSearching ? "Search Results" : navigation.category.rawValue)
             .toolbar {
                 if !isCatalog {
                     ToolbarItem(placement: .navigation) {
-                        Button { navigation.page = nil } label: { Label("Back to \(navigation.category.rawValue)", systemImage: "chevron.backward") }
-                            .help("Back to \(navigation.category.rawValue)")
+                        Button(action: navigation.back) { Label(navigation.backTitle, systemImage: "chevron.backward") }
+                            .keyboardShortcut("[", modifiers: .command)
+                            .help(navigation.backTitle)
                     }
-                } else if !searching && navigation.category == .finder {
+                } else if !navigation.isSearching && navigation.category == .finder {
                     ToolbarItem {
                         Button("Finder Setup…", systemImage: "gearshape") { settings(.finder) }.labelStyle(.titleAndIcon)
                     }
@@ -90,6 +90,8 @@ struct WorkbenchView: View {
             }
         }
         .navigationSplitViewStyle(.balanced)
+        .searchable(text: $navigation.query, placement: .sidebar, prompt: "Find a tool")
+        .searchFocused($searchFocused)
         .frame(minWidth: 800, minHeight: 600)
         .windowDismissBehavior(navigation.hasBusyDraft ? .disabled : .automatic)
         .onAppear {
@@ -97,12 +99,15 @@ struct WorkbenchView: View {
             welcome = !model.preferences.hasChosenTools && model.persistenceError == nil
         }
         .onDisappear { navigation.windowClosed() }
-        .onChange(of: navigation.searchRequest) { searchFocused = true }
+        .onChange(of: navigation.searchRequest) {
+            if columnVisibility == .detailOnly { columnVisibility = .all }
+            searchFocused = true
+        }
+        .onChange(of: isCatalog) { _, showingCatalog in
+            if !showingCatalog || navigation.isSearching { searchFocused = showingCatalog }
+        }
         .onChange(of: model.preferences.developerToolsEnabled) { _, enabled in
-            if !enabled && navigation.category == .developer {
-                navigation.category = .finder
-                if !navigation.drafts.keys.contains(where: { $0 == navigation.page }) { navigation.page = nil }
-            }
+            if !enabled { navigation.hideDeveloperCategory() }
         }
         .sheet(isPresented: $welcome) { ToolWelcomeView(model: model).interactiveDismissDisabled() }
         .sheet(item: linkSheet) { page in
@@ -112,26 +117,54 @@ struct WorkbenchView: View {
     }
 
     @ViewBuilder private var catalog: some View {
-        if tools.isEmpty {
-            ContentUnavailableView.search(text: navigation.query)
+        let matches = navigation.isSearching ? searchResults : []
+        if navigation.isSearching && matches.isEmpty {
+            ContentUnavailableView {
+                Label("No matching tools", systemImage: "magnifyingglass")
+            } description: {
+                Text("Try a file type like PDF or an action like resize.")
+            } actions: {
+                Button("Clear Search") { navigation.query = ""; searchFocused = true }
+            }
         } else {
             Form {
-                Section {
-                    ForEach(tools) { tool in
-                        Button { launch(tool) } label: {
-                            HStack(spacing: 12) {
-                                Image(systemName: tool.symbol).foregroundStyle(.tint).frame(width: 24).accessibilityHidden(true)
-                                Text(tool.rawValue)
-                                Spacer(minLength: 4)
-                                if navigation.drafts[tool] != nil { Text("Resume").font(.caption).foregroundStyle(.secondary) }
-                                Image(systemName: "chevron.forward").font(.caption.weight(.semibold)).foregroundStyle(.tertiary).accessibilityHidden(true)
-                            }
-                            .padding(.vertical, 7).contentShape(Rectangle())
-                        }.buttonStyle(.plain)
+                if navigation.isSearching {
+                    Section(matches.count == 1 ? "1 tool" : "\(matches.count) tools") {
+                        ForEach(matches) { tool in toolRow(tool, singleResult: matches.count == 1) }
+                    }
+                } else {
+                    ForEach(navigation.category.groups) { group in
+                        Section(group.title) { ForEach(group.tools) { tool in toolRow(tool) } }
                     }
                 }
             }.formStyle(.grouped).scrollBounceBehavior(.basedOnSize)
         }
+    }
+
+    private func toolRow(_ tool: WorkbenchTool, singleResult: Bool = false) -> some View {
+        let resume = navigation.drafts[tool] != nil
+        return Button { launch(tool) } label: {
+            HStack(spacing: 12) {
+                Image(systemName: tool.symbol).font(.title3).foregroundStyle(.tint).frame(width: 26)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(tool.rawValue).fontWeight(.medium)
+                    Text(tool.detail).font(.callout).foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                Spacer(minLength: 6)
+                if resume { Text("Resume").font(.caption).foregroundStyle(.secondary) }
+                if singleResult {
+                    Text("⌘↩").font(.callout).foregroundStyle(.secondary)
+                } else {
+                    Image(systemName: "chevron.forward").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
+                }
+            }
+            .padding(.vertical, 3).contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .keyboardShortcut(singleResult ? KeyboardShortcut(.return, modifiers: .command) : nil)
+        .accessibilityLabel(Text(resume ? "Resume \(tool.rawValue)" : tool.rawValue))
+        .accessibilityHint(Text(tool.detail))
     }
 
     @ViewBuilder private func detail(_ page: WorkbenchTool) -> some View {

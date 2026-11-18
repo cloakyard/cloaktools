@@ -13,7 +13,12 @@ Checked the ad-hoc Debug build on Apple silicon with macOS 27.2.1 and Xcode 27.2
 | Create a file set | ⇧⌘N opened the destination picker. Review showed the Notes starter tree. Create Folder produced README.md, notes/Notes.md and the empty assets folder. |
 | Check JSON in dark appearance | Validate reported the line and column of a trailing comma. Correcting the input and pressing ⌘Return produced “Valid JSON”. |
 | Test a link rule | ⌥⌘T opened the link tester. |
+| Browse grouped tools | Finder Tools showed separate sections for creating files and working with a selection. At 800 pt wide, Files & Templates showed the three reusable starting points and wrapped the open image-fitting draft's name in the sidebar. |
+| Search with the sidebar hidden | ⌘F revealed and focused the search field. “PDF” returned Combine, Organize and Create in that order. ⌘Return left those choices visible. “Merge PDF” returned one result and ⌘Return opened its review. |
+| Return to search | ⌘[ restored the query and keyboard focus. Resume reopened the PDF draft. Cancel removed the draft and left the query available. Dismissing the link tester also returned to its originating search. |
+| Search into an image picker | Cancelling Choose Image preserved “shrink photo”. Choosing the fixture opened its image-fitting editor. Back returned to the query with Resume available. |
+| Recover from an empty result | A query with zero matches showed Clear Search. Activating it returned to the category. Light Finder and compact file views and dark search results were visually inspected. |
 
-The native build succeeded. All 224 core tests and 11 hosted tests passed. The hosted suite covers catalog visibility and matching, draft ownership, and the nesting and byte counts in a file-set review.
+The native build succeeded. All 224 core tests and 14 hosted tests passed. The hosted suite covers catalog visibility and ranking, search restoration across reviews and developer visibility changes, draft ownership, and the nesting and byte counts in a file-set review.
 
 The scoped Finder extension was disabled on this Mac. Its contextual menu, spoken VoiceOver, and the full system accessibility-setting matrix remain live verification items. The Finder Services test above used Finder’s actual Services menu.

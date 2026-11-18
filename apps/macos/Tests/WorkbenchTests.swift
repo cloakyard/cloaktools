@@ -13,6 +13,51 @@ import CloakToolsCore
     #expect(Set(WorkbenchCategory.allCases.flatMap(\.tools)) == Set(WorkbenchTool.allCases))
 }
 
+@Test func workbenchSearchPrioritizesDirectMatchesAndFallsBackToCategories() {
+    #expect(WorkbenchTool.matching("PDF", developerEnabled: false) == [.pdf, .pages, .newFile])
+    #expect(WorkbenchTool.matching("Swift", developerEnabled: true) == [.newFile])
+    #expect(WorkbenchTool.matching("Swift", developerEnabled: false).isEmpty)
+    #expect(WorkbenchTool.matching("JSON", developerEnabled: true).first == .json)
+    #expect(WorkbenchTool.matching("finder paths", developerEnabled: false) == [.copy])
+    #expect(Set(WorkbenchTool.matching("Finder Tools", developerEnabled: false)) == Set(WorkbenchCategory.finder.tools))
+    #expect(WorkbenchTool.matching("   ", developerEnabled: true).isEmpty)
+    for category in WorkbenchCategory.allCases {
+        #expect(Set(category.tools).count == category.tools.count)
+    }
+}
+
+@MainActor @Test func workbenchRestoresSearchAfterReviewAndSheetDismissal() {
+    let navigation = WorkbenchNavigation()
+    navigation.showWindow = {}
+    navigation.browse(.text)
+    navigation.query = "merge pdf"
+    #expect(navigation.present(.pdf) { _ in Text("Review") })
+    #expect(!navigation.isSearching)
+    navigation.back()
+    #expect(navigation.query == "merge pdf" && navigation.category == .text)
+    #expect(navigation.drafts[.pdf] != nil)
+    navigation.show(.pdf)
+    navigation.close(.pdf)
+    #expect(navigation.query == "merge pdf" && navigation.drafts.isEmpty)
+    navigation.query = "test link"
+    navigation.show(.testLink)
+    navigation.back()
+    #expect(navigation.query == "test link" && navigation.category == .text)
+    navigation.show(.testLink)
+    navigation.browse(.files)
+    #expect(navigation.query.isEmpty && navigation.category == .files)
+}
+
+@MainActor @Test func returningToSearchHonorsDeveloperVisibilityChanges() {
+    let navigation = WorkbenchNavigation()
+    navigation.browse(.developer)
+    navigation.query = "template"
+    navigation.show(.templates)
+    navigation.hideDeveloperCategory()
+    navigation.back()
+    #expect(navigation.category == .finder && navigation.query == "template")
+}
+
 @MainActor @Test func independentFinderRequestsPreserveAnOpenDraft() {
     let navigation = WorkbenchNavigation()
     var busy = true

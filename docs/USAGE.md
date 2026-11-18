@@ -77,9 +77,9 @@ Existing preferences from older versions migrate with Developer Tools On and onb
 
 ## Find your tools
 
-Choose **Finder Tools**, **Files & Templates**, **Images, PDFs & Media**, **Text & Sharing**, **Open Links**, or the optional **Developer Tools**. Press **⌘F** to search across visible categories. For example, “shrink photo” finds image fitting and “merge PDF” finds PDF assembly.
+Choose **Finder Tools**, **Files & Templates**, **Images, PDFs & Media**, **Text & Sharing**, **Open Links**, or the optional **Developer Tools**. Each page groups related actions and describes what each tool produces. Press **⌘F** to reveal the search field and search across visible categories. “PDF” lists PDF assembly and page organization first. “Merge PDF” narrows it to assembly, which you can open with **⌘Return**. When several results match, choose the one you want.
 
-Select an action to open its editor. A Finder selection enters the review with its files already supplied. Back lets you browse. **In Progress** returns to an open draft. Cancel, Close or Done releases that draft. A second incoming request for the same tool can open an independent review window.
+Select an action to open its editor. A Finder selection enters the review with its files already supplied. **Back (⌘[)** returns to the category or search results you came from. Choose **Resume** in the results or select the draft under **In Progress** to continue editing. Cancel, Close or Done releases that draft. A second incoming request for the same tool can open an independent review window.
 
 Open **Settings** from the sidebar or with **⌘,**. General holds the tool choice and file-opening preferences. Finder holds workspace and extension setup, Images holds conversion defaults, and Links holds rules and destinations. Language starters live in the optional Developer tab. Privacy and About have their own tabs. For tested entry points and outputs, see the [Workbench verification](verification/WORKBENCH.md).
 

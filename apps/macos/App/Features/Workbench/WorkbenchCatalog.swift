@@ -1,6 +1,12 @@
 import Foundation
 import CloakToolsCore
 
+struct WorkbenchGroup: Identifiable {
+    let title: String
+    let tools: [WorkbenchTool]
+    var id: String { title }
+}
+
 enum WorkbenchCategory: String, CaseIterable, Identifiable {
     case finder = "Finder Tools"
     case files = "Files & Templates"
@@ -21,16 +27,36 @@ enum WorkbenchCategory: String, CaseIterable, Identifiable {
         }
     }
 
-    var tools: [WorkbenchTool] {
+    var groups: [WorkbenchGroup] {
         switch self {
-        case .finder: [.newFile, .clipboard, .copy, .convert, .pdf, .fileList]
-        case .files: [.newFile, .fileSet, .templates, .savedSets, .presets]
-        case .media: [.fit, .convert, .pdf, .pages, .exportMedia, .recipes]
-        case .text: [.cleanup, .digest, .clipboard, .createQR, .readQR, .fileList]
-        case .links: [.openLink, .testLink, .linkSettings]
-        case .developer: [.json, .base64, .sample, .example, .languageSettings]
+        case .finder: [
+            .init(title: "Create in a folder", tools: [.newFile, .clipboard]),
+            .init(title: "Work with selected files", tools: [.copy, .convert, .pdf, .fileList])
+        ]
+        case .files: [
+            .init(title: "Create", tools: [.newFile, .fileSet]),
+            .init(title: "Use again", tools: [.templates, .savedSets, .presets])
+        ]
+        case .media: [
+            .init(title: "Images", tools: [.fit, .convert]),
+            .init(title: "PDFs", tools: [.pdf, .pages]),
+            .init(title: "Media and saved exports", tools: [.exportMedia, .recipes])
+        ]
+        case .text: [
+            .init(title: "Text and files", tools: [.cleanup, .digest, .clipboard, .fileList]),
+            .init(title: "QR codes", tools: [.createQR, .readQR])
+        ]
+        case .links: [
+            .init(title: "Open or test", tools: [.openLink, .testLink]),
+            .init(title: "Preferences", tools: [.linkSettings])
+        ]
+        case .developer: [
+            .init(title: "Inspect and transform", tools: [.json, .base64]),
+            .init(title: "Test data and starters", tools: [.sample, .example, .languageSettings])
+        ]
         }
     }
+    var tools: [WorkbenchTool] { groups.flatMap(\.tools) }
 
     static func visible(developerEnabled: Bool) -> [Self] {
         allCases.filter { $0 != .developer || developerEnabled }
@@ -66,6 +92,36 @@ enum WorkbenchTool: String, CaseIterable, Identifiable {
     case languageSettings = "Choose programming language starters"
 
     var id: Self { self }
+    var detail: String {
+        switch self {
+        case .newFile: "Start a text, Markdown or PDF file, or use a saved template."
+        case .clipboard: "Save copied text as a text file or a copied image as a PNG."
+        case .copy: "Preview names, full paths or links before copying them."
+        case .convert: "Save a copy as PNG, JPEG or HEIC."
+        case .pdf: "Arrange documents and images in reading order."
+        case .fileList: "Save names, sizes and other details as CSV or Markdown."
+        case .fileSet: "Review the folder tree and files before creating them together."
+        case .templates: "Import and favorite the text you use to start new files."
+        case .savedSets: "Reuse a folder structure and the files it contains."
+        case .presets: "Reuse a destination, file type and filename."
+        case .fit: "Preview the file size and dimensions before saving a copy."
+        case .pages: "Select, reorder or rotate pages from one PDF."
+        case .exportMedia: "Save an MP4 video or extract audio as M4A."
+        case .recipes: "Apply saved export settings to another image or media file."
+        case .cleanup: "Trim spaces, tidy blank lines and preview the result."
+        case .digest: "Collect the contents of text files in one Markdown document."
+        case .createQR: "Turn text or a link into a scannable PNG."
+        case .readQR: "Read the text or link stored in a code."
+        case .openLink: "Choose an app for this link and bypass routing rules."
+        case .testLink: "Preview which app your rules would choose for a web or email link."
+        case .linkSettings: "Choose default apps and edit web and email rules in Settings."
+        case .json: "Validate, indent or minify JSON and locate syntax errors."
+        case .base64: "Convert between Base64 and text or image data."
+        case .sample: "Create test files as JSON, CSV, plain text or binary."
+        case .example: "Replace values in a JSON or .env file with placeholders."
+        case .languageSettings: "Set the languages that start with a Hello World example."
+        }
+    }
     var symbol: String {
         switch self {
         case .newFile: "doc.badge.plus"
@@ -98,10 +154,11 @@ enum WorkbenchTool: String, CaseIterable, Identifiable {
 
     private func searchTerms(for availability: ToolAvailability) -> String {
         switch self {
+        case .newFile: availability.builtInTemplates.map { "\($0.title) \($0.fileExtension)" }.joined(separator: " ")
         case .fit: "shrink photo compress resize make it fit upload budget"
-        case .pdf: "merge PDFs assemble images"
+        case .pdf: "merge PDFs assemble create PDF from images"
         case .copy: "copy as " + availability.copyFormats.map(\.title).joined(separator: " ")
-        case .pages: "rotate reorder remove pages"
+        case .pages: "rotate reorder remove pages from PDFs"
         case .convert: "photo png jpeg heic tiff"
         case .fileList: "csv markdown inventory"
         case .digest: "markdown digest"
@@ -115,13 +172,23 @@ enum WorkbenchTool: String, CaseIterable, Identifiable {
     }
 
     static func matching(_ query: String, developerEnabled: Bool) -> [Self] {
-        let categories = WorkbenchCategory.visible(developerEnabled: developerEnabled)
+        let categories = WorkbenchCategory.visible(developerEnabled: developerEnabled).map { (name: $0.rawValue, tools: Set($0.tools)) }
         let availability = ToolAvailability(developerEnabled: developerEnabled)
-        let words = query.split(whereSeparator: \.isWhitespace)
-        return allCases.filter { tool in
+        let words = query.split(whereSeparator: \.isWhitespace).map(String.init)
+        guard !words.isEmpty else { return [] }
+        func matches(_ text: String) -> Bool { words.allSatisfy { text.localizedStandardContains($0) } }
+        var titles: [Self] = []
+        var capabilities: [Self] = []
+        var byCategory: [Self] = []
+        for tool in allCases {
             let owners = categories.filter { $0.tools.contains(tool) }
-            let terms = ([tool.rawValue, tool.searchTerms(for: availability)] + owners.map(\.rawValue)).joined(separator: " ")
-            return !owners.isEmpty && words.allSatisfy { terms.localizedStandardContains(String($0)) }
+            guard !owners.isEmpty else { continue }
+            let terms = [tool.rawValue, tool.detail, tool.searchTerms(for: availability)].joined(separator: " ")
+            if matches(tool.rawValue) { titles.append(tool) }
+            else if matches(terms) { capabilities.append(tool) }
+            else if owners.contains(where: { matches(terms + " " + $0.name) }) { byCategory.append(tool) }
         }
+        let direct = titles + capabilities
+        return direct.isEmpty ? byCategory : direct
     }
 }

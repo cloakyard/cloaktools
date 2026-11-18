@@ -10,9 +10,12 @@ final class WorkbenchNavigation {
         let finish: () -> Void
     }
 
-    var category = WorkbenchCategory.finder
-    var page: WorkbenchTool?
+    private(set) var category = WorkbenchCategory.finder
+    private(set) var page: WorkbenchTool?
     var query = ""
+    var isSearching: Bool { !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+    private var lastSearch: (category: WorkbenchCategory, query: String)?
+    var backTitle: String { lastSearch == nil ? "Back to \(category.rawValue)" : "Back to Search Results" }
     var searchRequest = 0
     private(set) var drafts: [WorkbenchTool: Draft] = [:]
     @ObservationIgnored var showWindow: (() -> Void)?
@@ -22,14 +25,32 @@ final class WorkbenchNavigation {
         self.category = category
         page = nil
         query = ""
+        lastSearch = nil
     }
 
-    func show(_ tool: WorkbenchTool) {
-        if !category.tools.contains(tool), let owner = WorkbenchCategory.allCases.first(where: { $0.tools.contains(tool) }) {
+    func show(_ tool: WorkbenchTool, in categories: [WorkbenchCategory] = WorkbenchCategory.allCases) {
+        lastSearch = isSearching ? (category, query) : nil
+        if !category.tools.contains(tool), let owner = categories.first(where: { $0.tools.contains(tool) }) {
             category = owner
         }
         page = tool
         query = ""
+    }
+
+    func back() {
+        if let lastSearch, !isSearching {
+            category = lastSearch.category
+            query = lastSearch.query
+        }
+        page = nil
+        lastSearch = nil
+    }
+
+    func hideDeveloperCategory() {
+        if lastSearch?.category == .developer { lastSearch?.category = .finder }
+        guard category == .developer else { return }
+        category = .finder
+        if let page, drafts[page] == nil { self.page = nil; lastSearch = nil }
     }
 
     /// A second request for the same tool needs its own independent operation window.
@@ -57,13 +78,12 @@ final class WorkbenchNavigation {
         guard let draft = drafts[tool], !draft.busy() else { return }
         draft.finish()
         drafts.removeValue(forKey: tool)
-        if page == tool { page = nil }
+        if page == tool { back() }
     }
 
     func windowClosed() {
         for tool in Array(drafts.keys) { close(tool) }
-        page = nil
-        query = ""
+        browse(category)
     }
 }
 
