@@ -18,7 +18,7 @@ touch, enlarged text and static-motion fallbacks. Record coverage and limits in
 
 Build affected native changes with `./scripts/build-native.sh` and inspect the
 changed UI. Run feature tests for changed behavior. Keep source/release claims
-truthful: the app remains a development preview without a public installer.
+truthful: public betas are ad-hoc signed until Developer ID distribution is verified.
 
 Use `dev`, commit only verified bounded changes, then promote to `main` for an
 authorized website deployment. Do not add co-author trailers or change KERR.

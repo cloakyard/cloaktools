@@ -4,7 +4,7 @@ Commands in this guide run from the repository root unless stated otherwise. For
 
 **Small tasks. Less friction.** A native macOS toolkit in the Cloakyard family.
 
-Canonical website: [tools.cloakyard.com](https://tools.cloakyard.com). The [source repository](https://github.com/cloakyard/cloaktools) is available; website deployment and a public installer remain separate work.
+Canonical website: [tools.cloakyard.com](https://tools.cloakyard.com). The [source repository](https://github.com/cloakyard/cloaktools) is available; the [public beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-beta.20261118.2) includes the installer and checksums.
 
 ![CloakTools first-run tool choice](../assets/screenshots/tools-welcome-light.png)
 
@@ -12,7 +12,7 @@ Compact native dialogs use Liquid Glass actions. [New file](../assets/screenshot
 
 ## Status and features
 
-The **0.6.0 development preview** adds three buildable Shortcuts actions, signed-build Finder-folder configuration, conservative incoming-event source recognition, private output staging and abandoned media-capture recovery. Shortcuts execution and additional Finder folders remain unavailable in this ad-hoc preview; signing is deferred by the project owner. A verified local ZIP and an explicit Developer ID/notarization pipeline are included. See [implementation and audit evidence](verification/ROADMAP-IMPLEMENTATION.md) and [release instructions](RELEASE.md).
+The **0.6.0 beta** adds three buildable Shortcuts actions, signed-build Finder-folder configuration, conservative incoming-event source recognition, private output staging and abandoned media-capture recovery. Shortcuts execution and additional Finder folders remain unavailable in this ad-hoc preview; signing is deferred by the project owner. A verified local ZIP and an explicit Developer ID/notarization pipeline are included. See [implementation and audit evidence](verification/ROADMAP-IMPLEMENTATION.md) and [release instructions](RELEASE.md).
 
 Earlier working features include [media export](verification/MEDIA-EXPORT.md), [PDF page organization](verification/PDF-PAGES.md), [Make It Fit](verification/MAKE-IT-FIT.md), [destination preferences](verification/DESTINATIONS.md), [default-handler setup/restoration](verification/DEFAULT-HANDLERS.md), [routing rules/testing](verification/ROUTING-RULES.md), [PDF/Copy As](verification/PDF-COPY-AS.md), [image conversion](verification/IMAGE-CONVERSION.md), [clipboard](verification/CLIPBOARD.md) and [historical integration records](verification/MILESTONE-1.md).
 
@@ -46,7 +46,7 @@ Earlier working features include [media export](verification/MEDIA-EXPORT.md), [
 | Link chooser | Real HTTP/HTTPS/mailto events, installed-app discovery, explicit Open Once, Copy Link, Cancel |
 | Companion site | Home, Install, Privacy, Support, Source, 404, and local license page; Air 1.7.5 |
 
-The [macOS feature audit](MACOS-FEATURE-AUDIT.md) narrows future work: standalone OCR, basic batch renaming, ZIP tools, Keep Awake and generic inspection are not planned. Existing tools that overlap with macOS enter maintenance/consolidation. Development prioritizes constrained image fitting, reviewed file sets/exports and cross-app routing, with Shortcuts integration. Verified Edge/profile routing and configurable Finder scopes still have documented prerequisites. **The first public beta is MVP 0 plus Milestones 1 and 2**, not this local preview.
+The [macOS feature audit](MACOS-FEATURE-AUDIT.md) narrows future work: standalone OCR, basic batch renaming, ZIP tools, Keep Awake and generic inspection are not planned. Existing tools that overlap with macOS enter maintenance/consolidation. Development prioritizes constrained image fitting, reviewed file sets/exports and cross-app routing, with Shortcuts integration. Verified Edge/profile routing and configurable Finder scopes still have documented prerequisites. See the release notes for the features and signing limits of the first public beta.
 
 ## Requirements
 
@@ -61,7 +61,7 @@ Install Xcode 27 and XcodeGen (`brew install xcodegen`), then from this reposito
 open apps/macos/build/Verify/Build/Products/Debug/CloakTools.app
 ```
 
-The authoritative project is `apps/macos/project.yml`; XcodeGen creates the ignored Xcode project. The build is arm64 and ad-hoc signed (`CODE_SIGN_IDENTITY=-`), with **no hardcoded Team ID**. Release retains hardened runtime and permits the embedded Sparkle framework through a library-validation exception. `python3 scripts/release.py --preview` builds a verified local ZIP. Developer ID signing and notarization are configured but deferred; a public installer remains release work. About contains Check for Updates and optional automatic checks/downloads, both off by default. Privacy explains local storage and update traffic. See [release instructions](RELEASE.md) and [signed updates](UPDATES.md).
+The authoritative project is `apps/macos/project.yml`; XcodeGen creates the ignored Xcode project. The build is arm64 and ad-hoc signed (`CODE_SIGN_IDENTITY=-`), with **no hardcoded Team ID**. Release retains hardened runtime and permits the embedded Sparkle framework through a library-validation exception. `python3 scripts/release.py --preview` builds a verified local ZIP. Developer ID signing and notarization are configured but deferred; the current public beta is ad-hoc signed. About contains Check for Updates and optional automatic checks/downloads, both off by default. Privacy explains local storage and update traffic. See [release instructions](RELEASE.md) and [signed updates](UPDATES.md).
 
 The settings window is the main app. **CloakTools → Settings… (⌘,)** brings it back. **⌘N** creates a file; **⌥⌘N** saves copied text/image content; **⇧⌘K** chooses an image to convert; **⌥⌘K** opens Make It Fit; **⇧⌘P** assembles a PDF; **⌥⌘P** organizes PDF pages; **⌥⌘E** exports media; **⌥⌘C** opens Copy As; **⌥⌘T** tests a link without opening it; **⌥⌘O** opens a link once with rules and fallback bypassed. Native lists, toggles, pickers, Return, Escape, and standard focus behavior support keyboard use. Conversion progress/cancellation lives in its own operation window, separately from output preferences.
 

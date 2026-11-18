@@ -7,7 +7,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
   <img src="https://img.shields.io/badge/platform-macOS%2027%2B%20%C2%B7%20Apple%20silicon-lightgrey" alt="Requires macOS 27+, Apple silicon only">
-  <img src="https://img.shields.io/badge/preview-0.6.0-3067CD" alt="Development preview: 0.6.0">
+  <img src="https://img.shields.io/badge/beta-0.6.0-3067CD" alt="Public beta 0.6.0">
   <img src="https://img.shields.io/badge/Swift-6-F05138?logo=swift&logoColor=white" alt="Swift 6">
   <img src="https://img.shields.io/badge/SwiftUI-Liquid%20Glass-8A2BE2" alt="SwiftUI · Liquid Glass">
 </p>
@@ -23,7 +23,7 @@
 
 A native macOS toolkit for creating files, preparing copies and opening links in the right app. Everyday tools are included; Developer Tools is an optional first-run choice. The SwiftUI app is separate from its Air website. The capture above shows the actual development app with no personal files.
 
-The source is **0.6.0, build 20261118.1**, a local development preview. The website is live at tools.cloakyard.com; a public installer is still pending. See [release instructions](docs/RELEASE.md) for the signing boundary and [the usage guide](docs/USAGE.md) for every implemented workflow.
+The [first public beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-beta.20261118.2) is **0.6.0, build 20261118.2**. Download the DMG from the release page or check for updates in About. See [release instructions](docs/RELEASE.md) for the signing boundary and [the usage guide](docs/USAGE.md) for every implemented workflow.
 
 ## Features
 
@@ -57,7 +57,7 @@ No accounts, analytics, cloud processing, link prefetch or browsing-history pers
 
 ## Getting started
 
-Requires **macOS 27 or later on Apple silicon**, Xcode 27 and [XcodeGen](https://github.com/yonaskolb/XcodeGen). Intel Macs are not supported. There is no public installer yet.
+Download the [beta DMG](https://github.com/cloakyard/cloaktools/releases/download/v0.6.0-beta.20261118.2/CloakTools-v0.6.0-beta.20261118.2.dmg) for **macOS 27 or later on Apple silicon**. Drag CloakTools to Applications. To build from source, install Xcode 27 and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
 
 ```sh
 brew install xcodegen

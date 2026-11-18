@@ -98,7 +98,7 @@ struct SettingsView: View {
                         }
                     }
                 } else {
-                    Text("Shortcuts actions need a signed build. In this local preview, use Make It Fit, Markdown Digest and File Sets directly in CloakTools.").font(.callout).foregroundStyle(.secondary)
+                    Text("Shortcuts actions need a signed build. In this ad-hoc build, use Make It Fit, Markdown Digest and File Sets directly in CloakTools.").font(.callout).foregroundStyle(.secondary)
                 }
             }
             Section {
@@ -126,7 +126,7 @@ struct SettingsView: View {
             FinderFoldersSection(model: model.finderScopes)
             Section("Access and scope") {
                 Text("Every action shows its destination before writing. macOS may request access to protected folders. Finder search results, cloud-provider views, and virtual locations may not offer extension menus.")
-                Text("This local preview runs the host outside App Sandbox. The Finder extension is sandboxed and only passes requests to the host; it does not write files or convert images.").foregroundStyle(.secondary)
+                Text("The host runs outside App Sandbox. The Finder extension is sandboxed and only passes requests to the host; it does not write files or convert images.").foregroundStyle(.secondary)
             }
             Section("Copy names and paths") {
                 Button("Copy As…", systemImage: "list.clipboard", action: model.chooseCopyFiles)
