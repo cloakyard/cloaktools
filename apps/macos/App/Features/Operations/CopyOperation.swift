@@ -11,6 +11,14 @@ final class CopyOperation: Identifiable {
     var content = ""
     var error: String?
     var copied = false
+    var copyTitle: String {
+        let count = selection.files.count
+        switch format {
+        case .names: return count == 1 ? "Copy Name" : "Copy \(count) Names"
+        case .paths: return count == 1 ? "Copy Path" : "Copy \(count) Paths"
+        default: return "Copy \(format.title)"
+        }
+    }
     var preview: String { String(content.prefix(8_192)) }
     var truncated: Bool { content.count > 8_192 }
     init(selection: CopySelection, preferences: Preferences) { self.selection = selection; formats = preferences.tools.copyFormats; refresh() }
@@ -50,11 +58,11 @@ struct CopyOperationView: View {
     let close: () -> Void
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            DialogHeading(title: "Copy as", subtitle: "Names and paths, ready to paste.", symbol: "list.clipboard")
+            DialogHeading(title: "Copy file names or paths", subtitle: "Choose what to put on the clipboard.", symbol: "list.clipboard")
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
                     HStack(spacing: 14) {
-                        Text("Format").foregroundStyle(.secondary)
+                        Text("Copy as").foregroundStyle(.secondary)
                         Picker("Copy format", selection: $operation.format) {
                             ForEach(operation.formats) { format in Text(format.title).tag(format) }
                         }.labelsHidden()
@@ -62,7 +70,7 @@ struct CopyOperationView: View {
                     }
                     VStack(alignment: .leading, spacing: 8) {
                         HStack {
-                            Text("\(operation.selection.files.count) selected \(operation.selection.files.count == 1 ? "item" : "items")")
+                            Text("Clipboard preview · \(operation.selection.files.count) selected \(operation.selection.files.count == 1 ? "item" : "items")")
                             Spacer()
                             Text("\(operation.content.utf8.count.formatted()) bytes")
                         }.font(.caption).foregroundStyle(.secondary)
@@ -83,7 +91,7 @@ struct CopyOperationView: View {
                     Spacer(minLength: 4)
                     Button(operation.copied ? "Done" : "Cancel", role: .cancel, action: close)
                         .keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                    Button("Copy", action: operation.copy).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
+                    Button(operation.copyTitle, action: operation.copy).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
                         .disabled(operation.content.isEmpty || operation.error != nil)
                 }
             }

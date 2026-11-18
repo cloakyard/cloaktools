@@ -42,7 +42,7 @@ struct ToolWelcomeView: View {
                     }
                 }
             }.modifier(DialogCard())
-            Text("You can change this anytime in General → Developer Tools.")
+            Text("You can change this in Settings → General at any time.")
                 .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             OperationFeedback(error: error)
             GlassEffectContainer(spacing: 8) {

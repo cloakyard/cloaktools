@@ -21,7 +21,7 @@
 
 ## Overview
 
-A native macOS toolkit for creating files, preparing copies and opening links in the right app. Everyday tools are included; Developer Tools is an optional first-run choice. The SwiftUI app is separate from its Air website. The capture above shows the actual development app with no personal files.
+A native macOS toolkit for creating files, preparing copies and opening links in the right app. Everyday tools are included; Developer Tools is an optional first-run choice. The SwiftUI app is separate from its Air website. The capture above shows the 0.6.0 interface with sample files. The development build opens a two-column Workbench with separate native Settings.
 
 The [first public beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-beta.20261118.2) is **0.6.0, build 20261118.2**. Download the DMG from the release page or check for updates in About. See [release instructions](docs/RELEASE.md) for the signing boundary and [the usage guide](docs/USAGE.md) for every implemented workflow.
 
@@ -49,7 +49,7 @@ Standalone OCR, basic batch renaming, ZIP tools, Keep Awake and generic inspecti
 
 If a Finder menu is missing, enable **CloakTools Finder** in System Settings and use the bounded CloakTools Files workspace. Selected-item Services cover other accessible folders. See [Finder access](docs/FINDER-ACCESS.md).
 
-If a destination app or default change is unavailable, use **Open With → Refresh Status** and review the actual state. Restore preferred web/email handlers before uninstalling. Setup and restoration do not create routing rules. See [Open With](docs/OPEN-WITH.md).
+If a destination app or default change is unavailable, use **Settings → Links → Refresh Status** and review the actual state. Restore preferred web/email handlers before uninstalling. Setup and restoration do not create routing rules. See [Open With](docs/OPEN-WITH.md).
 
 ## Privacy
 
@@ -67,7 +67,7 @@ cd cloaktools
 open apps/macos/build/Verify/Build/Products/Debug/CloakTools.app
 ```
 
-On first launch, leave **Developer Tools** off for the everyday catalog or enable it for technical tools. Choose **Start Using CloakTools**. You can change the choice in **General → Your tools**. General has quick actions; New Files, Conversions and Open With organize the remaining workflows. **⌘,** reopens Settings and **⌘N** creates a file.
+In the development build, choose a category in the Workbench or press **⌘F** to find a tool. **Finder Tools → Finder Setup…** opens extension settings. **⌘,** opens the separate Settings window and **⌘N** creates a file. Developer Tools is optional at first launch and in **Settings → General**. The published 0.6.0 beta uses the earlier settings sidebar.
 
 Builds are locally ad-hoc signed and not notarized. Current recorded runtime checks used macOS 27.2.1; macOS 27.0 has not been exercised. Full tool instructions and shortcuts are in [the usage guide](docs/USAGE.md).
 

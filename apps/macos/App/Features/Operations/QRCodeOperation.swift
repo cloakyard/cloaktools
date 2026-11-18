@@ -5,6 +5,7 @@ import CloakToolsCore
 @MainActor @Observable
 final class QRCodeOperation: Identifiable {
     let id = UUID()
+    var reading = false
     var input = "" { didSet { if !input.utf8.elementsEqual(oldValue.utf8) { invalidate() } } }
     var options = QRCodeOptions() { didSet { if options != oldValue { invalidate() } } }
     var name = "QR code" { didSet { if !name.utf8.elementsEqual(oldValue.utf8) { savedURL = nil; error = nil } } }
@@ -77,11 +78,11 @@ final class QRCodeWindow: NSWindowController, NSWindowDelegate {
     var onClose: (() -> Void)?
     private let operation: QRCodeOperation
     private let reader = QRCodeReadOperation()
-    init(operation: QRCodeOperation, reading: Bool = false) {
+    init(operation: QRCodeOperation) {
         self.operation = operation
         let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 660, height: 600), styleMask: [.titled, .closable, .resizable, .miniaturizable], backing: .buffered, defer: false)
         window.title = "QR Code"; window.titleVisibility = .hidden; window.titlebarAppearsTransparent = true
-        window.contentViewController = NSHostingController(rootView: QRCodeWorkspace(operation: operation, reader: reader, reading: reading, close: { [weak window] in window?.close() }))
+        window.contentViewController = NSHostingController(rootView: QRCodeWorkspace(operation: operation, reader: reader, close: { [weak window] in window?.close() }))
         operation.onSaved = { [weak window] in window?.makeFirstResponder(nil) }
         reader.onSaved = { [weak window] in window?.makeFirstResponder(nil) }
         window.contentMinSize = NSSize(width: 600, height: 560); window.setContentSize(NSSize(width: 660, height: 600))
@@ -94,13 +95,12 @@ final class QRCodeWindow: NSWindowController, NSWindowDelegate {
 }
 
 struct QRCodeWorkspace: View {
-    let operation: QRCodeOperation
+    @Bindable var operation: QRCodeOperation
     let reader: QRCodeReadOperation
-    @State var reading: Bool
     let close: () -> Void
     var body: some View {
-        if reading { QRCodeReadView(operation: reader, reading: $reading, close: close) }
-        else { QRCodeView(operation: operation, reading: $reading, close: close) }
+        if operation.reading { QRCodeReadView(operation: reader, reading: $operation.reading, close: close) }
+        else { QRCodeView(operation: operation, reading: $operation.reading, close: close) }
     }
 }
 struct QRCodeHeading: View {

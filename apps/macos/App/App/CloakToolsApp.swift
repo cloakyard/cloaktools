@@ -6,99 +6,111 @@ import CloakToolsCore
 struct CloakToolsApp: App {
     @StateObject private var updater = AppUpdater()
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var delegate
-    @Environment(\.openWindow) private var openWindow
     var body: some Scene {
-        Window("CloakTools", id: "settings") {
-            SettingsView(model: AppModel.shared)
-                .environmentObject(updater)
-                .onAppear { AppDelegate.showMain = { openWindow(id: "settings") } }
-                .frame(minWidth: 720, minHeight: 520)
+        Window("CloakTools", id: "workbench") {
+            WorkbenchView(model: AppModel.shared, navigation: AppModel.shared.workbench)
         }
-        .defaultSize(width: 900, height: 650)
+        .defaultSize(width: 1000, height: 700)
         .windowResizability(.contentMinSize)
         .commands {
-            CommandGroup(replacing: .appInfo) {
-                Button("About CloakTools") {
-                    AppModel.shared.update { $0.lastCategory = .about }
-                    openWindow(id: "settings")
-                    NSApp.activate()
-                }
-            }
+            WorkbenchCommands(model: AppModel.shared)
             UpdateCommands(updater: updater)
-            CommandGroup(replacing: .appSettings) {
-                Button("Settings…") { openWindow(id: "settings"); NSApp.activate() }
-                    .keyboardShortcut(",", modifiers: .command)
-            }
-            CommandGroup(replacing: .newItem) {
-                Button("New File…") { AppModel.shared.chooseCreationFolder() }.keyboardShortcut("n", modifiers: .command)
-                Button("New File Set…") { AppModel.shared.chooseFileSetFolder() }.keyboardShortcut("n", modifiers: [.command, .shift])
-                Button("Markdown Digest…", action: AppModel.shared.presentMarkdownDigest)
-                Menu("New File from Preset") {
-                    ForEach(AppModel.shared.visibleFolderPresets) { preset in
-                        Button(preset.title) { AppModel.shared.presentPreset(preset) }
-                    }
-                    if !AppModel.shared.visibleFolderPresets.isEmpty { Divider() }
-                    Button("Manage Folder Presets…") {
-                        AppModel.shared.update { $0.lastCategory = .newFiles }
-                        AppModel.shared.settingsNavigationID = UUID()
-                        openWindow(id: "settings"); NSApp.activate()
-                    }
-                }
-                Divider()
-                Button("Make It Fit…") { AppModel.shared.chooseImageToFit() }.keyboardShortcut("k", modifiers: [.command, .option])
-                Button("Export Media…") { AppModel.shared.chooseMediaToExport() }.keyboardShortcut("e", modifiers: [.command, .option])
-                Menu("Recreate Export") {
-                    ForEach(AppModel.shared.exportRecipes) { recipe in Button(recipe.title) { AppModel.shared.useRecipe(recipe) } }
-                    if !AppModel.shared.exportRecipes.isEmpty { Divider() }
-                    Button("Manage Export Recipes…") {
-                        AppModel.shared.update { $0.lastCategory = .conversions }; AppModel.shared.settingsNavigationID = UUID()
-                        openWindow(id: "settings"); NSApp.activate()
-                    }
-                }
-                Divider()
-                Button("File List…", action: AppModel.shared.presentFileList)
-                Button("Copy As…") { AppModel.shared.chooseCopyFiles() }.keyboardShortcut("c", modifiers: [.command, .option])
-                Divider()
-                Menu("Text & Sharing") {
-                    Button("Create QR Code…", action: AppModel.shared.presentQRCode)
-                    Button("Read QR Code…", action: AppModel.shared.presentQRReader)
-                    Button("Text Cleanup…", action: AppModel.shared.presentTextCleanup)
-                    Divider()
-                    Button("New File from Clipboard…") { AppModel.shared.chooseClipboardFolder() }.keyboardShortcut("n", modifiers: [.command, .option])
-                }
-                Menu("Images & PDFs") {
-                    Button("Convert Image…") { AppModel.shared.chooseImage() }.keyboardShortcut("k", modifiers: [.command, .shift])
-                    Button("Assemble PDF…") { AppModel.shared.choosePDFFiles() }.keyboardShortcut("p", modifiers: [.command, .shift])
-                    Button("Organize PDF…") { AppModel.shared.choosePDFToOrganize() }.keyboardShortcut("p", modifiers: [.command, .option])
-                }
-                if AppModel.shared.preferences.developerToolsEnabled {
-                    Menu("Developer Tools") {
-                        Button("JSON…") { AppModel.shared.presentDeveloperText(.json) }
-                        Button("Base64…") { AppModel.shared.presentDeveloperText(.base64) }
-                        Button("Sample Files…", action: AppModel.shared.presentSampleFiles)
-                        Button("Example Copy…", action: AppModel.shared.presentExampleCopy)
-                    }
-                }
-                Divider()
-                Button("Open a Link Once…") {
-                    AppModel.shared.update { $0.lastCategory = .openWith }
-                    openWindow(id: "settings"); AppModel.shared.routing.showingOneTime = true
-                }.keyboardShortcut("o", modifiers: [.command, .option])
-                Button("Test a Link…") {
-                    AppModel.shared.update { $0.lastCategory = .openWith }
-                    openWindow(id: "settings"); AppModel.shared.routing.showingTester = true
-                }.keyboardShortcut("t", modifiers: [.command, .option])
-            }
-            CommandGroup(replacing: .help) {
-                Link("CloakTools Support", destination: URL(string: "https://tools.cloakyard.com/support/")!)
+            SidebarCommands()
+        }
+        Settings {
+            SettingsView(model: AppModel.shared).environmentObject(updater)
+        }
+        .defaultSize(width: 680, height: 600)
+    }
+}
+
+private struct WorkbenchCommands: Commands {
+    let model: AppModel
+    @Environment(\.openSettings) private var openSettings
+    @Environment(\.openWindow) private var openWindow
+
+    var body: some Commands {
+        CommandGroup(replacing: .appInfo) {
+            Button("About CloakTools") {
+                model.settingsTab = .about
+                openSettings()
+                NSApp.activate()
             }
         }
+        CommandGroup(replacing: .newItem) {
+            Button("New File…") { model.chooseCreationFolder() }.keyboardShortcut("n", modifiers: .command)
+            Button("New File Set…") { model.chooseFileSetFolder() }.keyboardShortcut("n", modifiers: [.command, .shift])
+            Button("Markdown Digest…", action: model.presentMarkdownDigest)
+            Menu("New File from Preset") {
+                ForEach(model.visibleFolderPresets) { preset in
+                    Button(preset.title) { model.presentPreset(preset) }
+                }
+                if !model.visibleFolderPresets.isEmpty { Divider() }
+                Button("Manage Folder Presets…") {
+                    show(.presets)
+                }
+            }
+            Divider()
+            Button("Make It Fit…") { model.chooseImageToFit() }.keyboardShortcut("k", modifiers: [.command, .option])
+            Button("Export Media…") { model.chooseMediaToExport() }.keyboardShortcut("e", modifiers: [.command, .option])
+            Menu("Recreate Export") {
+                ForEach(model.exportRecipes) { recipe in Button(recipe.title) { model.useRecipe(recipe) } }
+                if !model.exportRecipes.isEmpty { Divider() }
+                Button("Manage Export Recipes…") {
+                    show(.recipes)
+                }
+            }
+            Divider()
+            Button("File List…", action: model.presentFileList)
+            Button("Copy As…") { model.chooseCopyFiles() }.keyboardShortcut("c", modifiers: [.command, .option])
+            Divider()
+            Menu("Text & Sharing") {
+                Button("Create QR Code…", action: model.presentQRCode)
+                Button("Read QR Code…", action: model.presentQRReader)
+                Button("Text Cleanup…", action: model.presentTextCleanup)
+                Divider()
+                Button("New File from Clipboard…") { model.chooseClipboardFolder() }.keyboardShortcut("n", modifiers: [.command, .option])
+            }
+            Menu("Images & PDFs") {
+                Button("Convert Image…") { model.chooseImage() }.keyboardShortcut("k", modifiers: [.command, .shift])
+                Button("Assemble PDF…") { model.choosePDFFiles() }.keyboardShortcut("p", modifiers: [.command, .shift])
+                Button("Organize PDF…") { model.choosePDFToOrganize() }.keyboardShortcut("p", modifiers: [.command, .option])
+            }
+            if model.preferences.developerToolsEnabled {
+                Menu("Developer Tools") {
+                    Button("JSON…") { model.presentDeveloperText(.json) }
+                    Button("Base64…") { model.presentDeveloperText(.base64) }
+                    Button("Sample Files…", action: model.presentSampleFiles)
+                    Button("Example Copy…", action: model.presentExampleCopy)
+                }
+            }
+            Divider()
+            Button("Open a Link Once…") {
+                show(.openLink)
+            }.keyboardShortcut("o", modifiers: [.command, .option])
+            Button("Test a Link…") {
+                show(.testLink)
+            }.keyboardShortcut("t", modifiers: [.command, .option])
+        }
+        CommandGroup(after: .textEditing) {
+            Button("Find a Tool…") {
+                openWindow(id: "workbench")
+                model.workbench.searchRequest += 1
+            }.keyboardShortcut("f", modifiers: .command)
+        }
+        CommandGroup(replacing: .help) {
+            Link("CloakTools Support", destination: URL(string: "https://tools.cloakyard.com/support/")!)
+        }
+    }
+    private func show(_ tool: WorkbenchTool) {
+        model.workbench.show(tool)
+        openWindow(id: "workbench")
+        NSApp.activate()
     }
 }
 
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
-    static var showMain: (() -> Void)?
     func applicationDidFinishLaunching(_ notification: Notification) {
         Task.detached(priority: .utility) { TemporaryMediaRecovery.recoverAbandonedCaptures() }
         #if DEBUG
@@ -120,8 +132,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        if !flag { Self.showMain?() }
-        return true
+        guard let show = AppModel.shared.workbench.showWindow else { return true }
+        show()
+        return false
     }
     @objc func createFile(_ pasteboard: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString>) {
         guard let url = serviceURL(pasteboard), (try? url.resourceValues(forKeys: [.isDirectoryKey]).isDirectory) == true else {

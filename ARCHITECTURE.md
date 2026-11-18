@@ -4,7 +4,7 @@ The local preview has an arm64 macOS 27 SwiftUI/AppKit host, a local dependency-
 
 ## Ownership and process boundaries
 
-`AppModel` is main-actor isolated and owns preferences and operation windows. `CloakToolsCore` contains Sendable preference/template/request values, atomic disk preference storage, safe publication, ImageIO conversion, URL validation, and loop models. It has no SwiftUI dependency. `FileOperation` owns transient progress, cancellation, errors, and results; these are not persisted as settings.
+`AppModel` is main-actor isolated and owns preferences, in-memory Workbench drafts and independent operation windows. WorkbenchNavigation retains one draft per tool. Concurrent submissions for the same tool receive separate windows, and both presentations count toward the same eight-operation limit. `CloakToolsCore` contains Sendable preference/template/request values, atomic disk preference storage, safe publication, ImageIO conversion, URL validation, and loop models. It has no SwiftUI dependency. `FileOperation` owns transient progress, cancellation, errors, and results; these are not persisted as settings.
 
 The host is the sole preferences and template-library writer. Finder menus carry only intent through the registered `cloaktools-action` scheme, explicitly addressed to the containing app. The host validates the scheme/action/path/catalog value and reads settings and the template library once at creation ingress. Confirmation shows the path/content snapshot. Thus no cross-process preference cache, polling timer, or Finder restart is required for preference propagation. The separate optional signed Finder-folder store uses an entitled App Group only for monitored folder bookmarks. Services enter the exact same operation coordinator.
 
@@ -74,7 +74,7 @@ Chooser windows are transient, queued, keyboard operable, and support Copy Link/
 
 ## Family decisions
 
-CloakDrop/CloakRoll were inspected read-only: thin native shells, headless Swift packages, XcodeGen, grouped semantic settings, explicit operation ownership, Air/Astro websites, and honest ad-hoc signing conventions were reused. Their GRDB, downloader tools, USB/device layers, updater/packaging machinery, and Team IDs were not copied. The requested sidebar layout replaces their tabbed settings layout.
+CloakDrop/CloakRoll were inspected read-only: thin native shells, headless Swift packages, XcodeGen, grouped semantic settings, explicit operation ownership, Air/Astro websites, and honest ad-hoc signing conventions were reused. Their GRDB, downloader tools, USB/device layers, updater/packaging machinery, and Team IDs were not copied. The main Workbench uses their native source-list pattern. Preferences use the same separate Settings scene and toolbar tabs as both sibling apps.
 
 ## Build and release
 

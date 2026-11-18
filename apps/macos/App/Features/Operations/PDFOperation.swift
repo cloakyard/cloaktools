@@ -20,11 +20,13 @@ final class PDFOperation: Identifiable {
     var output: URL?
     private var preparation: Task<[PDFAssemblyItem], Error>?
     private var publication: Task<URL, Error>?
+    private var useFirstSourceFolder: Bool
     var pageCount: Int { items.reduce(0) { $0 + $1.pageCount } }
     var selectedIndex: Int? { items.firstIndex { $0.id == selectedID } }
 
     init(files: [URL], preferences: Preferences) {
         self.preferences = preferences
+        useFirstSourceFolder = files.isEmpty
         destination = files.first?.deletingLastPathComponent() ?? FileManager.default.homeDirectoryForCurrentUser
         add(files)
     }
@@ -38,6 +40,10 @@ final class PDFOperation: Identifiable {
             do {
                 let prepared = try await worker.value
                 if worker.isCancelled { throw CancellationError() }
+                if useFirstSourceFolder, let first = prepared.first {
+                    destination = first.sourceURL.deletingLastPathComponent()
+                    useFirstSourceFolder = false
+                }
                 items = prepared
                 thumbnails = Dictionary(uniqueKeysWithValues: items.compactMap { item in NSImage(data: item.thumbnailPNG).map { (item.id, $0) } })
                 selectedID = items.last?.id
@@ -68,7 +74,10 @@ final class PDFOperation: Identifiable {
     func chooseDestination() {
         let panel = NSOpenPanel(); panel.title = "Save the combined PDF in…"; panel.prompt = "Choose Folder"
         panel.directoryURL = destination; panel.canChooseFiles = false; panel.canChooseDirectories = true
-        if panel.runModal() == .OK, let folder = panel.url { destination = folder }
+        if panel.runModal() == .OK, let folder = panel.url {
+            destination = folder
+            useFirstSourceFolder = false
+        }
     }
     func start() {
         guard !busy, output == nil, !items.isEmpty else { return }
@@ -117,8 +126,25 @@ struct PDFOperationView: View {
     let close: () -> Void
     @FocusState private var nameFocused: Bool
     var body: some View {
+        if operation.items.isEmpty && operation.output == nil && !operation.busy {
+            ContentUnavailableView {
+                Label("Combine files into a PDF", systemImage: "doc.on.doc")
+            } description: {
+                Text("Choose up to 32 PDFs or images. You can arrange their order before creating the PDF.")
+            } actions: {
+                Button("Choose Files…", action: operation.chooseFiles)
+                    .modifier(DialogActionStyle(prominent: true)).keyboardShortcut(.defaultAction)
+                OperationFeedback(cancellation: operation.cancellation, error: operation.error)
+                Button("Cancel", role: .cancel, action: close).keyboardShortcut(.cancelAction)
+            }
+        } else {
+            editor
+        }
+    }
+
+    private var editor: some View {
         VStack(alignment: .leading, spacing: 16) {
-            DialogHeading(title: "Assemble a PDF", subtitle: "A few files. One document.", symbol: "doc.on.doc")
+            DialogHeading(title: operation.output == nil ? "Combine files into a PDF" : "PDF created", subtitle: operation.output == nil ? "Arrange the files in reading order, then choose a name and destination." : "Your combined document is ready.", symbol: "doc.on.doc")
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
                     if operation.output == nil {
