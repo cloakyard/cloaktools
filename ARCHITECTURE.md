@@ -124,7 +124,7 @@ Publication creates a private sibling staging directory (0700), writes ordinary 
 
 ## Export recipes
 
-`ExportRecipeOptions` is a typed Codable payload for `ImageConversionOptions`, `ImageFitOptions` or `MediaExportPreset`. It stores output settings only. Recipe identity and title live beside that payload; no source URL, destination, output filename, captured bytes or history is serialized. Fit limits must use whole decimal KB, matching the existing editor without silent rounding.
+`ExportRecipeOptions` is a typed Codable payload for `ImageConversionOptions`, `ImageFitOptions` or `MediaExportPreset`. It stores output settings only. Recipe identity and title live beside that payload; no source URL, destination, output filename, captured bytes or history is serialized. Fit recipes store exact byte limits, including limits entered as “under 2 MB” in the editor.
 
 `ExportRecipeStore` validates at most 32 unique entries, 1–80-character titles and each option payload. Version 1 archives are bounded to 256 KiB, read through `LocalFileCapture` and written atomically to `export-recipes.json`. Unsupported versions, malformed/oversized data and invalid values fail without replacing the library. Upsert reloads current state and compares an update's original value, rejecting stale changes or removed recipes. Save as new uses a fresh UUID. Main-actor app calls serialize ordinary edits; cross-process concurrent writers are not transactionally locked.
 

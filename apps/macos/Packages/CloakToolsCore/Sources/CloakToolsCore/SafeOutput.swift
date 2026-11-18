@@ -11,7 +11,7 @@ public enum ToolError: LocalizedError, Sendable {
         case .imageTooLarge: "This preview supports images up to 40 megapixels and 100 MB. Choose a smaller image."
         case .encodingFailed: "macOS could not encode the image. The source was not changed."
         case .invalidLink: "Choose an HTTP, HTTPS, or mailto link with a valid destination."
-        case .invalidRequest: "This Finder request is invalid. Select one folder or one image and try again."
+        case .invalidRequest: "Select the items required by this action in Finder and try again."
         case .noDestination: "No compatible application is available. Install a browser or mail app, then try again."
         }
     }
@@ -57,6 +57,32 @@ public enum SafeOutput {
                 destination.withUnsafeFileSystemRepresentation { to in renamex_np(from!, to!, UInt32(RENAME_EXCL)) }
             }
             if result == 0 { return destination }
+            let code = errno
+            if code != EEXIST { throw POSIXError(POSIXErrorCode(rawValue: code) ?? .EIO) }
+        }
+        throw CocoaError(.fileWriteFileExists)
+    }
+
+    static func publishFolder(named name: String, in destination: URL, populate: (URL) throws -> Void) throws -> URL {
+        try SafeOutput.validate(stem: name)
+        try Task.checkCancellation()
+        guard destination.isFileURL, [nil, "", "localhost"].contains(destination.host),
+              destination.user == nil, destination.password == nil, destination.port == nil,
+              destination.query == nil, destination.fragment == nil,
+              (try? destination.resourceValues(forKeys: [.isDirectoryKey]).isDirectory) == true else { throw ToolError.unavailableFolder }
+        let fm = FileManager.default
+        let stage = destination.appendingPathComponent(".cloaktools-set-\(UUID())", isDirectory: true)
+        try fm.createDirectory(at: stage, withIntermediateDirectories: false, attributes: [.posixPermissions: 0o700])
+        defer { try? fm.removeItem(at: stage) }
+        try populate(stage)
+        for index in 1...10_000 {
+            try Task.checkCancellation()
+            let targetName = name + (index == 1 ? "" : " \(index)")
+            let target = destination.appendingPathComponent(targetName, isDirectory: true)
+            let status = stage.withUnsafeFileSystemRepresentation { from in
+                target.withUnsafeFileSystemRepresentation { to in renamex_np(from!, to!, UInt32(RENAME_EXCL)) }
+            }
+            if status == 0 { return target }
             let code = errno
             if code != EEXIST { throw POSIXError(POSIXErrorCode(rawValue: code) ?? .EIO) }
         }

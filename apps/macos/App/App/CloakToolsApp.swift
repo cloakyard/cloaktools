@@ -9,6 +9,8 @@ struct CloakToolsApp: App {
     var body: some Scene {
         Window("CloakTools", id: "workbench") {
             WorkbenchView(model: AppModel.shared, navigation: AppModel.shared.workbench)
+                .handlesExternalEvents(preferring: ["cloaktools-action:"], allowing: ["*"])
+                .onOpenURL { url in delegate.receive(url, sourceApplication: IncomingEventSource.current()) }
         }
         .defaultSize(width: 1000, height: 700)
         .windowResizability(.contentMinSize)
@@ -61,6 +63,11 @@ private struct WorkbenchCommands: Commands {
                 }
             }
             Divider()
+            Menu("Finder Tools") {
+                Button("Reuse Folder Structure…", action: model.chooseStructure)
+                Button("Collect Copies for Sharing…") { model.collectForSharing([]) }
+                Button("Compare Two Folders…", action: model.chooseComparison)
+            }
             Button("File List…", action: model.presentFileList)
             Button("Copy As…") { model.chooseCopyFiles() }.keyboardShortcut("c", modifiers: [.command, .option])
             Divider()
@@ -120,15 +127,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.servicesProvider = self
         NSUpdateDynamicServices()
     }
+    // AppKit supplies URLs that were not already delivered to an open Workbench.
     func application(_ application: NSApplication, open urls: [URL]) {
         let sourceApplication = IncomingEventSource.current()
-        for url in urls {
-            if url.scheme == "cloaktools-action" {
-                do { AppModel.shared.present(try FinderIntent(url: url)) }
-                catch { AppModel.shared.showError(error) }
-            } else {
-                AppModel.shared.router.receive(url.absoluteString, sourceApplication: sourceApplication)
-            }
+        for url in urls { receive(url, sourceApplication: sourceApplication) }
+    }
+
+    func receive(_ url: URL, sourceApplication: String?) {
+        if url.scheme == "cloaktools-action" {
+            do { AppModel.shared.present(try FinderIntent(url: url)) }
+            catch { AppModel.shared.showError(error) }
+        } else {
+            AppModel.shared.router.receive(url.absoluteString, sourceApplication: sourceApplication)
         }
     }
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
@@ -155,6 +165,27 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         guard let files = pasteboard.readObjects(forClasses: [NSURL.self], options: [.urlReadingFileURLsOnly: true]) as? [URL],
               (1...PDFAssembly.maximumFiles).contains(files.count) else { error.pointee = "Select 1–32 PDFs or images in Finder."; return }
         AppModel.shared.present(.assemble(files: files.sorted { $0.lastPathComponent.localizedStandardCompare($1.lastPathComponent) == .orderedAscending }))
+    }
+    private func selectedURLs(_ board: NSPasteboard) -> [URL] {
+        (board.readObjects(forClasses: [NSURL.self], options: [.urlReadingFileURLsOnly: true]) as? [URL]) ?? []
+    }
+    @objc func fitImage(_ board: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString>) {
+        guard let url = serviceURL(board) else { error.pointee = "Select one image."; return }
+        AppModel.shared.present(.fit(image: url))
+    }
+    @objc func reuseStructure(_ board: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString>) {
+        guard let url = serviceURL(board) else { error.pointee = "Select one folder."; return }
+        AppModel.shared.present(.structure(folder: url))
+    }
+    @objc func collectCopies(_ board: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString>) {
+        let urls = selectedURLs(board)
+        guard (1...SharingCollection.maximumFiles).contains(urls.count) else { error.pointee = "Select 1–200 files."; return }
+        AppModel.shared.present(.collect(files: urls))
+    }
+    @objc func compareFolders(_ board: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString>) {
+        let urls = selectedURLs(board)
+        guard urls.count == 2 else { error.pointee = "Select exactly two folders."; return }
+        AppModel.shared.present(.compare(first: urls[0], second: urls[1]))
     }
     @objc func copyAs(_ pasteboard: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString>) {
         guard let files = pasteboard.readObjects(forClasses: [NSURL.self], options: [.urlReadingFileURLsOnly: true]) as? [URL],

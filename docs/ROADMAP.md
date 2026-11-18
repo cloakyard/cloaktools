@@ -25,6 +25,8 @@ Native sidebar settings and restoration, persistent Hello World precedence, 15 t
 
 ## Milestone 1 — Files and Finder
 
+The source Workbench adds Finder entry points for measured image fitting, selective empty-folder reuse, collecting copies across selections and read-only folder comparison. These additions postdate the published 0.6.0 beta. See the [workflow guide](USAGE.md#work-with-selected-folders-and-files) and [native verification](verification/FINDER-WORKFLOWS.md).
+
 - **Implemented:** 13 programming languages plus text, Markdown, valid blank PDF and JSON; [capability/encoding table](FORMATS.md) and format-aware output tests.
 - **Implemented:** imported UTF-8 single-file templates with exact content, favorites, editable titles/default names and immutable operation snapshots. Templates are never executed; custom content is independent of built-in starters.
 - **Implemented:** optional Open After Creation via explicit TextEdit/Preview destinations.

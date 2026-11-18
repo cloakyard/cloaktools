@@ -18,6 +18,10 @@ Reviewed 16 November 2026 for the local macOS 27.2.1 / arm64 build. Scope is sti
 
 Runtime records: [MVP 0](verification/MVP-0.md), [Milestone 1](verification/MILESTONE-1.md), [clipboard](verification/CLIPBOARD.md), [image conversion](verification/IMAGE-CONVERSION.md), [PDF/Copy As](verification/PDF-COPY-AS.md).
 
+## Finder workflows in the source build
+
+The post-0.6.0 Workbench adds Make It Fit for a selected photo, Reuse Folder Structure for a folder, Collect Copies for Sharing for regular files, and Compare Two Folders for two selected directories. Each also has a Finder Service and an in-app entry point. The extension sends the selection to the host for review. Multiple Collect requests append to the open collection. The four Services were exercised in Finder on macOS 27.2.1. The scoped extension menu was unavailable on that Mac. [Verification and coverage](verification/FINDER-WORKFLOWS.md).
+
 ## Compact creation menu
 
 The 0.5.0 extension offers Plain Text, Markdown and PDF directly, plus Choose File Type or Template and clipboard creation. The host catalog includes programming/JSON formats only when Developer Tools is enabled. Current preferences are read at handoff; no extension-side settings cache or new shared-storage entitlement is required. The updated menu and selected-folder handoff were verified in actual Finder.

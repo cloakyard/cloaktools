@@ -10,7 +10,7 @@ struct PrivacySettingsView: View {
                         .symbolRenderingMode(.hierarchical).foregroundStyle(.tint).accessibilityHidden(true)
                     VStack(alignment: .leading, spacing: 2) {
                         Text("Privacy Policy").font(.title2.bold()).accessibilityAddTraits(.isHeader)
-                        Text("Updated 17 November 2026").font(.callout).foregroundStyle(.secondary)
+                        Text("Updated 18 November 2026").font(.callout).foregroundStyle(.secondary)
                     }
                 }
                 VStack(alignment: .leading, spacing: 12) {
@@ -56,6 +56,9 @@ struct PrivacySettingsView: View {
                 Base64 image copies preserve original bytes. PDFs and file lists can contain personal information. \
                 Review output before sharing. A cloud-managed destination may synchronize through its own service.
                 """)
+            }
+            policySection("Finder Tools") {
+                Text("Folder comparison reads both selected trees, including hidden files. Sharing collections keep paths in memory while open. Saved copies can retain personal metadata. Saving a folder structure as a file set stores the selected relative folder names in your Library.")
             }
             policySection("Links and Permissions") {
                 Text("""

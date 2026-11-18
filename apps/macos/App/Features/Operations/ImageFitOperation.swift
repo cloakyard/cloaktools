@@ -4,14 +4,15 @@ import CloakToolsCore
 
 struct ImageFitDraft: Equatable {
     var format: ImageOutputFormat = .jpeg
-    var kilobytes = "500"
+    var sizeLimit: String
     var width = "1600"
     var height = "1600"
     var minimumQuality = 0.6
     var background: ImageBackground = .white
     var allowSmaller = true
     init(options: ImageFitOptions = .init()) {
-        format = options.format; kilobytes = String(options.maximumBytes / 1000)
+        format = options.format
+        sizeLimit = options.sizeLimitText
         width = String(options.maximumWidth); height = String(options.maximumHeight)
         minimumQuality = options.minimumQuality; background = options.background; allowSmaller = options.allowSmallerDimensions
     }
@@ -20,9 +21,16 @@ struct ImageFitDraft: Equatable {
             guard !value.isEmpty, value.utf8.allSatisfy({ (48...57).contains($0) }), let result = Int(value) else { throw ImageFitError.invalidOptions }
             return result
         }
-        let kb = try number(kilobytes)
-        guard (1...100_000).contains(kb) else { throw ImageFitError.invalidOptions }
-        let options = ImageFitOptions(format: format, maximumBytes: kb * 1000, maximumWidth: try number(width), maximumHeight: try number(height),
+        let text = sizeLimit.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        guard let match = text.wholeMatch(of: #/(under\s+)?([0-9]{1,9})(?:\.([0-9]{1,6}))?\s*(mb|kb|b)?/#) else {
+            throw ImageFitError.invalidOptions
+        }
+        let places = match.4 == "mb" ? 6 : match.4 == "b" ? 0 : 3
+        let fraction = String(match.3 ?? "")
+        guard fraction.dropFirst(places).allSatisfy({ $0 == "0" }) else { throw ImageFitError.invalidOptions }
+        let digits = String(match.2) + fraction.prefix(places) + String(repeating: "0", count: max(0, places - fraction.count))
+        let limit = try number(digits) - (match.1 == nil ? 0 : 1)
+        let options = ImageFitOptions(format: format, maximumBytes: limit, maximumWidth: try number(width), maximumHeight: try number(height),
                                       minimumQuality: minimumQuality, background: background, allowSmallerDimensions: allowSmaller)
         try options.validate(); return options
     }
@@ -224,7 +232,9 @@ struct ImageFitView: View {
                 GridRow { Text("Format").foregroundStyle(.secondary); ImageFormatPicker(selection: $operation.draft.format).labelsHidden() }
                 GridRow {
                     Text("Maximum size").foregroundStyle(.secondary)
-                    HStack { TextField("500", text: $operation.draft.kilobytes).textFieldStyle(.roundedBorder).accessibilityLabel("Maximum size in kilobytes"); Text("KB").foregroundStyle(.secondary).help("1 KB = 1,000 bytes") }
+                    TextField("e.g. under 2 MB", text: $operation.draft.sizeLimit)
+                        .textFieldStyle(.roundedBorder).accessibilityLabel("Maximum file size")
+                        .help("Enter a limit such as 500 KB or under 2 MB. A number alone means KB.")
                 }
                 GridRow {
                     Text("Fit within").foregroundStyle(.secondary)

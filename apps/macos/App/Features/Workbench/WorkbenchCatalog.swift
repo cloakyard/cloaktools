@@ -30,8 +30,10 @@ enum WorkbenchCategory: String, CaseIterable, Identifiable {
     var groups: [WorkbenchGroup] {
         switch self {
         case .finder: [
-            .init(title: "Create in a folder", tools: [.newFile, .clipboard]),
-            .init(title: "Work with selected files", tools: [.copy, .convert, .pdf, .fileList])
+            .init(title: "Folders", tools: [.structure, .compare]),
+            .init(title: "Collect and list files", tools: [.collect, .copy, .fileList]),
+            .init(title: "Images and PDFs", tools: [.fit, .convert, .pdf]),
+            .init(title: "Create a file", tools: [.newFile, .clipboard])
         ]
         case .files: [
             .init(title: "Create", tools: [.newFile, .fileSet]),
@@ -70,6 +72,9 @@ enum WorkbenchTool: String, CaseIterable, Identifiable {
     case convert = "Convert an image"
     case pdf = "Combine files into a PDF"
     case fileList = "Export a file list"
+    case structure = "Reuse a folder structure"
+    case collect = "Collect copies for sharing"
+    case compare = "Compare two folders"
     case fileSet = "Create a folder with a set of files"
     case templates = "Saved file templates"
     case savedSets = "Saved file sets"
@@ -100,6 +105,9 @@ enum WorkbenchTool: String, CaseIterable, Identifiable {
         case .convert: "Save a copy as PNG, JPEG or HEIC."
         case .pdf: "Arrange documents and images in reading order."
         case .fileList: "Save names, sizes and other details as CSV or Markdown."
+        case .structure: "Choose subfolders to recreate empty or save as a file set."
+        case .collect: "Gather files from different locations and review the copy names."
+        case .compare: "Find missing or changed files in a working folder and its backup."
         case .fileSet: "Review the folder tree and files before creating them together."
         case .templates: "Import and favorite the text you use to start new files."
         case .savedSets: "Reuse a folder structure and the files it contains."
@@ -130,6 +138,9 @@ enum WorkbenchTool: String, CaseIterable, Identifiable {
         case .convert: "photo"
         case .pdf: "doc.on.doc"
         case .fileList: "list.bullet.rectangle"
+        case .structure: "folder.badge.plus"
+        case .collect: "tray.and.arrow.down"
+        case .compare: "arrow.left.arrow.right"
         case .fileSet, .savedSets: "folder.badge.plus"
         case .templates: "doc.text"
         case .presets: "folder.badge.gearshape"

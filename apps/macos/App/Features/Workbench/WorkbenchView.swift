@@ -215,6 +215,9 @@ struct WorkbenchView: View {
     private func launch(_ tool: WorkbenchTool) {
         if navigation.drafts[tool] != nil { navigation.show(tool); return }
         switch tool {
+        case .structure: model.chooseStructure()
+        case .collect: model.collectForSharing([])
+        case .compare: model.chooseComparison()
         case .newFile: model.chooseCreationFolder()
         case .clipboard: model.chooseClipboardFolder()
         case .copy: model.chooseCopyFiles()

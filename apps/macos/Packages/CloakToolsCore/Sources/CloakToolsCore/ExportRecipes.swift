@@ -29,7 +29,7 @@ public enum ExportRecipeOptions: Codable, Equatable, Sendable {
         case let .image(options):
             options.format.isLossy ? "\(options.format.title) · \(Int((options.quality * 100).rounded()))% · \(options.background.title) background" : "PNG · Original dimensions · Keeps transparency"
         case let .fit(options):
-            "\(options.format.title) · ≤\(options.maximumBytes / 1000) KB · \(options.maximumWidth) × \(options.maximumHeight) px"
+            "\(options.format.title) · ≤\(options.sizeLimitText) · \(options.maximumWidth) × \(options.maximumHeight) px"
         case let .media(preset): preset.title
         }
     }
@@ -45,10 +45,7 @@ public enum ExportRecipeOptions: Codable, Equatable, Sendable {
     public func validate() throws {
         switch self {
         case let .image(options): try options.validate()
-        case let .fit(options):
-            try options.validate()
-            // The existing review edits whole decimal KB. Never silently round a saved limit.
-            guard options.maximumBytes % 1000 == 0 else { throw ImageFitError.invalidOptions }
+        case let .fit(options): try options.validate()
         case .media: break
         }
     }

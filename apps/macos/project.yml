@@ -15,7 +15,7 @@ settings:
     ENABLE_HARDENED_RUNTIME: YES
     MARKETING_VERSION: "0.6.0"
     CURRENT_PROJECT_VERSION: "20261118.2"
-    CLOAKTOOLS_RELEASE_CHANNEL: "Development preview"
+    CLOAKTOOLS_RELEASE_CHANNEL: "Beta"
     CLOAKTOOLS_APP_GROUP: ""
     CLOAKTOOLS_SOURCE_ROOT: $(SRCROOT)
   configs:
@@ -109,6 +109,34 @@ targets:
             NSMessage: copyAs
             NSPortName: CloakTools
             NSSendTypes: [public.file-url]
+            NSRequiredContext:
+              NSApplicationIdentifier: com.apple.finder
+          - NSMenuItem:
+              default: Make It Fit with CloakTools
+            NSMessage: fitImage
+            NSPortName: CloakTools
+            NSSendFileTypes: [public.png, public.jpeg, public.tiff, public.heic, public.heif]
+            NSRequiredContext:
+              NSApplicationIdentifier: com.apple.finder
+          - NSMenuItem:
+              default: Reuse Folder Structure with CloakTools
+            NSMessage: reuseStructure
+            NSPortName: CloakTools
+            NSSendFileTypes: [public.folder]
+            NSRequiredContext:
+              NSApplicationIdentifier: com.apple.finder
+          - NSMenuItem:
+              default: Collect Copies for Sharing with CloakTools
+            NSMessage: collectCopies
+            NSPortName: CloakTools
+            NSSendFileTypes: [public.data]
+            NSRequiredContext:
+              NSApplicationIdentifier: com.apple.finder
+          - NSMenuItem:
+              default: Compare Two Folders with CloakTools
+            NSMessage: compareFolders
+            NSPortName: CloakTools
+            NSSendFileTypes: [public.folder]
             NSRequiredContext:
               NSApplicationIdentifier: com.apple.finder
   CloakToolsFinder:

@@ -192,6 +192,16 @@ Programming content can follow global/language settings or stay blank. A preset 
 
 Presets are explicit starting points, separate from Finder monitoring scopes. They do not automatically match folders or broaden extension access. Related file sets and folder templates are available as a separate reviewed workflow.
 
+## Work with selected folders and files
+
+The source build offers these workflows in **Finder Tools**, the **File** menu and Finder. Right-click a selection inside a configured workspace, or use **Finder → Services** elsewhere. The work happens locally.
+
+- **Reuse Folder Structure…** takes one project folder. Check the visible subfolders to recreate. Selecting a branch includes its descendants. Select a nested folder to include its parents. Enter a new folder name, then **Create Folder** beside the source or use **Change…** to choose another location. The new folders are empty. **Save File Set** stores the selected layout in **Files & Templates → Saved file sets**. File-set limits apply when saving a reusable layout. Packages, hidden folders and symbolic links are skipped.
+- **Collect Copies for Sharing…** adds selected files to the same open collection. Keep the review open while you browse, or use **Add Files…** in the review. It accepts up to 200 regular files. Each row shows its source path and editable copy name. Duplicate names are numbered. Choose **Save Copies…** and pick a parent folder. Closing the review discards the in-memory list. If a source changes before copying, remove it and add it again.
+- **Compare Two Folders…** takes two selected folders. In the Workbench you can pick the folders separately, including folders on different volumes. The review lists missing entries, different types and changed contents by relative path. It includes hidden items, packages, file data, resource forks and symbolic-link targets. Permissions, dates and other extended attributes are outside the comparison. Use the reveal link for either available side, or **Compare Again** after making changes. An incomplete scan reports an error.
+
+Folder outputs use an available numbered name if the requested name already exists.
+
 ## Related file sets and folder templates
 
 Choose **File → New File Set… (⇧⌘N)**, or **Files & Templates → Create a folder with a set of files**. Select a parent destination, then edit the new folder name and its contents. Notes, Python, Rust and C++ starting points are available; add any built-in type or saved UTF-8 template. These are file collections, without generated build systems or installed dependencies.
@@ -200,7 +210,7 @@ The pencil edits a relative path and file type; changing type adjusts the extens
 
 **Review…** prepares immutable bytes off the main actor without writing files. The review lists paths, content descriptions, total bytes and destination. Back returns to editing; Change selects another parent without regenerating content. **Create Folder** stages the entire set privately, then publishes it with exclusive rename. Existing folders are never merged: collisions create a numbered folder. Normal failure/cancellation cleans unfinished staging; successful final publication wins over late cancellation. The folder can be revealed in Finder; Open After Creation does not launch all its files.
 
-**Save Set…** stores a reusable definition, without output or a saved destination. Use opens another editable review; Save Changes updates that saved set. Cancel leaves stored definitions unchanged. Removing a saved set leaves files and source templates intact. Limits are 32 saved sets, 32 items per set, 8 path levels and 16 MiB of generated content. Missing imported templates must be replaced in the draft. Existing tree import, symlinks, hidden configuration files, direct merging, build-system generation and a dedicated Finder action are outside this slice.
+**Save Set…** stores a reusable definition, without output or a saved destination. Use opens another editable review; Save Changes updates that saved set. Cancel leaves stored definitions unchanged. Removing a saved set leaves files and source templates intact. Limits are 32 saved sets, 32 items per set, 8 path levels and 16 MiB of generated content. Missing imported templates must be replaced in the draft. To start from a project you already organized, use **Reuse Folder Structure…** in Finder.
 
 ## From clipboard
 
@@ -218,13 +228,13 @@ Set defaults in **Settings → Images → Image conversion defaults**. Each dial
 
 ## Make an image fit
 
-Choose **Images, PDFs & Media → Make an image fit a size limit** or press **⌥⌘K**. Choose PNG, JPEG or HEIC, a maximum size in decimal KB (1 KB = 1,000 bytes), and a width/height bounding box. Defaults are JPEG, 500 KB and 1600 × 1600 px, with a 60% quality floor and white transparency background. These are per-operation choices; regular conversion defaults stay unchanged.
+Choose **Images, PDFs & Media → Make an image fit a size limit** or press **⌥⌘K**. Choose PNG, JPEG or HEIC, a maximum size in bytes, decimal KB or MB (1 KB = 1,000 bytes), and a width/height bounding box. Defaults are JPEG, 500 KB and 1600 × 1600 px, with a 60% quality floor and white transparency background. These are per-operation choices; regular conversion defaults stay unchanged.
 
 **Preview Fit** measures a real encoded output. Images keep their proportions, rounded to whole pixels, and never enlarge. JPEG/HEIC try quality before further reduction; the quality floor is an encoder setting, not a visual score. **Reduce further to meet size** optionally permits smaller dimensions, stopping at a 320 px long edge or the initial bounded size if smaller. PNG retains alpha and uses dimensions to reduce its losslessly encoded size.
 
 Review the two previews, actual bytes, dimensions and encoding quality. The save-copy action is available only when the measured result fits. It writes those exact bytes in the displayed destination, with a ` fit` suffix and numbered collision handling. **Change…** chooses another folder without discarding the measured result. Editing an encoding option invalidates the preview. Impossible targets remain reviewable but cannot be saved. Cancel stops between native encoding steps and writes no preview files. Source changes after capture cannot alter a pending fit.
 
-Inputs use the normal 40-megapixel/100 MB single-frame limits. Output size accepts 1–100,000 KB; dimensions accept 1–20,000 px each. Output remains 8-bit sRGB/SDR, without original camera/location metadata. No dedicated Finder menu or Service is added for Make It Fit in this slice.
+Inputs use the normal 40-megapixel/100 MB single-frame limits. Output size accepts 1–100,000 KB; dimensions accept 1–20,000 px each. Output remains 8-bit sRGB/SDR, without original camera/location metadata. In the source build, select a photo and choose **Make It Fit…** in the scoped right-click menu or **Make It Fit with CloakTools** in Finder’s Services. Enter a limit such as **under 2 MB** or **500 KB**. Preview Fit shows the encoded dimensions and measured byte count. Save places the reviewed copy beside the original unless you change the destination.
 
 ## Assemble a PDF
 

@@ -1,6 +1,6 @@
 # Privacy policy
 
-**CloakTools · Updated 17 November 2026**
+**CloakTools · Updated 18 November 2026**
 
 CloakTools is a local Mac toolkit. It has no accounts, advertising, analytics, telemetry or automatic crash-report uploads. Update checks and downloads are off by default and can be managed in About.
 
@@ -31,6 +31,8 @@ File creation and image conversion happen on your Mac using native frameworks. S
 Image conversion keeps the prepared source pixels in memory for its preview and confirmed output. Camera/location metadata is not copied. **Open in Preview** explicitly sends the completed copy to Preview.
 
 PDF assembly captures selected sources in memory, then writes only the confirmed new PDF. PDF page content and annotations are retained in the combined copy; this action is not a PDF metadata scrubber. Original documents stay unchanged. Organize PDF similarly holds one captured document, thumbnails, page choices and rotations in memory until its window closes. Only Export Copy writes the selected pages. It keeps no page-edit history, performs no OCR and is not a metadata-sanitization tool.
+
+In the source build, **Reuse Folder Structure** reads the selected directory tree and offers to save relative folder names in a local file set. **Collect Copies for Sharing** holds selected paths and proposed copy names in memory until the review closes. Saved copies can retain source metadata, including personal information and resource forks. **Compare Two Folders** reads the selected trees, including hidden files, and holds differences in memory for review. Folder comparison and collection have no stored history.
 
 **Copy As** uses selected file/folder names and paths without reading file contents or traversing folders. Only pressing Copy replaces the system clipboard; previews and cancellation do not. Copied paths may contain personal information. CloakTools keeps no copy history and runs no command. Other applications with clipboard access may read what you copy under macOS controls.
 
@@ -92,7 +94,7 @@ Folder presets store a title, local destination path, template identifier, defau
 
 ## File sets
 
-Reusable file sets store their title, proposed folder name, relative paths, template identifiers and blank-code policy in `~/Library/Application Support/com.cloakyard.cloaktools/file-sets.json`. No destination is stored in a set. Preparing a review captures the selected template bytes and preferences locally. It does not read an existing folder tree, execute code, install dependencies or contact a service.
+Reusable file sets store their title, proposed folder name, relative paths, template identifiers and blank-code policy in `~/Library/Application Support/com.cloakyard.cloaktools/file-sets.json`. No destination is stored in a set. Preparing a saved set for creation captures its selected template bytes and preferences locally. Importing a structure reads the folder tree you choose.
 
 Creation writes the reviewed files into a private staging folder beside the destination, then publishes one complete new folder. Normal cancellation/failure removes staging; abrupt termination may leave a hidden `.cloaktools-set-…` folder. Created output and saved definitions have independent lifetimes. Removing a definition never deletes output. A set does not widen Finder scopes or grant filesystem access.
 

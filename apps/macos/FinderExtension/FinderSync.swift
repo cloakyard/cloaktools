@@ -50,6 +50,11 @@ final class FinderSync: FIFinderSync {
         guard let target = controller.targetedURL() else { return nil }
         let selected = controller.selectedItemURLs() ?? []
         let menu = NSMenu(title: "CloakTools")
+        func action(_ title: String, _ intent: FinderIntent) {
+            let item = NSMenuItem(title: title, action: #selector(send(_:)), keyEquivalent: "")
+            bind(item, intent: intent)
+            menu.addItem(item)
+        }
         var folder: URL?
         switch menuKind {
         case .contextualMenuForContainer: folder = target
@@ -72,6 +77,9 @@ final class FinderSync: FIFinderSync {
             let clipboard = NSMenuItem(title: "New File from Clipboard…", action: #selector(send(_:)), keyEquivalent: "")
             bind(clipboard, intent: .clipboard(folder: folder)); submenu.addItem(clipboard)
             parent.submenu = submenu; menu.addItem(parent)
+            if menuKind == .contextualMenuForContainer || menuKind == .contextualMenuForSidebar {
+                action("Reuse Folder Structure…", .structure(folder: folder))
+            }
         }
         if menuKind == .contextualMenuForItems, selected.count == 1, let image = selected.first,
            ImageConversion.inputExtensions.contains(image.pathExtension.lowercased()) {
@@ -83,6 +91,9 @@ final class FinderSync: FIFinderSync {
             let item = NSMenuItem(title: "Assemble PDF with CloakTools…", action: #selector(send(_:)), keyEquivalent: "")
             let files = selected.sorted { $0.lastPathComponent.localizedStandardCompare($1.lastPathComponent) == .orderedAscending }
             bind(item, intent: .assemble(files: files)); menu.addItem(item)
+        }
+        if menuKind == .contextualMenuForItems {
+            for entry in FinderIntent.reviewActions(for: selected) { action(entry.title, entry.intent) }
         }
         let copyFiles = menuKind == .contextualMenuForContainer ? [target] : selected
         if [.contextualMenuForContainer, .contextualMenuForItems, .contextualMenuForSidebar].contains(menuKind),

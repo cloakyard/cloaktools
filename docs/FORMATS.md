@@ -53,7 +53,7 @@ Defaults are PNG, 90% quality and white background. Quality/background choices r
 
 ## Make It Fit
 
-Accepts the same single-frame image inputs and PNG/JPEG/HEIC native encoders above. The per-operation defaults are JPEG, 500,000 maximum bytes, a 1600 × 1600 px bounding box, 60% minimum encoding quality, white background and further reduction allowed. Bounds are 1,000–100,000,000 bytes and 1–20,000 px per dimension. The app’s KB fields are decimal.
+Accepts the same single-frame image inputs and PNG/JPEG/HEIC native encoders above. The per-operation defaults are JPEG, 500,000 maximum bytes, a 1600 × 1600 px bounding box, 60% minimum encoding quality, white background and further reduction allowed. Bounds are 1,000–100,000,000 bytes and 1–20,000 px per dimension. KB and MB use decimal units. A bare number in the Workbench means KB. “Under 2 MB” sets an exact maximum of 1,999,999 bytes, including when saved in an export recipe.
 
 Images never enlarge and fit the bounding box with pixel rounding. Optional additional reduction stops at a 320 px long edge, or the smaller initial bounded size. JPEG/HEIC flatten transparency and try compression before dimensions; PNG retains alpha and compresses losslessly after normalization/resizing. The quality value is a native encoder setting, not a perceptual-quality guarantee.
 

@@ -44,10 +44,22 @@ public enum FinderIntent: Equatable, Sendable {
     case clipboard(folder: URL)
     case assemble(files: [URL])
     case copy(files: [URL])
+    case fit(image: URL)
+    case structure(folder: URL)
+    case collect(files: [URL])
+    case compare(first: URL, second: URL)
     public var url: URL {
         var parts = URLComponents()
         parts.scheme = "cloaktools-action"
         switch self {
+        case let .fit(image):
+            parts.host = "fit"; parts.queryItems = [.init(name: "path", value: image.path)]
+        case let .structure(folder):
+            parts.host = "structure"; parts.queryItems = [.init(name: "path", value: folder.path)]
+        case let .collect(files):
+            parts.host = "collect"; parts.queryItems = files.map { .init(name: "path", value: $0.path) }
+        case let .compare(first, second):
+            parts.host = "compare"; parts.queryItems = [first, second].map { .init(name: "path", value: $0.path) }
         case let .assemble(files):
             parts.host = "assemble"; parts.queryItems = files.map { .init(name: "path", value: $0.path) }
         case let .copy(files):
@@ -66,23 +78,35 @@ public enum FinderIntent: Equatable, Sendable {
         return parts.url!
     }
     public init(url: URL) throws {
-        if let parts = URLComponents(url: url, resolvingAgainstBaseURL: false), parts.host == "assemble" || parts.host == "copy" {
-            let maximum = parts.host == "assemble" ? PDFAssembly.maximumFiles : CopySelection.maximumItems
-            guard parts.scheme == "cloaktools-action", parts.user == nil, parts.password == nil, parts.port == nil,
-                  parts.path.isEmpty, parts.fragment == nil, url.absoluteString.utf8.count <= 131_072,
-                  let items = parts.queryItems, (1...maximum).contains(items.count),
-                  items.allSatisfy({ $0.name == "path" && Self.validPath($0.value) }) else { throw ToolError.invalidRequest }
-            let files = items.map { URL(fileURLWithPath: $0.value!) }
-            self = parts.host == "assemble" ? .assemble(files: files) : .copy(files: files); return
-        }
         guard let parts = URLComponents(url: url, resolvingAgainstBaseURL: false), parts.scheme == "cloaktools-action",
               parts.user == nil, parts.password == nil, parts.port == nil, parts.path.isEmpty, parts.fragment == nil,
-              url.absoluteString.utf8.count <= 131_072,
-              let items = parts.queryItems, items.count <= 2,
-              Set(items.map(\.name)).count == items.count,
-              let path = items.first(where: { $0.name == "path" })?.value,
-              path.hasPrefix("/"), !path.contains("\0"), path.utf8.count < 4096 else { throw ToolError.invalidRequest }
+              url.absoluteString.utf8.count <= 131_072, let items = parts.queryItems else { throw ToolError.invalidRequest }
+        if parts.host == "assemble" || parts.host == "copy" || parts.host == "collect" || parts.host == "compare" {
+            let count: ClosedRange<Int>
+            switch parts.host {
+            case "compare": count = 2...2
+            case "assemble": count = 1...PDFAssembly.maximumFiles
+            case "collect": count = 1...SharingCollection.maximumFiles
+            default: count = 1...CopySelection.maximumItems
+            }
+            guard count.contains(items.count), items.allSatisfy({ $0.name == "path" && Self.validPath($0.value) }) else { throw ToolError.invalidRequest }
+            let files = items.map { URL(fileURLWithPath: $0.value!) }
+            switch parts.host {
+            case "compare":
+                guard files[0].standardizedFileURL != files[1].standardizedFileURL else { throw ToolError.invalidRequest }
+                self = .compare(first: files[0], second: files[1])
+            case "collect": self = .collect(files: files)
+            case "assemble": self = .assemble(files: files)
+            default: self = .copy(files: files)
+            }
+            return
+        }
+        guard items.count <= 2, Set(items.map(\.name)).count == items.count,
+              let path = items.first(where: { $0.name == "path" })?.value, Self.validPath(path) else { throw ToolError.invalidRequest }
         switch parts.host {
+        case "fit", "structure":
+            guard items.count == 1 else { throw ToolError.invalidRequest }
+            self = parts.host == "fit" ? .fit(image: URL(fileURLWithPath: path)) : .structure(folder: URL(fileURLWithPath: path, isDirectory: true))
         case "create":
             guard items.count == 2, let value = items.first(where: { $0.name == "template" })?.value,
                   let template = FileTemplate(rawValue: value) else { throw ToolError.invalidRequest }

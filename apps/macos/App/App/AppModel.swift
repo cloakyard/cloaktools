@@ -29,6 +29,7 @@ final class AppModel {
     let routing = RoutingSettings()
     let defaultHandlers = DefaultHandlerSettings()
     let finderScopes = FinderScopeSettings()
+    private(set) var sharingReview: SharingReview?
     private var operationWindows: [UUID: NSWindowController] = [:]
     private func hasRoomForOperation() -> Bool {
         guard operationWindows.count + workbench.drafts.count < 8 else {
@@ -242,14 +243,35 @@ final class AppModel {
         guard hasRoomForOperation() else { return }
         let panel = NSOpenPanel(); panel.title = "Make an image fit"; panel.prompt = "Choose Image"
         panel.allowedContentTypes = ImageConversion.inputTypes; panel.allowsMultipleSelection = false; panel.canChooseDirectories = false
-        guard panel.runModal() == .OK, let input = panel.url, hasRoomForOperation() else { return }
-        let operation = ImageFitOperation(sourceURL: input, revealOutput: preferences.revealConvertedFile)
-        display(operation)
+        guard panel.runModal() == .OK, let input = panel.url else { return }
+        present(.fit(image: input))
     }
     func present(_ intent: FinderIntent) {
-        if case let .clipboard(folder) = intent { createFromClipboard(in: folder); return }
-        if case let .assemble(files) = intent { presentPDF(files); return }
-        if case let .copy(files) = intent { presentCopy(files); return }
+        switch intent {
+        case let .fit(image):
+            guard hasRoomForOperation() else { return }
+            display(ImageFitOperation(sourceURL: image, revealOutput: preferences.revealConvertedFile))
+            return
+        case let .structure(folder):
+            guard hasRoomForOperation() else { return }
+            let review = StructureReview(folder)
+            showReview(.structure, task: review.task) { close in
+                StructureReviewView(review: review, saveSet: self.saveFileSet, close: close)
+            }
+            return
+        case let .compare(first, second):
+            guard hasRoomForOperation() else { return }
+            let review = ComparisonReview(first, second)
+            showReview(.compare, task: review.task) { ComparisonReviewView(review: review, close: $0) }
+            return
+        case let .collect(files):
+            collectForSharing(files)
+            return
+        case let .clipboard(folder): createFromClipboard(in: folder); return
+        case let .assemble(files): presentPDF(files); return
+        case let .copy(files): presentCopy(files); return
+        case .create, .templates, .convert: break
+        }
         guard hasRoomForOperation() else { return }
         do {
             // Read once at ingress. A later settings edit cannot change this operation.
@@ -455,5 +477,42 @@ final class AppModel {
         let alert = NSAlert(); alert.messageText = "CloakTools couldn’t complete this action"
         alert.informativeText = error.localizedDescription; alert.addButton(withTitle: "OK")
         NSApp.activate(); alert.runModal()
+    }
+}
+
+extension AppModel {
+    private func showReview<Content: View>(_ tool: WorkbenchTool, task: FolderTask,
+                                           finish: @escaping () -> Void = {},
+                                           @ViewBuilder content: (@escaping () -> Void) -> Content) {
+        presentEditor(tool, id: task.id, busy: { task.busy }, finish: finish,
+                      panel: FinderReviewWindow(tool.rawValue, task: task, finish: finish, content: content), content: content)
+    }
+
+    func chooseStructure() {
+        if let folder = chooseFinderFolder("Choose the folder whose structure you want to reuse") { present(.structure(folder: folder)) }
+    }
+
+    func chooseComparison() {
+        guard let first = chooseFinderFolder("Choose the first folder to compare"),
+              let second = chooseFinderFolder("Choose the folder to compare with “\(first.lastPathComponent)”",
+                                              startingAt: first.deletingLastPathComponent()) else { return }
+        present(.compare(first: first, second: second))
+    }
+
+    func collectForSharing(_ files: [URL]) {
+        if let review = sharingReview {
+            review.add(files)
+            if let controller = operationWindows[review.task.id] { controller.window?.makeKeyAndOrderFront(nil) }
+            else { workbench.show(.collect); workbench.showWindow?() }
+            NSApp.activate()
+            return
+        }
+        guard hasRoomForOperation() else { return }
+        let review = SharingReview()
+        sharingReview = review
+        review.add(files)
+        showReview(.collect, task: review.task, finish: { [weak self] in self?.sharingReview = nil }) {
+            SharingReviewView(review: review, close: $0)
+        }
     }
 }

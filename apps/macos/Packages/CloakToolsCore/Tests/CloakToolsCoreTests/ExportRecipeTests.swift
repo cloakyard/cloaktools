@@ -17,7 +17,7 @@ private func recipeFolder() throws -> URL {
     #expect(try store.load().isEmpty)
     let recipes = [
         ExportRecipe(title: "JPEG", options: .image(.init(format: .jpeg, quality: 0.35, background: .black))),
-        ExportRecipe(title: "Small image", options: .fit(.init(format: .heic, maximumBytes: 123_000, maximumWidth: 790, maximumHeight: 430, minimumQuality: 0.45, background: .black, allowSmallerDimensions: false))),
+        ExportRecipe(title: "Small image", options: .fit(.init(format: .heic, maximumBytes: 123_456, maximumWidth: 790, maximumHeight: 430, minimumQuality: 0.45, background: .black, allowSmallerDimensions: false))),
         ExportRecipe(title: "Audio", options: .media(.audio)),
         ExportRecipe(title: "720", options: .media(.video720)),
         ExportRecipe(title: "1080", options: .media(.video1080))]
@@ -34,7 +34,7 @@ private func recipeFolder() throws -> URL {
     for quality in [-1.0, 0.0, 1.01, Double.infinity, Double.nan] {
         #expect(throws: ImageConversionError.self) { try ExportRecipeOptions.image(.init(quality: quality)).validate() }
     }
-    for fit in [ImageFitOptions(maximumBytes: 12_345), .init(maximumBytes: 999), .init(maximumWidth: 0), .init(maximumHeight: 20_001), .init(minimumQuality: .nan)] {
+    for fit in [ImageFitOptions(maximumBytes: 100_000_001), .init(maximumBytes: 999), .init(maximumWidth: 0), .init(maximumHeight: 20_001), .init(minimumQuality: .nan)] {
         #expect(throws: ImageFitError.self) { try ExportRecipeOptions.fit(fit).validate() }
     }
     try ExportRecipe(title: "日本語 🖼", options: .fit(.init(maximumBytes: 100_000_000, maximumWidth: 20_000))).validate()
