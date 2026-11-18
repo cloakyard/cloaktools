@@ -1,0 +1,7 @@
+{
+  "product": "CloakTools",
+  "website": "tools.cloakyard.com",
+  "minimumOS": 27,
+  "volumeIcon": "CloakTools.icns",
+  "background": "assets/dmg/background.png"
+}

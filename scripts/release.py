@@ -99,7 +99,7 @@ def main():
     command = ["xcodebuild", "-project", str(project / "CloakTools.xcodeproj"), "-scheme", "CloakTools",
                "-configuration", "Release", "-destination", "platform=macOS,arch=arm64", "-derivedDataPath", str(derived), "build", "CLOAKTOOLS_SOURCE_ROOT=" + str(MAC)]
     if not args.preview:
-        command += ["DEVELOPMENT_TEAM=" + args.team, "CODE_SIGN_IDENTITY=" + args.identity]
+        command += ["CODE_SIGN_STYLE=Manual", "DEVELOPMENT_TEAM=" + args.team, "CODE_SIGN_IDENTITY=" + args.identity]
     run(command, log)
     app = derived / "Build/Products/Release/CloakTools.app"
     info = verify(app, args)

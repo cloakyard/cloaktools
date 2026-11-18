@@ -47,6 +47,8 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>CloakToolsAppGroupIdentifier</key>
 	<string>$(CLOAKTOOLS_APP_GROUP)</string>
+	<key>CloakToolsReleaseChannel</key>
+	<string>$(CLOAKTOOLS_RELEASE_CHANNEL)</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>

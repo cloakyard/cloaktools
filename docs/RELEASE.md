@@ -1,6 +1,6 @@
 # Local packages and future releases
 
-Version 0.6.0 (build 26) targets Apple silicon and macOS 27+. Signing and notarization are deferred by the project owner, who does not currently have a paid Apple developer account. The local preview is usable without that account. Additional signed Finder folders and live Shortcuts execution are not supported by this ad-hoc package.
+Version 0.6.0 targets Apple silicon and macOS 27+. Signing and notarization are deferred by the project owner, who does not currently have a paid Apple developer account. The local preview is usable without that account. Additional signed Finder folders and live Shortcuts execution are not supported by this ad-hoc package.
 
 ## Local preview
 
@@ -17,7 +17,7 @@ The script generates the normal XcodeGen project and builds Release serially int
 
 An explicit `--output /absolute/new/directory` is supported; an existing output directory is rejected. This is an ad-hoc development package, not a Gatekeeper-approved public installer. No signing or notarization upload occurs in preview mode. Build and test jobs should not run concurrently against the same generated Xcode project.
 
-Quit an older CloakTools copy before replacing it. Keep a single intended installed copy for normal use; Launch Services may otherwise select another build. Updates are manual downloads/replacement, with no background updater or update check. Before uninstalling, restore any CloakTools web/email defaults through Open With and review saved app data separately. Removing the app does not remove generated files.
+Quit an older CloakTools copy before replacing it. Keep a single intended installed copy for normal use; Launch Services may otherwise select another build. Settings → About offers signed updates and opt-in automatic checks. Before uninstalling, restore any CloakTools web/email defaults through Open With and review saved app data separately. Removing the app does not remove generated files.
 
 ## Developer ID path, for later
 

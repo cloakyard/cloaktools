@@ -23,7 +23,7 @@
 
 A native macOS toolkit for creating files, preparing copies and opening links in the right app. Everyday tools are included; Developer Tools is an optional first-run choice. The SwiftUI app is separate from its Air website. The capture above shows the actual development app with no personal files.
 
-The source is **0.6.0, build 26**, a local development preview. The website is live at tools.cloakyard.com; a public installer is still pending. See [release instructions](docs/RELEASE.md) for the signing boundary and [the usage guide](docs/USAGE.md) for every implemented workflow.
+The source is **0.6.0, build 20261118.1**, a local development preview. The website is live at tools.cloakyard.com; a public installer is still pending. See [release instructions](docs/RELEASE.md) for the signing boundary and [the usage guide](docs/USAGE.md) for every implemented workflow.
 
 ## Features
 
@@ -110,6 +110,8 @@ The website follows the complete portable [Air contract and product appendix](ap
 
 ## Project structure
 
+In `apps/macos/App/`, `App/` holds the entry point and app state, `Features/` groups product workflows, `Shared/` holds reusable UI helpers and `Resources/` contains app resources. Headless code and its tests live under `apps/macos/Packages/`.
+
 ```text
 cloaktools/
 ├── apps/macos/                 # Native app, Finder extension, core and tests
@@ -124,13 +126,16 @@ See [architecture](ARCHITECTURE.md), [supported formats](docs/FORMATS.md) and [t
 
 ## Deployment and releases
 
+The app uses a three-part marketing version and an increasing `YYYYMMDD.N` build number.
+See the [Mac release guide](docs/MAC-RELEASE.md) for the Air installer, version settings and Developer ID workflow.
+
 Maintain only `dev` and `main`. Work on `dev`, verify, then promote the same reviewed changes to `main`. Keep `dev` synchronized with the published revision after each release; pushes and deployment are explicit maintainer actions.
 
 The website is hosted on Cloudflare Workers at tools.cloakyard.com. `apps/site/wrangler.jsonc` pins the existing custom domain, static output and HTTP 404 handling. Workers Builds uses `main`, root `apps/site`, build command `npm ci && npm run verify` and deploy command `npx wrangler deploy`. Verified changes promoted from `dev` to `main` publish automatically. `npm run check:worker` in `apps/site` validates the deployment bundle without publishing.
 
 Nonproduction branch builds use `npx wrangler preview` with the checked-in `previews` configuration. Cloudflare publishes the same static site to a branch Preview; only `main` updates tools.cloakyard.com. Production version URLs and workers.dev remain disabled.
 
-Native releases are separate. `python3 scripts/release.py --preview` creates a verified local ZIP; Developer ID signing and notarization remain deferred. See [Release](docs/RELEASE.md). Keep release binaries and generated build output out of source control. Updates are manual.
+Native releases are separate. `python3 scripts/release.py --preview` creates a verified local ZIP; Developer ID signing and notarization remain deferred. See [Release](docs/RELEASE.md). Keep release binaries and generated build output out of source control. Users can check for updates in About or enable automatic checks there.
 
 ## Contributing
 

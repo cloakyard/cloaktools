@@ -102,7 +102,7 @@ struct SettingsView: View {
                 }
             }
             Section {
-                LabeledContent("Release", value: "Development preview")
+                LabeledContent("Release", value: releaseChannel)
                 Text("No account, analytics or cloud processing. Automatic updates are optional.").foregroundStyle(.secondary)
             }
         }
@@ -267,9 +267,11 @@ struct SettingsView: View {
             Section {
                 HStack(spacing: 14) { Image("AboutAppIcon").resizable().frame(width: 64, height: 64).accessibilityHidden(true); Text("CloakTools").font(.title) }
                 Text("Part of Cloakyard · Built by Sumit Sahoo")
-                LabeledContent("Version", value: "\(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0.1.0") · Development preview")
+                LabeledContent("Version", value: versionLabel)
                 LabeledContent("Platform", value: "macOS 27 · Apple silicon")
-                Text("A local development build. No public installer is available yet.").foregroundStyle(.secondary)
+                if releaseChannel == "Development preview" {
+                    Text("Local development build").foregroundStyle(.secondary)
+                }
             }
             UpdateSettingsSection()
             Section("Learn more") {
@@ -281,6 +283,17 @@ struct SettingsView: View {
             }
         }
     }
+    private var releaseChannel: String {
+        Bundle.main.object(forInfoDictionaryKey: "CloakToolsReleaseChannel") as? String ?? "Development preview"
+    }
+
+    private var versionLabel: String {
+        let info = Bundle.main.infoDictionary
+        let version = info?["CFBundleShortVersionString"] as? String ?? "—"
+        let build = info?["CFBundleVersion"] as? String ?? "—"
+        return "\(version) (\(build)) · \(releaseChannel)"
+    }
+
     private func categoryColor(_ category: SettingsCategory) -> Color {
         switch category {
         case .general, .about: .gray

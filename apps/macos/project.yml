@@ -14,7 +14,8 @@ settings:
     CODE_SIGN_IDENTITY: "-"
     ENABLE_HARDENED_RUNTIME: YES
     MARKETING_VERSION: "0.6.0"
-    CURRENT_PROJECT_VERSION: "26"
+    CURRENT_PROJECT_VERSION: "20261118.1"
+    CLOAKTOOLS_RELEASE_CHANNEL: "Development preview"
     CLOAKTOOLS_APP_GROUP: ""
     CLOAKTOOLS_SOURCE_ROOT: $(SRCROOT)
   configs:
@@ -33,7 +34,7 @@ targets:
     platform: macOS
     sources:
       - path: App
-        excludes: [Info.plist, CloakTools.entitlements, CloakTools.Release.entitlements]
+        excludes: [Resources/Info.plist, Resources/CloakTools.entitlements, Resources/CloakTools.Release.entitlements]
       - path: ../../assets/icon/CloakTools.icon
         buildPhase: resources
       - path: ../../LICENSE
@@ -51,13 +52,13 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.cloakyard.cloaktools
         PRODUCT_NAME: CloakTools
-        CODE_SIGN_ENTITLEMENTS: App/CloakTools.entitlements
+        CODE_SIGN_ENTITLEMENTS: App/Resources/CloakTools.entitlements
         SPARKLE_PUBLIC_ED_KEY: "KcgLTg+iK7QXkwQ1j1GuDZYSZtlQ+QZvEMWP43502i4="
         SPARKLE_FEED_URL: https://tools.cloakyard.com/updates/appcast.xml
         LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/../Frameworks"
         ASSETCATALOG_COMPILER_APPICON_NAME: CloakTools
     info:
-      path: App/Info.plist
+      path: App/Resources/Info.plist
       properties:
         SUFeedURL: "$(SPARKLE_FEED_URL)"
         SUPublicEDKey: "$(SPARKLE_PUBLIC_ED_KEY)"
@@ -69,6 +70,7 @@ targets:
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         CFBundleDisplayName: CloakTools
+        CloakToolsReleaseChannel: $(CLOAKTOOLS_RELEASE_CHANNEL)
         CloakToolsAppGroupIdentifier: $(CLOAKTOOLS_APP_GROUP)
         LSMinimumSystemVersion: "27.0"
         LSApplicationCategoryType: public.app-category.utilities
@@ -130,6 +132,7 @@ targets:
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         CFBundleDisplayName: CloakTools Finder
+        CloakToolsReleaseChannel: $(CLOAKTOOLS_RELEASE_CHANNEL)
         CloakToolsAppGroupIdentifier: $(CLOAKTOOLS_APP_GROUP)
         NSExtension:
           NSExtensionPointIdentifier: com.apple.FinderSync
