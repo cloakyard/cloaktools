@@ -50,9 +50,9 @@ Media processing uses native frameworks. External media references are forbidden
 
 ## QR creation
 
-Create QR Code processes only text you type or paste, or a fixed Try Example link. Input and generated PNG stay in the operation window's memory. Links are not opened, fetched, validated against a server or rewritten. The app does not automatically read the clipboard, retain QR history or upload anything. A QR code is readable by anyone who has it; it does not encrypt or hide the text.
+Create QR Code encodes the fields you enter locally. Contact cards, calendar events, coordinates and Wi-Fi credentials come from the form. The tool keeps drafts and the prepared PNG in the window’s memory until you close it. Anyone who receives the code can read its contents, including an encoded Wi-Fi password.
 
-Copy Image explicitly replaces the system clipboard with the prepared PNG. Save PNG writes that image only after you review its name and choose a folder, using numbered filenames to preserve existing files. Cloud-managed destinations may synchronize output under their provider's policy. Switching between Create and Read keeps each draft in memory. Closing the window discards its input, options and generated image. Read mode is described below; camera access is not used.
+**Copy Image** writes the prepared PNG to the system clipboard. **Save PNG** writes it in the folder you choose. Cloud-managed destinations may synchronize the file under their provider’s policy.
 
 ## File lists
 
@@ -148,4 +148,4 @@ Use the [repository support guidance](https://github.com/cloakyard/cloaktools) a
 
 Read mode opens only an image you explicitly select, up to 10 MiB and 40 megapixels. Native image processing and QR detection run locally. The window keeps a reduced preview, filename, dimensions, code locations and decoded text in memory; it does not retain the full original bytes after reading. It does not access the camera, read the clipboard automatically, upload images, open decoded links or keep a QR history.
 
-Copy Text explicitly replaces the clipboard with the selected decoded string. Save Text writes it as a new UTF-8 file only after you review its name and select a folder; existing filenames receive numbered copies. Image metadata is not included in text exports. A code can itself contain private information, so review the decoded text before sharing. Cloud-managed destinations may synchronize saved text under their provider's policy. Switching modes retains the result; closing the window discards it.
+The reader initially conceals decoded Wi-Fi text. **Show encoded text** reveals it. **Copy Text** and file export include the complete selected result, including any encoded password. Contact and calendar documents can also be saved as .vcf or .ics for manual import. Saving creates a new file in the chosen folder. Cloud-managed destinations may synchronize the file under their provider’s policy. Closing the window discards the result.

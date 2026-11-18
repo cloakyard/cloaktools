@@ -25,7 +25,7 @@ public enum QRCodeError: LocalizedError, Equatable {
     public var errorDescription: String? {
         switch self {
         case .empty: "Enter text or a link to create a QR code."
-        case .inputTooLarge: "Use up to 1,024 bytes of UTF-8 text. Shorter messages make easier-to-scan codes."
+        case .inputTooLarge: "The code can hold up to 1,024 encoded bytes. Shorten the content or remove an optional detail."
         case .unsupportedControl: "Use plain text without binary control characters. Tabs and line breaks are supported."
         case .tooDense: "Choose a larger image or shorter text to keep this code easy to scan."
         case .generationFailed: "macOS could not create this QR code. Try shorter text or Standard error correction."
@@ -46,11 +46,15 @@ public struct PreparedQRCode: Sendable {
 public enum QRCodeCreation {
     public static let maximumInputBytes = 1024
 
-    public static func prepare(_ text: String, options: QRCodeOptions = .init()) throws -> PreparedQRCode {
-        try Task.checkCancellation()
+    static func validate(_ text: String) throws {
         guard text.utf8.count <= maximumInputBytes else { throw QRCodeError.inputTooLarge }
         guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { throw QRCodeError.empty }
         guard !text.unicodeScalars.contains(where: { ($0.value < 32 && ![9,10,13].contains($0.value)) || $0.value == 127 }) else { throw QRCodeError.unsupportedControl }
+    }
+
+    public static func prepare(_ text: String, options: QRCodeOptions = .init()) throws -> PreparedQRCode {
+        try Task.checkCancellation()
+        try validate(text)
         let filter = CIFilter.qrCodeGenerator()
         filter.message = Data(text.utf8); filter.correctionLevel = options.correction.rawValue
         guard let output = filter.outputImage,

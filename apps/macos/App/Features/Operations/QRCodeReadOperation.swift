@@ -2,10 +2,35 @@ import AppKit
 import SwiftUI
 import CloakToolsCore
 
+private extension QRReadFileFormat {
+    var suggestedName: String {
+        switch self { case .text: "QR text"; case .vCard: "Contact card"; case .calendar: "Calendar event" }
+    }
+}
+
 @MainActor @Observable
 final class QRCodeReadOperation {
     var name = "QR text" { didSet { if !name.utf8.elementsEqual(oldValue.utf8) { savedURL = nil; error = nil } } }
-    var selectedID: Int? { didSet { if selectedID != oldValue { savedURL = nil; copied = false; error = nil } } }
+    var selectedID: Int? {
+        didSet {
+            if selectedID != oldValue {
+                savedURL = nil; copied = false; error = nil; revealsWiFi = false
+                format = .text
+            }
+        }
+    }
+    var format: QRReadFileFormat = .text {
+        didSet {
+            guard format != oldValue else { return }
+            if name == oldValue.suggestedName { name = format.suggestedName }
+            savedURL = nil
+            error = nil
+        }
+    }
+    var saveTitle: String {
+        switch format { case .text: "Save Text"; case .vCard: "Save vCard"; case .calendar: "Save Calendar File" }
+    }
+    var revealsWiFi = false
     var onSaved: (() -> Void)?
     private(set) var prepared: PreparedQRReading?
     private(set) var previewImage: NSImage?
@@ -19,6 +44,8 @@ final class QRCodeReadOperation {
     var busy: Bool { activity != nil }
     var saving: Bool { activity == "Saving decoded text…" }
     var selectedCode: ReadQRCode? { prepared?.codes.first { $0.id == selectedID } }
+    var contentKind: QRContentKind? { selectedCode?.text.map(QRContentKind.recognizing) }
+    var concealsWiFi: Bool { contentKind == .wifi && !revealsWiFi }
     var nameError: String? { do { try SafeOutput.validate(stem: name); return nil } catch { return error.localizedDescription } }
     func cancel() { task?.cancel(); task = nil; revision = UUID(); activity = nil }
     func chooseImage() {
@@ -49,13 +76,13 @@ final class QRCodeReadOperation {
     func save() {
         guard !busy, let code = selectedCode, code.text != nil else { return }
         do { try SafeOutput.validate(stem: name) } catch { self.error = error.localizedDescription; return }
-        let panel = NSOpenPanel(); panel.title = "Save decoded QR text"; panel.prompt = "Save Text"
+        let panel = NSOpenPanel(); panel.title = saveTitle; panel.prompt = saveTitle
         panel.canChooseFiles = false; panel.canChooseDirectories = true; panel.canCreateDirectories = true
-        panel.message = "Save \(name).txt · Code \(code.id + 1) · \(code.text?.utf8.count ?? 0) bytes. Existing files get a numbered copy."
-        let revision = revision, name = name
+        panel.message = "Save \(name).\(format.rawValue) · Code \(code.id + 1) · \(code.text?.utf8.count ?? 0) bytes. Existing files get a numbered copy."
+        let revision = revision, name = name, format = format
         let completion: (NSApplication.ModalResponse) -> Void = { [weak self] response in
             guard response == .OK, let folder = panel.url, let self, self.revision == revision else { return }
-            self.start("Saving decoded text…", work: { try QRCodeReading.save(code, in: folder, stem: name) }) { model, url in
+            self.start("Saving decoded text…", work: { try QRCodeReading.save(code, in: folder, stem: name, format: format) }) { model, url in
                 model.savedURL = url; model.onSaved?()
             }
         }
@@ -102,7 +129,7 @@ struct QRCodeReadView: View {
                 }.frame(maxWidth: .infinity, maxHeight: .infinity)
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
-                        Text("Decoded text").font(.callout.weight(.medium))
+                        Text(operation.contentKind?.rawValue ?? "Decoded text").font(.callout.weight(.medium))
                         Spacer(minLength: 4)
                         if let result = operation.prepared, result.codes.count > 1 {
                             Picker("Selected QR code", selection: $operation.selectedID) {
@@ -110,23 +137,43 @@ struct QRCodeReadView: View {
                             }.labelsHidden().fixedSize().disabled(operation.busy)
                         }
                     }.frame(height: 24)
-                    PlainTextEditor(text: .constant(operation.selectedCode?.text ?? ""), editable: false, label: "Decoded QR text", rejectLargeInput: {})
-                        .overlay(alignment: .topLeading) {
-                            if operation.selectedCode?.text?.isEmpty != false {
-                                Text(emptyMessage).font(.callout).foregroundStyle(.secondary).padding(12).allowsHitTesting(false).accessibilityHidden(true)
-                            }
+                    if operation.concealsWiFi {
+                        VStack(spacing: 10) {
+                            Image(systemName: "wifi").font(.title).foregroundStyle(.secondary)
+                            Text("Network details are hidden").font(.callout)
+                            Button("Show encoded text") { operation.revealsWiFi = true }
                         }
-                        .background(Color(nsColor: .textBackgroundColor)).clipShape(.rect(cornerRadius: 10))
-                        .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(.separator.opacity(0.6)))
-                    Text(operation.selectedCode?.text.map { "\($0.utf8.count.formatted()) bytes · Selectable text" } ?? "Nothing is copied or opened automatically")
-                        .font(.caption).foregroundStyle(.secondary)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color(nsColor: .controlBackgroundColor), in: .rect(cornerRadius: 10))
+                    } else {
+                        PlainTextEditor(text: .constant(operation.selectedCode?.text ?? ""), editable: false, label: "Decoded QR text", rejectLargeInput: {})
+                            .overlay(alignment: .topLeading) {
+                                if operation.selectedCode?.text?.isEmpty != false {
+                                    Text(emptyMessage).font(.callout).foregroundStyle(.secondary).padding(12).allowsHitTesting(false).accessibilityHidden(true)
+                                }
+                            }
+                            .background(Color(nsColor: .textBackgroundColor)).clipShape(.rect(cornerRadius: 10))
+                            .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(.separator.opacity(0.6)))
+                    }
+                    if operation.contentKind == .wifi {
+                        if operation.revealsWiFi { Button("Hide encoded text") { operation.revealsWiFi = false }.buttonStyle(.link) }
+                        Text("Copy and Save include the full network details.").font(.caption).foregroundStyle(.secondary)
+                    } else {
+                        Text(operation.selectedCode?.text.map { "\($0.utf8.count.formatted()) bytes · Selectable text" } ?? "Nothing is copied or opened automatically")
+                            .font(.caption).foregroundStyle(.secondary)
+                    }
                 }.frame(maxWidth: .infinity, maxHeight: .infinity)
             }.frame(minHeight: 240, maxHeight: .infinity)
             if operation.selectedCode?.text != nil {
                 HStack {
                     Text("Name").foregroundStyle(.secondary)
                     TextField("Filename without extension", text: $operation.name).textFieldStyle(.roundedBorder).labelsHidden()
-                    Text(".txt").font(.callout.monospaced()).foregroundStyle(.secondary)
+                    if let document = operation.selectedCode?.documentFormat {
+                        Picker("File format", selection: $operation.format) {
+                            Text("Plain text (.txt)").tag(QRReadFileFormat.text)
+                            Text(document == .vCard ? "Contact (.vcf)" : "Calendar (.ics)").tag(document)
+                        }.labelsHidden().fixedSize()
+                    } else { Text(".txt").font(.callout.monospaced()).foregroundStyle(.secondary) }
                 }.disabled(operation.busy)
             }
             VStack(alignment: .leading, spacing: 5) {
@@ -157,7 +204,7 @@ struct QRCodeReadView: View {
                         Button("Done", action: close).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
                     } else if operation.selectedCode?.text != nil {
                         Button(operation.copied ? "Copied" : "Copy Text", action: operation.copyText).modifier(DialogActionStyle()).disabled(operation.busy || operation.selectedCode?.text?.isEmpty != false)
-                        Button("Save Text…", action: operation.save).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy || operation.nameError != nil)
+                        Button(operation.saveTitle + "…", action: operation.save).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy || operation.nameError != nil)
                     } else {
                         Button("Choose Image…", action: operation.chooseImage).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy)
                     }

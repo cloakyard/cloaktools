@@ -6,7 +6,40 @@ import CloakToolsCore
 final class QRCodeOperation: Identifiable {
     let id = UUID()
     var reading = false
-    var input = "" { didSet { if !input.utf8.elementsEqual(oldValue.utf8) { invalidate() } } }
+    private var eventID = UUID()
+    private var eventStamp = Date()
+    private var filenames: [QRContentKind: String] = [:]
+    var draft = QRContentDraft() {
+        didSet {
+            if draft.kind == .event && !draft.describesSameEvent(as: oldValue) {
+                eventID = UUID()
+                eventStamp = Date()
+            }
+            let next: String?
+            let hint: String?
+            do {
+                next = try draft.content.encoded(eventID: eventID, createdAt: eventStamp)
+                hint = nil
+            } catch {
+                next = nil
+                hint = error.localizedDescription
+            }
+            let switched = draft.kind != oldValue.kind
+            // AppKit can commit an unchanged field again when Create takes focus.
+            // Keep the reviewed PNG if its exact bytes and content type still apply.
+            let sameBytes = next?.utf8.elementsEqual((payload ?? "").utf8) ?? (payload == nil)
+            guard switched || !sameBytes || hint != fieldHint else { return }
+            invalidate()
+            if switched {
+                filenames[oldValue.kind] = name
+                name = filenames[draft.kind] ?? draft.kind.defaultFilename
+            }
+            payload = next
+            fieldHint = hint
+        }
+    }
+    private(set) var payload: String?
+    private(set) var fieldHint: String?
     var options = QRCodeOptions() { didSet { if options != oldValue { invalidate() } } }
     var name = "QR code" { didSet { if !name.utf8.elementsEqual(oldValue.utf8) { savedURL = nil; error = nil } } }
     var onSaved: (() -> Void)?
@@ -20,14 +53,13 @@ final class QRCodeOperation: Identifiable {
     private var revision = UUID()
     var busy: Bool { activity != nil }
     var saving: Bool { activity == "Saving QR code…" }
-    var hasInput: Bool { !input.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
     var nameError: String? { do { try SafeOutput.validate(stem: name); return nil } catch { return error.localizedDescription } }
     func cancel() { task?.cancel(); task = nil; revision = UUID(); activity = nil }
     private func invalidate() { cancel(); prepared = nil; previewImage = nil; error = nil; copied = false; savedURL = nil }
     func rejectLargeInput() { error = QRCodeError.inputTooLarge.localizedDescription }
     func generate() {
-        guard !busy, hasInput else { return }
-        invalidate(); let input = input, options = options
+        guard !busy, let input = payload else { return }
+        invalidate(); let options = options
         start("Creating QR code…", work: { try QRCodeCreation.prepare(input, options: options) }) { model, result in
             model.prepared = result; model.previewImage = NSImage(data: result.png)
         }
@@ -107,7 +139,7 @@ struct QRCodeHeading: View {
     @Binding var reading: Bool
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
-            DialogHeading(title: "QR code", subtitle: reading ? "Read an image. Review its contents." : "A little square. Ready to share.", symbol: "qrcode")
+            DialogHeading(title: "QR code", subtitle: reading ? "Read an image and review its contents." : "Choose what someone will scan.", symbol: "qrcode")
             Spacer(minLength: 0)
             Picker("QR tool", selection: $reading) { Text("Create").tag(false); Text("Read").tag(true) }
                 .pickerStyle(.segmented).labelsHidden().fixedSize()
@@ -115,67 +147,65 @@ struct QRCodeHeading: View {
     }
 }
 struct QRCodeView: View {
+    @State private var imageSettings = false
     @Bindable var operation: QRCodeOperation
     @Binding var reading: Bool
     let close: () -> Void
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             QRCodeHeading(reading: $reading).disabled(operation.busy)
-            HStack(alignment: .top, spacing: 14) {
-                VStack(alignment: .leading, spacing: 8) {
-                    HStack {
-                        Text("Text or link").font(.callout.weight(.medium))
-                        Spacer(minLength: 4)
-                        Button(operation.input.isEmpty ? "Try Example" : "Clear") {
-                            operation.input = operation.input.isEmpty ? "https://example.com/" : ""
-                        }.buttonStyle(.link).font(.caption).disabled(operation.busy)
-                    }
-                    PlainTextEditor(text: $operation.input, editable: !operation.busy, label: "QR code text or link", rejectLargeInput: operation.rejectLargeInput, maximumInputBytes: QRCodeCreation.maximumInputBytes)
-                        .overlay(alignment: .topLeading) {
-                            if operation.input.isEmpty {
-                                Text("Paste or type what you want to share.").font(.system(.callout, design: .monospaced)).foregroundStyle(.tertiary).padding(12).allowsHitTesting(false).accessibilityHidden(true)
-                            }
-                        }
-                        .background(Color(nsColor: .textBackgroundColor)).clipShape(.rect(cornerRadius: 10))
-                        .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(.separator.opacity(0.6)))
-                    Text("\(operation.input.utf8.count.formatted()) / 1,024 bytes · Exact text is encoded")
-                        .font(.caption).foregroundStyle(.secondary)
-                }.frame(maxWidth: .infinity, maxHeight: .infinity)
-                VStack(alignment: .leading, spacing: 8) {
+            Picker("Content", selection: $operation.draft.kind) {
+                ForEach(QRContentKind.allCases) { Text($0.rawValue).tag($0) }
+            }.fixedSize().disabled(operation.busy)
+            HStack(alignment: .top, spacing: 18) {
+                ScrollView {
+                    QRContentForm(operation: operation).id(operation.draft.kind)
+                        .padding(.trailing, 5).padding(.vertical, 3)
+                }.scrollBounceBehavior(.basedOnSize)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity).disabled(operation.busy)
+                VStack(spacing: 8) {
                     Text("Preview").font(.callout.weight(.medium))
                     ZStack {
                         if let image = operation.previewImage {
                             Color.white
                             Image(nsImage: image).interpolation(.none).resizable().scaledToFit()
-                                .accessibilityLabel("Generated QR code. Encodes the text shown beside it.")
+                                .accessibilityLabel("\(operation.draft.kind.rawValue) QR code")
                         } else {
                             Color(nsColor: .controlBackgroundColor)
-                            VStack(spacing: 10) {
-                                Image(systemName: "qrcode").font(.system(size: 38)).foregroundStyle(.tertiary).accessibilityHidden(true)
-                                Text("Your code appears here").font(.callout).foregroundStyle(.secondary)
-                            }
+                            Image(systemName: "qrcode").font(.system(size: 42)).foregroundStyle(.tertiary)
+                                .accessibilityLabel("QR preview is empty")
                         }
-                    }.clipShape(.rect(cornerRadius: 10)).overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(.separator.opacity(0.6)))
-                    Text(operation.prepared.map { "\($0.width) × \($0.width) px · PNG · \($0.png.count.formatted()) bytes" } ?? "Black on white · A clear border for scanning")
-                        .font(.caption).foregroundStyle(.secondary)
-                }.frame(maxWidth: .infinity, maxHeight: .infinity)
-            }.frame(minHeight: 210, maxHeight: .infinity)
-            VStack(alignment: .leading, spacing: 10) {
+                    }
+                    .aspectRatio(1, contentMode: .fit).frame(maxWidth: 245, maxHeight: 245)
+                    .clipShape(.rect(cornerRadius: 10)).overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(.separator.opacity(0.6)))
+                    if let result = operation.prepared {
+                        Text("\(result.width) × \(result.width) px · PNG · \(result.png.count.formatted()) bytes")
+                            .font(.caption).foregroundStyle(.secondary)
+                    }
+                }.frame(maxWidth: .infinity)
+            }.frame(minHeight: 160, maxHeight: .infinity)
+            if let hint = operation.fieldHint {
+                Text(hint).font(.callout).foregroundStyle(.secondary)
+            } else if let payload = operation.payload {
+                Text("\(payload.utf8.count.formatted()) / 1,024 encoded bytes").font(.caption).foregroundStyle(.secondary)
+            }
+            DisclosureGroup("Image settings", isExpanded: $imageSettings) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Picker("Image size", selection: $operation.options.size) {
+                        ForEach(QRImageSize.allCases) { Text($0.title).tag($0) }
+                    }.pickerStyle(.segmented)
+                    Picker("Error correction", selection: $operation.options.correction) {
+                        ForEach(QRCorrection.allCases) { Text($0.title).tag($0) }
+                    }.pickerStyle(.segmented)
+                }.padding(.top, 5)
+            }.modifier(DialogCard()).disabled(operation.busy)
+            if operation.prepared != nil {
                 HStack {
-                    Text("Image size").foregroundStyle(.secondary).frame(width: 110, alignment: .leading)
-                    Picker("Image size", selection: $operation.options.size) { ForEach(QRImageSize.allCases) { Text($0.title).tag($0) } }.pickerStyle(.segmented).labelsHidden()
-                }
-                HStack {
-                    Text("Error correction").foregroundStyle(.secondary).frame(width: 110, alignment: .leading)
-                    Picker("Error correction", selection: $operation.options.correction) { ForEach(QRCorrection.allCases) { Text($0.title).tag($0) } }.pickerStyle(.segmented).labelsHidden()
-                }
-                Text("High tolerates more damage, but makes a denser code.").font(.caption).foregroundStyle(.secondary)
-            }.frame(maxWidth: .infinity, alignment: .leading).modifier(DialogCard()).disabled(operation.busy)
-            HStack {
-                Text("Name").foregroundStyle(.secondary)
-                TextField("Filename without extension", text: $operation.name).textFieldStyle(.roundedBorder).labelsHidden()
-                Text(".png").font(.callout.monospaced()).foregroundStyle(.secondary)
-            }.disabled(operation.busy)
+                    Text("Name").foregroundStyle(.secondary)
+                    TextField("Filename without extension", text: $operation.name).textFieldStyle(.roundedBorder).accessibilityLabel("PNG filename")
+                    Text(".png").font(.callout.monospaced()).foregroundStyle(.secondary)
+                }.disabled(operation.busy)
+            }
             VStack(alignment: .leading, spacing: 5) {
                 if let url = operation.savedURL {
                     HStack {
@@ -185,7 +215,7 @@ struct QRCodeView: View {
                     }.font(.callout).foregroundStyle(.green)
                 } else if operation.copied { Label("QR image copied", systemImage: "checkmark.circle.fill").font(.callout).foregroundStyle(.green) }
                 OperationFeedback(activity: operation.activity, error: operation.error ?? operation.nameError)
-                Text("Local only · Links aren't opened · Anyone can read a shared code")
+                Text(operation.draft.kind == .wifi && operation.draft.security != .open ? "Anyone with this code can read the Wi-Fi password." : "Anyone with the code can read its contents.")
                     .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
                 if let result = operation.prepared, result.inputByteCount > 512 {
                     Text("Dense code · Check it with your scanner before sharing.").font(.caption).foregroundStyle(.secondary)
@@ -201,7 +231,7 @@ struct QRCodeView: View {
                         Button(operation.copied ? "Copied" : "Copy Image", action: operation.copyImage).modifier(DialogActionStyle()).disabled(operation.busy)
                         Button("Save PNG…", action: operation.save).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy || operation.nameError != nil)
                     } else {
-                        Button("Create QR Code", action: operation.generate).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy || !operation.hasInput)
+                        Button("Create QR Code", action: operation.generate).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy || operation.payload == nil)
                     }
                 }
             }

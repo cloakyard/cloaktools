@@ -122,17 +122,13 @@ Items and Export share one workspace. Numbered item rows show name, kind, parent
 
 ## QR creation
 
-Create QR Code joins New Files' Text & sharing group and the File menu as an everyday tool. Its 660 × 600 pt window (minimum 600 × 560) places an editable text/link pane beside the generated image. Try Example supplies a fixed example.com link; Clear is explicit. A neutral empty preview avoids displaying a misleading functional sample code. The image remains opaque black on white, with no decorative overlays or logo cutouts.
+QR Code opens from Text & Sharing in the Workbench or File menu. The 660 × 600 pt window (minimum 600 × 560) keeps Create and Read in the same heading. Switching modes retains each draft for the lifetime of the window.
 
-The full-width options card contains size and correction segments plus a concise explanation. Default 512 px / Standard suits short messages. Exact UTF-8 byte count, output dimensions and PNG bytes remain visible. Input/options changes remove stale output immediately. Density errors offer a larger image or shorter text; prepared inputs over 512 bytes show a scanner-check hint. Shared Glass actions advance from Create QR Code to Copy Image/Save PNG, then Done. Inline safe-name feedback disables Save, and the folder picker states filename, dimensions and collision behavior. Live checks caught and corrected an initially undersized options-card background. See [verification](docs/verification/QR-CREATION.md) for scan tests and remaining layout/accessibility coverage.
+In Create, the Content picker shows only the fields for the chosen type. Longer forms scroll beside a fixed preview. Contact and event fields have visible labels, dates use native pickers, and password entry uses a secure field. Image settings starts collapsed with Standard correction and 512 px selected. The user can review encoded byte count, dimensions and PNG size before copying or saving. Editing a payload or an image setting clears the previous preview.
 
 ## QR reading workspace
 
-QR Code now has compact Create/Read segments within its shared heading; New Files keeps one row for both actions. Each mode retains its draft while the window stays open. File → Text & Sharing → Read QR Code opens the reader directly. Both are everyday tools.
-
-Read places an orientation-correct image beside selectable, read-only text. Numbered outlines and a matching code menu support multiple results without adding a sidebar. Both pane headings reserve the same height so the selector does not shift one preview lower. The selected outline uses the accent color and thicker stroke. Filename and Copy/Save actions appear only for readable text; no-code and invalid-image states offer a new image instead. No code opens a link automatically.
-
-Choose Another keeps the current result when its panel is cancelled. Accepting a new source clears the old image/text before reading, so a failed read cannot expose stale output actions. Safe-name guidance disables Save, the folder picker identifies code number and byte count, and successful saving offers Show in Finder and Return-to-Done. Glass is confined to action controls; image and text surfaces use semantic backgrounds. See [QR reading verification](docs/verification/QR-READING.md).
+Read places an orientation-correct image beside its contents. Numbered outlines and a matching code menu identify multiple results. The reader labels the content type, conceals Wi-Fi details until requested and offers a file format picker for contact cards or calendar documents. The save button and filename extension reflect the chosen format. Glass is confined to actions, with semantic backgrounds for images and text. [QR workspace verification](docs/verification/QR-CONTENT.md)
 
 ## Native capabilities and catalog scope
 

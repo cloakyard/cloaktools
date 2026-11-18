@@ -35,7 +35,7 @@ The [first public beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.
 | **Prepare images** | Convert PNG/JPEG/TIFF/HEIC input; Make It Fit measures an output against byte and dimension limits before saving the exact preview. |
 | **Reuse exports** | Saved image, size-budget and media recipes; full-clip MP4 or M4A export with native preview and cancellation. |
 | **Organize PDFs** | Assemble PDFs/images; select, reorder and rotate pages, then export an ordinary PDF without modifying its sources. |
-| **Handle text and sharing** | Clipboard to file, QR creation/reading, text cleanup, Markdown digests, reviewed CSV/Markdown file lists and Copy As formats. |
+| **Handle text and sharing** | Clipboard to file, QR creation/reading, text cleanup, Markdown digests, reviewed CSV/Markdown file lists and Copy As formats. The source build adds QR forms for contacts, Wi-Fi, links, email, calls, messages, locations and events alongside plain text. |
 | **Route links** | Separate web/email defaults with guarded restoration, ordered rules, pinned destinations, per-role fallback, an offline tester and explicit one-time bypass. |
 | **Work from Finder** | Workspace-scoped Finder menus, selected-item Services and compact native operation dialogs. |
 

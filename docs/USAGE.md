@@ -117,17 +117,26 @@ Keys, variable names and structure remain in the example and may themselves cont
 
 ## Create QR codes
 
-Open **Text & Sharing → Create a QR code** or **File → Text & Sharing → Create QR Code…**. Type or paste text or a link, or choose **Try Example**. Select a 512, 1024 or 2048-pixel PNG and Standard or High error correction, then **Create QR Code** (⌘Return). Input and preview remain side by side. Standard / 512 pixels is the default; High tolerates more damage but makes a denser code.
+Open **Text & Sharing → Create a QR code**. Choose what someone will scan from **Content**.
 
-Review the input and image, then explicitly **Copy Image** or name and **Save PNG…**. Save writes the exact prepared PNG in your chosen folder, with numbered collisions. Changing input, image size or correction clears the old code; filename edits keep the prepared image. One Return activates Done after saving.
+| Content | What to enter |
+| --- | --- |
+| Text or Web link | Paste a message exactly as you want it to appear, or enter a full HTTP or HTTPS address. |
+| Contact card (vCard) | Enter a first or last name. Add a phone number, email, organization or website as needed. |
+| Wi-Fi network | Enter the exact network name and choose WPA/WPA2 Personal, WEP or Open. For a protected network, enter its password. Select **Hidden network** if applicable. |
+| Email, Phone call or Text message | Enter one email address or a phone number with its country code. Email supports a subject and message. Text message supports a prefilled message. |
+| Map location | Enter latitude and longitude in decimal degrees. |
+| Calendar event | Give the event a title, choose local start and end times, and optionally add a location. |
 
-Input is capped at 1,024 UTF-8 bytes. Spaces, line endings and Unicode are encoded without trimming or normalization; empty/whitespace-only input and binary controls are rejected. Output uses opaque black/white pixels, integer-sized modules and a white scanning border. If the selected image is too small, choose a larger size or shorten the text. Dense codes may not work with every scanner, so check the intended reader before sharing. The app never opens or fetches encoded links, reads the clipboard automatically, or keeps QR history. Anyone with the code can read its contents. Use the Read tab to inspect an existing code from an image.
+Choose **Create QR Code** (⌘Return) to preview the image. **Copy Image** puts the PNG on the clipboard. **Save PNG…** writes the reviewed image into the folder you choose, adding a number if the name is taken. Switch types to work on another code and return to your entries while the window stays open.
+
+**Image settings** defaults to 512 pixels and Standard correction. Choose 1024 or 2048 pixels for denser codes, or High correction for greater damage tolerance. The 1,024-byte limit includes the encoded contact, network or event fields. Anyone with a Wi-Fi QR code can read its encoded password.
 
 ## Read QR codes
 
-Open **Text & Sharing → Read a QR code from an image** or **File → Text & Sharing → Read QR Code…**. Choose a still image and review it beside the decoded text. For multiple codes, click a numbered outline or choose **Code 1**, **Code 2**, and so on. Links remain plain text and are never opened automatically. Create and Read keep separate drafts until the window closes.
+Open **Text & Sharing → Read a QR code from an image**, or switch to **Read** in the QR window. Choose a still image. If it contains multiple codes, click a numbered outline or choose its number above the preview. The reader identifies the selected content. For Wi-Fi, choose **Show encoded text** to reveal the network details.
 
-**Copy Text** copies the selected result. Enter a name and **Save Text…** to create a UTF-8 `.txt` copy in a chosen folder; existing names receive numbered copies. Copying/saving uses the complete decoded string, with no added newline. Scanner interpretation can omit encoding markers such as a BOM; this is text reading, not raw QR payload extraction.
+**Copy Text** copies the entire result. **Save Text…** writes it as UTF-8. For a contact card or calendar document, use the format picker to save a **.vcf** or **.ics** file that you can open separately. Each export preserves the complete decoded text and adds a number if the name is taken. The reader leaves opening links, joining a network and importing a file up to you.
 
 PNG, JPEG, GIF, WebP, TIFF and HEIC/HEIF are accepted as single still images, up to 10 MiB and 40 megapixels. Reading is bounded to a 4096-pixel long edge, 16 codes and 32 KiB of decoded text per code. If a code is missed, try a sharper image or a closer crop. Animations, multi-page images, PDF and SVG are unsupported. No camera access, automatic clipboard reads, uploads or QR history are used. See [verification](verification/QR-READING.md).
 
