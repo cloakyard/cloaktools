@@ -22,6 +22,8 @@ Make It Fit opens at 480 × 520 pt, with original and encoded-result previews, a
 
 ## App identity
 
+The Workbench sidebar starts with the 44 pt app icon and CloakTools name below the window controls. The native search field sits directly beneath them. Both stay in place as the categories scroll.
+
 The original mark combines a cobalt tool case, beveled silver spanner and fluted amber screwdriver. Eleven editable SVG layers in three depth groups and a native background live in `assets/icon/CloakTools.icon`. A recessed tray sits behind the tools; the raised front rim, case return and brushed latch establish the foreground. Xcode compiles the native icon; macOS supplies glass, lighting and the shape mask. Light, dark, clear and tinted exports come from Icon Composer, not painted imitations. About uses native appearance-specific exports. The circular web adaptation derives from every group's identical source paths in matching paint order. See [asset provenance and regeneration](assets/README.md).
 
 CloakDrop and CloakRoll were studied at their source: foreground geometry, background and dark variants, material configuration, native asset build and website mark. Their filled, legible silhouettes and individual palettes guide CloakTools, with its own tool imagery.

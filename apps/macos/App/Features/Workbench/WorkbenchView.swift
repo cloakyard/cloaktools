@@ -28,15 +28,8 @@ struct WorkbenchView: View {
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
             List(selection: Binding<WorkbenchCategory?>(get: { navigation.category }, set: { if let category = $0 { navigation.browse(category) } })) {
-                Section {
-                    ForEach(categories) { category in
-                        Label(category.rawValue, systemImage: category.symbol).tag(category)
-                    }
-                } header: {
-                    HStack(spacing: 8) {
-                        Image("AboutAppIcon").resizable().frame(width: 32, height: 32).accessibilityHidden(true)
-                        Text("CloakTools").font(.headline).foregroundStyle(.primary)
-                    }.padding(.vertical, 6)
+                ForEach(categories) { category in
+                    Label(category.rawValue, systemImage: category.symbol).tag(category)
                 }
                 if !otherDrafts.isEmpty {
                     Section("In Progress") {
@@ -57,6 +50,21 @@ struct WorkbenchView: View {
             }
             .listStyle(.sidebar)
             .accessibilityLabel("Tool categories")
+            .safeAreaInset(edge: .top, alignment: .leading, spacing: 0) {
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack(spacing: 8) {
+                        Image("AboutAppIcon").resizable().scaledToFit()
+                            .frame(width: 44, height: 44).accessibilityHidden(true)
+                        Text("CloakTools").font(.title3.weight(.semibold)).accessibilityAddTraits(.isHeader)
+                    }
+                    SidebarSearchField(query: $navigation.query)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .focused($searchFocused)
+                }
+                .padding(.horizontal, 10)
+                .padding(.top, 4)
+                .padding(.bottom, 8)
+            }
             .safeAreaInset(edge: .bottom, alignment: .leading) {
                 SettingsLink { Label("Settings…", systemImage: "gearshape") }
                     .buttonStyle(.borderless).padding(16)
@@ -90,8 +98,6 @@ struct WorkbenchView: View {
             }
         }
         .navigationSplitViewStyle(.balanced)
-        .searchable(text: $navigation.query, placement: .sidebar, prompt: "Find a tool")
-        .searchFocused($searchFocused)
         .frame(minWidth: 800, minHeight: 600)
         .windowDismissBehavior(navigation.hasBusyDraft ? .disabled : .automatic)
         .onAppear {
@@ -100,8 +106,15 @@ struct WorkbenchView: View {
         }
         .onDisappear { navigation.windowClosed() }
         .onChange(of: navigation.searchRequest) {
-            if columnVisibility == .detailOnly { columnVisibility = .all }
-            searchFocused = true
+            if columnVisibility == .detailOnly {
+                columnVisibility = .all
+                Task { @MainActor in
+                    await Task.yield()
+                    searchFocused = true
+                }
+            } else {
+                searchFocused = true
+            }
         }
         .onChange(of: isCatalog) { _, showingCatalog in
             if !showingCatalog || navigation.isSearching { searchFocused = showingCatalog }
@@ -211,5 +224,34 @@ struct WorkbenchView: View {
         case .languageSettings: settings(.developer)
         case .templates, .savedSets, .presets, .recipes, .openLink, .testLink: navigation.show(tool)
         }
+    }
+}
+
+private struct SidebarSearchField: NSViewRepresentable {
+    @Binding var query: String
+
+    func makeCoordinator() -> Coordinator { Coordinator(query: $query) }
+
+    func makeNSView(context: Context) -> NSSearchField {
+        let field = NSSearchField()
+        field.placeholderString = "Find a tool"
+        field.setAccessibilityLabel("Find a tool")
+        field.controlSize = .large
+        field.sendsSearchStringImmediately = true
+        field.target = context.coordinator
+        field.action = #selector(Coordinator.searchChanged(_:))
+        field.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        return field
+    }
+
+    func updateNSView(_ field: NSSearchField, context: Context) {
+        if field.stringValue != query { field.stringValue = query }
+    }
+
+    final class Coordinator: NSObject {
+        @Binding var query: String
+        init(query: Binding<String>) { _query = query }
+
+        @objc func searchChanged(_ field: NSSearchField) { query = field.stringValue }
     }
 }

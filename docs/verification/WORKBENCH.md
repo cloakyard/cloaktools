@@ -18,6 +18,7 @@ Checked the ad-hoc Debug build on Apple silicon with macOS 27.2.1 and Xcode 27.2
 | Return to search | ⌘[ restored the query and keyboard focus. Resume reopened the PDF draft. Cancel removed the draft and left the query available. Dismissing the link tester also returned to its originating search. |
 | Search into an image picker | Cancelling Choose Image preserved “shrink photo”. Choosing the fixture opened its image-fitting editor. Back returned to the query with Resume available. |
 | Recover from an empty result | A query with zero matches showed Clear Search. Activating it returned to the category. Light Finder and compact file views and dark search results were visually inspected. |
+| Sidebar identity and search | The 44 pt icon and app name appeared above search in light and compact dark windows. ⌘F restored focus from a hidden sidebar, Escape cleared the query, and ⌘Return and ⌘[ opened a result and restored its search. |
 
 The native build succeeded. All 224 core tests and 14 hosted tests passed. The hosted suite covers catalog visibility and ranking, search restoration across reviews and developer visibility changes, draft ownership, and the nesting and byte counts in a file-set review.
 
