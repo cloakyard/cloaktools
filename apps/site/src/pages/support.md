@@ -1,11 +1,15 @@
 ---
 layout: ../layouts/Reading.astro
 title: Support
-description: Practical help for the CloakTools development preview.
+description: Practical help for the CloakTools public beta.
 ---
+## Installing and updating
+
+Download the [official beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-beta.20261118.2) and follow the [installation guide](/install/). In the installed app, open **Settings → About → Check for Updates**. If the feed cannot be reached, retry when you are online. The same release page provides the DMG for manual installation.
+
 ## A tool has moved
 
-The 0.6.0 preview keeps existing tools in smaller groups. Expand **New Files → More text tools** for QR Code, Text Cleanup and Clipboard to File, or **Conversions → Image & PDF tools** for Convert Image, Assemble PDF and Organize PDF. Saved image defaults are under **Conversions → Image conversion defaults**.
+The 0.6.0 beta keeps existing tools in smaller groups. Expand **New Files → More text tools** for QR Code, Text Cleanup and Clipboard to File, or **Conversions → Image & PDF tools** for Convert Image, Assemble PDF and Organize PDF. Saved image defaults are under **Conversions → Image conversion defaults**.
 
 The same actions are in **File → Text & Sharing** and **File → Images & PDFs**. Keyboard shortcuts still work directly. Saved templates, recipes, presets and Developer Tools choices are kept.
 
@@ -195,8 +199,8 @@ Include the app version, macOS version, entry point, expected result, actual res
 
 Use [GitHub issues](https://github.com/cloakyard/cloaktools/issues) for reproducible problems. The repository includes [contribution guidance](https://github.com/cloakyard/cloaktools/blob/main/CONTRIBUTING.md), [security reporting](https://github.com/cloakyard/cloaktools/blob/main/SECURITY.md), and verification notes. [Source and release status](/source/) explains what is available.
 
-## Shortcuts in the local preview
+## Shortcuts in the public beta
 
 Make Image Fit, Make Markdown Digest and Review Saved File Set are implemented and can appear in the Shortcuts library. On the tested Mac, an ad-hoc build cannot execute them because macOS cannot establish its team signing identity. General explains the limitation. Use the matching native tools for now; a signed build still needs end-to-end verification. A Shortcuts action does not create a file set automatically.
 
-Additional Finder folders have the same signed-build boundary. The workspace and selected-item Services remain the supported local-preview paths. Signing and notarization are deferred; no paid account is needed to build and use the ordinary local tools.
+Additional Finder folders have the same signed-build boundary. The workspace and selected-item Services remain the supported options in the public beta. Signing and notarization are deferred; no paid account is needed to build and use the ordinary local tools.

@@ -22,6 +22,8 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>CloakToolsAppGroupIdentifier</key>
 	<string>$(CLOAKTOOLS_APP_GROUP)</string>
+	<key>CloakToolsReleaseChannel</key>
+	<string>$(CLOAKTOOLS_RELEASE_CHANNEL)</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionPointIdentifier</key>

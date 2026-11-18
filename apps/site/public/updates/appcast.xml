@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!-- sparkle-sign-warning:
+IMPORTANT: This file was signed by Sparkle. Any modifications to this file requires re-signing this file with generate_appcast or sign_update! The signed signature will be embedded at the end of this file.
+-->
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>CloakTools Updates</title>
+        <link>https://tools.cloakyard.com/updates/appcast.xml</link>
+        <description>Signed updates for CloakTools.</description>
+        <language>en</language>
+        <item>
+            <title>0.6.0</title>
+            <pubDate>Wed, 18 Nov 2026 15:14:25 +0530</pubDate>
+            <sparkle:version>20261118.2</sparkle:version>
+            <sparkle:shortVersionString>0.6.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>27.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/cloakyard/cloaktools/releases/download/v0.6.0-beta.20261118.2/CloakTools-20261118.2.zip" length="6679402" type="application/octet-stream" sparkle:edSignature="zbkQwZ4YIsoQLGY1C+U8N26grosX8CF6wrRhsYzReLQQGFI7J3rmUqXp8eI5XitysnofCycdKgHmcgwMIeQIDw=="/>
+        </item>
+    </channel>
+</rss>
+<!-- sparkle-signatures:
+edSignature: Wp3YGQNhKiZntIoAGg8Ri1o55Eh/Hxn1fdrLO6KSqQlUM4tKFIPj3RQFtCXHAwApb03ND88qHfHL7SmGULU7Cg==
+length: 1262
+-->

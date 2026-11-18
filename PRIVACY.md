@@ -1,8 +1,8 @@
 # Privacy policy
 
-**CloakTools · Updated 16 November 2026**
+**CloakTools · Updated 17 November 2026**
 
-CloakTools is a local Mac toolkit. No account is required.
+CloakTools is a local Mac toolkit. It has no accounts, advertising, analytics, telemetry or automatic crash-report uploads. Update checks and downloads are off by default and can be managed in About.
 
 <details>
 <summary>On this page</summary>
@@ -122,13 +122,15 @@ Pinned destination names/identifiers, their order and optional web/email fallbac
 
 ## Network and diagnostics
 
-There are no analytics, ads, automatic update checks, crash uploads, or app-operated cloud services. User-invoked website links open in an external app. The local preview has no updater.
+There are no analytics, ads, crash uploads or cloud processing. User-invoked website links open in an external app.
+
+Sparkle 2 checks for updates only when you choose Check for Updates or enable automatic checks in About settings. Automatic checks and automatic downloads are off by default. The app contacts its Cloakyard website for a signed update feed and GitHub Releases (including its asset delivery hosts) for update downloads. These providers receive ordinary request data such as your IP address, requested resource and the app/updater version in the user agent. No system profile, analytics, files or app activity are uploaded. Preferences and the last check time are stored locally. Downloads are signature-verified before extraction; optional automatic installation happens when the app quits.
 
 Standard macOS diagnostics may include information about a failure. Remove personal paths, URLs, credentials, recipients, and message bodies before sharing a report. Test fixtures and screenshots in the repository use synthetic content.
 
 ## This website
 
-This static website has no accounts, analytics, advertising, tracking cookies, external fonts, or file uploads. It does not create application browser storage. Local browser and HTTP caches may retain assets. Deployment is outside this handoff; any future hosting provider may process ordinary request data such as IP addresses and user agents. Hosting policy must be reviewed before publication.
+This static website has no accounts, analytics, advertising, tracking cookies, external fonts, or file uploads. It does not create application browser storage. Local browser and HTTP caches may retain assets. Cloudflare serves this site and may process ordinary request data, including IP addresses, requested paths and browser headers, for delivery and security under its [privacy policy](https://www.cloudflare.com/privacypolicy/). The project does not add a separate analytics pipeline.
 
 External links, including Cloakyard, GitHub, and Ko-fi, have their own policies. They are contacted only when you choose to follow a link; no external widgets are embedded.
 
@@ -138,7 +140,7 @@ Restore your preferred web/email defaults before uninstalling, if CloakTools cur
 
 ## Questions
 
-Use the support guidance and privacy-safe reporting instructions in the local repository. A public issue tracker has not been published yet.
+Use the [repository support guidance](https://github.com/cloakyard/cloaktools) and [security reporting instructions](https://github.com/cloakyard/cloaktools/blob/main/SECURITY.md). Do not include personal files, paths or credentials in public reports.
 
 ## QR reading
 

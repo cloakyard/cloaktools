@@ -78,7 +78,7 @@ CloakDrop/CloakRoll were inspected read-only: thin native shells, headless Swift
 
 ## Build and release
 
-`project.yml` is authoritative. Swift 6 strict concurrency; no third-party Swift dependencies. Website dependencies are exact versions with a lockfile. No reference checkout is needed to build. Ad-hoc signing works locally; `scripts/release.py` packages and verifies local ZIPs. An explicit Developer ID mode verifies team/group/runtime signatures, with opt-in notarization/stapling. Updates are manual. Signing credentials, signed runtime validation, distribution entitlement review and public release remain gates. Deployment/DNS were not performed.
+`project.yml` is authoritative. Swift 6 strict concurrency; the app embeds pinned Sparkle 2 while the core stays dependency-free. Website dependencies are exact versions with a lockfile. No reference checkout is needed to build. Ad-hoc signing works locally; `scripts/release.py` packages and verifies local ZIPs. An explicit Developer ID mode verifies team/group/runtime signatures, with opt-in notarization/stapling. Sparkle verifies signed feeds and update archives; checks and automatic installation require user action or opt-in. See `docs/UPDATES.md`. Signing credentials, signed runtime validation, distribution entitlement review and public release remain gates. Deployment/DNS were not performed.
 
 ## Ordered routing rules
 
@@ -229,3 +229,11 @@ App Intents reuse the native core through detached workers with cancellation pro
 Review Saved File Set uses stable UUID entities, re-resolves the current definition and Developer Tools availability, and opens the normal folder/review flow. The folder callback rechecks the eight-window cap. It returns after starting review, without claiming creation finished. The local ad-hoc app exposes a signing limitation because LinkDaemon rejects its missing team identity; metadata discovery and hosted perform tests alone are not end-to-end acceptance.
 
 IncomingEventSource reads only current Get URL events and the OS-provided read-only sender PID attribute. It accepts a running regular non-self app identity, never a guessed frontmost app. Source evidence is captured with each routing request and is not persisted as history. Unknown is a normal result, including the exercised NSWorkspace route.
+
+
+## App updates
+
+`AppUpdater` owns one app-lifetime `SPUStandardUpdaterController`. The SwiftUI command and
+About settings observe Sparkle’s KVO state. Update preferences stay in Sparkle’s local defaults,
+independent of core persistence. Ed25519 authenticates both feeds and archives, with profiling
+disabled and automatic checks/downloads off by default. See [update publishing](docs/UPDATES.md).

@@ -47,6 +47,8 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>CloakToolsAppGroupIdentifier</key>
 	<string>$(CLOAKTOOLS_APP_GROUP)</string>
+	<key>CloakToolsReleaseChannel</key>
+	<string>$(CLOAKTOOLS_RELEASE_CHANNEL)</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
@@ -136,5 +138,19 @@
 			</array>
 		</dict>
 	</array>
+	<key>SUAutomaticallyUpdate</key>
+	<false/>
+	<key>SUEnableAutomaticChecks</key>
+	<false/>
+	<key>SUEnableSystemProfiling</key>
+	<false/>
+	<key>SUFeedURL</key>
+	<string>$(SPARKLE_FEED_URL)</string>
+	<key>SUPublicEDKey</key>
+	<string>$(SPARKLE_PUBLIC_ED_KEY)</string>
+	<key>SURequireSignedFeed</key>
+	<true/>
+	<key>SUVerifyUpdateBeforeExtraction</key>
+	<true/>
 </dict>
 </plist>

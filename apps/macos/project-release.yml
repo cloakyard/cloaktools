@@ -1,8 +1,11 @@
-# Only scripts/release.py's signed path uses this spec. Team and identity come from
-# explicit xcodebuild settings; the normal local build stays ad-hoc and unentitled.
+# Use the enrolled team for an Organizer archive or the signed release script.
+# The regular project spec supports local ad-hoc builds without App Groups.
 include: [project.yml]
 settings:
   base:
+    CODE_SIGN_STYLE: Automatic
+    CODE_SIGN_IDENTITY: "Apple Development"
+    CLOAKTOOLS_RELEASE_CHANNEL: "Beta"
     CLOAKTOOLS_APP_GROUP: $(DEVELOPMENT_TEAM).com.cloakyard.cloaktools
     ENABLE_HARDENED_RUNTIME: YES
     OTHER_CODE_SIGN_FLAGS: --timestamp
@@ -10,7 +13,7 @@ targets:
   CloakTools:
     settings:
       base:
-        CODE_SIGN_ENTITLEMENTS: $(CLOAKTOOLS_SOURCE_ROOT)/App/CloakTools.Release.entitlements
+        CODE_SIGN_ENTITLEMENTS: $(CLOAKTOOLS_SOURCE_ROOT)/App/Resources/CloakTools.Release.entitlements
   CloakToolsFinder:
     settings:
       base:

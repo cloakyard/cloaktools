@@ -39,6 +39,7 @@ struct SettingsView: View {
                     case .conversions: conversions
                     case .developer: developer
                     case .openWith: RoutingSettingsView(model: model, routing: model.routing)
+                    case .privacy: PrivacySettingsView()
                     case .about: about
                     }
                 }
@@ -97,12 +98,12 @@ struct SettingsView: View {
                         }
                     }
                 } else {
-                    Text("Shortcuts actions need a signed build. In this local preview, use Make It Fit, Markdown Digest and File Sets directly in CloakTools.").font(.callout).foregroundStyle(.secondary)
+                    Text("Shortcuts actions need a signed build. In this ad-hoc build, use Make It Fit, Markdown Digest and File Sets directly in CloakTools.").font(.callout).foregroundStyle(.secondary)
                 }
             }
             Section {
-                LabeledContent("Release", value: "Development preview")
-                Text("No account, analytics, background update checks, or cloud processing.").foregroundStyle(.secondary)
+                LabeledContent("Release", value: releaseChannel)
+                Text("No account, analytics or cloud processing. Automatic updates are optional.").foregroundStyle(.secondary)
             }
         }
     }
@@ -125,7 +126,7 @@ struct SettingsView: View {
             FinderFoldersSection(model: model.finderScopes)
             Section("Access and scope") {
                 Text("Every action shows its destination before writing. macOS may request access to protected folders. Finder search results, cloud-provider views, and virtual locations may not offer extension menus.")
-                Text("This local preview runs the host outside App Sandbox. The Finder extension is sandboxed and only passes requests to the host; it does not write files or convert images.").foregroundStyle(.secondary)
+                Text("The host runs outside App Sandbox. The Finder extension is sandboxed and only passes requests to the host; it does not write files or convert images.").foregroundStyle(.secondary)
             }
             Section("Copy names and paths") {
                 Button("Copy As…", systemImage: "list.clipboard", action: model.chooseCopyFiles)
@@ -266,10 +267,13 @@ struct SettingsView: View {
             Section {
                 HStack(spacing: 14) { Image("AboutAppIcon").resizable().frame(width: 64, height: 64).accessibilityHidden(true); Text("CloakTools").font(.title) }
                 Text("Part of Cloakyard · Built by Sumit Sahoo")
-                LabeledContent("Version", value: "\(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0.1.0") · Development preview")
+                LabeledContent("Version", value: versionLabel)
                 LabeledContent("Platform", value: "macOS 27 · Apple silicon")
-                Text("A local development build. No public installer is available yet.").foregroundStyle(.secondary)
+                if releaseChannel == "Development preview" {
+                    Text("Local development build").foregroundStyle(.secondary)
+                }
             }
+            UpdateSettingsSection()
             Section("Learn more") {
                 Link("tools.cloakyard.com", destination: URL(string: "https://tools.cloakyard.com")!)
                 Link(destination: AppLinks.support) {
@@ -279,9 +283,21 @@ struct SettingsView: View {
             }
         }
     }
+    private var releaseChannel: String {
+        Bundle.main.object(forInfoDictionaryKey: "CloakToolsReleaseChannel") as? String ?? "Development preview"
+    }
+
+    private var versionLabel: String {
+        let info = Bundle.main.infoDictionary
+        let version = info?["CFBundleShortVersionString"] as? String ?? "—"
+        let build = info?["CFBundleVersion"] as? String ?? "—"
+        return "\(version) (\(build)) · \(releaseChannel)"
+    }
+
     private func categoryColor(_ category: SettingsCategory) -> Color {
         switch category {
         case .general, .about: .gray
+        case .privacy: .green
         case .finder: .blue
         case .newFiles: .indigo
         case .conversions: .orange
@@ -292,6 +308,7 @@ struct SettingsView: View {
     private func symbol(_ category: SettingsCategory) -> String {
         switch category {
         case .general: "gearshape"; case .finder: "folder"; case .newFiles: "doc.badge.plus"
+        case .privacy: "lock.shield"
         case .developer: "chevron.left.forwardslash.chevron.right"
         case .conversions: "arrow.triangle.2.circlepath"; case .openWith: "arrow.up.forward.app"; case .about: "info.circle"
         }

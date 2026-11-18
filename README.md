@@ -7,7 +7,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
   <img src="https://img.shields.io/badge/platform-macOS%2027%2B%20%C2%B7%20Apple%20silicon-lightgrey" alt="Requires macOS 27+, Apple silicon only">
-  <img src="https://img.shields.io/badge/preview-0.6.0-3067CD" alt="Development preview: 0.6.0">
+  <img src="https://img.shields.io/badge/beta-0.6.0-3067CD" alt="Public beta 0.6.0">
   <img src="https://img.shields.io/badge/Swift-6-F05138?logo=swift&logoColor=white" alt="Swift 6">
   <img src="https://img.shields.io/badge/SwiftUI-Liquid%20Glass-8A2BE2" alt="SwiftUI · Liquid Glass">
 </p>
@@ -23,7 +23,7 @@
 
 A native macOS toolkit for creating files, preparing copies and opening links in the right app. Everyday tools are included; Developer Tools is an optional first-run choice. The SwiftUI app is separate from its Air website. The capture above shows the actual development app with no personal files.
 
-The source is **0.6.0, build 26**, a local development preview. The website is live at tools.cloakyard.com; a public installer is still pending. See [release instructions](docs/RELEASE.md) for the signing boundary and [the usage guide](docs/USAGE.md) for every implemented workflow.
+The [first public beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-beta.20261118.2) is **0.6.0, build 20261118.2**. Download the DMG from the release page or check for updates in About. See [release instructions](docs/RELEASE.md) for the signing boundary and [the usage guide](docs/USAGE.md) for every implemented workflow.
 
 ## Features
 
@@ -53,11 +53,11 @@ If a destination app or default change is unavailable, use **Open With → Refre
 
 ## Privacy
 
-No accounts, analytics, app-operated cloud service, automatic updater, link prefetch or browsing-history persistence. Processing and settings stay local. Cloud-managed folders and chosen destination apps follow their own policies. Files are published as new copies, with explicit review and bounded inputs. Read [Privacy](PRIVACY.md) and [Security](SECURITY.md) for exact storage and reporting boundaries.
+No accounts, analytics, cloud processing, link prefetch or browsing-history persistence. Processing and settings stay local. Sparkle update checks/downloads are manual unless you enable them in About. See [update publishing](docs/UPDATES.md). Cloud-managed folders and chosen destination apps follow their own policies. Files are published as new copies, with explicit review and bounded inputs. Read [Privacy](PRIVACY.md) and [Security](SECURITY.md) for exact storage and reporting boundaries.
 
 ## Getting started
 
-Requires **macOS 27 or later on Apple silicon**, Xcode 27 and [XcodeGen](https://github.com/yonaskolb/XcodeGen). Intel Macs are not supported. There is no public installer yet.
+Download the [beta DMG](https://github.com/cloakyard/cloaktools/releases/download/v0.6.0-beta.20261118.2/CloakTools-v0.6.0-beta.20261118.2.dmg) for **macOS 27 or later on Apple silicon**. Drag CloakTools to Applications. To build from source, install Xcode 27 and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
 
 ```sh
 brew install xcodegen
@@ -75,7 +75,7 @@ Builds are locally ad-hoc signed and not notarized. Current recorded runtime che
 
 ### Native app
 
-`apps/macos/project.yml` is authoritative; XcodeGen creates the ignored Xcode project. The build is arm64-only, has no hardcoded Team ID and uses local ad-hoc signing. Development uses Xcode 27, Swift 6 and macOS system frameworks, with no third-party Swift dependencies.
+`apps/macos/project.yml` is authoritative; XcodeGen creates the ignored Xcode project. The build is arm64-only, has no hardcoded Team ID and uses local ad-hoc signing. Development uses Xcode 27, Swift 6 and macOS system frameworks, with Sparkle 2 as an app-only dependency; the headless core has no third-party dependencies.
 
 | Layer | Choice |
 |---|---|
@@ -110,6 +110,8 @@ The website follows the complete portable [Air contract and product appendix](ap
 
 ## Project structure
 
+In `apps/macos/App/`, `App/` holds the entry point and app state, `Features/` groups product workflows, `Shared/` holds reusable UI helpers and `Resources/` contains app resources. Headless code and its tests live under `apps/macos/Packages/`.
+
 ```text
 cloaktools/
 ├── apps/macos/                 # Native app, Finder extension, core and tests
@@ -124,13 +126,16 @@ See [architecture](ARCHITECTURE.md), [supported formats](docs/FORMATS.md) and [t
 
 ## Deployment and releases
 
+The app uses a three-part marketing version and an increasing `YYYYMMDD.N` build number.
+See the [Mac release guide](docs/MAC-RELEASE.md) for the Air installer, version settings and Developer ID workflow.
+
 Maintain only `dev` and `main`. Work on `dev`, verify, then promote the same reviewed changes to `main`. Keep `dev` synchronized with the published revision after each release; pushes and deployment are explicit maintainer actions.
 
 The website is hosted on Cloudflare Workers at tools.cloakyard.com. `apps/site/wrangler.jsonc` pins the existing custom domain, static output and HTTP 404 handling. Workers Builds uses `main`, root `apps/site`, build command `npm ci && npm run verify` and deploy command `npx wrangler deploy`. Verified changes promoted from `dev` to `main` publish automatically. `npm run check:worker` in `apps/site` validates the deployment bundle without publishing.
 
 Nonproduction branch builds use `npx wrangler preview` with the checked-in `previews` configuration. Cloudflare publishes the same static site to a branch Preview; only `main` updates tools.cloakyard.com. Production version URLs and workers.dev remain disabled.
 
-Native releases are separate. `python3 scripts/release.py --preview` creates a verified local ZIP; Developer ID signing and notarization remain deferred. See [Release](docs/RELEASE.md). Keep release binaries and generated build output out of source control. Updates are manual.
+Native releases are separate. `python3 scripts/release.py --preview` creates a verified local ZIP; Developer ID signing and notarization remain deferred. See [Release](docs/RELEASE.md). Keep release binaries and generated build output out of source control. Users can check for updates in About or enable automatic checks there.
 
 ## Contributing
 

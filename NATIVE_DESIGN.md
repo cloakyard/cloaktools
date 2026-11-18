@@ -151,3 +151,12 @@ Shared dialog subtitles wrap without a two-line cap. Launcher buttons retain the
 ## Family support
 
 About → Learn more includes a native `Link` labelled Buy me a coffee with the `cup.and.saucer` SF Symbol. `AppLinks.support` owns the family Ko-fi destination. It opens only after an explicit click; no support widget or background request is added.
+
+
+## Privacy and updates
+
+Privacy is an always-visible sidebar category beside About. It uses native grouped sections for
+local storage, files/clipboard, links/permissions, updates, diagnostics/removal and the full policy
+link. The main host’s unsandboxed status is explicit. About places the update controls after
+app/version information and before support links. Shared update wording matches CloakDrop and
+CloakRoll, with automatic checks/downloads off by default and ordinary server request data disclosed.

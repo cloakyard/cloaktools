@@ -10,7 +10,7 @@ let fileManager = FileManager.default
 let scriptURL = URL(fileURLWithPath: #filePath).standardizedFileURL
 let repository = scriptURL.deletingLastPathComponent().deletingLastPathComponent()
 let source = repository.appendingPathComponent("assets/icon/CloakTools.icon")
-let about = repository.appendingPathComponent("apps/macos/App/Assets.xcassets/AboutAppIcon.imageset")
+let about = repository.appendingPathComponent("apps/macos/App/Resources/Assets.xcassets/AboutAppIcon.imageset")
 let previews = repository.appendingPathComponent("assets/icon/Previews")
 let renditions = ["Default", "Dark", "ClearLight", "ClearDark", "TintedLight", "TintedDark"]
 

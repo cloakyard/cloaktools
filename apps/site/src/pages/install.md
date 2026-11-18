@@ -1,13 +1,20 @@
 ---
 layout: ../layouts/Reading.astro
 title: Install
-description: Build the local preview. A public installer is not available yet.
+description: Install the CloakTools public beta or build it from source.
 ---
 ## Requirements
 
 CloakTools targets **macOS 27 or later on Apple silicon**. Development requires Xcode 27, its command-line tools, and XcodeGen. The current source has been built on macOS 27.2.1 with the macOS 27.2 SDK.
 
-## Build and launch
+## Install the public beta
+
+1. Download the [CloakTools 0.6.0 beta DMG](https://github.com/cloakyard/cloaktools/releases/download/v0.6.0-beta.20261118.2/CloakTools-v0.6.0-beta.20261118.2.dmg). The [release notes](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-beta.20261118.2) include the build number and SHA-256 checksums.
+2. Open the disk image, drag CloakTools to Applications, eject the image and open the installed copy.
+3. This beta is ad-hoc signed and unnotarized. If macOS blocks first launch, review [Apple’s instructions](https://support.apple.com/en-us/102445) before choosing whether to open it.
+4. Choose **Settings → About → Check for Updates**. Automatic checks and downloads are optional. Future updates arrive through a signed feed.
+
+## Build from source
 
 Clone the [source repository](https://github.com/cloakyard/cloaktools), then build from its root:
 
@@ -229,10 +236,10 @@ Restore your preferred defaults before uninstalling or deleting CloakTools’ se
 
 ## What comes next
 
-The first public beta follows Milestones 1 and 2: richer file and Finder tools, then production web and email routing. See [Source](/source/) and [Support](/support/) for the current boundaries.
+The first public beta includes Finder tools and web and email routing. Additional Finder folders and Shortcuts execution still require a provisioned build. See [Source](/source/) and [Support](/support/) for the current boundaries.
 
 ## Package a local preview
 
-From the checkout, run `python3 scripts/release.py --preview`. This builds a Release app, verifies the app and extension signatures and versions, and creates a fresh ZIP with SHA-256 and manifest files under `apps/macos/build/Packages`. It is an ad-hoc local package, not a notarized installer. Updates are manual; quit an older copy before replacing it. Restore CloakTools web/mail defaults before removing the app.
+From the checkout, run `python3 scripts/release.py --preview`. This builds a Release app, verifies the app and extension signatures and versions, and creates a fresh ZIP with SHA-256 and manifest files under `apps/macos/build/Packages`. It is an ad-hoc local package, not a notarized installer. For manual replacement, quit the older copy first. Restore CloakTools web/mail defaults before removing the app.
 
 The repository’s release guide documents a separate Developer ID/notarization path for later. No signing credentials or Team ID are included. Additional Finder folders and live Shortcuts execution remain gated until an appropriately signed build is available and tested.
