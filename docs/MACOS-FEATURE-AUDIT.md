@@ -2,6 +2,29 @@
 
 Reviewed 16 November 2026 against the CloakTools 0.5.8 catalog and roadmap, current Apple user guides, and installed macOS command manuals. This is a product-scope audit, not a claim that every native workflow was exercised interactively.
 
+## Finder selection audit, 18 November 2026
+
+Reviewed the development Workbench at `5986679`, Finder Sync menu construction, the eight Finder Services declarations and their host handlers. On macOS 27.2.1, inspected live menus using disposable items in the CloakTools Files workspace. The recommendations below record the audit before implementation. The [candidate verification](verification/FINDER-BETA-CANDIDATE.md) covers the resulting behavior.
+
+| Selection | What Finder offered on this Mac |
+| --- | --- |
+| One PNG, right-click | Apple’s Quick Actions included Convert Image and Create PDF. Services offered six CloakTools commands, including another conversion, another PDF command and New File. The New File handler requires a folder. |
+| One plain-text file, right-click | Five CloakTools Services appeared, including Convert Image, Assemble PDF and New File. Those three cannot complete with this input. |
+| One folder, Finder → Services | Compare Two Folders appeared beside Reuse Folder Structure. Compare requires exactly two selections and returns an error for one. |
+| Two folders, Finder → Services | Reuse Folder Structure still appeared, although its handler requires one folder. |
+
+The PNG and text right-click checks observed Services. Finder Sync’s direct entries have separate, scope-dependent selection rules. The source Workbench’s Finder Tools page has ten actions, six of which also appear in other categories. Export a file list appears on that page but has no Finder handoff. [Finder access and prior runtime coverage](FINDER-ACCESS.md)
+
+### Recommended order
+
+1. **Fix the existing menus first.** Narrow the broad file-URL declarations for New File, Convert Image and Assemble PDF to their supported input types wherever those Services are retained. Use Finder Sync’s live selection for count-sensitive commands. Let Compare accept one folder and prompt only for the other, which also covers backups on another drive. With two folders, start the comparison directly.
+2. **Give routine tasks to Finder.** Its Convert Image handles ordinary format and preset-size changes, Create PDF handles a straightforward combination, and Option–right-click copies a pathname. Give Make It Fit prominence for a measured upload limit. Keep ordered PDF assembly, conversion settings and reusable recipes available when people need that extra control. [Apple’s Finder Quick Actions](https://support.apple.com/en-ie/guide/mac-help/mchl97ff9142/27/mac/27) · [Apple’s pathname shortcut](https://support.apple.com/en-asia/guide/terminal/apd3cf6fe02-3ec8-48f1-951f-866e52955fc8/mac)
+3. **Keep the user in Finder while collecting.** Each addition currently brings the open collection to the front. Subsequent additions should give a count and a way to review while leaving Finder ready for the next selection. Keep conflict resolution and Save Copies together in the existing review.
+4. **Connect two existing reviews to selections.** For one supported still image, offer Read QR Code from Image as a secondary Service and open the reader with the result ready. For files or folders, expose CSV and Markdown file-list export through the existing Copy As entry, carrying the same selection into the file-list review. This avoids two near-identical menu items. Plain path copying stays in Finder.
+5. **Reuse the destination for saved file sets.** Within the existing New File submenu, offer Use Saved File Set when a set is available. The clicked folder supplies the destination. Keep editing templates, sets and presets in the Workbench.
+
+Use Finder Tools as a short guide to the context actions, with in-app starts for users without extension coverage. Keep QR creation, text cleanup, link rules, sample generation and developer preferences in their existing categories. Markdown Digest is a secondary candidate for selected text files if demand warrants another Service. PDF page editing, media conversion and recipe management can remain available from the Workbench.
+
 ## Decision
 
 Do not implement standalone image OCR. Preview already provides Live Text selection and copying. Remove basic batch renaming, generic ZIP tools, a standalone Keep Awake switch and generic file inspection from the active roadmap as well. Stop expanding already-built tools that mainly repeat Finder, Preview or QuickTime.

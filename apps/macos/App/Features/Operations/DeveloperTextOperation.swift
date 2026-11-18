@@ -13,6 +13,7 @@ enum DeveloperTextTool: String, CaseIterable, Identifiable, Sendable {
 @MainActor @Observable
 final class DeveloperTextOperation: Identifiable {
     let id = UUID()
+    var showImages = false
     let tool: DeveloperTextTool
     var input = "" { didSet { if !input.utf8.elementsEqual(oldValue.utf8) { invalidate() } } }
     var jsonAction: JSONTextAction = .format { didSet { invalidate() } }
@@ -89,15 +90,14 @@ final class DeveloperTextWindow: NSWindowController, NSWindowDelegate {
 }
 
 struct DeveloperToolWorkspace: View {
-    let operation: DeveloperTextOperation
+    @Bindable var operation: DeveloperTextOperation
     let imageOperation: Base64ImageOperation?
     let close: () -> Void
-    @State private var showImages = false
     var body: some View {
-        if showImages, let imageOperation {
-            Base64ImageView(operation: imageOperation, showImages: $showImages, close: close)
+        if operation.showImages, let imageOperation {
+            Base64ImageView(operation: imageOperation, showImages: $operation.showImages, close: close)
         } else {
-            DeveloperTextView(operation: operation, showImages: $showImages, close: close)
+            DeveloperTextView(operation: operation, showImages: $operation.showImages, close: close)
         }
     }
 }

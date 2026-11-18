@@ -1,6 +1,6 @@
 # Privacy policy
 
-**CloakTools · Updated 17 November 2026**
+**CloakTools · Updated 18 November 2026**
 
 CloakTools is a local Mac toolkit. It has no accounts, advertising, analytics, telemetry or automatic crash-report uploads. Update checks and downloads are off by default and can be managed in About.
 
@@ -32,6 +32,8 @@ Image conversion keeps the prepared source pixels in memory for its preview and 
 
 PDF assembly captures selected sources in memory, then writes only the confirmed new PDF. PDF page content and annotations are retained in the combined copy; this action is not a PDF metadata scrubber. Original documents stay unchanged. Organize PDF similarly holds one captured document, thumbnails, page choices and rotations in memory until its window closes. Only Export Copy writes the selected pages. It keeps no page-edit history, performs no OCR and is not a metadata-sanitization tool.
 
+In the source build, **Reuse Folder Structure** reads the selected directory tree and offers to save relative folder names in a local file set. **Collect Copies for Sharing** holds selected paths and proposed copy names in memory until the review closes. Saved copies can retain source metadata, including personal information and resource forks. **Compare Two Folders** reads the selected trees, including hidden files, and holds differences in memory for review. Folder comparison and collection have no stored history. While collecting from Finder, the menu bar displays the count. File names and paths are available in the review.
+
 **Copy As** uses selected file/folder names and paths without reading file contents or traversing folders. Only pressing Copy replaces the system clipboard; previews and cancellation do not. Copied paths may contain personal information. CloakTools keeps no copy history and runs no command. Other applications with clipboard access may read what you copy under macOS controls.
 
 Optional Open After Creation passes the saved file to TextEdit (text/source files) or Preview (built-in PDFs and clipboard images). Those applications can retain their own recent-document lists.
@@ -48,9 +50,9 @@ Media processing uses native frameworks. External media references are forbidden
 
 ## QR creation
 
-Create QR Code processes only text you type or paste, or a fixed Try Example link. Input and generated PNG stay in the operation window's memory. Links are not opened, fetched, validated against a server or rewritten. The app does not automatically read the clipboard, retain QR history or upload anything. A QR code is readable by anyone who has it; it does not encrypt or hide the text.
+Create QR Code encodes the fields you enter locally. Contact cards, calendar events, coordinates and Wi-Fi credentials come from the form. The tool keeps drafts and the prepared PNG in the window’s memory until you close it. Anyone who receives the code can read its contents, including an encoded Wi-Fi password.
 
-Copy Image explicitly replaces the system clipboard with the prepared PNG. Save PNG writes that image only after you review its name and choose a folder, using numbered filenames to preserve existing files. Cloud-managed destinations may synchronize output under their provider's policy. Switching between Create and Read keeps each draft in memory. Closing the window discards its input, options and generated image. Read mode is described below; camera access is not used.
+**Copy Image** writes the prepared PNG to the system clipboard. **Save PNG** writes it in the folder you choose. Cloud-managed destinations may synchronize the file under their provider’s policy.
 
 ## File lists
 
@@ -92,7 +94,7 @@ Folder presets store a title, local destination path, template identifier, defau
 
 ## File sets
 
-Reusable file sets store their title, proposed folder name, relative paths, template identifiers and blank-code policy in `~/Library/Application Support/com.cloakyard.cloaktools/file-sets.json`. No destination is stored in a set. Preparing a review captures the selected template bytes and preferences locally. It does not read an existing folder tree, execute code, install dependencies or contact a service.
+Reusable file sets store their title, proposed folder name, relative paths, template identifiers and blank-code policy in `~/Library/Application Support/com.cloakyard.cloaktools/file-sets.json`. No destination is stored in a set. Preparing a saved set for creation captures its selected template bytes and preferences locally. Importing a structure reads the folder tree you choose.
 
 Creation writes the reviewed files into a private staging folder beside the destination, then publishes one complete new folder. Normal cancellation/failure removes staging; abrupt termination may leave a hidden `.cloaktools-set-…` folder. Created output and saved definitions have independent lifetimes. Removing a definition never deletes output. A set does not widen Finder scopes or grant filesystem access.
 
@@ -146,4 +148,4 @@ Use the [repository support guidance](https://github.com/cloakyard/cloaktools) a
 
 Read mode opens only an image you explicitly select, up to 10 MiB and 40 megapixels. Native image processing and QR detection run locally. The window keeps a reduced preview, filename, dimensions, code locations and decoded text in memory; it does not retain the full original bytes after reading. It does not access the camera, read the clipboard automatically, upload images, open decoded links or keep a QR history.
 
-Copy Text explicitly replaces the clipboard with the selected decoded string. Save Text writes it as a new UTF-8 file only after you review its name and select a folder; existing filenames receive numbered copies. Image metadata is not included in text exports. A code can itself contain private information, so review the decoded text before sharing. Cloud-managed destinations may synchronize saved text under their provider's policy. Switching modes retains the result; closing the window discards it.
+The reader initially conceals decoded Wi-Fi text. **Show encoded text** reveals it. **Copy Text** and file export include the complete selected result, including any encoded password. Contact and calendar documents can also be saved as .vcf or .ics for manual import. Saving creates a new file in the chosen folder. Cloud-managed destinations may synchronize the file under their provider’s policy. Closing the window discards the result.

@@ -94,35 +94,3 @@ struct DestinationRow: View {
         }.font(.caption).foregroundStyle(.secondary).help(folder.path)
     }
 }
-
-/// A consistent, compact launch row; details wrap while its action remains visible.
-struct ToolLauncherRow: View {
-    let title: String
-    let subtitle: String
-    let symbol: String
-    var tint: Color = .blue
-    let action: () -> Void
-    var body: some View {
-        HStack(spacing: 12) {
-            Image(systemName: symbol).font(.title3).foregroundStyle(tint).frame(width: 28).accessibilityHidden(true)
-            VStack(alignment: .leading, spacing: 3) {
-                Text(title).fontWeight(.medium)
-                Text(subtitle).font(.callout).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
-            }
-            Spacer(minLength: 8)
-            Button("Open…", action: action).fixedSize().accessibilityLabel("Open \(title)").accessibilityHint(subtitle)
-        }.padding(.vertical, 3)
-    }
-}
-
-/// Explains a collapsed tool group without making users open it to discover its contents.
-struct ToolGroupLabel: View {
-    let title: String
-    let subtitle: String
-    var body: some View {
-        VStack(alignment: .leading, spacing: 3) {
-            Text(title)
-            Text(subtitle).font(.callout).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
-        }.padding(.vertical, 3)
-    }
-}

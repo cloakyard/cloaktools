@@ -6,7 +6,7 @@ import UniformTypeIdentifiers
 import Vision
 
 public enum QRReadError: LocalizedError, Equatable {
-    case tooLarge, unsupportedImage, multipleFrames, tooManyCodes, textTooLarge, noText, scanUnavailable
+    case tooLarge, unsupportedImage, multipleFrames, tooManyCodes, textTooLarge, noText, scanUnavailable, incompatibleFormat
     public var errorDescription: String? {
         switch self {
         case .tooLarge: "Choose an image up to 10 MiB and 40 megapixels."
@@ -15,13 +15,28 @@ public enum QRReadError: LocalizedError, Equatable {
         case .tooManyCodes: "This image contains more than 16 QR codes. Crop it to a smaller group and try again."
         case .textTooLarge: "The decoded text exceeds 32 KiB. Choose another code."
         case .noText: "This QR code has no text this reader can decode."
+        case .incompatibleFormat: "Choose a format available for this code."
         case .scanUnavailable: "macOS could not read this image. Try a clear PNG or JPEG copy."
         }
     }
 }
+public enum QRReadFileFormat: String, Sendable {
+    case text = "txt", vCard = "vcf", calendar = "ics"
+}
+
 public struct ReadQRCode: Identifiable, Sendable {
     public let id: Int
     public let text: String?
+    public var documentFormat: QRReadFileFormat? {
+        guard let text else { return nil }
+        let kind = QRContentKind.recognizing(text)
+        guard kind == .contact || kind == .event else { return nil }
+        let lines = text.split(whereSeparator: \.isNewline).map { $0.uppercased() }
+        if lines.first == "BEGIN:VCARD", lines.last == "END:VCARD", lines.contains(where: { $0.hasPrefix("VERSION:") }) { return .vCard }
+        if lines.first == "BEGIN:VCALENDAR", lines.last == "END:VCALENDAR", lines.contains("BEGIN:VEVENT"), lines.contains("END:VEVENT") { return .calendar }
+        return nil
+    }
+
     /// Normalized image coordinates, with origin at bottom left.
     public let bounds: CGRect
 }
@@ -110,10 +125,11 @@ public enum QRCodeReading {
         let common = intersection.width * intersection.height, union = a.width * a.height + b.width * b.height - common
         return union > 0 ? common / union : 0
     }
-    public static func save(_ code: ReadQRCode, in folder: URL, stem: String) throws -> URL {
+    public static func save(_ code: ReadQRCode, in folder: URL, stem: String, format: QRReadFileFormat = .text) throws -> URL {
         try Task.checkCancellation()
         guard let text = code.text else { throw QRReadError.noText }
         guard text.utf8.count <= maximumTextBytes else { throw QRReadError.textTooLarge }
-        return try SafeOutput.publish(Data(text.utf8), in: folder, stem: stem, extension: "txt")
+        guard format == .text || format == code.documentFormat else { throw QRReadError.incompatibleFormat }
+        return try SafeOutput.publish(Data(text.utf8), in: folder, stem: stem, extension: format.rawValue)
     }
 }

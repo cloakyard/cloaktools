@@ -27,6 +27,8 @@ open apps/macos/build/Verify/Build/Products/Debug/CloakTools.app
 
 This produces a local ad-hoc signed development app. It is not a notarized public release. No developer Team ID is built into the project.
 
+The homepage screenshot shows the upcoming Workbench. In that build, Finder Services accept selected files for QR reading, size-limited images and file lists. Folder Actions uses the folder you clicked, and the menu-bar collection holds files while you browse. The instructions below describe the downloadable 0.6.0 beta, build 20261118.2.
+
 ## Choose your tools
 
 On a fresh installation, CloakTools asks which tools you want. **Everyday tools** are always included. Leave **Developer Tools** Off for a simpler catalog, or turn it On to include JSON, Base64, Sample Files and Example Copy, code files, language starters and technical copy formats. Choose **Start Using CloakTools**. The welcome screen appears once.

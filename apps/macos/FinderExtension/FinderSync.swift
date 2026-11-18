@@ -50,6 +50,11 @@ final class FinderSync: FIFinderSync {
         guard let target = controller.targetedURL() else { return nil }
         let selected = controller.selectedItemURLs() ?? []
         let menu = NSMenu(title: "CloakTools")
+        func action(_ title: String, _ intent: FinderIntent) {
+            let item = NSMenuItem(title: title, action: #selector(send(_:)), keyEquivalent: "")
+            bind(item, intent: intent)
+            menu.addItem(item)
+        }
         var folder: URL?
         switch menuKind {
         case .contextualMenuForContainer: folder = target
@@ -67,27 +72,23 @@ final class FinderSync: FIFinderSync {
                 submenu.addItem(item)
             }
             submenu.addItem(.separator())
-            let saved = NSMenuItem(title: "Choose File Type or Template…", action: #selector(send(_:)), keyEquivalent: "")
+            let saved = NSMenuItem(title: "Choose Template or File Set…", action: #selector(send(_:)), keyEquivalent: "")
             bind(saved, intent: .templates(folder: folder)); submenu.addItem(saved)
             let clipboard = NSMenuItem(title: "New File from Clipboard…", action: #selector(send(_:)), keyEquivalent: "")
             bind(clipboard, intent: .clipboard(folder: folder)); submenu.addItem(clipboard)
             parent.submenu = submenu; menu.addItem(parent)
+            if menuKind == .contextualMenuForContainer || menuKind == .contextualMenuForSidebar {
+                action("Reuse Folder Structure…", .structure(folder: folder))
+                action("Compare with Another Folder…", .compare(first: folder, second: nil))
+            }
         }
-        if menuKind == .contextualMenuForItems, selected.count == 1, let image = selected.first,
-           ImageConversion.inputExtensions.contains(image.pathExtension.lowercased()) {
-            let item = NSMenuItem(title: "Convert Image with CloakTools…", action: #selector(send(_:)), keyEquivalent: "")
-            bind(item, intent: .convert(image: image)); menu.addItem(item)
-        }
-        if menuKind == .contextualMenuForItems, (1...PDFAssembly.maximumFiles).contains(selected.count),
-           selected.allSatisfy({ PDFAssembly.inputExtensions.contains($0.pathExtension.lowercased()) }) {
-            let item = NSMenuItem(title: "Assemble PDF with CloakTools…", action: #selector(send(_:)), keyEquivalent: "")
-            let files = selected.sorted { $0.lastPathComponent.localizedStandardCompare($1.lastPathComponent) == .orderedAscending }
-            bind(item, intent: .assemble(files: files)); menu.addItem(item)
+        if menuKind == .contextualMenuForItems {
+            for entry in FinderIntent.reviewActions(for: selected) { action(entry.title, entry.intent) }
         }
         let copyFiles = menuKind == .contextualMenuForContainer ? [target] : selected
         if [.contextualMenuForContainer, .contextualMenuForItems, .contextualMenuForSidebar].contains(menuKind),
            (1...CopySelection.maximumItems).contains(copyFiles.count) {
-            let item = NSMenuItem(title: "Copy As with CloakTools…", action: #selector(send(_:)), keyEquivalent: "")
+            let item = NSMenuItem(title: "Copy or Export File List…", action: #selector(send(_:)), keyEquivalent: "")
             let files = copyFiles.sorted { $0.lastPathComponent.localizedStandardCompare($1.lastPathComponent) == .orderedAscending }
             bind(item, intent: .copy(files: files)); menu.addItem(item)
         }
@@ -96,7 +97,9 @@ final class FinderSync: FIFinderSync {
     @objc private func send(_ sender: NSMenuItem) {
         guard let request = intents[sender.tag] else { return }
         let host = Bundle.main.bundleURL.deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
-        NSWorkspace.shared.open([request], withApplicationAt: host, configuration: NSWorkspace.OpenConfiguration()) { _, error in
+        let configuration = NSWorkspace.OpenConfiguration()
+        configuration.activates = request.host != "collect"
+        NSWorkspace.shared.open([request], withApplicationAt: host, configuration: configuration) { _, error in
             if error != nil {
                 Logger(subsystem: "com.cloakyard.cloaktools.finder", category: "handoff").error("Host handoff failed. Open CloakTools and retry.")
             }

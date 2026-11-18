@@ -33,13 +33,13 @@ final class FileOperation: Identifiable {
         switch intent {
         case let .create(folder, _), let .templates(folder), let .clipboard(folder): destination = folder
         case let .convert(image): destination = image.deletingLastPathComponent()
-        case .assemble, .copy: destination = FileManager.default.homeDirectoryForCurrentUser
+        case .assemble, .copy, .fit, .structure, .collect, .compare: destination = FileManager.default.homeDirectoryForCurrentUser
         }
         conversionOptions = preferences.imageConversion
         if case let .image(options) = recipe?.options { conversionOptions = options }
         switch intent {
         case let .create(_, template): selectedTemplateID = TemplateSource.builtIn(template).id
-        case .clipboard, .assemble, .copy: selectedTemplateID = TemplateSource.builtIn(.text).id
+        case .clipboard, .assemble, .copy, .fit, .structure, .collect, .compare: selectedTemplateID = TemplateSource.builtIn(.text).id
         case .templates: selectedTemplateID = sources.first(where: { if case .custom = $0 { true } else { false } })?.id ?? TemplateSource.builtIn(.text).id
         case .convert: selectedTemplateID = TemplateSource.builtIn(.text).id
         }
@@ -75,7 +75,7 @@ final class FileOperation: Identifiable {
         let request = CreationRequest(folder: destination, source: source, preferences: preferences, name: name)
         let intent = intent, prepared = preparedImage, options = conversionOptions, folder = destination
         let worker = Task.detached(priority: .userInitiated) {
-            switch intent { case .clipboard, .assemble, .copy: throw ToolError.invalidRequest; case .create, .templates: return try request.perform(); case .convert: guard let prepared else { throw ToolError.unsupportedImage }; return try ImageConversion.copy(prepared, options: options, in: folder) }
+            switch intent { case .clipboard, .assemble, .copy, .fit, .structure, .collect, .compare: throw ToolError.invalidRequest; case .create, .templates: return try request.perform(); case .convert: guard let prepared else { throw ToolError.unsupportedImage }; return try ImageConversion.copy(prepared, options: options, in: folder) }
         }
         task = worker
         Task { [self] in
@@ -166,6 +166,17 @@ struct OperationView: View {
                                 }
                             }
                         }.modifier(DialogCard()).disabled(operation.running || operation.output != nil)
+                        if operation.output == nil, !AppModel.shared.visibleFileSets.isEmpty {
+                            Menu("Use Saved File Set…") {
+                                ForEach(AppModel.shared.visibleFileSets) { set in
+                                    Button(set.title) {
+                                        let folder = operation.destination
+                                        close()
+                                        AppModel.shared.chooseFileSetFolder(set, destination: folder)
+                                    }
+                                }
+                            }.fixedSize().disabled(operation.busy)
+                        }
                         Label(operation.source.contentDescription(using: operation.preferences), systemImage: operation.source.isPDF ? "doc.richtext" : "doc")
                             .font(.callout).foregroundStyle(.secondary)
                     } else {

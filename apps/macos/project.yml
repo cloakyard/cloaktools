@@ -14,8 +14,8 @@ settings:
     CODE_SIGN_IDENTITY: "-"
     ENABLE_HARDENED_RUNTIME: YES
     MARKETING_VERSION: "0.6.0"
-    CURRENT_PROJECT_VERSION: "20261118.2"
-    CLOAKTOOLS_RELEASE_CHANNEL: "Development preview"
+    CURRENT_PROJECT_VERSION: "20261118.6"
+    CLOAKTOOLS_RELEASE_CHANNEL: "Beta"
     CLOAKTOOLS_APP_GROUP: ""
     CLOAKTOOLS_SOURCE_ROOT: $(SRCROOT)
   configs:
@@ -84,31 +84,38 @@ targets:
             CFBundleURLSchemes: [cloaktools-action]
         NSServices:
           - NSMenuItem:
-              default: New File with CloakTools
-            NSMessage: createFile
+              default: Folder Actions with CloakTools
+            NSMessage: folderActions
             NSPortName: CloakTools
-            NSSendTypes: [public.file-url]
+            NSSendFileTypes: [public.folder]
             NSRequiredContext:
               NSApplicationIdentifier: com.apple.finder
           - NSMenuItem:
-              default: Convert Image with CloakTools
-            NSMessage: convertImage
-            NSPortName: CloakTools
-            NSSendTypes: [public.file-url]
-            NSRequiredContext:
-              NSApplicationIdentifier: com.apple.finder
-          - NSMenuItem:
-              default: Assemble PDF with CloakTools
-            NSMessage: assemblePDF
-            NSPortName: CloakTools
-            NSSendTypes: [public.file-url]
-            NSRequiredContext:
-              NSApplicationIdentifier: com.apple.finder
-          - NSMenuItem:
-              default: Copy As with CloakTools
+              default: Copy or Export File List with CloakTools
             NSMessage: copyAs
             NSPortName: CloakTools
-            NSSendTypes: [public.file-url]
+            NSSendFileTypes: [public.item]
+            NSRequiredContext:
+              NSApplicationIdentifier: com.apple.finder
+          - NSMenuItem:
+              default: Make It Fit with CloakTools
+            NSMessage: fitImage
+            NSPortName: CloakTools
+            NSSendFileTypes: [public.png, public.jpeg, public.tiff, public.heic, public.heif]
+            NSRequiredContext:
+              NSApplicationIdentifier: com.apple.finder
+          - NSMenuItem:
+              default: Read QR Code from Image with CloakTools
+            NSMessage: readQR
+            NSPortName: CloakTools
+            NSSendFileTypes: [public.png, public.jpeg, com.compuserve.gif, org.webmproject.webp, public.tiff, public.heic, public.heif]
+            NSRequiredContext:
+              NSApplicationIdentifier: com.apple.finder
+          - NSMenuItem:
+              default: Collect Copies for Sharing with CloakTools
+            NSMessage: collectCopies
+            NSPortName: CloakTools
+            NSSendFileTypes: [public.data]
             NSRequiredContext:
               NSApplicationIdentifier: com.apple.finder
   CloakToolsFinder:

@@ -70,11 +70,12 @@ struct FinderFoldersSection: View {
                     }
                 }
                 Button("Add Folder…", systemImage: "folder.badge.plus") { model.choose() }.disabled(model.error != nil || model.folders.count >= 16)
-                Text("Include up to 16 folders and their subfolders. Removing one changes menu scope; it never removes files.").font(.callout).foregroundStyle(.secondary)
             } else {
-                Text("Additional folders are available in builds signed for CloakTools’ shared app group. This development build uses the default workspace; Services work with selected items elsewhere.").font(.callout).foregroundStyle(.secondary)
+                LabeledContent("Available folders", value: "Default workspace only")
             }
-        } header: { Text("Additional Finder folders") }
+        } header: { Text("Additional Finder folders") } footer: {
+            Text(model.store != nil ? "Include up to 16 folders and their subfolders. Removing a folder changes menu coverage and preserves its files." : "Adding folders requires a build signed for the shared app group. Finder Services work with selected items elsewhere.")
+        }
         .confirmationDialog("Remove this folder from Finder menus?", isPresented: Binding(get: { removing != nil }, set: { if !$0 { removing = nil } })) {
             if let folder = removing { Button("Remove Folder", role: .destructive) { model.remove(folder); removing = nil } }
         } message: { Text("The folder and its files stay unchanged. Menus may remain if a parent folder is also included.") }

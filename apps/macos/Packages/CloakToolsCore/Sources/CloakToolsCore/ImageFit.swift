@@ -16,6 +16,10 @@ public struct ImageFitOptions: Codable, Equatable, Sendable {
         self.format = format; self.maximumBytes = maximumBytes; self.maximumWidth = maximumWidth; self.maximumHeight = maximumHeight
         self.minimumQuality = minimumQuality; self.background = background; self.allowSmallerDimensions = allowSmallerDimensions
     }
+    public var sizeLimitText: String {
+        maximumBytes.isMultiple(of: 1000) ? "\(maximumBytes / 1000) KB" : "\(maximumBytes) B"
+    }
+
     public func validate() throws {
         guard (1_000...100_000_000).contains(maximumBytes), (1...20_000).contains(maximumWidth), (1...20_000).contains(maximumHeight),
               minimumQuality.isFinite, (0.1...1).contains(minimumQuality) else { throw ImageFitError.invalidOptions }

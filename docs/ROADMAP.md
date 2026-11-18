@@ -25,6 +25,8 @@ Native sidebar settings and restoration, persistent Hello World precedence, 15 t
 
 ## Milestone 1 — Files and Finder
 
+The source Workbench adds Finder entry points for measured image fitting, selective empty-folder reuse, collecting copies across selections and read-only folder comparison. These additions postdate the published 0.6.0 beta. See the [workflow guide](USAGE.md#work-with-selected-folders-and-files) and [native verification](verification/FINDER-WORKFLOWS.md).
+
 - **Implemented:** 13 programming languages plus text, Markdown, valid blank PDF and JSON; [capability/encoding table](FORMATS.md) and format-aware output tests.
 - **Implemented:** imported UTF-8 single-file templates with exact content, favorites, editable titles/default names and immutable operation snapshots. Templates are never executed; custom content is independent of built-in starters.
 - **Implemented:** optional Open After Creation via explicit TextEdit/Preview destinations.
@@ -74,12 +76,12 @@ Folder preferences must never override global Hello World Off. Operations snapsh
 - **Implemented:** everyday Text Cleanup with line-edge trimming, space/tab collapsing, blank-line policies, original/result comparison, changed-line feedback and explicit copying/safe saving.
 - **Implemented:** optional Developer Tools for JSON formatting/minification/validation and Base64 text/image encoding/decoding, with bounded local processing, image/data-URL previews, safe image saving, explicit copying and actionable errors.
 - **Implemented:** everyday File List exports explicitly selected metadata to CSV/Markdown with optional columns, ordering, refresh, exact previews and safe publication.
-- **Implemented:** everyday QR creation with literal UTF-8 input, side-by-side preview, 512/1024/2048-pixel PNG, Standard/High correction, density feedback, explicit copying and safe numbered export.
-- **Implemented:** everyday QR reading from selected still images, with orientation-aware previews, numbered code selection, reviewed decoded text and safe text export.
+- **Implemented:** everyday QR creation for plain text, web links, vCards, Wi-Fi, email, calls, text messages, map locations and calendar events, with side-by-side preview, 512/1024/2048-pixel PNG, Standard/High correction, density feedback, explicit copying and safe numbered export.
+- **Implemented:** everyday QR reading from selected still images, with orientation-aware previews, numbered code selection, concealed Wi-Fi details and export as plain text, vCard or iCalendar.
 - **Not planned:** standalone OCR; use Preview Live Text.
 - **Not planned:** basic Keep Awake; use macOS sleep controls or `caffeinate`.
 - **Not planned:** basic batch rename, ZIP/unzip or generic file inspection; use Finder.
-- **Maintenance/consolidation:** existing QR creation, Clipboard to File and Text Cleanup. QR reading receives no further expansion until native QR workflows are compared interactively.
+- **Maintenance/consolidation:** QR creation and reading, Clipboard to File and Text Cleanup.
 
 ## Milestone 6 — Advanced routing
 

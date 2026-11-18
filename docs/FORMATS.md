@@ -53,7 +53,7 @@ Defaults are PNG, 90% quality and white background. Quality/background choices r
 
 ## Make It Fit
 
-Accepts the same single-frame image inputs and PNG/JPEG/HEIC native encoders above. The per-operation defaults are JPEG, 500,000 maximum bytes, a 1600 × 1600 px bounding box, 60% minimum encoding quality, white background and further reduction allowed. Bounds are 1,000–100,000,000 bytes and 1–20,000 px per dimension. The app’s KB fields are decimal.
+Accepts the same single-frame image inputs and PNG/JPEG/HEIC native encoders above. The per-operation defaults are JPEG, 500,000 maximum bytes, a 1600 × 1600 px bounding box, 60% minimum encoding quality, white background and further reduction allowed. Bounds are 1,000–100,000,000 bytes and 1–20,000 px per dimension. KB and MB use decimal units. A bare number in the Workbench means KB. “Under 2 MB” sets an exact maximum of 1,999,999 bytes, including when saved in an export recipe.
 
 Images never enlarge and fit the bounding box with pixel rounding. Optional additional reduction stops at a 320 px long edge, or the smaller initial bounded size. JPEG/HEIC flatten transparency and try compression before dimensions; PNG retains alpha and compresses losslessly after normalization/resizing. The quality value is a native encoder setting, not a perceptual-quality guarantee.
 
@@ -162,7 +162,9 @@ Output is UTF-8, capped at 2 MiB; the raw-text preview shows up to 65,536 charac
 
 ## QR creation
 
-Create QR Code accepts up to 1,024 bytes of UTF-8. Input is encoded exactly without trimming, Unicode normalization or URL rewriting. Empty/whitespace-only input and C0 binary controls (except tab, CR and LF) plus DEL are rejected. Scanners may interpret encoded text; for example, Vision's display string hides a leading BOM even though QR codewords retain it.
+Create QR Code accepts up to 1,024 UTF-8 bytes after formatting. Text mode preserves whitespace, line endings and Unicode representation. It rejects blank input, DEL and C0 controls other than tab, CR and LF. Web link accepts HTTP and HTTPS addresses. Email uses a percent-encoded mailto URI, Phone call and Text message use international numbers in tel and sms URIs, and Map location uses a geo URI with decimal latitude and longitude.
+
+Contact cards encode vCard 3.0. Calendar events encode iCalendar 2.0 with UTC start and end times. Both use CRLF and fold long lines on UTF-8 scalar boundaries. Wi-Fi uses the WIFI format with escaped delimiters, a hidden-network flag when requested, and a password only for protected networks. [vCard](https://www.rfc-editor.org/rfc/rfc2426) · [iCalendar](https://www.rfc-editor.org/rfc/rfc5545) · [Wi-Fi QR convention](https://github.com/zxing/zxing/wiki/Barcode-Contents#wi-fi-network-config-android-ios-11)
 
 Output is an opaque black/white sRGB PNG at exactly 512, 1024 or 2048 pixels per side. Standard uses QR correction M; High uses H. Native Core Image generates the module matrix. Integer scaling avoids blended edges, requires at least four pixels per source module and leaves at least four white modules of additional border on every side. Dense payloads may require 1024 or 2048 pixels. If the selected size cannot satisfy the module minimum, generation returns a recoverable error without output.
 
@@ -176,4 +178,4 @@ Read accepts actual PNG, JPEG, GIF, WebP, TIFF and HEIC/HEIF content from one ex
 
 Vision and Core Image QR detectors supply spatially merged results, with up to 16 codes and 32 KiB of decoded UTF-8 per code. Duplicate payloads in different locations remain separate numbered codes. A valid image with no detected code returns its preview and a recovery hint. A detected code without readable text remains selectable with copying/saving unavailable; empty text is saveable with Copy disabled.
 
-Copy Text and Save Text use the entire selected decoded string; `.txt` output adds no newline and uses numbered collision protection. Scanner interpretation may omit a leading BOM or interpret an encoded character set. Raw QR codewords/binary payload extraction is not offered. Poor focus, small codes, distortion, dense payloads and native detector differences can prevent detection; universal scanner coverage is not claimed. See [QR reading verification](verification/QR-READING.md).
+Copy Text and Save Text preserve the entire decoded string with no added newline. A complete vCard or VCALENDAR wrapper also enables export as `.vcf` or `.ics`. All three formats use numbered collision protection. Scanner interpretation may omit a leading BOM or interpret an encoded character set. Raw QR codewords/binary payload extraction is not offered. Poor focus, small codes, distortion, dense payloads and native detector differences can prevent detection; universal scanner coverage is not claimed. See [QR reading verification](verification/QR-READING.md).

@@ -20,7 +20,8 @@ final class AppModel {
     private let recipeStore = ExportRecipeStore.standard
     var exportRecipes: [ExportRecipe] = []
     var recipeError: String?
-    var settingsNavigationID = UUID()
+    let workbench = WorkbenchNavigation()
+    var settingsTab: SettingsCategory = .general
     var persistenceError: String?
     var templateLibraryError: String?
     var finderEnabled = FIFinderSyncController.isExtensionEnabled
@@ -28,7 +29,19 @@ final class AppModel {
     let routing = RoutingSettings()
     let defaultHandlers = DefaultHandlerSettings()
     let finderScopes = FinderScopeSettings()
+    private(set) var sharingReview: SharingReview?
+    private var sharingStatus: SharingStatus?
     private var operationWindows: [UUID: NSWindowController] = [:]
+    private func hasRoomForOperation() -> Bool {
+        let backgroundCollection = sharingReview.map { workbench.drafts[.collect] == nil && operationWindows[$0.task.id] == nil } ?? false
+        guard operationWindows.count + workbench.drafts.count + (backgroundCollection ? 1 : 0) < 8 else {
+            showError(NSError(domain: "CloakTools", code: 1, userInfo: [
+                NSLocalizedDescriptionKey: "Finish or close an open task before starting another. You can resume a task from In Progress."
+            ]))
+            return false
+        }
+        return true
+    }
     init() {
         do { preferences = try store.load() }
         catch { preferences = Preferences(); persistenceError = "Settings could not be read: \(error.localizedDescription)" }
@@ -67,9 +80,7 @@ final class AppModel {
         } catch { recipeError = error.localizedDescription }
     }
     func useRecipe(_ selected: ExportRecipe) {
-        guard operationWindows.count < 8 else {
-            showError(NSError(domain: "CloakTools", code: 1, userInfo: [NSLocalizedDescriptionKey: "Finish or close an existing operation before starting another."])); return
-        }
+        guard hasRoomForOperation() else { return }
         do {
             guard let recipe = try recipeStore.load().first(where: { $0.id == selected.id }) else { throw ExportRecipeError.changed }
             let snapshot = try store.load()
@@ -83,32 +94,58 @@ final class AppModel {
             let completion: (NSApplication.ModalResponse) -> Void = { [weak self, panel] response in
                 guard let self, response == .OK, let source = panel.url else { return }
                 // Recheck the limit when an asynchronous picker returns.
-                guard self.operationWindows.count < 8 else { self.showError(NSError(domain: "CloakTools", code: 1, userInfo: [NSLocalizedDescriptionKey: "Finish or close an existing operation before starting another."])); return }
-                let window: NSWindowController
+                guard self.hasRoomForOperation() else { return }
                 switch recipe.options {
                 case .image:
                     let operation = FileOperation(intent: .convert(image: source), preferences: snapshot, sources: [], recipe: recipe)
-                    let controller = OperationWindow(operation: operation)
-                    self.operationWindows[operation.id] = controller
-                    controller.onClose = { [weak self] in self?.operationWindows[operation.id] = nil }; window = controller
+                    self.display(operation)
                 case .fit:
                     let operation = ImageFitOperation(sourceURL: source, revealOutput: snapshot.revealConvertedFile, recipe: recipe)
-                    let controller = ImageFitWindow(operation: operation)
-                    self.operationWindows[operation.id] = controller
-                    controller.onClose = { [weak self] in self?.operationWindows[operation.id] = nil }; window = controller
+                    self.display(operation)
                 case .media:
                     let operation = MediaOperation(sourceURL: source, revealOutput: snapshot.revealConvertedFile, recipe: recipe)
-                    let controller = MediaWindow(operation: operation)
-                    self.operationWindows[operation.id] = controller
-                    controller.onClose = { [weak self] in self?.operationWindows[operation.id] = nil }; window = controller
+                    self.display(operation)
                 }
-                window.showWindow(nil); window.window?.makeKeyAndOrderFront(nil); NSApp.activate()
             }
             NSApp.activate()
             if let window = NSApp.keyWindow ?? NSApp.mainWindow, window.attachedSheet == nil { panel.beginSheetModal(for: window, completionHandler: completion) }
             else { panel.begin(completionHandler: completion) }
         } catch { showError(error) }
     }
+    private func presentEditor<Panel: NSWindowController & OperationPanel, Content: View>(
+        _ tool: WorkbenchTool, id: UUID, busy: @escaping () -> Bool = { false },
+        finish: @escaping () -> Void = {}, panel makePanel: @autoclosure () -> Panel,
+        @ViewBuilder content: (@escaping () -> Void) -> Content
+    ) {
+        if workbench.present(tool, busy: busy, finish: finish, content: content) { return }
+        let controller = makePanel()
+        operationWindows[id] = controller
+        controller.onClose = { [weak self] in self?.operationWindows[id] = nil }
+        controller.showWindow(nil)
+        controller.window?.makeKeyAndOrderFront(nil)
+        NSApp.activate()
+    }
+
+    private func display(_ operation: FileOperation) {
+        let tool: WorkbenchTool = operation.isCreation ? .newFile : .convert
+        presentEditor(tool, id: operation.id, busy: { operation.busy }, panel: OperationWindow(operation: operation)) { close in
+            OperationView(operation: operation, close: close)
+        }
+    }
+
+    private func display(_ operation: ImageFitOperation) {
+        presentEditor(.fit, id: operation.id, busy: { operation.busy }, panel: ImageFitWindow(operation: operation)) { close in
+            ImageFitView(inWorkbench: true, operation: operation, close: close)
+        }
+    }
+
+    private func display(_ operation: MediaOperation) {
+        presentEditor(.exportMedia, id: operation.id, busy: { operation.busy }, finish: operation.finish, panel: MediaWindow(operation: operation)) { close in
+            MediaOperationView(operation: operation, close: close)
+                .onDisappear { operation.player?.pause() }
+        }
+    }
+
     func reloadFileSets() {
         do { fileSets = try fileSetStore.load(); fileSetError = nil }
         catch { fileSetError = "File sets could not be read: \(error.localizedDescription)" }
@@ -127,28 +164,26 @@ final class AppModel {
             try fileSetStore.save(updated); fileSets = updated; fileSetError = nil
         } catch { fileSetError = error.localizedDescription }
     }
-    func chooseFileSetFolder(_ definition: FileSetDefinition = .notes) {
-        guard operationWindows.count < 8 else {
-            showError(NSError(domain: "CloakTools", code: 1, userInfo: [NSLocalizedDescriptionKey: "Finish or close an existing operation before starting another."])); return
-        }
+    func chooseFileSetFolder(_ definition: FileSetDefinition = .notes, destination: URL? = nil) {
+        guard hasRoomForOperation() else { return }
         do {
             let preferences = try store.load()
             let allSources = FileTemplate.allCases.map(TemplateSource.builtIn) + (try library.load()).map(TemplateSource.custom)
             guard preferences.tools.includes(definition, sources: allSources) else { throw ToolAvailabilityError.developerToolsOff }
             let sources = allSources.filter { preferences.tools.includes($0) }
+            func review(in folder: URL) {
+                guard self.hasRoomForOperation() else { return }
+                let operation = FileSetOperation(definition: definition, sources: sources, preferences: preferences, destination: folder)
+                self.presentEditor(.fileSet, id: operation.id, busy: { operation.busy }, panel: FileSetWindow(operation: operation)) { close in
+                    FileSetView(operation: operation, close: close)
+                }
+            }
+            if let destination { review(in: destination); return }
             let panel = NSOpenPanel(); panel.title = "Create a file set in…"; panel.prompt = "Choose Folder"
             panel.message = "A new folder will hold the files you review next. Existing folders are never merged."
-            panel.canChooseFiles = false; panel.canChooseDirectories = true; panel.allowsMultipleSelection = false
-            let completion: (NSApplication.ModalResponse) -> Void = { [weak self, panel] response in
-                guard let self, response == .OK, let destination = panel.url else { return }
-                guard self.operationWindows.count < 8 else {
-                    self.showError(NSError(domain: "CloakTools", code: 1, userInfo: [NSLocalizedDescriptionKey: "Finish or close an existing operation before starting another."])); return
-                }
-                let operation = FileSetOperation(definition: definition, sources: sources, preferences: preferences, destination: destination)
-                let controller = FileSetWindow(operation: operation)
-                self.operationWindows[operation.id] = controller
-                controller.onClose = { [weak self] in self?.operationWindows[operation.id] = nil }
-                controller.showWindow(nil); controller.window?.makeKeyAndOrderFront(nil); NSApp.activate()
+            panel.canChooseFiles = false; panel.canChooseDirectories = true; panel.canCreateDirectories = true
+            let completion: (NSApplication.ModalResponse) -> Void = { response in
+                if response == .OK, let folder = panel.url { review(in: folder) }
             }
             NSApp.activate()
             if let window = NSApp.keyWindow ?? NSApp.mainWindow, window.attachedSheet == nil {
@@ -168,9 +203,7 @@ final class AppModel {
         catch { presetError = error.localizedDescription }
     }
     func presentPreset(_ preset: FolderPreset) {
-        guard operationWindows.count < 8 else {
-            showError(NSError(domain: "CloakTools", code: 1, userInfo: [NSLocalizedDescriptionKey: "Finish or close an existing operation before starting another."])); return
-        }
+        guard hasRoomForOperation() else { return }
         do {
             let templates = try library.load()
             let request = try preset.request(preferences: try store.load(), templates: templates)
@@ -178,10 +211,7 @@ final class AppModel {
             let sources = (FileTemplate.allCases.map(TemplateSource.builtIn) + templates.map(TemplateSource.custom)).filter { request.preferences.tools.includes($0) }
             let operation = FileOperation(intent: .create(folder: request.folder, template: .text), preferences: request.preferences, sources: sources)
             operation.selectedTemplateID = request.source.id; operation.name = request.name; operation.presetTitle = preset.title
-            let controller = OperationWindow(operation: operation)
-            operationWindows[operation.id] = controller
-            controller.onClose = { [weak self] in self?.operationWindows[operation.id] = nil }
-            controller.showWindow(nil); controller.window?.makeKeyAndOrderFront(nil); NSApp.activate()
+            display(operation)
         } catch { showError(error) }
     }
     func update(_ edit: (inout Preferences) -> Void) {
@@ -215,25 +245,53 @@ final class AppModel {
         if panel.runModal() == .OK, let input = panel.url { present(.convert(image: input)) }
     }
     func chooseImageToFit() {
-        guard operationWindows.count < 8 else {
-            showError(NSError(domain: "CloakTools", code: 1, userInfo: [NSLocalizedDescriptionKey: "Finish or close an existing operation before starting another."])); return
-        }
+        guard hasRoomForOperation() else { return }
         let panel = NSOpenPanel(); panel.title = "Make an image fit"; panel.prompt = "Choose Image"
         panel.allowedContentTypes = ImageConversion.inputTypes; panel.allowsMultipleSelection = false; panel.canChooseDirectories = false
         guard panel.runModal() == .OK, let input = panel.url else { return }
-        let operation = ImageFitOperation(sourceURL: input, revealOutput: preferences.revealConvertedFile)
-        let controller = ImageFitWindow(operation: operation)
-        operationWindows[operation.id] = controller
-        controller.onClose = { [weak self] in self?.operationWindows[operation.id] = nil }
-        controller.showWindow(nil); controller.window?.makeKeyAndOrderFront(nil); NSApp.activate()
+        present(.fit(image: input))
     }
     func present(_ intent: FinderIntent) {
-        if case let .clipboard(folder) = intent { createFromClipboard(in: folder); return }
-        if case let .assemble(files) = intent { presentPDF(files); return }
-        if case let .copy(files) = intent { presentCopy(files); return }
-        guard operationWindows.count < 8 else {
-            showError(NSError(domain: "CloakTools", code: 1, userInfo: [NSLocalizedDescriptionKey: "Finish or close an existing operation before starting another."])); return
+        switch intent {
+        case let .fit(image):
+            guard hasRoomForOperation() else { return }
+            display(ImageFitOperation(sourceURL: image, revealOutput: preferences.revealConvertedFile))
+            return
+        case let .structure(folder):
+            guard hasRoomForOperation() else { return }
+            let review = StructureReview(folder)
+            showReview(.structure, task: review.task) { close in
+                StructureReviewView(review: review, saveSet: self.saveFileSet, close: close)
+            }
+            return
+        case let .compare(first, second):
+            guard hasRoomForOperation() else { return }
+            guard let second else {
+                let panel = NSOpenPanel()
+                panel.title = "Compare “\(first.lastPathComponent)” with…"
+                panel.message = panel.title
+                panel.prompt = "Compare Folders"
+                panel.canChooseDirectories = true
+                panel.canChooseFiles = false
+                panel.directoryURL = first.deletingLastPathComponent()
+                NSApp.activate()
+                panel.begin { [weak self] response in
+                    if response == .OK, let folder = panel.url { self?.present(.compare(first: first, second: folder)) }
+                }
+                return
+            }
+            let review = ComparisonReview(first, second)
+            showReview(.compare, task: review.task) { ComparisonReviewView(review: review, close: $0) }
+            return
+        case let .collect(files):
+            collectForSharing(files)
+            return
+        case let .clipboard(folder): createFromClipboard(in: folder); return
+        case let .assemble(files): presentPDF(files); return
+        case let .copy(files): presentCopy(files); return
+        case .create, .templates, .convert: break
         }
+        guard hasRoomForOperation() else { return }
         do {
             // Read once at ingress. A later settings edit cannot change this operation.
             let snapshot = try store.load()
@@ -246,47 +304,38 @@ final class AppModel {
                 return $0.title.localizedStandardCompare($1.title) == .orderedAscending
             }
             let operation = FileOperation(intent: intent, preferences: snapshot, sources: sources)
-            let controller = OperationWindow(operation: operation)
-            operationWindows[operation.id] = controller
-            controller.onClose = { [weak self] in self?.operationWindows[operation.id] = nil }
-            controller.showWindow(nil); controller.window?.makeKeyAndOrderFront(nil); NSApp.activate()
+            display(operation)
         } catch { showError(error) }
     }
     func chooseClipboardFolder() { createFromClipboard(in: nil) }
+    func beginPDFReview() { presentPDF([]) }
+
     func choosePDFFiles() {
         let panel = PDFOperation.filePanel()
         if panel.runModal() == .OK { presentPDF(panel.urls) }
     }
     func choosePDFToOrganize() {
-        guard operationWindows.count < 8 else {
-            showError(NSError(domain: "CloakTools", code: 1, userInfo: [NSLocalizedDescriptionKey: "Finish or close an existing operation before starting another."])); return
-        }
+        guard hasRoomForOperation() else { return }
         let panel = NSOpenPanel(); panel.title = "Organize a PDF"; panel.prompt = "Choose PDF"
         panel.allowedContentTypes = [.pdf]; panel.allowsMultipleSelection = false; panel.canChooseDirectories = false
         panel.message = "Choose an ordinary PDF with up to 200 pages and 100 MB. The original stays unchanged."
-        guard panel.runModal() == .OK, let input = panel.url else { return }
+        guard panel.runModal() == .OK, let input = panel.url, hasRoomForOperation() else { return }
         do {
             let operation = PDFPagesOperation(sourceURL: input, preferences: try store.load())
-            let controller = PDFPagesWindow(operation: operation)
-            operationWindows[operation.id] = controller
-            controller.onClose = { [weak self] in self?.operationWindows[operation.id] = nil }
-            controller.showWindow(nil); controller.window?.makeKeyAndOrderFront(nil); NSApp.activate()
+            presentEditor(.pages, id: operation.id, busy: { operation.busy }, finish: operation.finishPreview, panel: PDFPagesWindow(operation: operation)) { close in
+                PDFPagesView(operation: operation, close: close)
+            }
         } catch { showError(error) }
     }
     func chooseMediaToExport() {
-        guard operationWindows.count < 8 else {
-            showError(NSError(domain: "CloakTools", code: 1, userInfo: [NSLocalizedDescriptionKey: "Finish or close an existing operation before starting another."])); return
-        }
+        guard hasRoomForOperation() else { return }
         let panel = NSOpenPanel(); panel.title = "Export media"; panel.prompt = "Choose Media"
         panel.allowedContentTypes = MediaExport.inputExtensions.sorted().compactMap { UTType(filenameExtension: $0) }
         panel.allowsMultipleSelection = false; panel.canChooseDirectories = false
         panel.message = "Choose a local movie or audio file, up to 1 GB and 30 minutes. The original stays unchanged."
-        guard panel.runModal() == .OK, let input = panel.url else { return }
+        guard panel.runModal() == .OK, let input = panel.url, hasRoomForOperation() else { return }
         let operation = MediaOperation(sourceURL: input, revealOutput: preferences.revealConvertedFile)
-        let controller = MediaWindow(operation: operation)
-        operationWindows[operation.id] = controller
-        controller.onClose = { [weak self] in self?.operationWindows[operation.id] = nil }
-        controller.showWindow(nil); controller.window?.makeKeyAndOrderFront(nil); NSApp.activate()
+        display(operation)
     }
     func chooseCopyFiles() {
         let panel = NSOpenPanel(); panel.title = "Copy names and paths"; panel.prompt = "Choose Items"
@@ -295,114 +344,108 @@ final class AppModel {
         if panel.runModal() == .OK { presentCopy(panel.urls) }
     }
     func presentDeveloperText(_ tool: DeveloperTextTool) {
-        guard operationWindows.count < 8 else {
-            showError(NSError(domain: "CloakTools", code: 1, userInfo: [NSLocalizedDescriptionKey: "Finish or close an existing operation before starting another."])); return
-        }
+        guard hasRoomForOperation() else { return }
         do {
             guard try store.load().developerToolsEnabled else { throw ToolAvailabilityError.developerToolsOff }
             let operation = DeveloperTextOperation(tool: tool)
-            let controller = DeveloperTextWindow(operation: operation)
-            operationWindows[operation.id] = controller
-            controller.onClose = { [weak self] in self?.operationWindows[operation.id] = nil }
-            controller.showWindow(nil); controller.window?.makeKeyAndOrderFront(nil); NSApp.activate()
+            let page: WorkbenchTool = tool == .json ? .json : .base64
+            let image = tool == .base64 ? Base64ImageOperation() : nil
+            image?.onSaved = workbench.endEditingAfterSave(on: page)
+            presentEditor(page, id: operation.id, busy: { image?.saving == true }, finish: {
+                operation.invalidate()
+                image?.cancel()
+            }, panel: DeveloperTextWindow(operation: operation)) { close in
+                DeveloperToolWorkspace(operation: operation, imageOperation: image, close: close)
+            }
         } catch { showError(error) }
     }
     func presentSampleFiles() {
-        guard operationWindows.count < 8 else {
-            showError(NSError(domain: "CloakTools", code: 1, userInfo: [NSLocalizedDescriptionKey: "Finish or close an existing operation before starting another."])); return
-        }
+        guard hasRoomForOperation() else { return }
         do {
             guard try store.load().developerToolsEnabled else { throw ToolAvailabilityError.developerToolsOff }
             let operation = SampleFileOperation()
-            let controller = SampleFileWindow(operation: operation)
-            operationWindows[operation.id] = controller
-            controller.onClose = { [weak self] in self?.operationWindows[operation.id] = nil }
-            controller.showWindow(nil); controller.window?.makeKeyAndOrderFront(nil); NSApp.activate()
+            operation.onSaved = workbench.endEditingAfterSave(on: .sample)
+            presentEditor(.sample, id: operation.id, busy: { operation.saving }, finish: operation.cancel, panel: SampleFileWindow(operation: operation)) { close in
+                SampleFileView(operation: operation, close: close)
+            }
         } catch { showError(error) }
     }
     func presentQRCode() { presentQRWindow(reading: false) }
     func presentQRReader() { presentQRWindow(reading: true) }
-    private func presentQRWindow(reading: Bool) {
-        guard operationWindows.count < 8 else {
-            showError(NSError(domain: "CloakTools", code: 1, userInfo: [NSLocalizedDescriptionKey: "Finish or close an existing operation before starting another."])); return
-        }
+    func presentQRReader(image: URL) { presentQRWindow(reading: true, image: image) }
+    private func presentQRWindow(reading: Bool, image: URL? = nil) {
+        guard hasRoomForOperation() else { return }
         let operation = QRCodeOperation()
-        let controller = QRCodeWindow(operation: operation, reading: reading)
-        operationWindows[operation.id] = controller
-        controller.onClose = { [weak self] in self?.operationWindows[operation.id] = nil }
-        controller.showWindow(nil); controller.window?.makeKeyAndOrderFront(nil); NSApp.activate()
-    }
-    func presentFileList() {
-        guard operationWindows.count < 8 else {
-            showError(NSError(domain: "CloakTools", code: 1, userInfo: [NSLocalizedDescriptionKey: "Finish or close an existing operation before starting another."])); return
+        operation.reading = reading
+        let page: WorkbenchTool = reading ? .readQR : .createQR
+        let reader = QRCodeReadOperation()
+        if let image { reader.read(image) }
+        operation.onSaved = workbench.endEditingAfterSave(on: page)
+        reader.onSaved = operation.onSaved
+        presentEditor(page, id: operation.id, busy: { operation.saving || reader.saving }, finish: {
+            operation.cancel()
+            reader.cancel()
+        }, panel: QRCodeWindow(operation: operation, reader: reader)) { close in
+            QRCodeWorkspace(operation: operation, reader: reader, close: close)
         }
+    }
+    func presentFileList() { presentFileList([]) }
+    func presentFileList(_ urls: [URL]) {
+        guard hasRoomForOperation() else { return }
         let operation = FileListOperation()
-        let controller = FileListWindow(operation: operation)
-        operationWindows[operation.id] = controller
-        controller.onClose = { [weak self] in self?.operationWindows[operation.id] = nil }
-        controller.showWindow(nil); controller.window?.makeKeyAndOrderFront(nil); NSApp.activate()
+        operation.add(urls)
+        operation.onSaved = workbench.endEditingAfterSave(on: .fileList)
+        presentEditor(.fileList, id: operation.id, busy: { operation.saving }, finish: operation.cancel, panel: FileListWindow(operation: operation)) { close in
+            FileListView(operation: operation, close: close)
+        }
     }
     func presentTextCleanup() {
-        guard operationWindows.count < 8 else {
-            showError(NSError(domain: "CloakTools", code: 1, userInfo: [NSLocalizedDescriptionKey: "Finish or close an existing operation before starting another."])); return
-        }
+        guard hasRoomForOperation() else { return }
         let operation = TextCleanupOperation()
-        let controller = TextCleanupWindow(operation: operation)
-        operationWindows[operation.id] = controller
-        controller.onClose = { [weak self] in self?.operationWindows[operation.id] = nil }
-        controller.showWindow(nil); controller.window?.makeKeyAndOrderFront(nil); NSApp.activate()
+        operation.onSaved = workbench.endEditingAfterSave(on: .cleanup)
+        presentEditor(.cleanup, id: operation.id, busy: { operation.saving }, finish: operation.cancel, panel: TextCleanupWindow(operation: operation)) { close in
+            TextCleanupView(operation: operation, close: close)
+        }
     }
     func presentMarkdownDigest() {
-        guard operationWindows.count < 8 else {
-            showError(NSError(domain: "CloakTools", code: 1, userInfo: [NSLocalizedDescriptionKey: "Finish or close an existing operation before starting another."])); return
-        }
+        guard hasRoomForOperation() else { return }
         let operation = MarkdownDigestOperation()
-        let controller = MarkdownDigestWindow(operation: operation)
-        operationWindows[operation.id] = controller
-        controller.onClose = { [weak self] in self?.operationWindows[operation.id] = nil }
-        controller.showWindow(nil); controller.window?.makeKeyAndOrderFront(nil); NSApp.activate()
+        operation.onSaved = workbench.endEditingAfterSave(on: .digest)
+        presentEditor(.digest, id: operation.id, busy: { operation.saving }, finish: operation.cancel, panel: MarkdownDigestWindow(operation: operation)) { close in
+            MarkdownDigestView(operation: operation, close: close)
+        }
     }
     func presentExampleCopy() {
-        guard operationWindows.count < 8 else {
-            showError(NSError(domain: "CloakTools", code: 1, userInfo: [NSLocalizedDescriptionKey: "Finish or close an existing operation before starting another."])); return
-        }
+        guard hasRoomForOperation() else { return }
         do {
             guard try store.load().developerToolsEnabled else { throw ToolAvailabilityError.developerToolsOff }
             let operation = ExampleCopyOperation()
-            let controller = ExampleCopyWindow(operation: operation)
-            operationWindows[operation.id] = controller
-            controller.onClose = { [weak self] in self?.operationWindows[operation.id] = nil }
-            controller.showWindow(nil); controller.window?.makeKeyAndOrderFront(nil); NSApp.activate()
+            operation.onSaved = workbench.endEditingAfterSave(on: .example)
+            presentEditor(.example, id: operation.id, busy: { operation.saving }, finish: operation.cancel, panel: ExampleCopyWindow(operation: operation)) { close in
+                ExampleCopyView(operation: operation, close: close)
+            }
         } catch { showError(error) }
     }
     private func presentCopy(_ files: [URL]) {
-        guard operationWindows.count < 8 else {
-            showError(NSError(domain: "CloakTools", code: 1, userInfo: [NSLocalizedDescriptionKey: "Finish or close an existing operation before starting another."])); return
-        }
+        guard hasRoomForOperation() else { return }
         do {
             let operation = try CopyOperation(selection: CopySelection(files: files), preferences: try store.load())
-            let controller = CopyOperationWindow(operation: operation)
-            operationWindows[operation.id] = controller
-            controller.onClose = { [weak self] in self?.operationWindows[operation.id] = nil }
-            controller.showWindow(nil); controller.window?.makeKeyAndOrderFront(nil); NSApp.activate()
+            presentEditor(.copy, id: operation.id, panel: CopyOperationWindow(operation: operation)) { close in
+                CopyOperationView(operation: operation, close: close)
+            }
         } catch { showError(error) }
     }
     private func presentPDF(_ files: [URL]) {
-        guard operationWindows.count < 8 else {
-            showError(NSError(domain: "CloakTools", code: 1, userInfo: [NSLocalizedDescriptionKey: "Finish or close an existing operation before starting another."])); return
-        }
+        guard hasRoomForOperation() else { return }
         do {
             let operation = PDFOperation(files: files, preferences: try store.load())
-            let controller = PDFOperationWindow(operation: operation)
-            operationWindows[operation.id] = controller
-            controller.onClose = { [weak self] in self?.operationWindows[operation.id] = nil }
-            controller.showWindow(nil); controller.window?.makeKeyAndOrderFront(nil); NSApp.activate()
+            presentEditor(.pdf, id: operation.id, busy: { operation.busy }, panel: PDFOperationWindow(operation: operation)) { close in
+                PDFOperationView(operation: operation, close: close)
+            }
         } catch { showError(error) }
     }
     private func createFromClipboard(in destination: URL?) {
-        guard operationWindows.count < 8 else {
-            showError(NSError(domain: "CloakTools", code: 1, userInfo: [NSLocalizedDescriptionKey: "Finish or close an existing operation before starting another."])); return
-        }
+        guard hasRoomForOperation() else { return }
         do {
             // Capture at the explicit action, before the folder picker; no background reads.
             let input = try ClipboardCapture.read()
@@ -412,14 +455,13 @@ final class AppModel {
             else {
                 let panel = NSOpenPanel(); panel.title = "Save clipboard contents in…"; panel.prompt = "Choose Folder"
                 panel.canChooseFiles = false; panel.canChooseDirectories = true; panel.allowsMultipleSelection = false
-                guard panel.runModal() == .OK, let selection = panel.url else { return }
+                guard panel.runModal() == .OK, let selection = panel.url, hasRoomForOperation() else { return }
                 folder = selection
             }
             let operation = ClipboardOperation(input: input, destination: folder, preferences: snapshot)
-            let controller = ClipboardWindow(operation: operation)
-            operationWindows[operation.id] = controller
-            controller.onClose = { [weak self] in self?.operationWindows[operation.id] = nil }
-            controller.showWindow(nil); controller.window?.makeKeyAndOrderFront(nil); NSApp.activate()
+            presentEditor(.clipboard, id: operation.id, busy: { operation.busy }, panel: ClipboardWindow(operation: operation)) { close in
+                ClipboardView(operation: operation, close: close)
+            }
         } catch { showError(error) }
     }
     func importTemplate() {
@@ -458,5 +500,54 @@ final class AppModel {
         let alert = NSAlert(); alert.messageText = "CloakTools couldn’t complete this action"
         alert.informativeText = error.localizedDescription; alert.addButton(withTitle: "OK")
         NSApp.activate(); alert.runModal()
+    }
+}
+
+extension AppModel {
+    private func showReview<Content: View>(_ tool: WorkbenchTool, task: FolderTask,
+                                           finish: @escaping () -> Void = {},
+                                           @ViewBuilder content: (@escaping () -> Void) -> Content) {
+        presentEditor(tool, id: task.id, busy: { task.busy }, finish: finish,
+                      panel: FinderReviewWindow(tool.rawValue, task: task, finish: finish, content: content), content: content)
+    }
+
+    func chooseStructure() {
+        if let folder = chooseFinderFolder("Choose the folder whose structure you want to reuse") { present(.structure(folder: folder)) }
+    }
+
+    func chooseComparison() {
+        if let first = chooseFinderFolder("Choose the first folder to compare") { present(.compare(first: first, second: nil)) }
+    }
+
+    func collectForSharing(_ files: [URL]) {
+        if sharingReview == nil {
+            guard hasRoomForOperation() else { return }
+            sharingReview = SharingReview()
+        }
+        guard let review = sharingReview else { return }
+        if !files.isEmpty {
+            if sharingStatus == nil {
+                sharingStatus = SharingStatus { [weak self] in self?.collectForSharing([]) }
+                review.onChange = { [weak self, weak review] in
+                    guard let review else { return }
+                    self?.sharingStatus?.update(count: review.files.count, error: review.task.error)
+                }
+                review.onChange?()
+            }
+            review.add(files)
+            return
+        }
+        if let controller = operationWindows[review.task.id] {
+            controller.window?.makeKeyAndOrderFront(nil)
+            NSApp.activate()
+        } else if workbench.drafts[.collect] != nil {
+            workbench.show(.collect); workbench.showWindow?()
+        } else {
+            showReview(.collect, task: review.task, finish: { [weak self] in
+                self?.sharingStatus?.remove()
+                self?.sharingStatus = nil
+                self?.sharingReview = nil
+            }) { close in SharingReviewView(review: review, close: close) }
+        }
     }
 }

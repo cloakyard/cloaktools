@@ -116,37 +116,18 @@ public struct PreparedFileSet: Sendable {
     /// Build inside a private sibling directory, then publish the whole folder with
     /// exclusive rename. Existing directories are never merged or modified.
     public func publish(in destination: URL, progress: @Sendable (Int, Int) -> Void = { _, _ in }) throws -> URL {
-        try Task.checkCancellation()
-        guard destination.isFileURL, [nil, "", "localhost"].contains(destination.host),
-              destination.user == nil, destination.password == nil, destination.port == nil,
-              destination.query == nil, destination.fragment == nil,
-              (try? destination.resourceValues(forKeys: [.isDirectoryKey]).isDirectory) == true else { throw ToolError.unavailableFolder }
-        let fm = FileManager.default
-        let stage = destination.appendingPathComponent(".cloaktools-set-\(UUID())", isDirectory: true)
-        try fm.createDirectory(at: stage, withIntermediateDirectories: false, attributes: [.posixPermissions: 0o700])
-        defer { try? fm.removeItem(at: stage) }
-        for (index, item) in items.enumerated() {
-            try Task.checkCancellation()
-            let target = stage.appendingPathComponent(item.path)
-            try fm.createDirectory(at: item.data == nil ? target : target.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: [.posixPermissions: 0o700])
-            if let data = item.data {
-                try data.write(to: target, options: .withoutOverwriting)
-                try fm.setAttributes([.posixPermissions: 0o600], ofItemAtPath: target.path)
+        try SafeOutput.publishFolder(named: folderName, in: destination) { stage in
+            for (index, item) in items.enumerated() {
+                try Task.checkCancellation()
+                let target = stage.appendingPathComponent(item.path)
+                try FileManager.default.createDirectory(at: item.data == nil ? target : target.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: [.posixPermissions: 0o700])
+                if let data = item.data {
+                    try data.write(to: target, options: .withoutOverwriting)
+                    try FileManager.default.setAttributes([.posixPermissions: 0o600], ofItemAtPath: target.path)
+                }
+                progress(index + 1, items.count)
             }
-            progress(index + 1, items.count)
         }
-        for index in 1...10_000 {
-            try Task.checkCancellation()
-            let name = folderName + (index == 1 ? "" : " \(index)")
-            let target = destination.appendingPathComponent(name, isDirectory: true)
-            let status = stage.withUnsafeFileSystemRepresentation { from in
-                target.withUnsafeFileSystemRepresentation { to in renamex_np(from!, to!, UInt32(RENAME_EXCL)) }
-            }
-            if status == 0 { return target }
-            let code = errno
-            if code != EEXIST { throw POSIXError(POSIXErrorCode(rawValue: code) ?? .EIO) }
-        }
-        throw CocoaError(.fileWriteFileExists)
     }
 }
 

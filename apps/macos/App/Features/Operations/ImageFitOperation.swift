@@ -4,14 +4,15 @@ import CloakToolsCore
 
 struct ImageFitDraft: Equatable {
     var format: ImageOutputFormat = .jpeg
-    var kilobytes = "500"
+    var sizeLimit: String
     var width = "1600"
     var height = "1600"
     var minimumQuality = 0.6
     var background: ImageBackground = .white
     var allowSmaller = true
     init(options: ImageFitOptions = .init()) {
-        format = options.format; kilobytes = String(options.maximumBytes / 1000)
+        format = options.format
+        sizeLimit = options.sizeLimitText
         width = String(options.maximumWidth); height = String(options.maximumHeight)
         minimumQuality = options.minimumQuality; background = options.background; allowSmaller = options.allowSmallerDimensions
     }
@@ -20,9 +21,16 @@ struct ImageFitDraft: Equatable {
             guard !value.isEmpty, value.utf8.allSatisfy({ (48...57).contains($0) }), let result = Int(value) else { throw ImageFitError.invalidOptions }
             return result
         }
-        let kb = try number(kilobytes)
-        guard (1...100_000).contains(kb) else { throw ImageFitError.invalidOptions }
-        let options = ImageFitOptions(format: format, maximumBytes: kb * 1000, maximumWidth: try number(width), maximumHeight: try number(height),
+        let text = sizeLimit.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        guard let match = text.wholeMatch(of: #/(under\s+)?([0-9]{1,9})(?:\.([0-9]{1,6}))?\s*(mb|kb|b)?/#) else {
+            throw ImageFitError.invalidOptions
+        }
+        let places = match.4 == "mb" ? 6 : match.4 == "b" ? 0 : 3
+        let fraction = String(match.3 ?? "")
+        guard fraction.dropFirst(places).allSatisfy({ $0 == "0" }) else { throw ImageFitError.invalidOptions }
+        let digits = String(match.2) + fraction.prefix(places) + String(repeating: "0", count: max(0, places - fraction.count))
+        let limit = try number(digits) - (match.1 == nil ? 0 : 1)
+        let options = ImageFitOptions(format: format, maximumBytes: limit, maximumWidth: try number(width), maximumHeight: try number(height),
                                       minimumQuality: minimumQuality, background: background, allowSmallerDimensions: allowSmaller)
         try options.validate(); return options
     }
@@ -138,12 +146,13 @@ final class ImageFitWindow: NSWindowController, NSWindowDelegate {
 }
 
 struct ImageFitView: View {
+    var inWorkbench = false
     @Bindable var operation: ImageFitOperation
     let close: () -> Void
     @State private var advanced = false
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
-            DialogHeading(title: "Make it fit", subtitle: operation.recipe.map { "From “\($0.title)”. Preview before saving." } ?? "A smaller copy, with limits you choose.", symbol: "arrow.down.right.and.arrow.up.left")
+            DialogHeading(title: "Make an image fit", subtitle: operation.recipe.map { "From “\($0.title)”. Preview before saving." } ?? "A smaller copy, with limits you choose.", symbol: "arrow.down.right.and.arrow.up.left")
             ScrollView {
                 VStack(alignment: .leading, spacing: 14) {
                     previews
@@ -187,7 +196,7 @@ struct ImageFitView: View {
                         Button("Done", action: close).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
                     } else {
                         Button("Cancel", role: .cancel, action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                        Button(operation.result == nil ? "Preview Fit" : "Save Copy") { if operation.result == nil { operation.preview() } else { operation.save() } }
+                        Button(operation.result == nil ? "Preview Fit" : "Save \(operation.draft.format.title) Copy") { if operation.result == nil { operation.preview() } else { operation.save() } }
                             .keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
                             .disabled(operation.source == nil || operation.result?.fits == false || !operation.draft.format.isAvailable)
                     }
@@ -198,9 +207,9 @@ struct ImageFitView: View {
     }
     private var previews: some View {
         HStack(spacing: 14) {
-            previewImage(operation.sourceThumbnail, title: "Original", detail: operation.source.map { "\($0.width) × \($0.height) · \(size($0.sourceByteCount))" } ?? "Preparing…")
+            previewImage(operation.sourceThumbnail, title: inWorkbench ? operation.sourceURL.lastPathComponent : "Original", detail: operation.source.map { "\($0.width) × \($0.height) · \(size($0.sourceByteCount))" } ?? "Preparing…")
             Image(systemName: "arrow.right").foregroundStyle(.tertiary).accessibilityHidden(true)
-            previewImage(operation.resultThumbnail, title: operation.result?.options.format.title ?? "Preview", detail: operation.result.map {
+            previewImage(operation.resultThumbnail, title: operation.result.map { inWorkbench ? $0.filename : $0.options.format.title } ?? "Preview", detail: operation.result.map {
                 "\($0.width) × \($0.height) · \(size($0.byteCount))" + ($0.quality.map { " · \(Int(($0 * 100).rounded()))%" } ?? "")
             } ?? "Set limits below")
         }.frame(maxWidth: .infinity).modifier(DialogCard())
@@ -209,8 +218,8 @@ struct ImageFitView: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Spacer(minLength: 0)
-                if let image { Image(nsImage: image).resizable().scaledToFit().frame(height: 64).accessibilityLabel("\(title) image preview") }
-                else { Image(systemName: "photo").font(.title2).foregroundStyle(.tertiary).frame(height: 64).accessibilityHidden(true) }
+                if let image { Image(nsImage: image).resizable().scaledToFit().frame(height: inWorkbench ? 128 : 64).accessibilityLabel("\(title) image preview") }
+                else { Image(systemName: "photo").font(.title2).foregroundStyle(.tertiary).frame(height: inWorkbench ? 128 : 64).accessibilityHidden(true) }
                 Spacer(minLength: 0)
             }
             Text(title).font(.caption).fontWeight(.semibold)
@@ -223,7 +232,9 @@ struct ImageFitView: View {
                 GridRow { Text("Format").foregroundStyle(.secondary); ImageFormatPicker(selection: $operation.draft.format).labelsHidden() }
                 GridRow {
                     Text("Maximum size").foregroundStyle(.secondary)
-                    HStack { TextField("500", text: $operation.draft.kilobytes).textFieldStyle(.roundedBorder).accessibilityLabel("Maximum size in kilobytes"); Text("KB").foregroundStyle(.secondary).help("1 KB = 1,000 bytes") }
+                    TextField("e.g. under 2 MB", text: $operation.draft.sizeLimit)
+                        .textFieldStyle(.roundedBorder).accessibilityLabel("Maximum file size")
+                        .help("Enter a limit such as 500 KB or under 2 MB. A number alone means KB.")
                 }
                 GridRow {
                     Text("Fit within").foregroundStyle(.secondary)

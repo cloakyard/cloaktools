@@ -117,8 +117,8 @@ struct FileSetView: View {
     private var reviewing: Bool { operation.prepared != nil }
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
-            DialogHeading(title: operation.output != nil ? "Folder created" : reviewing ? "Review file set" : "New file set",
-                          subtitle: operation.output != nil ? "Your files are ready, together." : reviewing ? "These exact files will go into one new folder." : "A few related files. One organized start.", symbol: "folder.badge.plus")
+            DialogHeading(title: operation.output != nil ? "Folder created" : reviewing ? "Review folder contents" : "Create a folder with a set of files",
+                          subtitle: operation.output != nil ? "Your files are ready, together." : reviewing ? "Check the files and destination before creating the folder." : "Choose the folder name and the files to create inside it.", symbol: "folder.badge.plus")
             operationContent
             DestinationRow(folder: operation.output ?? operation.destination, change: operation.output == nil ? { operation.chooseDestination() } : nil).disabled(operation.busy)
             OperationFeedback(activity: operation.busy ? (reviewing ? "Creating \(operation.completedItems) of \(operation.definition.entries.count) items…" : "Preparing review…") : nil, stopping: operation.stopping,
@@ -161,7 +161,23 @@ struct FileSetView: View {
                     ScrollViewReader { proxy in
                         ScrollView {
                             LazyVStack(alignment: .leading, spacing: 0) {
-                                ForEach(operation.definition.entries) { entry in entryRow(entry).id(entry.id) }
+                                if let prepared = operation.prepared {
+                                    ForEach(FileSetReviewItem.outline(prepared)) { item in
+                                        HStack {
+                                            Label(item.name, systemImage: item.bytes == nil ? "folder" : "doc.text")
+                                            Spacer()
+                                            if let bytes = item.bytes { Text("\(bytes.formatted()) bytes").foregroundStyle(.secondary) }
+                                        }
+                                        .padding(.leading, CGFloat(item.depth) * 18)
+                                        .padding(.vertical, 6)
+                                        .accessibilityElement(children: .combine)
+                                        .accessibilityLabel(item.path)
+                                        .accessibilityValue(item.bytes.map { "\($0) bytes" } ?? "Folder")
+                                        .help(item.path)
+                                    }
+                                } else {
+                                    ForEach(operation.definition.entries) { entry in entryRow(entry).id(entry.id) }
+                                }
                             }.padding(.trailing, 12)
                         }.scrollBounceBehavior(.basedOnSize)
                             .onChange(of: highlightedItem) { if let highlightedItem { proxy.scrollTo(highlightedItem, anchor: .center) } }
@@ -196,7 +212,7 @@ struct FileSetView: View {
             GlassEffectContainer(spacing: 8) {
                 HStack(spacing: 8) {
                     if !operation.busy && operation.output == nil {
-                        if reviewing { Button("Back", action: operation.edit).modifier(DialogActionStyle()) }
+                        if reviewing { Button("Edit Contents", action: operation.edit).modifier(DialogActionStyle()) }
                         else { Button("Save Set…") { saving = true }.buttonStyle(.link).disabled(operation.validation != nil) }
                     }
                     Spacer(minLength: 0)
@@ -303,5 +319,29 @@ private struct FileSetSaveSheet: View {
         }.padding(20).frame(width: 440).onAppear {
             title = AppModel.shared.fileSets.first { $0.id == operation.definition.id }?.title ?? operation.definition.title; focused = true
         }
+    }
+}
+
+
+/// Include the implicit parent folders that publication will create.
+struct FileSetReviewItem: Identifiable {
+    let components: [String]
+    let bytes: Int?
+    var path: String { components.joined(separator: "/") }
+    var id: String { path }
+    var name: String { components.last ?? path }
+    var depth: Int { components.count - 1 }
+
+    static func outline(_ prepared: PreparedFileSet) -> [Self] {
+        var rows: [String: Self] = [:]
+        for item in prepared.items {
+            var components: [String] = []
+            for segment in item.path.split(separator: "/") {
+                components.append(String(segment))
+                let path = components.joined(separator: "/")
+                rows[path] = Self(components: components, bytes: path == item.path ? item.data?.count : nil)
+            }
+        }
+        return rows.values.sorted { $0.components.lexicographicallyPrecedes($1.components) }
     }
 }

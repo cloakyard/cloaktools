@@ -3,17 +3,39 @@ import SwiftUI
 /// Native summary of the repository's PRIVACY.md; processing details remain app-specific.
 struct PrivacySettingsView: View {
     var body: some View {
-        Group {
-            Section {
-                Label("Local processing", systemImage: "internaldrive")
-                Label("No accounts, advertising, analytics or telemetry", systemImage: "lock.shield")
-                Label("Your source files stay unchanged", systemImage: "doc.on.doc")
-            } header: {
-                Text("Your Privacy")
-            } footer: {
-                Text("CloakTools processes the files and text you choose on this Mac. It does not upload your content.")
+        ScrollView {
+            VStack(alignment: .leading, spacing: 24) {
+                HStack(spacing: 14) {
+                    Image(systemName: "lock.shield.fill").font(.system(size: 38))
+                        .symbolRenderingMode(.hierarchical).foregroundStyle(.tint).accessibilityHidden(true)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Privacy Policy").font(.title2.bold()).accessibilityAddTraits(.isHeader)
+                        Text("Updated 18 November 2026").font(.callout).foregroundStyle(.secondary)
+                    }
+                }
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("At a glance").font(.subheadline.weight(.semibold))
+                    Label("Files and text are processed on this Mac", systemImage: "internaldrive")
+                    Label("No accounts, advertising, analytics or telemetry", systemImage: "lock.shield")
+                    Label("Outputs are saved as new files", systemImage: "doc.on.doc")
+                }
+                .padding(18)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(.quaternary.opacity(0.5), in: .rect(cornerRadius: 10))
+                Divider()
+                policy
+                Divider()
+                SettingsExternalLink("Read the Full Privacy Policy", symbol: "doc.text", destination: AppLinks.privacy)
             }
-            Section("On This Mac") {
+            .padding(24)
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .scrollBounceBehavior(.basedOnSize)
+    }
+
+    private var policy: some View {
+        VStack(alignment: .leading, spacing: 22) {
+            policySection("On This Mac") {
                 Text("""
                 Preferences, saved templates, folder presets, file sets, export recipes and routing rules stay in your \
                 user Library. Saved paths, template contents and rule patterns can contain personal information.
@@ -23,7 +45,7 @@ struct PrivacySettingsView: View {
                 an abrupt exit can leave temporary files. Only recognized abandoned captures are cleaned up later.
                 """)
             }
-            Section("Files and Clipboard") {
+            policySection("Files and Clipboard") {
                 Text("""
                 Tools read the sources you select. Clipboard input is read only when you invoke it; there is no clipboard \
                 monitoring or history. Copy actions replace the clipboard only when requested. Other apps may read it \
@@ -35,7 +57,10 @@ struct PrivacySettingsView: View {
                 Review output before sharing. A cloud-managed destination may synchronize through its own service.
                 """)
             }
-            Section("Links and Permissions") {
+            policySection("Finder Tools") {
+                Text("Folder comparison reads both selected trees, including hidden files. Sharing collections keep paths in memory while open. Saved copies can retain personal metadata. Saving a folder structure as a file set stores the selected relative folder names in your Library.")
+            }
+            policySection("Links and Permissions") {
                 Text("""
                 Links are not prefetched and no browsing history is saved. Routing hands the original link to the chosen \
                 app; its privacy policy then applies. Email links prepare a draft and never send mail.
@@ -45,21 +70,27 @@ struct PrivacySettingsView: View {
                 still apply. User-selected Finder folder access is retained only in appropriately provisioned builds.
                 """)
             }
-            Section("Updates") {
+            policySection("Updates") {
                 Text(UpdatePrivacyCopy.details)
             }
-            Section("Diagnostics and Removal") {
+            policySection("Diagnostics and Removal") {
                 Text("""
                 CloakTools does not upload crash reports or diagnostics. macOS diagnostics follow your system settings. \
                 Restore your preferred link handlers before uninstalling. Removing the app leaves created files and \
                 saved settings in place; the full policy explains how to remove local settings.
                 """)
             }
-            Section {
-                Link("Read the Full Privacy Policy", destination: AppLinks.privacy)
-            } footer: {
-                Text("Policy updated 17 November 2026. External links open in your browser only when you choose them.")
-            }
+        }
+    }
+
+    private func policySection<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(title).font(.headline).accessibilityAddTraits(.isHeader)
+            Group { content() }
+                .font(.callout)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+                .textSelection(.enabled)
         }
     }
 }
