@@ -3,7 +3,9 @@ import {resolve} from 'node:path';
 const root=resolve(import.meta.dirname,'..');
 const icon=resolve(root,'assets/icon/CloakTools.icon');
 const definition=JSON.parse(readFileSync(resolve(icon,'icon.json'),'utf8'));
-const paths=[...definition.groups[0].layers].reverse().map(layer=>{
+// Icon Composer stores both groups and their layers front-to-back. SVG paints
+// back-to-front, so preserve the complete native stack in the circular mark.
+const paths=[...definition.groups].reverse().flatMap(group=>[...group.layers].reverse()).map(layer=>{
   const svg=readFileSync(resolve(icon,'Assets',layer['image-name']),'utf8');
   return svg.match(/<svg[^>]*>([\s\S]*)<\/svg>/)[1].replace(/<title>[\s\S]*?<\/title>/,'');
 }).join('');

@@ -6,57 +6,61 @@
     {
       "layers": [
         {
-          "image-name": "06-latch.svg",
-          "name": "Latch"
-        },
-        {
-          "image-name": "05-rim.svg",
-          "name": "Toolbox rim",
+          "image-name": "06b-latch-slot.svg",
+          "name": "Latch slot",
           "fill-specializations": [
             {
               "appearance": "dark",
               "value": {
-                "solid": "extended-srgb:0.44706,0.64706,0.95686,1.00000"
+                "solid": "extended-srgb:0.34902,0.47451,0.62353,1.00000"
+              }
+            }
+          ]
+        },
+        {
+          "image-name": "06-latch.svg",
+          "name": "Brushed latch",
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "extended-srgb:0.90980,0.94510,0.98824,1.00000"
+              }
+            }
+          ]
+        },
+        {
+          "image-name": "05-rim.svg",
+          "name": "Raised rim",
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "extended-srgb:0.54902,0.72157,1.00000,1.00000"
+              }
+            }
+          ]
+        },
+        {
+          "image-name": "04b-case-facet.svg",
+          "name": "Case return",
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "extended-srgb:0.15686,0.32941,0.68627,1.00000"
               }
             }
           ]
         },
         {
           "image-name": "04-toolbox.svg",
-          "name": "Toolbox body",
+          "name": "Cobalt case",
           "fill-specializations": [
             {
               "appearance": "dark",
               "value": {
-                "solid": "extended-srgb:0.26667,0.47451,0.84314,1.00000"
-              }
-            }
-          ]
-        },
-        {
-          "image-name": "03-driver.svg",
-          "name": "Screwdriver handle"
-        },
-        {
-          "image-name": "02-driver-shaft.svg",
-          "name": "Screwdriver shaft",
-          "fill-specializations": [
-            {
-              "appearance": "dark",
-              "value": {
-                "solid": "extended-srgb:0.80392,0.86275,0.92549,1.00000"
-              }
-            }
-          ]
-        },
-        {
-          "image-name": "01-wrench.svg",
-          "name": "Spanner",
-          "fill-specializations": [
-            {
-              "appearance": "dark",
-              "value": {
-                "solid": "extended-srgb:0.82353,0.87451,0.94510,1.00000"
+                "solid": "extended-srgb:0.25882,0.48235,0.89412,1.00000"
               }
             }
           ]
@@ -64,11 +68,107 @@
       ],
       "shadow": {
         "kind": "neutral",
-        "opacity": 0.22
+        "opacity": 0.3
       },
       "translucency": {
         "enabled": true,
-        "value": 0.12
+        "value": 0.1
+      }
+    },
+    {
+      "layers": [
+        {
+          "image-name": "03b-driver-grip.svg",
+          "name": "Handle flutes",
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "extended-srgb:1.00000,0.88627,0.63922,1.00000"
+              }
+            }
+          ]
+        },
+        {
+          "image-name": "03-driver.svg",
+          "name": "Amber handle",
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "extended-srgb:1.00000,0.72549,0.34118,1.00000"
+              }
+            }
+          ]
+        },
+        {
+          "image-name": "02-driver-shaft.svg",
+          "name": "Steel shaft",
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "extended-srgb:0.80000,0.86667,0.93725,1.00000"
+              }
+            }
+          ]
+        },
+        {
+          "image-name": "01b-wrench-bevel.svg",
+          "name": "Spanner bevel",
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "extended-srgb:0.89804,0.94510,1.00000,1.00000"
+              }
+            }
+          ]
+        },
+        {
+          "image-name": "01-wrench.svg",
+          "name": "Forged spanner",
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "extended-srgb:0.63922,0.73725,0.85490,1.00000"
+              }
+            }
+          ]
+        }
+      ],
+      "shadow": {
+        "kind": "neutral",
+        "opacity": 0.23
+      },
+      "translucency": {
+        "enabled": true,
+        "value": 0.08
+      }
+    },
+    {
+      "layers": [
+        {
+          "image-name": "00-rear-tray.svg",
+          "name": "Recessed tray",
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "extended-srgb:0.14118,0.28235,0.50980,1.00000"
+              }
+            }
+          ]
+        }
+      ],
+      "shadow": {
+        "kind": "neutral",
+        "opacity": 0.18
+      },
+      "translucency": {
+        "enabled": true,
+        "value": 0.06
       }
     }
   ],
