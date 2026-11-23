@@ -7,7 +7,7 @@ struct OptimizeCLI {
     cloakopt [--recipe NAME] [--stronger] [--limit-kb N] [--output FOLDER] [--] FILE ...
     cloakopt --list-recipes
 
-    --image-format automatic|png|jpeg|heic|avif|webp|jxl|original-jpeg
+    --image-format automatic|png|jpeg|heic|avif|webp|gif|jxl|original-jpeg
     --video-format mp4|hevc|x265|webm|av1|gif
     --audio-format automatic|aac|flac|wav|aiff|mp3|ogg
     --scale PERCENT    --speed MULTIPLIER    --mute

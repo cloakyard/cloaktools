@@ -48,8 +48,8 @@ struct OptimizationView: View {
                             }
                         }
                         if review.includes(.image) {
-                            field("Still image format") {
-                                Picker("Still image format", selection: $review.options.imageFormat) {
+                            field("Image format") {
+                                Picker("Image format", selection: $review.options.imageFormat) {
                                     ForEach(OptimizedImageFormat.allCases.filter { $0.available && ($0 != .originalJPEG || review.hasJPEGXL || review.options.imageFormat == .originalJPEG) }, id: \.self) { Text($0.title).tag($0) }
                                 }
                             }

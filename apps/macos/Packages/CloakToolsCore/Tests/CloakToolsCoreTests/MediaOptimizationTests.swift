@@ -123,6 +123,11 @@ private func temporaryFolder() throws -> URL {
     let timing = try #require(CGImageSourceCopyPropertiesAtIndex(webpFrames, 1, nil) as? [CFString: Any])
     let info = try #require(timing[kCGImagePropertyWebPDictionary] as? [CFString: Any])
     #expect(abs((info[kCGImagePropertyWebPUnclampedDelayTime] as? Double ?? 0) - 1.0 / 12) < 0.015)
+    animation.imageFormat = .gif
+    let gifCopy = try await MediaOptimization.prepare(webp.previewURL, options: animation)
+    let gifFrames = try #require(CGImageSourceCreateWithURL(gifCopy.previewURL as CFURL, nil))
+    #expect(CGImageSourceGetCount(gifFrames) == 12)
+    #expect(CGImageSourceGetType(gifFrames) as String? == UTType.gif.identifier)
 }
 
 private extension OptimizationOptions {

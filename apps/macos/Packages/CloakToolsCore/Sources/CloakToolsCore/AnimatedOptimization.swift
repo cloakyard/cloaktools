@@ -11,7 +11,7 @@ enum AnimatedOptimization {
         var errorDescription: String? {
             switch self {
             case .limits: "Animation export supports up to 480 frames and 160 megapixels across the output. Shorten the clip or reduce its scale."
-            case .stillFormat: "Choose Automatic or WebP to keep every animation frame."
+            case .stillFormat: "Choose Automatic, GIF or WebP to keep every animation frame."
             }
         }
     }

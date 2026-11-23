@@ -4,12 +4,13 @@ import PDFKit
 import UniformTypeIdentifiers
 
 public enum OptimizedImageFormat: String, Codable, CaseIterable, Sendable {
-    case automatic, png, jpeg, heic, avif, webp, jxl, originalJPEG = "original-jpeg"
+    case automatic, png, jpeg, heic, avif, webp, gif, jxl, originalJPEG = "original-jpeg"
     public var title: String { self == .automatic ? "Automatic" : self == .originalJPEG ? "Reconstruct original JPEG" : rawValue.uppercased() }
     public var type: UTType? {
         switch self {
         case .automatic: nil
         case .webp: .webP
+        case .gif: .gif
         case .png: .png
         case .jpeg, .originalJPEG: .jpeg
         case .jxl: UTType("public.jpeg-xl")
@@ -194,7 +195,7 @@ public enum MediaOptimization {
         if let source = CGImageSourceCreateWithData(bytes as CFData, [kCGImageSourceShouldCache: false] as CFDictionary),
            CGImageSourceGetCount(source) > 1, let kind = CGImageSourceGetType(source) as String?,
            [UTType.gif.identifier, UTType.webP.identifier].contains(kind) {
-            guard [.automatic, .webp].contains(options.imageFormat) else { throw AnimatedOptimization.Failure.stillFormat }
+            guard [.automatic, .webp, .gif].contains(options.imageFormat) else { throw AnimatedOptimization.Failure.stillFormat }
             let workspace = try MediaWorkspace()
             let output = try AnimatedOptimization.image(source, options: options, in: workspace.folder)
             return try result(workspace, output, source: url, count: bytes.count, options: options,
