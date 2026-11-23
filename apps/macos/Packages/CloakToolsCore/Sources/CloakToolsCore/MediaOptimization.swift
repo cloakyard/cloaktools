@@ -49,6 +49,8 @@ public enum OptimizationCrop: String, CaseIterable, Codable, Sendable {
 public struct OptimizationOptions: Codable, Equatable, Sendable {
     public var imageFormat: OptimizedImageFormat = .automatic
     public var losslessWebP = false
+    public var scanDPI: Int?
+    public var steps: [OptimizationStep]?
     public var aggressive = false
     public var crop: OptimizationCrop = .original
     public var scale = 1.0
@@ -63,15 +65,22 @@ public struct OptimizationOptions: Codable, Equatable, Sendable {
     public init() {}
 
     func validate() throws {
+        if let scanDPI, ![72, 150, 300].contains(scanDPI) { throw OptimizationError.invalidOptions }
+        if let steps {
+            guard (1...12).contains(steps.count) else { throw OptimizationError.invalidOptions }
+            try steps.forEach { try $0.validate() }
+        }
         guard loudnessTarget.map({ (-30 ... -10).contains($0) }) ?? true, [48, 64, 96, 128, 160, 192, 256, 320].contains(audioBitrate), scale.isFinite, (0.1...1).contains(scale), playbackSpeed.isFinite, (0.25...4).contains(playbackSpeed),
               maximumBytes.map({ (1_000...1_000_000_000).contains($0) }) ?? true else { throw OptimizationError.invalidOptions }
     }
 }
 
 public enum OptimizationError: LocalizedError {
-    case unsupported, invalidOptions, overBudget, noReduction, exportFailed, inputLimit
+    case alreadyFits, noMatchingSteps, unsupported, invalidOptions, overBudget, noReduction, exportFailed, inputLimit
     public var errorDescription: String? {
         switch self {
+        case .alreadyFits: "Already within the requested size limit."
+        case .noMatchingSteps: "This pipeline has no steps for this file type."
         case .unsupported: "Choose a supported local image, PDF, movie or audio file."
         case .invalidOptions: "Check the scale, playback speed and byte limit."
         case .overBudget: "The result exceeds the size limit. Increase the limit or use stronger compression."
@@ -89,6 +98,7 @@ public struct OptimizedMedia: Sendable {
     public let inputBytes: Int
     public let outputBytes: Int
     public let filename: String
+    public private(set) var comparisonOriginal: URL?
     var reviewedSource: ReviewedOptimizationSource?
     init(workspace: MediaWorkspace, previewURL: URL, inputBytes: Int, outputBytes: Int, stem: String) {
         self.workspace = workspace
@@ -96,6 +106,18 @@ public struct OptimizedMedia: Sendable {
         self.inputBytes = inputBytes
         self.outputBytes = outputBytes
         self.filename = stem + "." + previewURL.pathExtension
+    }
+
+    mutating func keepOriginalPDF(_ data: Data) throws {
+        let file = workspace.folder.appendingPathComponent("Original.pdf")
+        try data.write(to: file, options: .withoutOverwriting)
+        comparisonOriginal = file
+    }
+
+    func named(for source: URL, originalBytes: Int) -> Self {
+        let proposed = source.deletingPathExtension().lastPathComponent + " optimized"
+        let stem = (try? SafeOutput.validate(stem: proposed)) != nil ? proposed : "Optimized copy"
+        return Self(workspace: workspace, previewURL: previewURL, inputBytes: originalBytes, outputBytes: outputBytes, stem: stem)
     }
 
     public func save(in folder: URL) throws -> URL {
@@ -127,19 +149,38 @@ public enum MediaOptimization {
         return preview
     }
 
-    private static func prepareFile(_ url: URL, options: OptimizationOptions) async throws -> OptimizedMedia {
+    private static func prepareFile(_ url: URL, options: OptimizationOptions, explicitConversion: Bool = false, captureComparison: Bool = true) async throws -> OptimizedMedia {
         try options.validate()
         try Task.checkCancellation()
         guard url.isFileURL, [nil, "", "localhost"].contains(url.host), extensions.contains(url.pathExtension.lowercased()),
               try url.resourceValues(forKeys: [.isRegularFileKey, .isSymbolicLinkKey]).isRegularFile == true else { throw OptimizationError.unsupported }
         let ext = url.pathExtension.lowercased()
+        if let steps = options.steps {
+            let originalBytes = try WatchedMedia.stamp(url).size
+            var previous: OptimizedMedia?
+            let stages = try OptimizationStep.stages(steps, input: url)
+            for stage in stages {
+                try Task.checkCancellation()
+                if stage.onlyFits, let limit = stage.options.maximumBytes, (previous?.outputBytes ?? originalBytes) <= limit { continue }
+                let retained = previous
+                defer { withExtendedLifetime(retained) {} }
+                previous = try await prepareFile(retained?.previewURL ?? url, options: stage.options,
+                                                 explicitConversion: stage.convertsFormat, captureComparison: false)
+            }
+            guard let previous else { throw OptimizationError.alreadyFits }
+            var output = previous.named(for: url, originalBytes: originalBytes)
+            if stages.contains(where: { $0.options.scanDPI != nil }) {
+                try output.keepOriginalPDF(LocalFileCapture.read(url, limit: 100_000_000))
+            }
+            return output
+        }
         if ExtendedMediaEncoding.handles(ext, options: options) {
             let workspace = try MediaWorkspace()
             let (output, count) = try await ExtendedMediaEncoding.encode(url, in: workspace.folder, options: options)
             let requireSavings = audioExtensions.contains(ext)
                 ? options.audioFormat == .automatic && options.loudnessTarget == nil && !options.normalizeAudio
                 : options.videoFormat == .mp4 && options.playbackSpeed == 1 && !options.muteVideo && options.scale == 1 && options.crop.aspect == nil
-            return try result(workspace, output, source: url, count: count, options: options, requireSavings: requireSavings)
+            return try result(workspace, output, source: url, count: count, options: options, requireSavings: requireSavings && !explicitConversion)
         }
         if audioExtensions.contains(ext) {
             let workspace = try MediaWorkspace()
@@ -156,7 +197,7 @@ public enum MediaOptimization {
             let preset: MediaExportPreset = source.hasVideo ? (options.aggressive ? .video720 : .video1080) : .audio
             let output = try await MediaExport.export(source, preset: preset, in: workspace.folder, name: "result", adjustments: options)
             return try result(workspace, output, source: url, count: source.sourceByteCount, options: options,
-                              requireSavings: !source.hasVideo || (options.playbackSpeed == 1 && !options.muteVideo && options.scale == 1 && options.crop.aspect == nil))
+                              requireSavings: !explicitConversion && (!source.hasVideo || (options.playbackSpeed == 1 && !options.muteVideo && options.scale == 1 && options.crop.aspect == nil)))
         }
         let bytes: Data
         do { bytes = try LocalFileCapture.read(url, limit: 100_000_000) }
@@ -180,6 +221,12 @@ public enum MediaOptimization {
                 page.setBounds(crop, for: .cropBox)
             }
         }
+        if let dpi = options.scanDPI {
+            let encoded = try ScannedPDFOptimization.encode(doc, dpi: dpi, limit: options.maximumBytes, stronger: options.aggressive)
+            var preview = try staged(encoded, ext: "pdf", source: url, count: bytes.count, options: options, requireSavings: false)
+            if captureComparison { try preview.keepOriginalPDF(bytes) }
+            return preview
+        }
         let writeOptions: [PDFDocumentWriteOption: Any] = [.optimizeImagesForScreenOption: true, .saveImagesAsJPEGOption: options.aggressive]
         guard let encoded = doc.dataRepresentation(options: writeOptions), encoded.count <= PDFAssembly.maximumBytes,
               let check = PDFDocument(data: encoded), check.pageCount == doc.pageCount else { throw PDFAssemblyError.encoding }
@@ -188,6 +235,15 @@ public enum MediaOptimization {
 
     public static func clipboardImage(_ bytes: Data, options: OptimizationOptions = .init()) async throws -> OptimizedMedia {
         try options.validate()
+        if options.steps != nil {
+            guard let source = CGImageSourceCreateWithData(bytes as CFData, nil), let identifier = CGImageSourceGetType(source),
+                  let ext = UTType(identifier as String)?.preferredFilenameExtension else { throw OptimizationError.unsupported }
+            let workspace = try MediaWorkspace()
+            defer { withExtendedLifetime(workspace) {} }
+            let input = workspace.folder.appendingPathComponent("Clipboard Image").appendingPathExtension(ext)
+            try bytes.write(to: input)
+            return try await prepareFile(input, options: options)
+        }
         return try await image(bytes, named: URL(fileURLWithPath: "Clipboard Image"), options: options)
     }
 

@@ -7,12 +7,18 @@ import UniformTypeIdentifiers
 @MainActor @Observable
 final class AutomaticOptimization {
     private(set) var clipboardStatus: String?
-    private(set) var folderStatus: String?
     private var clipboardLoop: Task<Void, Never>?
-    private var folderLoop: Task<Void, Never>?
-    private var monitoredFolder: URL?
+    private struct Watch {
+        let rule: OptimizationFolderRule
+        let options: OptimizationOptions
+        let task: Task<Void, Never>
+    }
+    private var watches: [UUID: Watch] = [:]
+    private(set) var activeRules: Set<UUID> = []
+    private(set) var ruleStatus: [UUID: String] = [:]
+    var didSave: ((URL, Int, Int) -> Void)?
 
-    func configure(clipboard: Bool, folder: URL?) {
+    func configure(clipboard: Bool, rules: [OptimizationFolderRule], recipes: [ExportRecipe]) {
         if clipboard && clipboardLoop == nil {
             let initialCount = NSPasteboard.general.changeCount
             clipboardLoop = Task { [weak self] in
@@ -36,11 +42,34 @@ final class AutomaticOptimization {
             clipboardLoop = nil
             clipboardStatus = nil
         }
-        guard folder != monitoredFolder else { return }
-        folderLoop?.cancel()
-        monitoredFolder = folder
-        folderStatus = nil
-        if let folder { folderLoop = Task { [weak self] in await self?.watch(folder) } }
+        let ids = Set(rules.map(\.id))
+        for id in Array(watches.keys) where !ids.contains(id) { stop(id) }
+        ruleStatus = ruleStatus.filter { ids.contains($0.key) }
+        for rule in rules {
+            let options: OptimizationOptions
+            if let id = rule.recipeID {
+                guard let recipe = recipes.first(where: { $0.id == id }), case let .optimize(saved) = recipe.options else {
+                    stop(rule.id)
+                    ruleStatus[rule.id] = "Recipe unavailable. Edit this rule to resume."
+                    continue
+                }
+                options = saved
+            } else { options = OptimizationOptions() }
+            if let watch = watches[rule.id], watch.rule == rule, watch.options == options { continue }
+            stop(rule.id)
+            let task = Task { [weak self] in
+                guard let self else { return }
+                await watch(rule, options: options)
+                if !Task.isCancelled { watches[rule.id] = nil; activeRules.remove(rule.id) }
+            }
+            watches[rule.id] = Watch(rule: rule, options: options, task: task)
+        }
+    }
+
+    private func stop(_ id: UUID) {
+        watches.removeValue(forKey: id)?.task.cancel()
+        activeRules.remove(id)
+        ruleStatus[id] = nil
     }
 
     /// Ignore file references and any item explicitly marked transient, generated or confidential.
@@ -68,21 +97,24 @@ final class AutomaticOptimization {
         return true
     }
 
-    private func watch(_ folder: URL) async {
+    private func watch(_ rule: OptimizationFolderRule, options: OptimizationOptions) async {
+        let folder = rule.folder
         do {
             let (events, source) = try directoryEvents(folder)
             defer { source.cancel() }
             var iterator = events.makeAsyncIterator()
             var state = WatchedMedia(baseline: try await scan(folder))
+            try Task.checkCancellation()
+            activeRules.insert(rule.id)
             while !Task.isCancelled {
                 if state.hasPending { try await Task.sleep(for: .seconds(3)) }
                 else if await iterator.next() == nil { return }
                 try Task.checkCancellation()
                 let snapshot = try await scan(folder)
-                for url in state.stableAdditions(snapshot) {
+                for url in state.stableAdditions(snapshot) where rule.kind.accepts(url) {
                     try Task.checkCancellation()
                     do {
-                        let result = try await MediaOptimization.prepare(url)
+                        let result = try await MediaOptimization.prepare(url, options: options)
                         try Task.checkCancellation()
                         guard let original = snapshot[url], try WatchedMedia.stamp(url) == original else {
                             state.reconsider(url)
@@ -90,20 +122,21 @@ final class AutomaticOptimization {
                         }
                         let worker = Task.detached(priority: .utility) { try result.save(in: WatchedMedia.outputFolder(for: folder)) }
                         let output = try await withTaskCancellationHandler(operation: { try await worker.value }, onCancel: { worker.cancel() })
+                        didSave?(output, result.inputBytes, result.outputBytes)
                         try Task.checkCancellation()
-                        folderStatus = "Saved \(output.lastPathComponent)."
+                        ruleStatus[rule.id] = "Saved \(output.lastPathComponent)."
                     } catch is CancellationError { return }
                     catch {
                         try Task.checkCancellation()
                         if (try? WatchedMedia.stamp(url)) != snapshot[url] { state.reconsider(url) }
-                        folderStatus = "\(url.lastPathComponent) · \(error.localizedDescription)"
+                        ruleStatus[rule.id] = "\(url.lastPathComponent) · \(error.localizedDescription)"
                     }
                 }
             }
         } catch is CancellationError { }
-        catch { if !Task.isCancelled { folderStatus = "Folder monitoring stopped. \(error.localizedDescription)" } }
+        catch { if !Task.isCancelled { ruleStatus[rule.id] = "Folder monitoring stopped. \(error.localizedDescription)" } }
     }
-    private func directoryEvents(_ folder: URL) throws -> (AsyncStream<Void>, DispatchSourceFileSystemObject) {
+    private nonisolated func directoryEvents(_ folder: URL) throws -> (AsyncStream<Void>, DispatchSourceFileSystemObject) {
         let fd = open(folder.path, O_EVTONLY | O_NOFOLLOW | O_DIRECTORY)
         guard fd >= 0 else { throw ToolError.unavailableFolder }
         let source = DispatchSource.makeFileSystemObjectSource(fileDescriptor: fd, eventMask: [.write, .rename, .delete, .revoke], queue: .global(qos: .utility))

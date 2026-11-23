@@ -67,6 +67,7 @@ private struct WorkbenchCommands: Commands {
             Divider()
             Button("Optimize Media…") { model.presentOptimizer() }
             Button("Show Drop Zone", action: model.showDropZone).keyboardShortcut("d", modifiers: [.command, .option, .shift])
+            RecentResultsMenu(history: model.recentOptimizations)
             Button("Restore an Original…", action: model.restoreOptimizationBackup)
             Button("Make It Fit…") { model.chooseImageToFit() }.keyboardShortcut("k", modifiers: [.command, .option])
             Button("Export Media…") { model.chooseMediaToExport() }.keyboardShortcut("e", modifiers: [.command, .option])

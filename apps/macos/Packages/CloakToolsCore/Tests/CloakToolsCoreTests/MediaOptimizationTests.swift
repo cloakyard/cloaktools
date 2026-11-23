@@ -179,3 +179,28 @@ private extension OptimizationOptions {
     #expect(throws: OriginalFileError.changed) { try preview.trashOriginal(afterSaving: saved) }
     #expect(try Data(contentsOf: url) == Data([42]))
 }
+
+@Test func pipelineAppliesOrderedStepsAndPreservesReviewedBytes() async throws {
+    let folder = try temporaryFolder()
+    defer { try? FileManager.default.removeItem(at: folder) }
+    let image = try QRCodeCreation.prepare("Ordered pipeline")
+    let source = try QRCodeCreation.save(image, in: folder, stem: "Ordered")
+    var options = OptimizationOptions()
+    options.steps = [.resize(percent: 50), .image(.jpeg), .resize(percent: 50), .image(.webp), .fit(bytes: 6_000)]
+    let result = try await MediaOptimization.prepare(source, options: options)
+    #expect(result.inputBytes == image.png.count && result.outputBytes <= 6000)
+    #expect(result.filename == "Ordered optimized.webp" && !result.canReplaceOriginal)
+    let decoded = try ImageConversion.prepare(bytes: Data(contentsOf: result.previewURL), sourceURL: result.previewURL, acceptedTypes: MediaOptimization.imageTypes)
+    #expect(decoded.width == 128 && decoded.height == 128)
+    let clipboard = try await MediaOptimization.clipboardImage(image.png, options: options)
+    #expect(clipboard.outputBytes == result.outputBytes && !clipboard.canReplaceOriginal)
+    let stored = ExportRecipeStore(url: folder.appendingPathComponent("recipes.json"))
+    let recipe = ExportRecipe(title: "Two reductions", options: .optimize(options))
+    try stored.save([recipe])
+    #expect(try stored.load() == [recipe])
+    options.steps = [.audio(.aac)]
+    await #expect(throws: OptimizationError.noMatchingSteps) { try await MediaOptimization.prepare(source, options: options) }
+    options.steps = [.resize(percent: 0)]
+    await #expect(throws: OptimizationError.invalidOptions) { try await MediaOptimization.prepare(source, options: options) }
+    #expect(try Data(contentsOf: source) == image.png)
+}

@@ -3,6 +3,8 @@ import CloakToolsCore
 
 struct ExportRecipeSection: View {
     @Bindable var model: AppModel
+    @State private var newPipeline = false
+    @State private var editPipeline: ExportRecipe?
     @State private var renaming: ExportRecipe?
     @State private var removing: ExportRecipe?
     var body: some View {
@@ -25,6 +27,9 @@ struct ExportRecipeSection: View {
                     Spacer(minLength: 4)
                     Button("Use…") { model.useRecipe(recipe) }.accessibilityLabel("Use recipe \(recipe.title)")
                     Menu {
+                        if case let .optimize(options) = recipe.options, options.steps != nil {
+                            Button("Edit Pipeline…") { editPipeline = recipe }
+                        }
                         Button("Rename…") { renaming = recipe }
                         Button("Remove Recipe…", role: .destructive) { removing = recipe }
                     } label: { Label("Actions for recipe \(recipe.title)", systemImage: "ellipsis").labelStyle(.iconOnly) }
@@ -32,9 +37,12 @@ struct ExportRecipeSection: View {
                     .help("Rename or remove \(recipe.title)")
                 }.padding(.vertical, 3)
             }
+            Button("New Pipeline…") { newPipeline = true }
         } header: { Text("Export recipes") } footer: {
-            Text("Recipes save settings, not files. Choose a fresh source and review each export.")
+            Text("Recipes store output settings. Use one in a review or apply it automatically with a folder rule.")
         }
+        .sheet(isPresented: $newPipeline) { OptimizationPipelineEditor() }
+        .sheet(item: $editPipeline) { OptimizationPipelineEditor(original: $0) }
         .sheet(item: $renaming) { recipe in ExportRecipeSaveSheet(draft: recipe, original: recipe) { _ in } }
         .confirmationDialog("Remove this export recipe?", isPresented: Binding(get: { removing != nil }, set: { if !$0 { removing = nil } })) {
             if let recipe = removing { Button("Remove Recipe", role: .destructive) { model.removeRecipe(recipe); removing = nil } }

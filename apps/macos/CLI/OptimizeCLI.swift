@@ -4,7 +4,7 @@ import Foundation
 @main
 struct OptimizeCLI {
     static let help = """
-    cloakopt [--recipe NAME] [--stronger] [--limit-kb N] [--output FOLDER] [--] FILE ...
+    cloakopt [--recipe NAME] [--stronger] [--pdf-dpi 72|150|300] [--limit-kb N] [--output FOLDER] [--] FILE ...
     cloakopt --list-recipes
 
     --image-format automatic|png|jpeg|heic|avif|webp|gif|jxl|original-jpeg
@@ -37,9 +37,12 @@ struct OptimizeCLI {
             var destination: URL?
             var files = [URL]()
             var flags = true
+            var hasEncodingFlags = false
+            var hasPipeline = false
             var iterator = args.makeIterator()
             while let arg = iterator.next() {
                 if !flags || !arg.hasPrefix("-") { files.append(URL(fileURLWithPath: arg)); continue }
+                if !["--", "--output", "--recipe"].contains(arg) { hasEncodingFlags = true }
                 switch arg {
                 case "--": flags = false
                 case "--stronger": options.aggressive = true
@@ -74,6 +77,9 @@ struct OptimizeCLI {
                 case "--output":
                     guard let path = iterator.next() else { throw Usage("--output needs an existing folder.") }
                     destination = URL(fileURLWithPath: path, isDirectory: true)
+                case "--pdf-dpi":
+                    guard let raw = iterator.next(), let dpi = Int(raw), [72, 150, 300].contains(dpi) else { throw Usage("Choose 72, 150 or 300 DPI.") }
+                    options.scanDPI = dpi
                 case "--limit-kb":
                     guard let raw = iterator.next(), let kb = Int(raw), (1...1_000_000).contains(kb) else { throw Usage("Choose a limit of 1–1,000,000 KB.") }
                     options.maximumBytes = kb * 1000
@@ -82,9 +88,11 @@ struct OptimizeCLI {
                     let matches = recipes.filter { $0.title == name }
                     guard matches.count == 1, case let .optimize(value) = matches[0].options else { throw Usage("Choose a unique name from --list-recipes.") }
                     options = value
+                    hasPipeline = value.steps != nil
                 default: throw Usage("Unknown option \(arg).\n\(help)")
                 }
             }
+            if hasPipeline && hasEncodingFlags { throw Usage("Use the pipeline on its own or edit its steps in CloakTools.") }
             guard (1...MediaOptimization.maximumItems).contains(files.count) else { throw Usage("Choose 1–100 local media files.") }
             let encoder = JSONEncoder()
             encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
@@ -97,7 +105,8 @@ struct OptimizeCLI {
                     record.encodedBytes = result.outputBytes
                     record.filename = result.filename
                     if let destination { record.output = try result.save(in: destination).path }
-                } catch OptimizationError.noReduction { record.message = OptimizationError.noReduction.localizedDescription }
+                } catch OptimizationError.alreadyFits { record.message = OptimizationError.alreadyFits.localizedDescription }
+                catch OptimizationError.noReduction { record.message = OptimizationError.noReduction.localizedDescription }
                 catch { record.message = error.localizedDescription; failed = true }
                 print(String(decoding: try encoder.encode(record), as: UTF8.self))
             }

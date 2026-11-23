@@ -11,9 +11,15 @@ struct QuickToolsMenu: View {
         Divider()
         Button(model.optimizer?.task.busy == true ? "Show Optimization Progress…" : "Optimize Media…") { model.presentOptimizer() }
         Button("Show Drop Zone", action: model.showDropZone)
+        RecentResultsMenu(history: model.recentOptimizations)
         Button("Restore an Original…", action: model.restoreOptimizationBackup)
         Button("Optimize from Clipboard…") { model.presentOptimizer(paste: true) }
             .disabled(model.optimizer?.task.busy == true)
+        if !model.preferences.folderRules.isEmpty || model.preferences.optimizeCopiedImages || model.preferences.automationPaused {
+            Button(model.preferences.automationPaused ? "Resume Automation" : "Pause Automation") {
+                model.update { $0.automationPaused.toggle() }
+            }
+        }
         Toggle("Optimize Copied Images", isOn: Binding(get: { model.preferences.optimizeCopiedImages },
             set: { enabled in model.update { $0.optimizeCopiedImages = enabled } }))
         Button("Make It Fit…") { model.chooseImageToFit() }

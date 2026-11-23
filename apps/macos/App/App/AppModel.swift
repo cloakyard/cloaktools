@@ -6,7 +6,8 @@ import UniformTypeIdentifiers
 
 @MainActor @Observable
 final class AppModel {
-    static let shared = AppModel()
+    static let shared = AppModel(history: RecentOptimizations(file: PreferencesStore.standard.url.deletingLastPathComponent().appendingPathComponent("recent-optimizations.json")))
+    let recentOptimizations: RecentOptimizations
     private let store = PreferencesStore.standard
     var preferences: Preferences
     var customTemplates: [CustomTemplate] = []
@@ -49,7 +50,8 @@ final class AppModel {
         }
         return true
     }
-    init() {
+    init(history: RecentOptimizations = RecentOptimizations()) {
+        recentOptimizations = history
         do { preferences = try store.load() }
         catch { preferences = Preferences(); persistenceError = "Settings could not be read: \(error.localizedDescription)" }
         do { customTemplates = try library.load() }
@@ -57,6 +59,7 @@ final class AppModel {
         reloadPresets()
         reloadFileSets()
         reloadRecipes()
+        automaticOptimization.didSave = { output, _, _ in history.add(output, batch: UUID()) }
     }
     var allTemplateSources: [TemplateSource] { FileTemplate.allCases.map(TemplateSource.builtIn) + customTemplates.map(TemplateSource.custom) }
     var visibleCustomTemplates: [CustomTemplate] { customTemplates.filter { preferences.tools.includes(.custom($0)) } }
@@ -79,11 +82,13 @@ final class AppModel {
     }
     func saveRecipe(_ recipe: ExportRecipe, replacing original: ExportRecipe?) throws {
         exportRecipes = try recipeStore.upsert(recipe, replacing: original); recipeError = nil
+        configureAutomaticOptimization()
     }
     func removeRecipe(_ recipe: ExportRecipe) {
         do {
             let updated = try recipeStore.load().filter { $0.id != recipe.id }
             try recipeStore.save(updated); exportRecipes = updated; recipeError = nil
+            configureAutomaticOptimization()
         } catch { recipeError = error.localizedDescription }
     }
     func useRecipe(_ selected: ExportRecipe) {
@@ -252,6 +257,7 @@ final class AppModel {
             review.addButton(withTitle: "Cancel").keyEquivalent = "\u{1b}"
             if review.runModal() == .alertFirstButtonReturn {
                 try backup.restore()
+                recentOptimizations.restored(backup.backupURL)
                 NSWorkspace.shared.activateFileViewerSelecting([backup.originalURL])
             }
         } catch { showError(error) }
@@ -269,13 +275,17 @@ final class AppModel {
     func configureAutomaticOptimization() {
         let available = dropZoneShortcut.configure(preferences.dropZoneKey) { [weak self] in self?.showDropZone() }
         dropZoneShortcutError = available ? nil : "This shortcut is unavailable. Record a different combination."
-        automaticOptimization.configure(clipboard: preferences.optimizeCopiedImages, folder: preferences.optimizationFolder)
+        automaticOptimization.configure(clipboard: preferences.optimizeCopiedImages && !preferences.automationPaused,
+                                        rules: preferences.automationPaused ? [] : preferences.folderRules, recipes: exportRecipes)
     }
-    func chooseOptimizationFolder() {
-        let title = "Watch new media in this folder and save smaller copies in its Optimized Copies subfolder"
-        if let folder = chooseFinderFolder(title, startingAt: preferences.optimizationFolder, prompt: "Watch Folder") {
-            update { $0.optimizationFolder = folder }
-        }
+    func saveFolderRule(_ rule: OptimizationFolderRule) throws {
+        try rule.validate(alongside: preferences.folderRules)
+        var value = preferences
+        if let i = value.folderRules.firstIndex(where: { $0.id == rule.id }) { value.folderRules[i] = rule }
+        else { value.folderRules.append(rule) }
+        try store.save(value)
+        preferences = value
+        configureAutomaticOptimization()
     }
     func completeToolSelection(developerEnabled: Bool) throws {
         var updated = preferences
@@ -590,7 +600,7 @@ extension AppModel {
     func presentOptimizer(files: [URL] = [], paste: Bool = false, recipe: ExportRecipe? = nil) {
         if let recipe, case let .optimize(options) = recipe.options, optimizer != nil {
             guard hasRoomForOperation() else { return }
-            let independent = OptimizationReview()
+            let independent = OptimizationReview(history: recentOptimizations)
             lastOptimizer = independent
             independent.options = options
             independent.recipe = recipe
@@ -607,7 +617,7 @@ extension AppModel {
         }
         if optimizer == nil {
             guard hasRoomForOperation() else { return }
-            optimizer = OptimizationReview()
+            optimizer = OptimizationReview(history: recentOptimizations)
         }
         guard let review = optimizer else { return }
         lastOptimizer = review

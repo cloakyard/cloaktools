@@ -55,7 +55,7 @@ If a destination app or default change is unavailable, use **Settings → Links 
 
 ## Privacy
 
-No accounts, analytics, cloud processing, link prefetch or browsing-history persistence. Processing and settings stay local. Sparkle update checks/downloads are manual unless you enable them in About. See [update publishing](docs/UPDATES.md). Cloud-managed folders and chosen destination apps follow their own policies. Manual exports publish reviewed new copies. Development builds can also optimize newly copied images or save smaller copies from a folder you choose. Both automations start off. Read [Privacy](PRIVACY.md) and [Security](SECURITY.md) for exact storage and reporting boundaries.
+No accounts, analytics, cloud processing, link prefetch or browsing-history persistence. Processing and settings stay local. Sparkle update checks/downloads are manual unless you enable them in About. See [update publishing](docs/UPDATES.md). Cloud-managed folders and chosen destination apps follow their own policies. Manual exports publish reviewed new copies. Development builds can also optimize newly copied images or apply a saved recipe to new files in folders you choose. Both automations start off. Read [Privacy](PRIVACY.md) and [Security](SECURITY.md) for exact storage and reporting boundaries.
 
 ## Getting started
 

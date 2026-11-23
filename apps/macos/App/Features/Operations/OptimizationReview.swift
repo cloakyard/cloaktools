@@ -44,6 +44,8 @@ struct OptimizationRow: Identifiable {
 @MainActor @Observable
 final class OptimizationReview {
     let task = FolderTask()
+    let history: RecentOptimizations
+    init(history: RecentOptimizations = RecentOptimizations()) { self.history = history }
     private(set) var rows: [OptimizationRow] = []
     private(set) var current: String?
     var recipe: ExportRecipe?
@@ -147,18 +149,46 @@ final class OptimizationReview {
     }
 
     func replaceOriginal(_ row: OptimizationRow) {
-        guard let result = row.result, row.backup == nil else { return }
-        task.run("Keeping original and replacing file…", work: { try result.replaceOriginal() }) { backup in
-            guard let index = self.rows.firstIndex(where: { $0.id == row.id }) else { return }
-            self.rows[index].output = backup.originalURL
-            self.rows[index].backup = backup
-            self.rows[index].message = "Original kept in \(backup.backupURL.deletingLastPathComponent().lastPathComponent)."
+        replaceOriginals([row])
+    }
+    var replaceable: [OptimizationRow] {
+        rows.filter { $0.output == nil && $0.result?.canReplaceOriginal == true }
+    }
+    func replaceOriginals(_ selected: [OptimizationRow]) {
+        let batch = UUID()
+        let jobs = selected.compactMap { row in
+            row.output == nil ? row.result.map { (row.id, $0) } : nil
+        }
+        task.run("Replacing originals…", work: { [self] in
+            for (id, result) in jobs {
+                try Task.checkCancellation()
+                do { await replaced(try result.replaceOriginal(), id: id, batch: batch) }
+                catch is CancellationError { throw CancellationError() }
+                catch { await failed(error.localizedDescription, id: id) }
+            }
+        }, success: {})
+    }
+    private func replaced(_ backup: OptimizationBackup, id: UUID, batch: UUID) {
+        history.add(backup.originalURL, batch: batch, backup: backup.backupURL)
+        guard let index = rows.firstIndex(where: { $0.id == id }) else { return }
+        rows[index].output = backup.originalURL
+        rows[index].backup = backup
+        rows[index].message = "Original kept in " + backup.backupURL.deletingLastPathComponent().lastPathComponent + "."
+    }
+    func syncRestoredRows() {
+        let restored = Set(history.entries.filter { $0.backup == nil }.map(\.output))
+        for i in rows.indices {
+            guard let file = rows[i].backup?.backupURL, restored.contains(file) else { continue }
+            rows[i].backup = nil
+            rows[i].output = file
+            rows[i].message = "Original restored. Optimized copy kept separately."
         }
     }
     func restoreOriginal(_ row: OptimizationRow) {
         guard let backup = row.backup else { return }
         task.run("Restoring original…", work: { try backup.restore() }) {
             guard let index = self.rows.firstIndex(where: { $0.id == row.id }) else { return }
+            self.history.restored(backup.backupURL)
             self.rows[index].backup = nil
             self.rows[index].output = backup.backupURL
             self.rows[index].message = "Original restored. Optimized copy kept separately."
@@ -176,11 +206,12 @@ final class OptimizationReview {
     func save(in folder: URL) {
         let pending = rows.compactMap { row in row.output == nil ? row.result.map { (row.id, $0) } : nil }
         guard !task.busy, !pending.isEmpty else { return }
+        let batch = UUID()
         task.run("Saving copies…", work: { [self] in
             for (id, result) in pending {
                 try Task.checkCancellation()
                 await started(result.filename, id: id)
-                do { await saved(try result.save(in: folder), id: id) }
+                do { await saved(try result.save(in: folder), id: id, batch: batch) }
                 catch is CancellationError { throw CancellationError() }
                 catch { await failed(error.localizedDescription, id: id) }
             }
@@ -197,7 +228,8 @@ final class OptimizationReview {
     private func failed(_ reason: String, id: UUID) {
         if let index = rows.firstIndex(where: { $0.id == id }) { rows[index].message = reason }
     }
-    private func saved(_ url: URL, id: UUID) {
+    private func saved(_ url: URL, id: UUID, batch: UUID) {
+        history.add(url, batch: batch)
         if let index = rows.firstIndex(where: { $0.id == id }) { rows[index].output = url }
     }
 }

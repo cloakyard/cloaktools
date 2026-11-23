@@ -35,7 +35,8 @@ public struct Preferences: Codable, Equatable, Sendable {
     public var languageChoices: [String: Bool] = Dictionary(uniqueKeysWithValues: FileTemplate.allCases.filter(\.isProgramming).map { ($0.rawValue, true) })
     public var lastCategory: SettingsCategory = .general
     public var optimizeCopiedImages = false
-    public var optimizationFolder: URL?
+    public var folderRules: [OptimizationFolderRule] = []
+    public var automationPaused = false
     public var showMenuBarTools = true
     public var dropZoneKey: DropZoneKey?
     public var revealCreatedFile = true
@@ -45,13 +46,22 @@ public struct Preferences: Codable, Equatable, Sendable {
     public var favoriteTemplateIDs: Set<String> = []
     public init() {}
     private enum CodingKeys: String, CodingKey {
-        case optimizeCopiedImages, optimizationFolder, showMenuBarTools, dropZoneKey, developerToolsEnabled, hasChosenTools, includeHelloWorld, languageChoices, lastCategory, revealCreatedFile, revealConvertedFile, openAfterCreation, favoriteTemplateIDs, imageConversion
+        case optimizeCopiedImages, folderRules, automationPaused, showMenuBarTools, dropZoneKey, developerToolsEnabled, hasChosenTools, includeHelloWorld, languageChoices, lastCategory, revealCreatedFile, revealConvertedFile, openAfterCreation, favoriteTemplateIDs, imageConversion
     }
     public init(from decoder: any Decoder) throws {
         self.init()
         let values = try decoder.container(keyedBy: CodingKeys.self)
         optimizeCopiedImages = try values.decodeIfPresent(Bool.self, forKey: .optimizeCopiedImages) ?? false
-        optimizationFolder = try values.decodeIfPresent(URL.self, forKey: .optimizationFolder)
+        if let saved = try values.decodeIfPresent([OptimizationFolderRule].self, forKey: .folderRules) {
+            folderRules = saved
+        } else {
+            enum Legacy: CodingKey { case optimizationFolder }
+            let old = try decoder.container(keyedBy: Legacy.self)
+            if let folder = try old.decodeIfPresent(URL.self, forKey: .optimizationFolder) {
+                folderRules = [.init(folder: folder)]
+            }
+        }
+        automationPaused = try values.decodeIfPresent(Bool.self, forKey: .automationPaused) ?? false
         dropZoneKey = try values.decodeIfPresent(DropZoneKey.self, forKey: .dropZoneKey)
         showMenuBarTools = try values.decodeIfPresent(Bool.self, forKey: .showMenuBarTools) ?? true
         // Existing installations keep the catalog they already had; only fresh installs opt in.

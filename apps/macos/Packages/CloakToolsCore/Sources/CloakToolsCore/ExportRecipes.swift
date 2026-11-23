@@ -28,7 +28,7 @@ public enum ExportRecipeOptions: Codable, Equatable, Sendable {
     public var summary: String {
         switch self {
         case let .optimize(options):
-            "\(options.aggressive ? "Stronger" : "Standard") · \(options.imageFormat.title) · \(options.scale.formatted(.percent))"
+            options.steps?.map(\.title).joined(separator: " → ") ?? options.scanDPI.map { "Scanned PDF · \($0) DPI" } ?? "\(options.aggressive ? "Stronger" : "Standard") · \(options.imageFormat.title) · \(options.scale.formatted(.percent))"
         case let .image(options):
             options.format.isLossy ? "\(options.format.title) · \(Int((options.quality * 100).rounded()))% · \(options.background.title) background" : "PNG · Original dimensions · Keeps transparency"
         case let .fit(options):
@@ -39,7 +39,7 @@ public enum ExportRecipeOptions: Codable, Equatable, Sendable {
     public var detail: String {
         switch self {
         case let .optimize(options):
-            "Crop \(options.crop.rawValue) · Video \(options.videoFormat.rawValue) · Audio \(options.audioFormat.rawValue)"
+            options.steps != nil ? "Matching steps run in order for each file." : "Crop \(options.crop.rawValue) · Video \(options.videoFormat.rawValue) · Audio \(options.audioFormat.rawValue)"
         case .image: "Keeps the original dimensions. A new source and destination are reviewed each time."
         case let .fit(options):
             (options.format.isLossy ? "Quality floor \(Int((options.minimumQuality * 100).rounded()))% · \(options.background.title) background. " : "Keeps transparency. ")

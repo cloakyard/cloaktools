@@ -43,14 +43,8 @@ struct SettingsView: View {
             Section("Automatic optimization") {
                 Toggle("Optimize new clipboard images", isOn: preference(\.optimizeCopiedImages))
                 Text("Replaces a newly copied image only when a smaller version is ready.").font(.caption).foregroundStyle(.secondary)
-                if let folder = model.preferences.optimizationFolder {
-                    LabeledContent("Watched folder", value: folder.path).lineLimit(2).help(folder.path)
-                    Button("Stop Watching") { model.update { $0.optimizationFolder = nil } }
-                } else { Button("Watch a Folder…", action: model.chooseOptimizationFolder) }
-                Text("New media in the selected folder is saved in Optimized Copies when compression saves space.")
-                    .font(.caption).foregroundStyle(.secondary)
+                FolderRuleSettings(model: model)
                 if let status = model.automaticOptimization.clipboardStatus { Text(status).font(.caption) }
-                if let status = model.automaticOptimization.folderStatus { Text(status).font(.caption).textSelection(.enabled) }
             }
             Section("Menu bar") {
                 Toggle("Show CloakTools in the menu bar", isOn: preference(\.showMenuBarTools))

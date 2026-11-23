@@ -6,7 +6,7 @@ enum ExtendedMediaEncoding {
     static let movies: Set<String> = ["mov", "mp4", "m4v", "webm", "mkv", "avi", "mpg", "mpeg", "m2v"]
     static let audio: Set<String> = ["ogg", "opus", "m4a", "mp3", "flac", "wav", "caf", "aiff", "aif"]
     static func handles(_ ext: String, options: OptimizationOptions) -> Bool {
-        if movies.contains(ext) { return !["mov", "mp4", "m4v"].contains(ext) || [.hevc, .x265, .webm, .av1].contains(options.videoFormat) }
+        if movies.contains(ext) { return (options.maximumBytes != nil && options.videoFormat != .gif) || !["mov", "mp4", "m4v"].contains(ext) || [.hevc, .x265, .webm, .av1].contains(options.videoFormat) }
         return audio.contains(ext) && (options.loudnessTarget != nil || ["ogg", "opus"].contains(ext) || [.mp3, .ogg].contains(options.audioFormat))
     }
     private enum Failure: LocalizedError {

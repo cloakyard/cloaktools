@@ -49,8 +49,8 @@ struct PrivacySettingsView: View {
                 Text("""
                 Clipboard optimization is off by default. Enabling it lets CloakTools check new clipboard images and \
                 replace one when a smaller version is ready. Other apps may read copied data under macOS controls. \
-                You can also choose a folder to watch. Smaller copies go in its Optimized Copies subfolder. Disable \
-                either option in General. Replace Original keeps a backup and recovery record beside the source.
+                Folder rules save matching files in Optimized Copies. Remove rules or disable clipboard optimization \
+                in General. Replace Original keeps a backup beside the source. Recent Results stores local output and backup paths for up to 20 batches. Use Clear Recent Results to forget these paths.
                 """)
                 Text("""
                 Metadata behavior depends on the tool. Image conversion excludes camera and location metadata; \
