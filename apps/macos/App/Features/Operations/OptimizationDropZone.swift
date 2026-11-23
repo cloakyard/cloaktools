@@ -38,6 +38,7 @@ private struct DropZoneContent: View {
     let close: () -> Void
     @State private var recipeID: UUID?
     @State private var targeted = false
+    @State private var error: String?
     private var recipes: [ExportRecipe] {
         model.exportRecipes.filter { if case .optimize = $0.options { true } else { false } }
     }
@@ -65,6 +66,7 @@ private struct DropZoneContent: View {
                     ForEach(recipes) { Text($0.title).tag(Optional($0.id)) }
                 }
             }
+            if let error { OperationFeedback(error: error) }
             DialogFooter {
                 Button("Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
             } actions: {
@@ -74,12 +76,20 @@ private struct DropZoneContent: View {
         }.padding(12).frame(minWidth: 280, minHeight: 150)
         .dropDestination(for: URL.self) { urls, _ in
             guard !urls.isEmpty, urls.allSatisfy(\.isFileURL) else { return false }
-            submit(urls)
-            return true
+            return submit(urls)
         } isTargeted: { targeted = $0 }
     }
-    private func submit(_ urls: [URL]) {
-        guard !urls.isEmpty else { return }
-        model.presentOptimizer(files: urls, recipe: recipes.first { $0.id == recipeID })
+    @discardableResult
+    private func submit(_ urls: [URL]) -> Bool {
+        guard !urls.isEmpty else { return false }
+        do {
+            try model.presentDropZoneFiles(urls, recipeID: recipeID)
+            error = nil
+            return true
+        } catch {
+            self.error = "Recipe unavailable. Choose another recipe or Standard."
+            recipeID = nil
+            return false
+        }
     }
 }

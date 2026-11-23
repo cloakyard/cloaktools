@@ -20,6 +20,8 @@ The acceptance target is standalone operation after removing Clop, including exi
 
 ## Verification
 
+The [native feature and usability audit](NATIVE-FEATURE-AUDIT.md) records the latest regression results, checks against the packaged CLI, and the limits of live verification.
+
 Core fixtures cover decoded output types and dimensions, exact measured bytes, changed or removed sources, numbered collisions, duplicate restore attempts, rejecting changes to original files, PDF crop/uncrop, rotated moving images, changed duration, audio removal, GIF frames, common audio formats and stable-folder selection. Hosted tests cover named pasteboards and the Workbench batch lifecycle.
 
 In the running development Workbench, a 2000 × 1400 repository screenshot measured 313 KB before preview and 145 KB at 50% scale. The review exposed Quick Look and Save 1 Copy. This is one fixture, and compression savings depend on its content.

@@ -156,7 +156,7 @@ struct OptimizationView: View {
             DialogFooter {
                 if review.task.busy {
                     Button("Cancel", action: review.task.cancel).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                } else if !allSaved {
+                } else if !review.isComplete {
                     Button("Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
                 }
             } actions: {
@@ -164,7 +164,7 @@ struct OptimizationView: View {
                     if review.rows.isEmpty {
                         Button("Choose Files…", action: review.chooseFiles)
                             .keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                    } else if allSaved {
+                    } else if review.isComplete {
                         DialogDoneButton(action: close)
                     } else {
                         if review.replaceable.count > 1 {
@@ -206,8 +206,6 @@ struct OptimizationView: View {
         } message: { row in Text("The saved optimized copy is kept. Finder can restore \(row.input.name) from Trash.") }
     }
 
-    private var allSaved: Bool { !review.rows.isEmpty && review.rows.allSatisfy { $0.output != nil } }
-
     private func bytes(_ count: Int) -> String { ByteCountFormatter.string(fromByteCount: Int64(count), countStyle: .file) }
     private func field<Content: View>(_ name: String, @ViewBuilder content: () -> Content) -> some View {
         GridRow { Text(name); content().labelsHidden() }
@@ -235,6 +233,9 @@ struct OptimizationView: View {
                 }
             }
             Menu {
+                if case .file = row.input, row.output == nil, row.result != nil || row.message != nil {
+                    Button("Preview Current File") { review.refreshPreview(row.id) }
+                }
                 if let backup = row.backup {
                     Button("Reveal Backup") { NSWorkspace.shared.activateFileViewerSelecting([backup.backupURL]) }
                     Button("Restore Original") { review.restoreOriginal(row) }

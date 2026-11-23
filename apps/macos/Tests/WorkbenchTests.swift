@@ -89,3 +89,13 @@ import CloakToolsCore
     #expect(rows.map(\.depth) == [0, 0, 0, 1])
     #expect(rows.map(\.bytes) == [0, nil, nil, 0])
 }
+
+@Test func workbenchFindsOptimizationFeaturesByTheirUserFacingNames() {
+    #expect(WorkbenchTool.matching("watch folder", developerEnabled: false).first == .folderRules)
+    for query in ["pipeline", "export pipeline"] {
+        #expect(WorkbenchTool.matching(query, developerEnabled: false).first == .recipes)
+    }
+    for query in ["compress scan", "WebP", "JPEG XL"] {
+        #expect(WorkbenchTool.matching(query, developerEnabled: false).contains(.optimize))
+    }
+}

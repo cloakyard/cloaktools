@@ -251,6 +251,7 @@ struct WorkbenchView: View {
         case .base64: model.presentDeveloperText(.base64)
         case .example: model.presentExampleCopy()
         case .sample: model.presentSampleFiles()
+        case .folderRules: settings(.general)
         case .linkSettings: settings(.openWith)
         case .languageSettings: settings(.developer)
         case .templates, .savedSets, .presets, .recipes, .openLink, .testLink: navigation.show(tool)

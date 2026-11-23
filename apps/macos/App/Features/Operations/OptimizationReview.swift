@@ -39,6 +39,7 @@ struct OptimizationRow: Identifiable {
     var message: String?
     var backup: OptimizationBackup?
     var originalRemoved = false
+    var skipped = false
 }
 
 @MainActor @Observable
@@ -56,6 +57,7 @@ final class OptimizationReview {
                     if rows[i].backup != nil || rows[i].originalRemoved { continue }
                     rows[i].result = nil
                     rows[i].message = nil
+                    rows[i].skipped = false
                     rows[i].output = nil
                 }
                 task.notice = nil
@@ -66,6 +68,7 @@ final class OptimizationReview {
     var hasJPEGXL: Bool {
         rows.contains { if case let .file(url) = $0.input { url.pathExtension.lowercased() == "jxl" } else { false } }
     }
+    var isComplete: Bool { !rows.isEmpty && rows.allSatisfy { $0.output != nil || $0.skipped } }
     var readyCount: Int { rows.filter { $0.result != nil && $0.output == nil }.count }
     var pendingCount: Int { rows.filter { $0.result == nil && $0.message == nil && $0.output == nil }.count }
 
@@ -131,7 +134,19 @@ final class OptimizationReview {
     }
 
     func preview() {
-        let pending = rows.filter { $0.output == nil && $0.result == nil }.map { ($0.id, $0.input) }
+        prepare(rows.filter { $0.output == nil && $0.result == nil && !$0.skipped })
+    }
+
+    func refreshPreview(_ id: UUID) {
+        guard !task.busy, let i = rows.firstIndex(where: { $0.id == id }), rows[i].output == nil else { return }
+        rows[i].result = nil
+        rows[i].message = nil
+        rows[i].skipped = false
+        prepare([rows[i]])
+    }
+
+    private func prepare(_ selection: [OptimizationRow]) {
+        let pending = selection.map { ($0.id, $0.input) }
         let options = options
         guard !task.busy, !pending.isEmpty else { return }
         task.run("Preparing previews…", work: { [self] in
@@ -143,6 +158,9 @@ final class OptimizationReview {
                     try Task.checkCancellation()
                     await prepared(result, id: id)
                 } catch is CancellationError { throw CancellationError() }
+                catch let error as OptimizationError where [.alreadyFits, .noReduction, .noMatchingSteps].contains(error) {
+                    await failed(error.localizedDescription, id: id, skipped: true)
+                }
                 catch { await failed(error.localizedDescription, id: id) }
             }
         }, success: { }, finished: { self.current = nil })
@@ -225,8 +243,11 @@ final class OptimizationReview {
     private func prepared(_ result: OptimizedMedia, id: UUID) {
         if let index = rows.firstIndex(where: { $0.id == id }) { rows[index].result = result }
     }
-    private func failed(_ reason: String, id: UUID) {
-        if let index = rows.firstIndex(where: { $0.id == id }) { rows[index].message = reason }
+    private func failed(_ reason: String, id: UUID, skipped: Bool = false) {
+        if let index = rows.firstIndex(where: { $0.id == id }) {
+            rows[index].message = reason
+            rows[index].skipped = skipped
+        }
     }
     private func saved(_ url: URL, id: UUID, batch: UUID) {
         history.add(url, batch: batch)

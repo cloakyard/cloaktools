@@ -197,3 +197,81 @@ import Testing
     #expect(review.readyCount == 1 && review.rows[0].result?.previewURL.pathExtension == "webp")
     #expect(try FileManager.default.contentsOfDirectory(atPath: folder.path).count == 1)
 }
+
+@MainActor @Test func standardDropKeepsARecipeDraftAndSkippedBatchCanFinish() async throws {
+    let fm = FileManager.default
+    let folder = fm.temporaryDirectory.appendingPathComponent(UUID().uuidString, isDirectory: true)
+    try fm.createDirectory(at: folder, withIntermediateDirectories: true)
+    defer { try? fm.removeItem(at: folder) }
+    let input = try QRCodeCreation.save(QRCodeCreation.prepare("Drop Zone audit"), in: folder, stem: "Original")
+    let other = folder.appendingPathComponent("New.png")
+    try fm.copyItem(at: input, to: other)
+    let model = AppModel()
+    model.workbench.showWindow = {}
+    var options = OptimizationOptions()
+    options.steps = [.fit(bytes: 100_000)]
+    let recipe = ExportRecipe(title: "Below 100 KB", options: .optimize(options))
+    model.presentOptimizer(files: [input], recipe: recipe)
+    let first = try #require(model.optimizer)
+    #expect(throws: ExportRecipeError.changed) { try model.presentDropZoneFiles([other], recipeID: UUID()) }
+    let windowsBeforeDrop = Set(NSApp.windows.map(ObjectIdentifier.init))
+    try model.presentDropZoneFiles([other], recipeID: nil)
+    let window = NSApp.windows.first { !windowsBeforeDrop.contains(ObjectIdentifier($0)) && $0.windowController is FinderReviewWindow }
+    defer { window?.close() }
+    let standard = try #require(model.lastOptimizer)
+    #expect(first !== standard && first.rows.count == 1 && first.options == options)
+    #expect(standard.rows.count == 1 && standard.options == OptimizationOptions() && standard.recipe == nil)
+    func wait() async throws {
+        let deadline = ContinuousClock.now.advanced(by: .seconds(8))
+        while first.task.busy, ContinuousClock.now < deadline { try await Task.sleep(for: .milliseconds(10)) }
+        try #require(!first.task.busy)
+    }
+    first.preview()
+    try await wait()
+    #expect(first.isComplete && first.rows[0].skipped && first.rows[0].output == nil)
+    first.options.imageFormat = .webp
+    first.options.steps = nil
+    #expect(!first.isComplete && first.pendingCount == 1)
+    first.preview()
+    try await wait()
+    let old = try #require(first.rows[0].result)
+    let fresh = try QRCodeCreation.prepare("A different source for the current preview")
+    try fresh.png.write(to: input)
+    first.refreshPreview(first.rows[0].id)
+    try await wait()
+    let updated = try #require(first.rows[0].result)
+    #expect(updated.previewURL != old.previewURL && updated.inputBytes == fresh.png.count)
+    model.workbench.close(.optimize)
+}
+
+@MainActor @Test func replacingAWatchedDirectoryAtTheSamePathStopsItsRule() async throws {
+    let fm = FileManager.default
+    let root = fm.temporaryDirectory.appendingPathComponent(UUID().uuidString, isDirectory: true)
+    let watched = root.appendingPathComponent("Watched", isDirectory: true)
+    let substitute = root.appendingPathComponent("Unrelated", isDirectory: true)
+    for folder in [watched, substitute] { try fm.createDirectory(at: folder, withIntermediateDirectories: true) }
+    defer { try? fm.removeItem(at: root) }
+    let rule = OptimizationFolderRule(folder: watched)
+    let automation = AutomaticOptimization()
+    defer { automation.configure(clipboard: false, rules: [], recipes: []) }
+    automation.configure(clipboard: false, rules: [rule], recipes: [])
+    let initial = ContinuousClock.now.advanced(by: .seconds(3))
+    while !automation.activeRules.contains(rule.id), ContinuousClock.now < initial { try await Task.sleep(for: .milliseconds(20)) }
+    try #require(automation.activeRules.contains(rule.id))
+    let status = watched.withUnsafeFileSystemRepresentation { first in
+        substitute.withUnsafeFileSystemRepresentation { second in renamex_np(first!, second!, UInt32(RENAME_SWAP)) }
+    }
+    try #require(status == 0)
+    let deadline = ContinuousClock.now.advanced(by: .seconds(3))
+    while automation.activeRules.contains(rule.id), ContinuousClock.now < deadline { try await Task.sleep(for: .milliseconds(20)) }
+    #expect(!automation.activeRules.contains(rule.id))
+    let failure = try #require(automation.ruleStatus[rule.id])
+    automation.configure(clipboard: false, rules: [rule], recipes: [])
+    #expect(automation.ruleStatus[rule.id] == failure)
+    #expect(!fm.fileExists(atPath: watched.appendingPathComponent("Optimized Copies").path))
+    automation.retryStoppedRule(rule.id)
+    automation.configure(clipboard: false, rules: [rule], recipes: [])
+    let retry = ContinuousClock.now.advanced(by: .seconds(3))
+    while !automation.activeRules.contains(rule.id), ContinuousClock.now < retry { try await Task.sleep(for: .milliseconds(20)) }
+    #expect(automation.activeRules.contains(rule.id))
+}

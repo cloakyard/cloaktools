@@ -24,8 +24,10 @@ struct FolderRuleSettings: View {
         Button("Add Folder Rule…") {
             if let url = chooseFinderFolder("Choose a folder to watch", prompt: "Choose Folder") { edit = .init(folder: url) }
         }
-        if model.preferences.automationPaused {
-            Button("Resume Automation") { model.update { $0.automationPaused = false } }
+        if model.preferences.optimizeCopiedImages || !model.preferences.folderRules.isEmpty || model.preferences.automationPaused {
+            Button(model.preferences.automationPaused ? "Resume Automation" : "Pause Automation") {
+                model.update { $0.automationPaused.toggle() }
+            }
         }
         Text("New matching files are saved in Optimized Copies. Existing files stay in place.")
             .font(.caption).foregroundStyle(.secondary)

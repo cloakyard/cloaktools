@@ -60,10 +60,14 @@ final class AutomaticOptimization {
             let task = Task { [weak self] in
                 guard let self else { return }
                 await watch(rule, options: options)
-                if !Task.isCancelled { watches[rule.id] = nil; activeRules.remove(rule.id) }
+                if !Task.isCancelled { activeRules.remove(rule.id) }
             }
             watches[rule.id] = Watch(rule: rule, options: options, task: task)
         }
+    }
+
+    func retryStoppedRule(_ id: UUID) {
+        if !activeRules.contains(id), ruleStatus[id] != nil { stop(id) }
     }
 
     private func stop(_ id: UUID) {
@@ -102,15 +106,16 @@ final class AutomaticOptimization {
         do {
             let (events, source) = try directoryEvents(folder)
             defer { source.cancel() }
+            let descriptor = source.handle
             var iterator = events.makeAsyncIterator()
-            var state = WatchedMedia(baseline: try await scan(folder))
+            var state = WatchedMedia(baseline: try await scan(folder, descriptor: descriptor))
             try Task.checkCancellation()
             activeRules.insert(rule.id)
             while !Task.isCancelled {
                 if state.hasPending { try await Task.sleep(for: .seconds(3)) }
                 else if await iterator.next() == nil { return }
                 try Task.checkCancellation()
-                let snapshot = try await scan(folder)
+                let snapshot = try await scan(folder, descriptor: descriptor)
                 for url in state.stableAdditions(snapshot) where rule.kind.accepts(url) {
                     try Task.checkCancellation()
                     do {
@@ -120,7 +125,10 @@ final class AutomaticOptimization {
                             state.reconsider(url)
                             continue
                         }
-                        let worker = Task.detached(priority: .utility) { try result.save(in: WatchedMedia.outputFolder(for: folder)) }
+                        let worker = Task.detached(priority: .utility) {
+                            try Self.verifyFolder(folder, descriptor: descriptor)
+                            return try result.save(in: WatchedMedia.outputFolder(for: folder))
+                        }
                         let output = try await withTaskCancellationHandler(operation: { try await worker.value }, onCancel: { worker.cancel() })
                         didSave?(output, result.inputBytes, result.outputBytes)
                         try Task.checkCancellation()
@@ -128,6 +136,7 @@ final class AutomaticOptimization {
                     } catch is CancellationError { return }
                     catch {
                         try Task.checkCancellation()
+                        try Self.verifyFolder(folder, descriptor: descriptor)
                         if (try? WatchedMedia.stamp(url)) != snapshot[url] { state.reconsider(url) }
                         ruleStatus[rule.id] = "\(url.lastPathComponent) · \(error.localizedDescription)"
                     }
@@ -147,7 +156,22 @@ final class AutomaticOptimization {
         }
         return (stream, source)
     }
-    private nonisolated func scan(_ folder: URL) async throws -> WatchedMedia.Snapshot { try WatchedMedia.snapshot(in: folder) }
+    // Directory events follow the vnode. Enumeration follows the path, which can
+    // now name a different directory after a rename or atomic replacement.
+    private nonisolated static func verifyFolder(_ folder: URL, descriptor: Int32) throws {
+        var observed = stat(), current = stat()
+        guard fstat(descriptor, &observed) == 0, lstat(folder.path, &current) == 0,
+              observed.st_dev == current.st_dev, observed.st_ino == current.st_ino else {
+            throw FolderWorkflowError("The watched folder moved or was replaced. Choose the folder again in General settings.")
+        }
+    }
+
+    private nonisolated func scan(_ folder: URL, descriptor: Int32) async throws -> WatchedMedia.Snapshot {
+        try Self.verifyFolder(folder, descriptor: descriptor)
+        let snapshot = try WatchedMedia.snapshot(in: folder)
+        try Self.verifyFolder(folder, descriptor: descriptor)
+        return snapshot
+    }
 }
 
 private extension Array {

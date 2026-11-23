@@ -163,8 +163,11 @@ struct OptimizeMediaIntent: AppIntent {
         let result = try await MediaOptimization.prepare(url, options: options)
         // IntentFile(data:) owns its bytes after the private workspace is released.
         guard result.outputBytes <= 100_000_000 else { throw AutomationResultError.tooLarge }
-        return .result(value: IntentFile(data: try Data(contentsOf: result.previewURL), filename: result.filename,
-                                         type: UTType(filenameExtension: result.previewURL.pathExtension)))
+        let proposed = (file.filename as NSString).deletingPathExtension + " optimized"
+        let stem = (try? SafeOutput.validate(stem: proposed)) != nil ? proposed : "Optimized copy"
+        let suffix = result.previewURL.pathExtension
+        return .result(value: IntentFile(data: try Data(contentsOf: result.previewURL), filename: stem + "." + suffix,
+                                         type: UTType(filenameExtension: suffix)))
     }
 }
 

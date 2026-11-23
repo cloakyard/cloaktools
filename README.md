@@ -43,7 +43,7 @@ The development build also includes **Optimize Media** for mixed batches and an 
 
 ### Current boundaries
 
-Shortcuts actions and additional Finder-folder configuration are implemented, but execution needs a matching team signing identity and further live verification. Signing and notarization are deferred. Verified Edge/profile routing, spoken VoiceOver, macOS 27.0 runtime acceptance and broader installer/filesystem/codec coverage remain open. See the [roadmap](docs/ROADMAP.md) and [latest native verification](docs/verification/ROADMAP-IMPLEMENTATION.md).
+Shortcuts actions and additional Finder-folder configuration are implemented, but execution needs a matching team signing identity and further live verification. Signing and notarization are deferred. Verified Edge/profile routing, spoken VoiceOver, macOS 27.0 runtime acceptance and broader installer/filesystem/codec coverage remain open. See the [roadmap](docs/ROADMAP.md) and [latest native verification](docs/verification/NATIVE-FEATURE-AUDIT.md).
 
 Standalone OCR, basic batch renaming, ZIP tools, Keep Awake and generic inspection are outside the active roadmap because macOS already supplies those workflows. Existing overlapping tools remain available in compact secondary groups; see the [macOS feature audit](docs/MACOS-FEATURE-AUDIT.md).
 
@@ -98,7 +98,7 @@ node scripts/check-air-design.mjs
 node scripts/check-air-portability.mjs
 ```
 
-The **November 16, 2026** native audit passed **224 core tests and 8 hosted app tests**. This is dated evidence, not a claim that browser checks revalidate native behavior. See [the native audit](docs/verification/ROADMAP-IMPLEMENTATION.md) for exact coverage and remaining gates. Website verification is recorded separately in [the Air audit](docs/air/AUDIT-2026-11-17.md).
+The November 23, 2026 native audit passed **248 core tests and 36 hosted app tests**. See the [feature and usability audit](docs/verification/NATIVE-FEATURE-AUDIT.md) for workflow coverage, fixes and remaining checks. Website verification is recorded separately in [the Air audit](docs/air/AUDIT-2026-11-17.md).
 
 ### Website
 

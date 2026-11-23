@@ -285,6 +285,7 @@ final class AppModel {
         else { value.folderRules.append(rule) }
         try store.save(value)
         preferences = value
+        automaticOptimization.retryStoppedRule(rule.id)
         configureAutomaticOptimization()
     }
     func completeToolSelection(developerEnabled: Bool) throws {
@@ -597,8 +598,23 @@ extension AppModel {
         sharingStatus?.update(count: review.files.count, error: review.task.error)
     }
 
-    func presentOptimizer(files: [URL] = [], paste: Bool = false, recipe: ExportRecipe? = nil) {
-        if let recipe, case let .optimize(options) = recipe.options, optimizer != nil {
+    /// A Drop Zone selection is explicit, even when the user selects Standard.
+    func presentDropZoneFiles(_ files: [URL], recipeID: UUID?) throws {
+        guard !files.isEmpty else { return }
+        var chosen: ExportRecipe?
+        if let recipeID {
+            guard let recipe = exportRecipes.first(where: { $0.id == recipeID }), case .optimize = recipe.options else {
+                throw ExportRecipeError.changed
+            }
+            chosen = recipe
+        }
+        presentOptimizer(files: files, recipe: chosen, standardBatch: chosen == nil)
+    }
+
+    func presentOptimizer(files: [URL] = [], paste: Bool = false, recipe: ExportRecipe? = nil, standardBatch: Bool = false) {
+        let options: OptimizationOptions
+        if case let .optimize(saved) = recipe?.options { options = saved } else { options = .init() }
+        if let current = optimizer, recipe != nil || (standardBatch && (current.options != options || current.recipe != nil)) {
             guard hasRoomForOperation() else { return }
             let independent = OptimizationReview(history: recentOptimizations)
             lastOptimizer = independent

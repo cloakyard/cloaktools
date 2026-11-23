@@ -84,3 +84,21 @@ private func automationFixture() throws -> URL {
     await #expect(throws: CancellationError.self) { _ = try await task.value }
     #expect(try FileManager.default.contentsOfDirectory(atPath: folder.path) == ["Input.txt"])
 }
+
+@Test func optimizationIntentKeepsTheNameOfAnInMemoryImage() async throws {
+    let source = try QRCodeCreation.prepare("Automation audit").png
+    let decoded = try #require(CGImageSourceCreateWithData(source as CFData, nil))
+    let image = try #require(CGImageSourceCreateImageAtIndex(decoded, 0, nil))
+    let bytes = NSMutableData()
+    let tiff = try #require(CGImageDestinationCreateWithData(bytes, UTType.tiff.identifier as CFString, 1, nil))
+    CGImageDestinationAddImage(tiff, image, nil)
+    try #require(CGImageDestinationFinalize(tiff))
+    var intent = OptimizeMediaIntent()
+    intent.file = IntentFile(data: bytes as Data, filename: "Handout.tiff", type: .tiff)
+    intent.aggressive = false
+    let response = try await intent.perform()
+    let output = try #require(response.value)
+    #expect(output.filename == "Handout optimized.png")
+    #expect(output.data.count > 0 && output.data.count < bytes.length)
+    #expect(CGImageSourceCreateWithData(output.data as CFData, nil) != nil)
+}
