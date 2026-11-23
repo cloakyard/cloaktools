@@ -119,6 +119,10 @@ final class MarkdownDigestWindow: NSWindowController, NSWindowDelegate {
 struct MarkdownDigestView: View {
     @Bindable var operation: MarkdownDigestOperation
     let close: () -> Void
+    private var dismissal: ReviewDismissButton {
+        ReviewDismissButton(busy: operation.busy, saving: operation.saving, cancel: operation.cancel, close: close)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             DialogHeading(title: "Markdown digest", subtitle: "Selected text files. One document.", symbol: "doc.text")
@@ -134,7 +138,7 @@ struct MarkdownDigestView: View {
                     HStack {
                         Label("Saved \(url.lastPathComponent)", systemImage: "checkmark.circle.fill").lineLimit(1).truncationMode(.middle)
                         Spacer()
-                        Button("Show in Finder") { NSWorkspace.shared.activateFileViewerSelecting([url]) }.buttonStyle(.link)
+                        ShowInFinderButton(url: url)
                     }.font(.callout).foregroundStyle(.green)
                 } else if operation.copied { Label("Digest copied to clipboard", systemImage: "checkmark.circle.fill").font(.callout).foregroundStyle(.green) }
                 OperationFeedback(activity: operation.activity, error: operation.error ?? operation.nameError)
@@ -143,21 +147,21 @@ struct MarkdownDigestView: View {
             }
             DialogFooter {
                 if operation.savedURL == nil {
-                    Button(operation.busy ? "Cancel" : "Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.saving)
+                    dismissal
                 }
             } actions: {
                 if operation.savedURL != nil {
                     DialogDoneButton(action: close)
                 } else if operation.prepared != nil {
                     Button(operation.copied ? "Copied" : "Copy Digest", action: operation.copy).modifier(DialogActionStyle()).disabled(operation.busy)
-                    Button("Save Digest…", action: operation.save).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy)
+                    ReviewDefaultButton(title: "Save Digest…", action: operation.save).disabled(operation.busy)
                 } else if operation.files.isEmpty {
-                    Button("Choose Files…", action: operation.chooseFiles).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy)
+                    ReviewDefaultButton(title: "Choose Files…", action: operation.chooseFiles).disabled(operation.busy)
                 } else {
-                    Button("Preview Digest", action: operation.generate).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy || operation.nameError != nil)
+                    ReviewDefaultButton(title: "Preview Digest", action: operation.generate).disabled(operation.busy || operation.nameError != nil)
                 }
             }
-        }.onExitCommand { if !operation.saving { close() } }
+        }.onExitCommand(perform: dismissal.perform)
         .padding(20).frame(minWidth: 560, minHeight: 600)
     }
     private var fileList: some View {

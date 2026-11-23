@@ -26,15 +26,13 @@ struct ExportRecipeSection: View {
                     }
                     Spacer(minLength: 4)
                     Button("Use…") { model.useRecipe(recipe) }.accessibilityLabel("Use recipe \(recipe.title)")
-                    Menu {
+                    RowActionsMenu(title: "Actions for recipe \(recipe.title)") {
                         if case let .optimize(options) = recipe.options, options.steps != nil {
                             Button("Edit Pipeline…") { editPipeline = recipe }
                         }
                         Button("Rename…") { renaming = recipe }
                         Button("Remove Recipe…", role: .destructive) { removing = recipe }
-                    } label: { Label("Actions for recipe \(recipe.title)", systemImage: "ellipsis").labelStyle(.iconOnly) }
-                    .menuStyle(.borderlessButton).fixedSize().accessibilityLabel("Actions for recipe \(recipe.title)")
-                    .help("Rename or remove \(recipe.title)")
+                    }
                 }.padding(.vertical, 3)
             }
             Button("New Pipeline…") { newPipeline = true }
@@ -62,8 +60,8 @@ struct SaveExportRecipeButton: View {
                 let value = try options(); try value.validate()
                 editing = ExportRecipe(id: recipe?.id ?? UUID(), title: recipe?.title ?? value.toolName, options: value)
             } catch { self.error = error.localizedDescription }
-        }.buttonStyle(.link).font(.caption)
-            .help("Save output settings for another source; creates no exported file")
+        }
+            .help("Save these output settings as a recipe")
             .sheet(item: $editing) { draft in ExportRecipeSaveSheet(draft: draft, original: recipe) { recipe = $0 } }
             .alert("Check the export settings", isPresented: Binding(get: { error != nil }, set: { if !$0 { error = nil } })) {
                 Button("OK") { error = nil }

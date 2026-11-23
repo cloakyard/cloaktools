@@ -132,6 +132,10 @@ final class FileListWindow: NSWindowController, NSWindowDelegate {
 struct FileListView: View {
     @Bindable var operation: FileListOperation
     let close: () -> Void
+    private var dismissal: ReviewDismissButton {
+        ReviewDismissButton(busy: operation.busy, saving: operation.saving, cancel: operation.cancel, close: close)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             DialogHeading(title: "File list", subtitle: "Selected items. A useful list.", symbol: "list.bullet.rectangle")
@@ -169,7 +173,7 @@ struct FileListView: View {
                     HStack {
                         Label("Saved \(url.lastPathComponent)", systemImage: "checkmark.circle.fill").lineLimit(1).truncationMode(.middle)
                         Spacer(minLength: 4)
-                        Button("Show in Finder") { NSWorkspace.shared.activateFileViewerSelecting([url]) }.buttonStyle(.link)
+                        ShowInFinderButton(url: url)
                     }.font(.callout).foregroundStyle(.green)
                 } else if operation.copied { Label("List copied to clipboard", systemImage: "checkmark.circle.fill").font(.callout).foregroundStyle(.green) }
                 OperationFeedback(activity: operation.activity, error: operation.error ?? operation.nameError)
@@ -180,21 +184,21 @@ struct FileListView: View {
             }
             DialogFooter {
                 if operation.savedURL == nil {
-                    Button(operation.busy ? "Cancel" : "Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.saving)
+                    dismissal
                 }
             } actions: {
                 if operation.savedURL != nil {
                     DialogDoneButton(action: close)
                 } else if operation.prepared != nil {
                     Button(operation.copied ? "Copied" : "Copy List", action: operation.copy).modifier(DialogActionStyle()).disabled(operation.busy)
-                    Button("Save List…", action: operation.save).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy || operation.nameError != nil)
+                    ReviewDefaultButton(title: "Save List…", action: operation.save).disabled(operation.busy || operation.nameError != nil)
                 } else if operation.items.isEmpty {
-                    Button("Choose Items…", action: operation.chooseItems).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy)
+                    ReviewDefaultButton(title: "Choose Items…", action: operation.chooseItems).disabled(operation.busy)
                 } else {
-                    Button("Preview Export", action: operation.preview).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy)
+                    ReviewDefaultButton(title: "Preview Export", action: operation.preview).disabled(operation.busy)
                 }
             }
-        }.onExitCommand { if !operation.saving { close() } }
+        }.onExitCommand(perform: dismissal.perform)
         .padding(20).frame(minWidth: 560, minHeight: 560)
     }
     private var workspace: some View {

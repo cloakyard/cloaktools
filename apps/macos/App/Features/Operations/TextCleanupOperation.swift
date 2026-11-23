@@ -93,6 +93,10 @@ final class TextCleanupWindow: NSWindowController, NSWindowDelegate {
 struct TextCleanupView: View {
     @Bindable var operation: TextCleanupOperation
     let close: () -> Void
+    private var dismissal: ReviewDismissButton {
+        ReviewDismissButton(busy: operation.busy, saving: operation.saving, cancel: operation.cancel, close: close)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             DialogHeading(title: "Text cleanup", subtitle: "Tidy the spacing. Keep your words.", symbol: "text.alignleft")
@@ -125,7 +129,7 @@ struct TextCleanupView: View {
                     HStack {
                         Label("Saved \(url.lastPathComponent)", systemImage: "checkmark.circle.fill").lineLimit(1).truncationMode(.middle)
                         Spacer(minLength: 4)
-                        Button("Show in Finder") { NSWorkspace.shared.activateFileViewerSelecting([url]) }.buttonStyle(.link)
+                        ShowInFinderButton(url: url)
                     }.font(.callout).foregroundStyle(.green)
                 } else if operation.copied { Label("Result copied to clipboard", systemImage: "checkmark.circle.fill").font(.callout).foregroundStyle(.green) }
                 else if let result = operation.prepared {
@@ -140,7 +144,7 @@ struct TextCleanupView: View {
             }
             DialogFooter {
                 if operation.savedURL == nil {
-                    Button(operation.busy ? "Cancel" : "Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.saving)
+                    dismissal
                 }
             } actions: {
                 if operation.savedURL != nil {
@@ -155,7 +159,7 @@ struct TextCleanupView: View {
                         .disabled(operation.busy || operation.input.isEmpty)
                 }
             }
-        }.onExitCommand { if !operation.saving { close() } }
+        }.onExitCommand(perform: dismissal.perform)
         .padding(20).frame(minWidth: 540, minHeight: 570)
     }
     private var editor: some View {

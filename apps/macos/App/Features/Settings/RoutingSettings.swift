@@ -90,14 +90,13 @@ struct RoutingSettingsView: View {
                         Spacer(minLength: 0)
                         Toggle("Enable \(rule.name)", isOn: Binding(get: { rule.enabled }, set: { routing.enable(rule, $0) }))
                             .labelsHidden().toggleStyle(.switch).controlSize(.small)
-                        Menu {
+                        RowActionsMenu(title: "Actions for \(rule.name)") {
                             Button("Edit Rule…") { editing = rule }
                             Button("Move Up") { routing.move(rule, by: -1) }.disabled(index == 0)
                             Button("Move Down") { routing.move(rule, by: 1) }.disabled(index == routing.rules.count - 1)
                             Divider()
                             Button("Delete Rule…", role: .destructive) { removing = rule }
-                        } label: { Image(systemName: "ellipsis") }
-                        .menuStyle(.borderlessButton).fixedSize().accessibilityLabel("Actions for \(rule.name)")
+                        }
                     }.padding(.vertical, 3)
                 }
                 Button("Add Rule…", systemImage: "plus") { editing = RoutingRule() }

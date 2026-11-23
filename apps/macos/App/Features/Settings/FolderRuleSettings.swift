@@ -14,11 +14,10 @@ struct FolderRuleSettings: View {
                     if let status = model.automaticOptimization.ruleStatus[rule.id] { Text(status).font(.caption).foregroundStyle(.secondary) }
                 }
                 Spacer()
-                Menu {
+                RowActionsMenu(title: "Actions for " + rule.folder.lastPathComponent) {
                     Button("Edit Rule…") { edit = rule }
                     Button("Stop Watching") { model.update { $0.folderRules.removeAll { $0.id == rule.id } } }
-                } label: { Image(systemName: "ellipsis.circle") }.menuStyle(.borderlessButton).fixedSize()
-                .accessibilityLabel("Actions for " + rule.folder.lastPathComponent)
+                }
             }
         }
         Button("Add Folder Rule…") {

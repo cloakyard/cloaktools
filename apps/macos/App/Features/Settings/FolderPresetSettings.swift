@@ -23,11 +23,10 @@ struct FolderPresetSection: View {
                     }
                     Spacer(minLength: 4)
                     Button("Use…") { model.presentPreset(preset) }.accessibilityLabel("Use preset \(preset.title)")
-                    Menu {
+                    RowActionsMenu(title: "Actions for preset \(preset.title)") {
                         Button("Edit Preset…") { editing = preset }
                         Button("Remove Preset…", role: .destructive) { removing = preset }
-                    } label: { Image(systemName: "ellipsis") }
-                        .menuStyle(.borderlessButton).fixedSize().accessibilityLabel("Actions for preset \(preset.title)")
+                    }
                 }.padding(.vertical, 3)
             }
             Button("Add Folder Preset…", systemImage: "plus") {

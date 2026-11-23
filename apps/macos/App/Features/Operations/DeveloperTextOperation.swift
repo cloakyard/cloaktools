@@ -172,7 +172,7 @@ struct DeveloperTextView: View {
                     .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             }
             DialogFooter {
-                Button("Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+                ReviewDismissButton(busy: operation.running, cancel: operation.invalidate, close: close)
             } actions: {
                 if !isJSON || operation.jsonAction != .validate {
                     Button(operation.copied ? "Copied" : "Copy Result", action: operation.copy)

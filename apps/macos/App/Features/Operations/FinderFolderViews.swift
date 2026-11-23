@@ -2,7 +2,7 @@ import AppKit
 import CloakToolsCore
 import SwiftUI
 
-private struct FolderReviewPage<Content: View, Actions: View>: View {
+struct FolderReviewPage<Content: View, Actions: View>: View {
     let tool: WorkbenchTool
     let subtitle: String
     let task: FolderTask
@@ -14,13 +14,17 @@ private struct FolderReviewPage<Content: View, Actions: View>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             DialogHeading(title: tool.rawValue, subtitle: subtitle, symbol: tool.symbol)
-            content.disabled(task.busy)
+            VStack(alignment: .leading, spacing: 14) {
+                content
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .disabled(task.busy)
             if let output {
                 HStack {
                     Label("Created \(output.lastPathComponent)", systemImage: "checkmark.circle")
                         .lineLimit(1).help(output.path)
                     Spacer()
-                    Button("Reveal in Finder") { NSWorkspace.shared.activateFileViewerSelecting([output]) }.buttonStyle(.link)
+                    ShowInFinderButton(url: output)
                 }.modifier(DialogCard())
             }
             OperationFeedback(activity: task.activity, error: task.error)
@@ -107,7 +111,7 @@ struct SharingReviewView: View {
     var body: some View {
         FolderReviewPage(tool: .collect, subtitle: "Keep this collection open to add files from other Finder windows.",
                          task: review.task, output: review.output, close: close) {
-            if review.output == nil {
+            if review.output == nil && !review.files.isEmpty {
                 LabeledContent("New folder name") {
                     TextField("Folder name", text: $review.name).textFieldStyle(.roundedBorder).accessibilityLabel("New folder name")
                 }
@@ -142,11 +146,14 @@ struct SharingReviewView: View {
                 }
             }
         } actions: {
-            if review.output == nil {
+            if review.files.isEmpty {
+                Button("Choose Files…", action: review.chooseFiles)
+                    .modifier(DialogActionStyle(prominent: true)).keyboardShortcut(.defaultAction)
+            } else if review.output == nil {
                 Button("Save Copies…") {
                     if let folder = chooseFinderFolder("Choose where to save “\(review.name)”", prompt: "Save Copies") { review.save(in: folder) }
                 }.modifier(DialogActionStyle(prominent: true)).keyboardShortcut(.defaultAction)
-                    .disabled(review.files.isEmpty || nameProblem != nil)
+                    .disabled(nameProblem != nil)
             }
         }
     }

@@ -165,7 +165,7 @@ struct MediaOperationView: View {
                             Label("Saved \(output.lastPathComponent)", systemImage: "checkmark.circle.fill").foregroundStyle(.green)
                             if let count = operation.outputBytes { Text("\(count.formatted()) bytes · \(operation.preset.title)").font(.caption).foregroundStyle(.secondary) }
                             HStack(spacing: 16) {
-                                Button("Reveal in Finder") { NSWorkspace.shared.activateFileViewerSelecting([output]) }.buttonStyle(.link)
+                                ShowInFinderButton(url: output)
                                 Button("Open in QuickTime", action: operation.open).buttonStyle(.link)
                             }
                         }.frame(maxWidth: .infinity, alignment: .leading).modifier(DialogCard())
@@ -199,6 +199,7 @@ struct MediaOperationView: View {
                 } else if !operation.busy {
                     if operation.source != nil && operation.compatibilityError == nil {
                         SaveExportRecipeButton(recipe: $operation.recipe) { .media(operation.preset) }
+                            .modifier(DialogActionStyle())
                     }
                     Button("Export Copy", action: operation.export).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true)).disabled(operation.source == nil || operation.compatibilityError != nil || operation.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }

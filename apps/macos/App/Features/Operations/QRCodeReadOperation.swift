@@ -114,6 +114,10 @@ struct QRCodeReadView: View {
     @Bindable var operation: QRCodeReadOperation
     @Binding var reading: Bool
     let close: () -> Void
+    private var dismissal: ReviewDismissButton {
+        ReviewDismissButton(busy: operation.busy, saving: operation.saving, cancel: operation.cancel, close: close)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             QRCodeHeading(reading: $reading).disabled(operation.busy)
@@ -185,7 +189,7 @@ struct QRCodeReadView: View {
                     HStack {
                         Label("Saved \(url.lastPathComponent)", systemImage: "checkmark.circle.fill").lineLimit(1).truncationMode(.middle)
                         Spacer(minLength: 4)
-                        Button("Show in Finder") { NSWorkspace.shared.activateFileViewerSelecting([url]) }.buttonStyle(.link)
+                        ShowInFinderButton(url: url)
                     }.font(.callout).foregroundStyle(.green)
                 } else if operation.copied { Label("Decoded text copied", systemImage: "checkmark.circle.fill").font(.callout).foregroundStyle(.green) }
                 if let result = operation.prepared, result.codes.isEmpty {
@@ -201,18 +205,18 @@ struct QRCodeReadView: View {
                     .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             }
             DialogFooter {
-                if operation.savedURL == nil { Button(operation.busy ? "Cancel" : "Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.saving) }
+                if operation.savedURL == nil { dismissal }
             } actions: {
                 if operation.savedURL != nil {
                     DialogDoneButton(action: close)
                 } else if operation.selectedCode?.text != nil {
                     Button(operation.copied ? "Copied" : "Copy Text", action: operation.copyText).modifier(DialogActionStyle()).disabled(operation.busy || operation.selectedCode?.text?.isEmpty != false)
-                    Button(operation.saveTitle + "…", action: operation.save).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy || operation.nameError != nil)
+                    ReviewDefaultButton(title: operation.saveTitle + "…", action: operation.save).disabled(operation.busy || operation.nameError != nil)
                 } else {
-                    Button("Choose Image…", action: operation.chooseImage).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy)
+                    ReviewDefaultButton(title: "Choose Image…", action: operation.chooseImage).disabled(operation.busy)
                 }
             }
-        }.onExitCommand { if !operation.saving { close() } }
+        }.onExitCommand(perform: dismissal.perform)
         .padding(20).frame(minWidth: 600, minHeight: 560)
     }
     private var emptyMessage: String {

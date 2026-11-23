@@ -190,7 +190,7 @@ struct PDFOperationView: View {
                             Text("\(operation.pageCount) pages · \(operation.items.count) source files").foregroundStyle(.secondary)
                             Text(output.deletingLastPathComponent().path).font(.caption).foregroundStyle(.secondary).textSelection(.enabled)
                             HStack(spacing: 16) {
-                                Button("Reveal in Finder") { NSWorkspace.shared.activateFileViewerSelecting([output]) }.buttonStyle(.link)
+                                ShowInFinderButton(url: output)
                                 Button("Open in Preview", action: operation.open).buttonStyle(.link)
                             }
                         }.modifier(DialogCard())

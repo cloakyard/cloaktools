@@ -30,12 +30,11 @@ struct OptimizationPipelineEditor: View {
                             Text("\(i + 1).").monospacedDigit().foregroundStyle(.secondary)
                             Menu(steps[i].title) { choices { steps[i] = $0 } }
                             Spacer()
-                            Menu {
+                            RowActionsMenu(title: "Actions for step \(i + 1)") {
                                 Button("Move Up") { steps.swapAt(i, i - 1) }.disabled(i == 0)
                                 Button("Move Down") { steps.swapAt(i, i + 1) }.disabled(i + 1 == steps.count)
                                 Button("Remove Step") { steps.remove(at: i) }
-                            } label: { Image(systemName: "ellipsis.circle") }.menuStyle(.borderlessButton).fixedSize()
-                                .accessibilityLabel("Actions for step \(i + 1)")
+                            }
                         }
                     }
                 }.padding(4)

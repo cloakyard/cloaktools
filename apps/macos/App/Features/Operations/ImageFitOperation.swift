@@ -161,7 +161,7 @@ struct ImageFitView: View {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Saved \(output.lastPathComponent)").font(.callout).fontWeight(.medium)
                             HStack(spacing: 16) {
-                                Button("Reveal in Finder") { NSWorkspace.shared.activateFileViewerSelecting([output]) }.buttonStyle(.link)
+                                ShowInFinderButton(url: output)
                                 Button("Open in Preview", action: operation.open).buttonStyle(.link)
                             }
                         }.frame(maxWidth: .infinity, alignment: .leading).modifier(DialogCard())
@@ -196,6 +196,7 @@ struct ImageFitView: View {
                 } else if !operation.busy {
                     if operation.source != nil {
                         SaveExportRecipeButton(recipe: $operation.recipe) { .fit(try operation.draft.options()) }
+                            .modifier(DialogActionStyle())
                     }
                     Button(operation.result == nil ? "Preview Fit" : "Save \(operation.draft.format.title) Copy") { if operation.result == nil { operation.preview() } else { operation.save() } }
                         .keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))

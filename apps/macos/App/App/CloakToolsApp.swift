@@ -29,6 +29,7 @@ struct CloakToolsApp: App {
                     .accessibilityLabel("CloakTools, \(review.files.count) files collected")
             } else {
                 Label("CloakTools", systemImage: "wrench.and.screwdriver")
+                    .accessibilityLabel("CloakTools")
             }
         }
         Settings {

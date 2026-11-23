@@ -143,7 +143,7 @@ struct FileSetView: View {
                     Label(output.lastPathComponent, systemImage: "checkmark.circle.fill").font(.headline).foregroundStyle(.green)
                     Text("\(operation.fileCount) files · \(operation.prepared?.byteCount.formatted() ?? "0") bytes").foregroundStyle(.secondary)
                     Text("Existing files and folders were kept.").font(.callout).foregroundStyle(.secondary)
-                    Button("Reveal in Finder") { NSWorkspace.shared.activateFileViewerSelecting([output]) }.buttonStyle(.link)
+                    ShowInFinderButton(url: output)
                 }.frame(maxWidth: .infinity, alignment: .leading).modifier(DialogCard())
                 Spacer(minLength: 0)
             } else {

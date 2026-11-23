@@ -122,7 +122,7 @@ struct ClipboardView: View {
                     }
                     if let output = operation.output {
                         Label("Created \(output.lastPathComponent)", systemImage: "checkmark.circle.fill").foregroundStyle(.green)
-                        Button("Reveal in Finder") { NSWorkspace.shared.activateFileViewerSelecting([output]) }.buttonStyle(.link)
+                        ShowInFinderButton(url: output)
                     }
                 }.frame(maxWidth: .infinity, alignment: .leading)
             }.scrollBounceBehavior(.basedOnSize)

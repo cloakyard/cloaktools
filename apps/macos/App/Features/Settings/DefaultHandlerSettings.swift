@@ -150,8 +150,7 @@ struct DefaultHandlerReview: View {
                     }
                 }
             }.scrollBounceBehavior(.basedOnSize).disabled(applying)
-            if applying { HStack(spacing: 8) { ProgressView().controlSize(.small); Text("Waiting for macOS…").font(.callout) } }
-            if let error { Text(error).font(.callout).foregroundStyle(.red).fixedSize(horizontal: false, vertical: true) }
+            OperationFeedback(activity: applying ? "Waiting for macOS…" : nil, error: error)
             DialogFooter {
                 if result == nil {
                     Button("Cancel", role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
@@ -167,7 +166,7 @@ struct DefaultHandlerReview: View {
                 } else {
                     DialogDoneButton { dismiss() }
                 }
-            }
+            }.disabled(applying)
         }.padding(20).frame(width: 460, height: result == nil ? (role == .web ? 380 : 330) : (role == .web ? 300 : 280))
             .interactiveDismissDisabled(applying).onAppear(perform: load)
             .onChange(of: selected) { updatePlan() }

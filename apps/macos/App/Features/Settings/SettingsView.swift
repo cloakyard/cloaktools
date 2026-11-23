@@ -56,7 +56,7 @@ struct SettingsView: View {
                 Text("Adds JSON, Base64, code starters, sample files and developer copy formats. Turning it off preserves saved items, language choices and open drafts.")
             }
             Section {
-                Toggle("Reveal the new file in Finder", isOn: preference(\.revealCreatedFile))
+                Toggle("Show the new file in Finder", isOn: preference(\.revealCreatedFile))
                 Toggle("Open after creation", isOn: preference(\.openAfterCreation))
             } header: { Text("After creating a file") } footer: {
                 Text(model.preferences.developerToolsEnabled ? "Text and source files open in TextEdit. PDFs and clipboard images open in Preview." : "Text files open in TextEdit. PDFs and clipboard images open in Preview.")
@@ -72,7 +72,7 @@ struct SettingsView: View {
                     LabeledContent("Shortcuts actions", value: "Unavailable in this build")
                 }
             } header: { Text("Use with Shortcuts") } footer: {
-                Text(AutomationAvailability.hasSigningIdentity ? "Choose CloakTools in the Shortcuts action library to fit an image, collect a Markdown digest or review a file set." : "Shortcuts requires a build with a signing identity. You can fit an image, collect a Markdown digest or review a file set in the Workbench.")
+                Text(AutomationAvailability.hasSigningIdentity ? "Choose CloakTools in the Shortcuts action library to optimize media, fit an image, create a Markdown digest or review a file set." : "Shortcuts requires a build with a signing identity. You can optimize media, fit an image, create a Markdown digest or review a file set in the Workbench.")
             }
         }
     }
@@ -142,7 +142,7 @@ struct SettingsView: View {
                     }
                 }
                 LabeledContent("Location", value: "Beside the original")
-                Toggle("Reveal the converted copy in Finder", isOn: preference(\.revealConvertedFile))
+                Toggle("Show the converted copy in Finder", isOn: preference(\.revealConvertedFile))
             } header: { Text("Image conversion defaults") } footer: {
                 Text("These defaults apply when you start a conversion. Open conversions keep their current settings.")
             }

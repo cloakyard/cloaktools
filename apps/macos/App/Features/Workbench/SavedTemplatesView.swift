@@ -27,12 +27,10 @@ struct SavedTemplatesView: View {
                             Text(".\(template.fileExtension) · \(template.content.count.formatted()) bytes").font(.caption).foregroundStyle(.secondary)
                         }
                         Spacer()
-                        Menu {
+                        RowActionsMenu(title: "Actions for template \(template.title)") {
                             Button("Edit Details…") { editingTemplate = template }
                             Button("Remove…", role: .destructive) { removingTemplate = template }
-                        } label: { Image(systemName: "ellipsis").frame(width: 22, height: 22) }
-                            .menuStyle(.borderlessButton).menuIndicator(.hidden).fixedSize()
-                            .accessibilityLabel("Options for \(template.title)").help("Template options")
+                        }
                     }
                 }
                 Button("Import Template…", systemImage: "square.and.arrow.down", action: model.importTemplate)

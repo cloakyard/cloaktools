@@ -152,6 +152,10 @@ struct QRCodeView: View {
     @Bindable var operation: QRCodeOperation
     @Binding var reading: Bool
     let close: () -> Void
+    private var dismissal: ReviewDismissButton {
+        ReviewDismissButton(busy: operation.busy, saving: operation.saving, cancel: operation.cancel, close: close)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             QRCodeHeading(reading: $reading).disabled(operation.busy)
@@ -212,7 +216,7 @@ struct QRCodeView: View {
                     HStack {
                         Label("Saved \(url.lastPathComponent)", systemImage: "checkmark.circle.fill").lineLimit(1).truncationMode(.middle)
                         Spacer(minLength: 4)
-                        Button("Show in Finder") { NSWorkspace.shared.activateFileViewerSelecting([url]) }.buttonStyle(.link)
+                        ShowInFinderButton(url: url)
                     }.font(.callout).foregroundStyle(.green)
                 } else if operation.copied { Label("QR image copied", systemImage: "checkmark.circle.fill").font(.callout).foregroundStyle(.green) }
                 OperationFeedback(activity: operation.activity, error: operation.error ?? operation.nameError)
@@ -223,7 +227,7 @@ struct QRCodeView: View {
                 }
             }
             DialogFooter {
-                if operation.savedURL == nil { Button(operation.busy ? "Cancel" : "Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.saving) }
+                if operation.savedURL == nil { dismissal }
             } actions: {
                 if operation.savedURL != nil {
                     DialogDoneButton(action: close)
@@ -234,7 +238,7 @@ struct QRCodeView: View {
                     Button("Create QR Code", action: operation.generate).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy || operation.payload == nil)
                 }
             }
-        }.onExitCommand { if !operation.saving { close() } }
+        }.onExitCommand(perform: dismissal.perform)
         .padding(20).frame(minWidth: 600, minHeight: 560)
     }
 }

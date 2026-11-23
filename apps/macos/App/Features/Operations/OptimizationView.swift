@@ -224,7 +224,7 @@ struct OptimizationView: View {
             Spacer()
             if let result = row.result { OptimizationDragHandle(result: result) }
             if let output = row.output {
-                Button("Reveal") { NSWorkspace.shared.activateFileViewerSelecting([output]) }
+                ShowInFinderButton(url: output)
             } else if let result = row.result {
                 if result.comparisonOriginal != nil { Button("Compare PDF…") { comparing = row } }
                 else { Button("Quick Look") { quickLook = result.previewURL } }
@@ -232,7 +232,7 @@ struct OptimizationView: View {
                     Button("Copy") { review.copyImage(result) }
                 }
             }
-            Menu {
+            RowActionsMenu(title: "Actions for \(row.input.name)") {
                 if case .file = row.input, row.output == nil, row.result != nil || row.message != nil {
                     Button("Preview Current File") { review.refreshPreview(row.id) }
                 }
@@ -244,8 +244,7 @@ struct OptimizationView: View {
                     if row.output != nil && !row.originalRemoved { Button("Move Original to Trash…", role: .destructive) { trashing = row } }
                 }
                 Button("Remove from Batch") { review.remove(row.id) }
-            } label: { Image(systemName: "ellipsis.circle") }
-            .menuStyle(.borderlessButton).fixedSize().accessibilityLabel("Actions for \(row.input.name)").disabled(review.task.busy)
+            }.disabled(review.task.busy)
         }.buttonStyle(.borderless).padding(.vertical, 3)
     }
 }

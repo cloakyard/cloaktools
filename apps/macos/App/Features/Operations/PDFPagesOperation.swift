@@ -170,7 +170,7 @@ struct PDFPagesView: View {
                     Text(output.lastPathComponent).textSelection(.enabled)
                     Text(output.deletingLastPathComponent().path).font(.caption).foregroundStyle(.secondary).textSelection(.enabled)
                     HStack(spacing: 16) {
-                        Button("Reveal in Finder") { NSWorkspace.shared.activateFileViewerSelecting([output]) }.buttonStyle(.link)
+                        ShowInFinderButton(url: output)
                         Button("Open in Preview", action: operation.open).buttonStyle(.link)
                     }
                 }.frame(maxWidth: .infinity, alignment: .leading).modifier(DialogCard())

@@ -99,7 +99,7 @@ Image mode accepts files/decoded images up to 10 MiB, 40 megapixels per frame an
 
 ## Sample files
 
-Open **Developer Tools → Generate sample files** or **File → Developer Tools → Sample Files…**. Choose JSON, CSV, Text or Binary, then a record count or file size. **Generate** (⌘Return) shows a preview and exact byte count without writing a file. Enter a name and choose **Save File…**, then a folder. Existing names receive a numbered copy. Success offers Show in Finder and Done.
+Open **Developer Tools → Generate sample files** or **File → Developer Tools → Sample Files…**. Choose JSON, CSV, Text or Binary, then a record count or file size. **Generate** (Return or ⌘Return) shows a preview and exact byte count without writing a file. Enter a name and choose **Save File…**, then a folder. Existing names receive a numbered copy. Success offers Show in Finder and Done.
 
 JSON and CSV contain 1–10,000 deterministic records: an ID, synthetic name, `example.com` email, boolean and note. Notes cycle through plain text, commas, quotes, multiline text and Unicode. CSV uses UTF-8, a header, quoted fields and CRLF record endings. Text repeats ASCII content to the exact byte count; Binary creates zero-filled `.bin` data. Size accepts whole numbers from 1 byte through 32 MiB, with Bytes/KiB/MiB units (1 KiB = 1,024 bytes). The last text line may be partial. Binary files are useful for size checks, not representative compression tests.
 
@@ -283,7 +283,7 @@ From Finder, select the items, choose **Copy or Export File List** and then **Ex
 
 Open **Text & Sharing → Export a file list** or **File → File List…**. Choose up to 200 files or folders, review their order, and use the arrows or Remove to arrange them. CSV is selected initially; Markdown is also available. Expand **Columns** to choose kind, size in bytes, modified date in UTC or full path. Names are always included; dates and full paths start off.
 
-**Preview Export** (⌘Return) prepares the exact list. Switch between **Items** and **Export**, then explicitly **Copy List** or name and **Save List…**. Both actions use the complete prepared export, even while Items is visible. Saving makes a new `.csv` or `.md` file, with numbered names on collisions. Changing columns, order or selection requires a fresh preview.
+**Preview Export** (Return or ⌘Return) prepares the exact list. Switch between **Items** and **Export**, then explicitly **Copy List** or name and **Save List…**. Both actions use the complete prepared export, even while Items is visible. Saving makes a new `.csv` or `.md` file, with numbered names on collisions. Changing columns, order or selection requires a fresh preview.
 
 Only selected metadata is read. File contents are not opened, folders are not scanned, and final symbolic links are listed without following their targets. Sizes are file bytes, with blank cells for folders and links. Captured details stay fixed until **Refresh**; a failed refresh/addition retains the previous list. Full paths may reveal private folder names, so review before sharing. CSV quotes every field and prefixes formula-like cells with an apostrophe. Markdown escapes markup and displays embedded line breaks/tabs as visible symbols. The preview shows up to 65,536 characters; output is capped at 2 MiB. This everyday tool is available in either tool mode.
 

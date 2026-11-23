@@ -19,10 +19,10 @@ struct FileSetSection: View {
                     }
                     Spacer(minLength: 4)
                     Button("Use…") { model.chooseFileSetFolder(set) }.accessibilityLabel("Use file set \(set.title)")
-                    Menu {
+                    RowActionsMenu(title: "Actions for file set \(set.title)") {
                         Button("Edit & Review…") { model.chooseFileSetFolder(set) }
                         Button("Remove Saved Set…", role: .destructive) { removing = set }
-                    } label: { Image(systemName: "ellipsis") }.menuStyle(.borderlessButton).fixedSize().accessibilityLabel("Actions for file set \(set.title)")
+                    }
                 }.padding(.vertical, 3)
             }
             HStack(spacing: 16) {
