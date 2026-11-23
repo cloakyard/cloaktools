@@ -17,10 +17,11 @@ struct ReviewedOptimizationSource: Sendable {
 }
 
 public enum OriginalFileError: LocalizedError {
-    case changed, format
+    case changed, format, backup
     public var errorDescription: String? {
         switch self {
         case .changed: "The file has changed since review. Preview it again before changing the original."
+        case .backup: "Choose the original file inside its CloakTools Backup folder."
         case .format: "Replacement requires the same file format as the original. Save a copy for this conversion."
         }
     }
@@ -39,12 +40,58 @@ public struct OptimizationBackup: Sendable {
         replacementStamp = candidate.stamp
     }
 
+    private struct Record: Codable {
+        let version: Int
+        let name: String
+        let original: WatchedMedia.Stamp
+        let replacement: WatchedMedia.Stamp
+    }
+    private static let recordName = ".cloaktools-recovery.json"
+    fileprivate func writeRecord() throws {
+        let record = Record(version: 1, name: originalURL.lastPathComponent, original: originalStamp, replacement: replacementStamp)
+        let file = backupURL.deletingLastPathComponent().appendingPathComponent(Self.recordName)
+        try JSONEncoder().encode(record).write(to: file, options: .withoutOverwriting)
+    }
+
+    /// Reopen a local backup after relaunch. Relative names keep the pair portable on its volume.
+    public init(backupFile: URL) throws {
+        guard backupFile.isFileURL, [nil, "", "localhost"].contains(backupFile.host) else { throw OriginalFileError.backup }
+        let folder = backupFile.deletingLastPathComponent()
+        let prefix = "CloakTools Backup "
+        guard folder.lastPathComponent.hasPrefix(prefix),
+              UUID(uuidString: String(folder.lastPathComponent.dropFirst(prefix.count))) != nil,
+              (try? folder.resourceValues(forKeys: [.isSymbolicLinkKey]).isSymbolicLink) == false,
+              let data = try? LocalFileCapture.read(folder.appendingPathComponent(Self.recordName), limit: 4096),
+              let record = try? JSONDecoder().decode(Record.self, from: data), record.version == 1,
+              record.name == backupFile.lastPathComponent, ![".", "..", Self.recordName].contains(record.name) else { throw OriginalFileError.backup }
+        backupURL = backupFile
+        originalURL = folder.deletingLastPathComponent().appendingPathComponent(record.name)
+        originalStamp = record.original
+        replacementStamp = record.replacement
+        try verify()
+    }
+
     public func restore() throws {
+        try withOriginalDirectoryLock(originalURL) {
+            try verify()
+            try exchange(originalURL, backupURL)
+        }
+    }
+    private func verify() throws {
         guard try WatchedMedia.stamp(originalURL) == replacementStamp, try WatchedMedia.stamp(backupURL) == originalStamp else {
             throw OriginalFileError.changed
         }
-        try exchange(originalURL, backupURL)
     }
+}
+
+/// Serialize CloakTools operations that publish or restore a replacement in this directory.
+private func withOriginalDirectoryLock<T>(_ file: URL, action: () throws -> T) throws -> T {
+    let directory = file.deletingLastPathComponent()
+    let fd = open(directory.path, O_RDONLY | O_DIRECTORY | O_CLOEXEC)
+    guard fd >= 0 else { throw POSIXError(POSIXErrorCode(rawValue: errno) ?? .EIO) }
+    defer { Darwin.close(fd) }
+    guard flock(fd, LOCK_EX) == 0 else { throw POSIXError(POSIXErrorCode(rawValue: errno) ?? .EIO) }
+    return try action()
 }
 
 private func exchange(_ first: URL, _ second: URL) throws {
@@ -71,8 +118,11 @@ extension OptimizedMedia {
         do {
             try fm.copyItem(at: previewURL, to: candidate)
             let backup = try OptimizationBackup(original: source, candidate: ReviewedOptimizationSource(candidate))
-            try source.checkUnchanged()
-            try exchange(source.url, candidate)
+            try backup.writeRecord()
+            try withOriginalDirectoryLock(source.url) {
+                try source.checkUnchanged()
+                try exchange(source.url, candidate)
+            }
             return backup
         } catch {
             try? fm.removeItem(at: candidate)

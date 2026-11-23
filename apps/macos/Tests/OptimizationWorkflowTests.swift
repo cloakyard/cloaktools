@@ -59,3 +59,25 @@ import Testing
     model.workbench.close(.optimize)
     #expect(model.optimizer == nil)
 }
+
+@MainActor @Test func dragResultKeepsItsBytesAfterTheReviewCloses() async throws {
+    let fixture = try QRCodeCreation.prepare("Drag fixture")
+    var options = OptimizationOptions()
+    options.imageFormat = .webp
+    var original: OptimizedMedia? = try await MediaOptimization.clipboardImage(fixture.png, options: options)
+    let expected = try Data(contentsOf: #require(original).previewURL)
+    let provider = OptimizationDragHandle.copyProvider(for: try #require(original))
+    original = nil
+    #expect(provider.hasItemConformingToTypeIdentifier("org.webmproject.webp"))
+    #expect(provider.suggestedName?.hasSuffix(".webp") == true)
+    let bytes: Data = try await withCheckedThrowingContinuation { continuation in
+        _ = provider.loadFileRepresentation(forTypeIdentifier: "org.webmproject.webp") { file, error in
+            do {
+                if let error { throw error }
+                guard let file else { throw CocoaError(.fileReadUnknown) }
+                continuation.resume(returning: try Data(contentsOf: file))
+            } catch { continuation.resume(throwing: error) }
+        }
+    }
+    #expect(bytes == expected)
+}

@@ -54,6 +54,7 @@ struct SettingsView: View {
             }
             Section("Menu bar") {
                 Toggle("Show CloakTools in the menu bar", isOn: preference(\.showMenuBarTools))
+                DropZoneShortcutSetting(model: model)
             }
             Section {
                 Toggle("Developer Tools", isOn: preference(\.developerToolsEnabled))

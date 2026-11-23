@@ -20,7 +20,10 @@ final class AppModel {
     private let recipeStore = ExportRecipeStore.standard
     var exportRecipes: [ExportRecipe] = []
     var recipeError: String?
+    private(set) var dropZone: OptimizationDropZone?
     let automaticOptimization = AutomaticOptimization()
+    private let dropZoneShortcut = DropZoneShortcut()
+    private(set) var dropZoneShortcutError: String?
     let workbench = WorkbenchNavigation()
     var settingsTab: SettingsCategory = .general
     var persistenceError: String?
@@ -32,6 +35,7 @@ final class AppModel {
     let finderScopes = FinderScopeSettings()
     private(set) var sharingReview: SharingReview?
     private(set) var optimizer: OptimizationReview?
+    private(set) weak var lastOptimizer: OptimizationReview?
     private(set) var finderCollectionActive = false
     private var sharingStatus: SharingStatus?
     private var operationWindows: [UUID: NSWindowController] = [:]
@@ -234,7 +238,37 @@ final class AppModel {
         }
         catch { persistenceError = "Settings could not be saved: \(error.localizedDescription)" }
     }
+    func restoreOptimizationBackup() {
+        let picker = NSOpenPanel()
+        picker.title = "Choose an original from a CloakTools Backup folder"
+        picker.prompt = "Review Backup"
+        guard picker.runModal() == .OK, let file = picker.url else { return }
+        do {
+            let backup = try OptimizationBackup(backupFile: file)
+            let review = NSAlert()
+            review.messageText = "Restore “\(backup.originalURL.lastPathComponent)”?"
+            review.informativeText = "The original will return to \(backup.originalURL.path). The current optimized version will move into the backup folder."
+            review.addButton(withTitle: "Restore Original")
+            review.addButton(withTitle: "Cancel").keyEquivalent = "\u{1b}"
+            if review.runModal() == .alertFirstButtonReturn {
+                try backup.restore()
+                NSWorkspace.shared.activateFileViewerSelecting([backup.originalURL])
+            }
+        } catch { showError(error) }
+    }
+
+    func showDropZone() {
+        if dropZone == nil {
+            let zone = OptimizationDropZone(model: self)
+            zone.onClose = { [weak self] in self?.dropZone = nil }
+            dropZone = zone
+        }
+        dropZone?.showAtPointer()
+    }
+
     func configureAutomaticOptimization() {
+        let available = dropZoneShortcut.configure(preferences.dropZoneKey) { [weak self] in self?.showDropZone() }
+        dropZoneShortcutError = available ? nil : "This shortcut is unavailable. Record a different combination."
         automaticOptimization.configure(clipboard: preferences.optimizeCopiedImages, folder: preferences.optimizationFolder)
     }
     func chooseOptimizationFolder() {
@@ -557,6 +591,7 @@ extension AppModel {
         if let recipe, case let .optimize(options) = recipe.options, optimizer != nil {
             guard hasRoomForOperation() else { return }
             let independent = OptimizationReview()
+            lastOptimizer = independent
             independent.options = options
             independent.recipe = recipe
             independent.add(files)
@@ -575,6 +610,7 @@ extension AppModel {
             optimizer = OptimizationReview()
         }
         guard let review = optimizer else { return }
+        lastOptimizer = review
         if let recipe, case let .optimize(options) = recipe.options { review.recipe = recipe; review.options = options }
         review.add(files)
         if paste { review.addClipboard() }

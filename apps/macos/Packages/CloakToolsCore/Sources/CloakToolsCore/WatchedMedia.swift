@@ -3,7 +3,7 @@ import Foundation
 /// Only new, regular files directly inside the selected folder qualify. Two matching observations
 /// avoid starting on an ordinary partial download. The caller rechecks again after encoding.
 public struct WatchedMedia: Sendable {
-    public struct Stamp: Equatable, Sendable {
+    public struct Stamp: Codable, Equatable, Sendable {
         let size: Int
         let modified: Date
         let identity: UInt64

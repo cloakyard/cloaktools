@@ -168,7 +168,7 @@ private extension OptimizationOptions {
     let backup = try preview.replaceOriginal()
     #expect(try Data(contentsOf: url) == encoded)
     #expect(try Data(contentsOf: backup.backupURL) == original)
-    try backup.restore()
+    try OptimizationBackup(backupFile: backup.backupURL).restore()
     #expect(try Data(contentsOf: url) == original)
     #expect(try Data(contentsOf: backup.backupURL) == encoded)
     #expect(throws: OriginalFileError.changed) { try backup.restore() }

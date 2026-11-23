@@ -17,7 +17,7 @@ struct OptimizationView: View {
         VStack(alignment: .leading, spacing: 12) {
             DialogHeading(title: "Optimize Media", subtitle: "Review the size of each copy before saving.", symbol: "arrow.down.right.and.arrow.up.left")
             HStack {
-                Button("Add Files…", systemImage: "plus", action: review.chooseFiles)
+                if !review.rows.isEmpty { Button("Add Files…", systemImage: "plus", action: review.chooseFiles) }
                 Button("Paste", systemImage: "document.on.clipboard", action: review.addClipboard)
                 Spacer()
                 if !review.rows.isEmpty { Text("\(review.rows.count) \(review.rows.count == 1 ? "item" : "items")").foregroundStyle(.secondary) }
@@ -132,7 +132,10 @@ struct OptimizationView: View {
                 }
             } actions: {
                 if !review.task.busy {
-                    if allSaved {
+                    if review.rows.isEmpty {
+                        Button("Choose Files…", action: review.chooseFiles)
+                            .keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
+                    } else if allSaved {
                         DialogDoneButton(action: close)
                     } else {
                         if review.readyCount > 0 {
@@ -143,7 +146,7 @@ struct OptimizationView: View {
                         }
                         if review.pendingCount > 0 || review.readyCount == 0 {
                             Button(review.pendingCount == 0 && !review.rows.isEmpty ? "Preview Again" : "Preview", action: review.preview)
-                                .keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true)).disabled(review.rows.isEmpty)
+                                .keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
                         }
                     }
                 }
@@ -176,6 +179,7 @@ struct OptimizationView: View {
                 if let reason = row.message { Text(reason).font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true) }
             }
             Spacer()
+            if let result = row.result { OptimizationDragHandle(result: result) }
             if let output = row.output {
                 Button("Reveal") { NSWorkspace.shared.activateFileViewerSelecting([output]) }
             } else if let result = row.result {

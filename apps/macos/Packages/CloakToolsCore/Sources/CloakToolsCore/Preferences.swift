@@ -17,6 +17,17 @@ public enum SettingsCategory: String, CaseIterable, Codable, Sendable, Identifia
     }
 }
 
+public struct DropZoneKey: Codable, Equatable, Sendable {
+    public let code: UInt16
+    public let modifiers: UInt32
+    public let label: String
+    public init(code: UInt16, modifiers: UInt32, label: String) {
+        self.code = code
+        self.modifiers = modifiers
+        self.label = label
+    }
+}
+
 public struct Preferences: Codable, Equatable, Sendable {
     public var developerToolsEnabled = false
     public var hasChosenTools = false
@@ -26,6 +37,7 @@ public struct Preferences: Codable, Equatable, Sendable {
     public var optimizeCopiedImages = false
     public var optimizationFolder: URL?
     public var showMenuBarTools = true
+    public var dropZoneKey: DropZoneKey?
     public var revealCreatedFile = true
     public var revealConvertedFile = true
     public var openAfterCreation = false
@@ -33,13 +45,14 @@ public struct Preferences: Codable, Equatable, Sendable {
     public var favoriteTemplateIDs: Set<String> = []
     public init() {}
     private enum CodingKeys: String, CodingKey {
-        case optimizeCopiedImages, optimizationFolder, showMenuBarTools, developerToolsEnabled, hasChosenTools, includeHelloWorld, languageChoices, lastCategory, revealCreatedFile, revealConvertedFile, openAfterCreation, favoriteTemplateIDs, imageConversion
+        case optimizeCopiedImages, optimizationFolder, showMenuBarTools, dropZoneKey, developerToolsEnabled, hasChosenTools, includeHelloWorld, languageChoices, lastCategory, revealCreatedFile, revealConvertedFile, openAfterCreation, favoriteTemplateIDs, imageConversion
     }
     public init(from decoder: any Decoder) throws {
         self.init()
         let values = try decoder.container(keyedBy: CodingKeys.self)
         optimizeCopiedImages = try values.decodeIfPresent(Bool.self, forKey: .optimizeCopiedImages) ?? false
         optimizationFolder = try values.decodeIfPresent(URL.self, forKey: .optimizationFolder)
+        dropZoneKey = try values.decodeIfPresent(DropZoneKey.self, forKey: .dropZoneKey)
         showMenuBarTools = try values.decodeIfPresent(Bool.self, forKey: .showMenuBarTools) ?? true
         // Existing installations keep the catalog they already had; only fresh installs opt in.
         developerToolsEnabled = try values.decodeIfPresent(Bool.self, forKey: .developerToolsEnabled) ?? true

@@ -54,7 +54,7 @@ Apple silicon, macOS **27.0 or later**. Built and exercised on macOS 27.2.1 (26B
 
 ## Build, install, and first run
 
-Install Xcode 27 and XcodeGen (`brew install xcodegen`), then from this repository:
+Install Xcode 27, CMake and XcodeGen (`brew install xcodegen cmake`), then from this repository:
 
 ```sh
 ./scripts/build-native.sh
@@ -403,3 +403,8 @@ In **Settings → General**, **Optimize new clipboard images** replaces a newly 
 The bundled command-line tool lives at `CloakTools.app/Contents/MacOS/cloakopt`. Run it with `--help`. Supplying local files prints measured results as JSON lines. Add `--output <folder>` to publish the copies, or use `--recipe <name>` to apply a saved optimization recipe.
 
 For a same-format preview, the row’s actions menu also offers **Replace Original…**. Confirmation exchanges the two files and keeps the original in a visible backup folder beside the source. Use **Restore Original** during the review or **Reveal Backup** to locate it. After using **Save Copies…**, the actions menu can move the original to Trash. The app checks the reviewed file before replacing or trashing it.
+
+
+**Show Drop Zone** opens a floating target near the pointer. Drop local files or choose a saved optimization recipe there. A prepared item has a drag handle in its review and the latest result appears in the drop zone. Record a system-wide **Show Drop Zone shortcut** in General to call it from another app. After closing a review or relaunching, **File → Restore an Original…** accepts the original inside a CloakTools Backup folder and reviews its destination.
+
+The development build also encodes animated WebP, JPEG XL, HEVC (hardware or x265), VP9 WebM, AV1 MKV, MP3 and Ogg Opus locally. For JPEG XL, a JPEG with original geometry keeps a recoverable copy of its exact JPEG bytes. Choose **Reconstruct original JPEG** to recover them. Audio loudness targets use LUFS. Run the bundled `cloakopt --help` for command-line format, crop, scale, speed, bitrate and loudness options.

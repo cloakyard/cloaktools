@@ -10,6 +10,8 @@ struct QuickToolsMenu: View {
         Button("Open Workbench") { openWindow(id: "workbench"); NSApp.activate() }
         Divider()
         Button(model.optimizer?.task.busy == true ? "Show Optimization Progress…" : "Optimize Media…") { model.presentOptimizer() }
+        Button("Show Drop Zone", action: model.showDropZone)
+        Button("Restore an Original…", action: model.restoreOptimizationBackup)
         Button("Optimize from Clipboard…") { model.presentOptimizer(paste: true) }
             .disabled(model.optimizer?.task.busy == true)
         Toggle("Optimize Copied Images", isOn: Binding(get: { model.preferences.optimizeCopiedImages },
