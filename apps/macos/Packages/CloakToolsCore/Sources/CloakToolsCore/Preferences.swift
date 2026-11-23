@@ -23,6 +23,9 @@ public struct Preferences: Codable, Equatable, Sendable {
     public var includeHelloWorld = false
     public var languageChoices: [String: Bool] = Dictionary(uniqueKeysWithValues: FileTemplate.allCases.filter(\.isProgramming).map { ($0.rawValue, true) })
     public var lastCategory: SettingsCategory = .general
+    public var optimizeCopiedImages = false
+    public var optimizationFolder: URL?
+    public var showMenuBarTools = true
     public var revealCreatedFile = true
     public var revealConvertedFile = true
     public var openAfterCreation = false
@@ -30,11 +33,14 @@ public struct Preferences: Codable, Equatable, Sendable {
     public var favoriteTemplateIDs: Set<String> = []
     public init() {}
     private enum CodingKeys: String, CodingKey {
-        case developerToolsEnabled, hasChosenTools, includeHelloWorld, languageChoices, lastCategory, revealCreatedFile, revealConvertedFile, openAfterCreation, favoriteTemplateIDs, imageConversion
+        case optimizeCopiedImages, optimizationFolder, showMenuBarTools, developerToolsEnabled, hasChosenTools, includeHelloWorld, languageChoices, lastCategory, revealCreatedFile, revealConvertedFile, openAfterCreation, favoriteTemplateIDs, imageConversion
     }
     public init(from decoder: any Decoder) throws {
         self.init()
         let values = try decoder.container(keyedBy: CodingKeys.self)
+        optimizeCopiedImages = try values.decodeIfPresent(Bool.self, forKey: .optimizeCopiedImages) ?? false
+        optimizationFolder = try values.decodeIfPresent(URL.self, forKey: .optimizationFolder)
+        showMenuBarTools = try values.decodeIfPresent(Bool.self, forKey: .showMenuBarTools) ?? true
         // Existing installations keep the catalog they already had; only fresh installs opt in.
         developerToolsEnabled = try values.decodeIfPresent(Bool.self, forKey: .developerToolsEnabled) ?? true
         hasChosenTools = try values.decodeIfPresent(Bool.self, forKey: .hasChosenTools) ?? true

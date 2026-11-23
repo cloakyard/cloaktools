@@ -20,6 +20,7 @@ final class AppModel {
     private let recipeStore = ExportRecipeStore.standard
     var exportRecipes: [ExportRecipe] = []
     var recipeError: String?
+    let automaticOptimization = AutomaticOptimization()
     let workbench = WorkbenchNavigation()
     var settingsTab: SettingsCategory = .general
     var persistenceError: String?
@@ -30,6 +31,8 @@ final class AppModel {
     let defaultHandlers = DefaultHandlerSettings()
     let finderScopes = FinderScopeSettings()
     private(set) var sharingReview: SharingReview?
+    private(set) var optimizer: OptimizationReview?
+    private(set) var finderCollectionActive = false
     private var sharingStatus: SharingStatus?
     private var operationWindows: [UUID: NSWindowController] = [:]
     private func hasRoomForOperation() -> Bool {
@@ -88,6 +91,9 @@ final class AppModel {
             panel.message = "\(recipe.options.summary). Choose a fresh source; nothing exports until you confirm."
             panel.canChooseDirectories = false; panel.allowsMultipleSelection = false
             switch recipe.options {
+            case .optimize:
+                panel.allowsMultipleSelection = true
+                panel.allowedContentTypes = MediaOptimization.extensions.sorted().compactMap { UTType(filenameExtension: $0) }
             case .image, .fit: panel.allowedContentTypes = ImageConversion.inputTypes
             case .media: panel.allowedContentTypes = MediaExport.inputExtensions.sorted().compactMap { UTType(filenameExtension: $0) }
             }
@@ -96,6 +102,8 @@ final class AppModel {
                 // Recheck the limit when an asynchronous picker returns.
                 guard self.hasRoomForOperation() else { return }
                 switch recipe.options {
+                case .optimize:
+                    self.presentOptimizer(files: panel.urls, recipe: recipe)
                 case .image:
                     let operation = FileOperation(intent: .convert(image: source), preferences: snapshot, sources: [], recipe: recipe)
                     self.display(operation)
@@ -216,8 +224,24 @@ final class AppModel {
     }
     func update(_ edit: (inout Preferences) -> Void) {
         var updated = preferences; edit(&updated); updated.normalizeToolSelection()
-        do { try store.save(updated); preferences = updated; persistenceError = nil }
+        do {
+            try store.save(updated)
+            let visibilityChanged = preferences.showMenuBarTools != updated.showMenuBarTools
+            preferences = updated
+            configureAutomaticOptimization()
+            if visibilityChanged { updateSharingStatus() }
+            persistenceError = nil
+        }
         catch { persistenceError = "Settings could not be saved: \(error.localizedDescription)" }
+    }
+    func configureAutomaticOptimization() {
+        automaticOptimization.configure(clipboard: preferences.optimizeCopiedImages, folder: preferences.optimizationFolder)
+    }
+    func chooseOptimizationFolder() {
+        let title = "Watch new media in this folder and save smaller copies in its Optimized Copies subfolder"
+        if let folder = chooseFinderFolder(title, startingAt: preferences.optimizationFolder, prompt: "Watch Folder") {
+            update { $0.optimizationFolder = folder }
+        }
     }
     func completeToolSelection(developerEnabled: Bool) throws {
         var updated = preferences
@@ -519,6 +543,54 @@ extension AppModel {
         if let first = chooseFinderFolder("Choose the first folder to compare") { present(.compare(first: first, second: nil)) }
     }
 
+    private func updateSharingStatus() {
+        guard finderCollectionActive, !preferences.showMenuBarTools, let review = sharingReview else {
+            sharingStatus?.remove()
+            sharingStatus = nil
+            return
+        }
+        if sharingStatus == nil { sharingStatus = SharingStatus { [weak self] in self?.collectForSharing([]) } }
+        sharingStatus?.update(count: review.files.count, error: review.task.error)
+    }
+
+    func presentOptimizer(files: [URL] = [], paste: Bool = false, recipe: ExportRecipe? = nil) {
+        if let recipe, case let .optimize(options) = recipe.options, optimizer != nil {
+            guard hasRoomForOperation() else { return }
+            let independent = OptimizationReview()
+            independent.options = options
+            independent.recipe = recipe
+            independent.add(files)
+            let panel = FinderReviewWindow("Optimize Media", task: independent.task, finish: {}) { close in
+                OptimizationView(review: independent, close: close)
+            }
+            operationWindows[independent.task.id] = panel
+            panel.onClose = { [weak self] in self?.operationWindows[independent.task.id] = nil }
+            panel.showWindow(nil)
+            panel.window?.makeKeyAndOrderFront(nil)
+            NSApp.activate()
+            return
+        }
+        if optimizer == nil {
+            guard hasRoomForOperation() else { return }
+            optimizer = OptimizationReview()
+        }
+        guard let review = optimizer else { return }
+        if let recipe, case let .optimize(options) = recipe.options { review.recipe = recipe; review.options = options }
+        review.add(files)
+        if paste { review.addClipboard() }
+        if let controller = operationWindows[review.task.id] {
+            controller.window?.makeKeyAndOrderFront(nil)
+            NSApp.activate()
+        } else if workbench.drafts[.optimize] != nil {
+            workbench.show(.optimize)
+            workbench.showWindow?()
+        } else {
+            showReview(.optimize, task: review.task, finish: { [weak self] in self?.optimizer = nil }) { close in
+                OptimizationView(review: review, close: close)
+            }
+        }
+    }
+
     func collectForSharing(_ files: [URL]) {
         if sharingReview == nil {
             guard hasRoomForOperation() else { return }
@@ -526,13 +598,10 @@ extension AppModel {
         }
         guard let review = sharingReview else { return }
         if !files.isEmpty {
-            if sharingStatus == nil {
-                sharingStatus = SharingStatus { [weak self] in self?.collectForSharing([]) }
-                review.onChange = { [weak self, weak review] in
-                    guard let review else { return }
-                    self?.sharingStatus?.update(count: review.files.count, error: review.task.error)
-                }
-                review.onChange?()
+            if !finderCollectionActive {
+                finderCollectionActive = true
+                review.onChange = { [weak self] in self?.updateSharingStatus() }
+                updateSharingStatus()
             }
             review.add(files)
             return
@@ -544,6 +613,7 @@ extension AppModel {
             workbench.show(.collect); workbench.showWindow?()
         } else {
             showReview(.collect, task: review.task, finish: { [weak self] in
+                self?.finderCollectionActive = false
                 self?.sharingStatus?.remove()
                 self?.sharingStatus = nil
                 self?.sharingReview = nil

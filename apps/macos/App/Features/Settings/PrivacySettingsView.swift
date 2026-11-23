@@ -10,14 +10,14 @@ struct PrivacySettingsView: View {
                         .symbolRenderingMode(.hierarchical).foregroundStyle(.tint).accessibilityHidden(true)
                     VStack(alignment: .leading, spacing: 2) {
                         Text("Privacy Policy").font(.title2.bold()).accessibilityAddTraits(.isHeader)
-                        Text("Updated 18 November 2026").font(.callout).foregroundStyle(.secondary)
+                        Text("Updated 23 November 2026").font(.callout).foregroundStyle(.secondary)
                     }
                 }
                 VStack(alignment: .leading, spacing: 12) {
                     Text("At a glance").font(.subheadline.weight(.semibold))
                     Label("Files and text are processed on this Mac", systemImage: "internaldrive")
                     Label("No accounts, advertising, analytics or telemetry", systemImage: "lock.shield")
-                    Label("Outputs are saved as new files", systemImage: "doc.on.doc")
+                    Label("Save Copies preserves originals", systemImage: "doc.on.doc")
                 }
                 .padding(18)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -47,9 +47,10 @@ struct PrivacySettingsView: View {
             }
             policySection("Files and Clipboard") {
                 Text("""
-                Tools read the sources you select. Clipboard input is read only when you invoke it; there is no clipboard \
-                monitoring or history. Copy actions replace the clipboard only when requested. Other apps may read it \
-                under macOS controls. Outputs are new files; originals are not overwritten.
+                Clipboard optimization is off by default. Enabling it lets CloakTools check new clipboard images and \
+                replace one when a smaller version is ready. Other apps may read copied data under macOS controls. \
+                You can also choose a folder to watch. Smaller copies go in its Optimized Copies subfolder. Disable \
+                either option in General. Replace Original keeps a backup beside the source.
                 """)
                 Text("""
                 Metadata behavior depends on the tool. Image conversion excludes camera and location metadata; \

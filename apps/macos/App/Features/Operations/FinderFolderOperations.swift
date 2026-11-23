@@ -11,7 +11,7 @@ final class FolderTask {
     private var cancelWorker: (() -> Void)?
     var busy: Bool { activity != nil }
 
-    func run<Value: Sendable>(_ label: String, work: @escaping @Sendable () throws -> Value,
+    func run<Value: Sendable>(_ label: String, work: @escaping @Sendable () async throws -> Value,
                               success: @escaping (Value) -> Void, finished: @escaping () -> Void = {}) {
         guard !busy else { return }
         error = nil

@@ -1,6 +1,6 @@
 # Privacy policy
 
-**CloakTools · Updated 18 November 2026**
+**CloakTools · Updated 23 November 2026**
 
 CloakTools is a local Mac toolkit. It has no accounts, advertising, analytics, telemetry or automatic crash-report uploads. Update checks and downloads are off by default and can be managed in About.
 
@@ -26,7 +26,7 @@ CloakTools is a local Mac toolkit. It has no accounts, advertising, analytics, t
 
 ## Files and settings
 
-File creation and image conversion happen on your Mac using native frameworks. Sources are not uploaded or modified. Preferences and your saved template library live in your user Library. This includes whether you completed the welcome choice and enabled Developer Tools. No occupation or developer identity is inferred. Technical templates are shown or hidden using file-type/extension metadata, without inspecting their contents for classification. Turning the group off keeps saved templates, workflows and language choices; it does not delete files or revoke permissions. Importing a template copies its text into the library; changes to the original do not alter that copy. Removing a saved template does not remove the original or any created files. No source-folder monitoring is retained. Outputs are saved only after you confirm the destination. If a destination is cloud-managed, that provider may synchronize it under its own policy.
+File creation and image conversion happen on your Mac using native frameworks. Manual creation and conversion produce new files. Preferences and your saved template library live in your user Library. This includes whether you completed the welcome choice and enabled Developer Tools. No occupation or developer identity is inferred. Technical templates are shown or hidden using file-type/extension metadata, without inspecting their contents for classification. Turning the group off keeps saved templates, workflows and language choices; it does not delete files or revoke permissions. Importing a template copies its text into the library; changes to the original do not alter that copy. Removing a saved template does not remove the original or any created files. Template imports run once. You confirm the destination for manual exports. If a destination is cloud-managed, that provider may synchronize it under its own policy.
 
 Image conversion keeps the prepared source pixels in memory for its preview and confirmed output. Camera/location metadata is not copied. **Open in Preview** explicitly sends the completed copy to Preview.
 
@@ -40,7 +40,11 @@ Optional Open After Creation passes the saved file to TextEdit (text/source file
 
 **New File from Clipboard** reads one text selection or image only when you invoke that action. CloakTools keeps that copy in memory for the preview and writes it only after you confirm creation. It does not poll, keep a clipboard history, fetch linked resources, or save cancelled clipboard contents. A later copy does not change an already-open preview. macOS clipboard access controls apply.
 
-The development host runs outside App Sandbox; the Finder extension is sandboxed and passes action requests to the host. macOS privacy permissions still apply. The app does not scan your home folder or monitor file contents.
+The development host runs outside App Sandbox; the Finder extension is sandboxed and passes action requests to the host. macOS privacy permissions still apply. Automatic media optimization is limited to a folder you select.
+
+**Optimize Media in development builds** prepares local previews in private temporary directories. Closing the batch releases them. Startup recovery removes recognized abandoned previews. Save Copies publishes the measured bytes in your chosen folder. Replace Original exchanges a same-format result with its source and keeps the original in a visible backup folder beside it. The review can restore that backup. After a separate save, Move Original to Trash moves the reviewed source to the system Trash on request. Export recipes contain settings. The command-line tool prints paths, byte counts and outcomes to its caller.
+
+Two optional automations are off by default. **Optimize new clipboard images** checks the pasteboard while CloakTools is running. It can replace a new image with a smaller encoding. It ignores file references and items marked confidential or transient, and checks that the clipboard still contains the same item before replacing it. **Watch a Folder** stores the selected folder path in preferences and checks new media files directly inside it. Smaller copies are saved in its **Optimized Copies** subfolder. Existing files are skipped at startup. General settings let you stop each automation. Cloud-managed folders may synchronize their contents.
 
 Make It Fit holds captured pixels and candidate output bytes in memory while calculating a fit. Preview does not write temporary image files or upload anything. Save writes only the reviewed encoded copy to the displayed destination. Change can select another folder without regenerating the measured result. Per-operation format, size and quality choices are not retained as a separate history. Original camera/location metadata is excluded, with the same image normalization limits as regular conversion.
 

@@ -18,14 +18,17 @@ public enum ExportRecipeOptions: Codable, Equatable, Sendable {
     case image(ImageConversionOptions)
     case fit(ImageFitOptions)
     case media(MediaExportPreset)
+    case optimize(OptimizationOptions)
     public var toolName: String {
-        switch self { case .image: "Convert Image"; case .fit: "Make It Fit"; case .media: "Export Media" }
+        switch self { case .optimize: "Optimize Media"; case .image: "Convert Image"; case .fit: "Make It Fit"; case .media: "Export Media" }
     }
     public var symbol: String {
-        switch self { case .image: "photo"; case .fit: "arrow.down.right.and.arrow.up.left"; case .media: "play.rectangle" }
+        switch self { case .optimize: "square.and.arrow.down"; case .image: "photo"; case .fit: "arrow.down.right.and.arrow.up.left"; case .media: "play.rectangle" }
     }
     public var summary: String {
         switch self {
+        case let .optimize(options):
+            "\(options.aggressive ? "Stronger" : "Standard") · \(options.imageFormat.title) · \(options.scale.formatted(.percent))"
         case let .image(options):
             options.format.isLossy ? "\(options.format.title) · \(Int((options.quality * 100).rounded()))% · \(options.background.title) background" : "PNG · Original dimensions · Keeps transparency"
         case let .fit(options):
@@ -35,6 +38,8 @@ public enum ExportRecipeOptions: Codable, Equatable, Sendable {
     }
     public var detail: String {
         switch self {
+        case let .optimize(options):
+            "Crop \(options.crop.rawValue) · Video \(options.videoFormat.rawValue) · Audio \(options.audioFormat.rawValue)"
         case .image: "Keeps the original dimensions. A new source and destination are reviewed each time."
         case let .fit(options):
             (options.format.isLossy ? "Quality floor \(Int((options.minimumQuality * 100).rounded()))% · \(options.background.title) background. " : "Keeps transparency. ")
@@ -44,6 +49,7 @@ public enum ExportRecipeOptions: Codable, Equatable, Sendable {
     }
     public func validate() throws {
         switch self {
+        case let .optimize(options): try options.validate()
         case let .image(options): try options.validate()
         case let .fit(options): try options.validate()
         case .media: break

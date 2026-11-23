@@ -145,3 +145,30 @@ struct CloakToolsShortcuts: AppShortcutsProvider {
     }
     static var shortcutTileColor: ShortcutTileColor { .blue }
 }
+
+struct OptimizeMediaIntent: AppIntent {
+    static let title: LocalizedStringResource = "Optimize Media File"
+    static let description = IntentDescription("Return a smaller copy of a local image, PDF, movie or audio file.", categoryName: "Media", resultValueName: "Optimized file")
+    static var supportedModes: IntentModes { .background }
+    @Parameter(title: "File", supportedContentTypes: [.image, .pdf, .movie, .audio], inputConnectionBehavior: .connectToPreviousIntentResult) var file: IntentFile
+    @Parameter(title: "Stronger compression", default: false) var aggressive: Bool
+    static var parameterSummary: some ParameterSummary { Summary("Optimize \(\.$file)") { \.$aggressive } }
+
+    func perform() async throws -> some IntentResult & ReturnsValue<IntentFile> {
+        let url = try await automationURL(file)
+        let scoped = url.startAccessingSecurityScopedResource()
+        defer { if scoped { url.stopAccessingSecurityScopedResource() } }
+        var options = OptimizationOptions()
+        options.aggressive = aggressive
+        let result = try await MediaOptimization.prepare(url, options: options)
+        // IntentFile(data:) owns its bytes after the private workspace is released.
+        guard result.outputBytes <= 100_000_000 else { throw AutomationResultError.tooLarge }
+        return .result(value: IntentFile(data: try Data(contentsOf: result.previewURL), filename: result.filename,
+                                         type: UTType(filenameExtension: result.previewURL.pathExtension)))
+    }
+}
+
+private enum AutomationResultError: LocalizedError {
+    case tooLarge
+    var errorDescription: String? { "Use the Workbench to save outputs larger than 100 MB." }
+}

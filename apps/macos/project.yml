@@ -46,6 +46,11 @@ targets:
     dependencies:
       - package: Sparkle
       - package: CloakToolsCore
+      - target: cloakopt
+        embed: true
+        link: false
+        copy:
+          destination: executables
       - target: CloakToolsFinder
         embed: true
     settings:
@@ -98,6 +103,13 @@ targets:
             NSRequiredContext:
               NSApplicationIdentifier: com.apple.finder
           - NSMenuItem:
+              default: Optimize Media with CloakTools
+            NSMessage: optimizeMedia
+            NSPortName: CloakTools
+            NSSendFileTypes: [public.image, com.adobe.pdf, public.movie, public.audio]
+            NSRequiredContext:
+              NSApplicationIdentifier: com.apple.finder
+          - NSMenuItem:
               default: Make It Fit with CloakTools
             NSMessage: fitImage
             NSPortName: CloakTools
@@ -118,6 +130,16 @@ targets:
             NSSendFileTypes: [public.data]
             NSRequiredContext:
               NSApplicationIdentifier: com.apple.finder
+  cloakopt:
+    type: tool
+    platform: macOS
+    sources: [CLI]
+    dependencies:
+      - package: CloakToolsCore
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.cloakyard.cloaktools.cloakopt
+        SKIP_INSTALL: YES
   CloakToolsFinder:
     type: app-extension
     platform: macOS

@@ -6,6 +6,7 @@ import CloakToolsCore
 struct CloakToolsApp: App {
     @StateObject private var updater = AppUpdater()
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var delegate
+    @State private var model = AppModel.shared
     var body: some Scene {
         Window("CloakTools", id: "workbench") {
             WorkbenchView(model: AppModel.shared, navigation: AppModel.shared.workbench)
@@ -18,6 +19,17 @@ struct CloakToolsApp: App {
             WorkbenchCommands(model: AppModel.shared)
             UpdateCommands(updater: updater)
             SidebarCommands()
+        }
+        MenuBarExtra(isInserted: Binding(get: { model.preferences.showMenuBarTools },
+                                        set: { visible in model.update { $0.showMenuBarTools = visible } })) {
+            QuickToolsMenu(model: model)
+        } label: {
+            if model.finderCollectionActive, let review = model.sharingReview {
+                Label("\(review.files.count)", systemImage: review.task.error == nil ? "tray.full" : "exclamationmark.triangle")
+                    .accessibilityLabel("CloakTools, \(review.files.count) files collected")
+            } else {
+                Label("CloakTools", systemImage: "wrench.and.screwdriver")
+            }
         }
         Settings {
             SettingsView(model: AppModel.shared).environmentObject(updater)
@@ -53,6 +65,7 @@ private struct WorkbenchCommands: Commands {
                 }
             }
             Divider()
+            Button("Optimize Media…") { model.presentOptimizer() }
             Button("Make It Fit…") { model.chooseImageToFit() }.keyboardShortcut("k", modifiers: [.command, .option])
             Button("Export Media…") { model.chooseMediaToExport() }.keyboardShortcut("e", modifiers: [.command, .option])
             Menu("Recreate Export") {
@@ -124,6 +137,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if ProcessInfo.processInfo.arguments.contains("--appearance=dark") { NSApp.appearance = NSAppearance(named: .darkAqua) }
         if ProcessInfo.processInfo.arguments.contains("--appearance=light") { NSApp.appearance = NSAppearance(named: .aqua) }
         #endif
+        AppModel.shared.configureAutomaticOptimization()
         NSApp.servicesProvider = self
         NSUpdateDynamicServices()
     }
@@ -156,6 +170,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
     private func selectedURLs(_ board: NSPasteboard) -> [URL] {
         (board.readObjects(forClasses: [NSURL.self], options: [.urlReadingFileURLsOnly: true]) as? [URL]) ?? []
+    }
+    @objc func optimizeMedia(_ board: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString>) {
+        let files = selectedURLs(board)
+        guard (1...MediaOptimization.maximumItems).contains(files.count) else { error.pointee = "Select 1–100 media files."; return }
+        AppModel.shared.presentOptimizer(files: files)
     }
     @objc func fitImage(_ board: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString>) {
         let urls = selectedURLs(board)

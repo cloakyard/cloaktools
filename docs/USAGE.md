@@ -389,3 +389,17 @@ The [complete roadmap](ROADMAP.md) retains all six subsequent milestones. Milest
 Three App Intents are implemented: **Make Image Fit**, **Make Markdown Digest**, and **Review Saved File Set**. Image and digest actions return files to the next Shortcuts action; they do not save beside sources. File-set automation opens the existing destination/review flow and never creates silently. Developer Tools filtering still applies to saved sets.
 
 On this Mac, the Shortcuts library discovers the actions, but macOS rejects live execution without a team signing identity. General explains this limitation instead of offering a failing launch path. Use the equivalent tools directly in the local preview. Additional Finder folders likewise require matching app-group signing; Add/Renew/Remove and bounded bookmark storage are implemented behind that gate. Both features require signed runtime verification before release.
+
+## Optimize Media in the development build
+
+Open **Images, PDFs & Media → Optimize media files**, **File → Optimize Media…** or the wrench-and-screwdriver menu bar item. In Finder, select media and choose **Services → Optimize Media with CloakTools**. Add files, drop them onto the review, or paste copied files or an image. A batch accepts up to 100 items.
+
+Choose **Preview** to measure the output. Each row shows the input and output size or the reason the file was skipped. Quick Look opens the prepared result. Copy places an encoded image on the clipboard. **Save Copies…** asks for a destination and assigns numbered names when needed. You can cancel a batch, keep completed results and retry remaining items. Closing the review releases its previews.
+
+**Export options** shows controls relevant to the selected files. Choose a still-image format, crop, scale, byte limit, video speed, mute, animated GIF output, audio format or AAC bitrate. Use **Save Recipe…** to reuse a combination from the menu bar. A PDF crop changes the visible page box. Restore PDF media box reveals the full original page area in a new copy. Cropping a PDF does not redact its hidden contents.
+
+In **Settings → General**, **Optimize new clipboard images** replaces a newly copied image when its encoding saves space. **Watch a Folder…** processes new media directly inside a selected folder and writes smaller copies to **Optimized Copies** inside it. Both settings start off. The Workbench and Finder Service also work when the menu bar icon is hidden.
+
+The bundled command-line tool lives at `CloakTools.app/Contents/MacOS/cloakopt`. Run it with `--help`. Supplying local files prints measured results as JSON lines. Add `--output <folder>` to publish the copies, or use `--recipe <name>` to apply a saved optimization recipe.
+
+For a same-format preview, the row’s actions menu also offers **Replace Original…**. Confirmation exchanges the two files and keeps the original in a visible backup folder beside the source. Use **Restore Original** during the review or **Reveal Backup** to locate it. After using **Save Copies…**, the actions menu can move the original to Trash. The app checks the reviewed file before replacing or trashing it.

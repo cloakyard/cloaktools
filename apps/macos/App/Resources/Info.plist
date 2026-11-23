@@ -101,6 +101,29 @@
 			<key>NSMenuItem</key>
 			<dict>
 				<key>default</key>
+				<string>Optimize Media with CloakTools</string>
+			</dict>
+			<key>NSMessage</key>
+			<string>optimizeMedia</string>
+			<key>NSPortName</key>
+			<string>CloakTools</string>
+			<key>NSRequiredContext</key>
+			<dict>
+				<key>NSApplicationIdentifier</key>
+				<string>com.apple.finder</string>
+			</dict>
+			<key>NSSendFileTypes</key>
+			<array>
+				<string>public.image</string>
+				<string>com.adobe.pdf</string>
+				<string>public.movie</string>
+				<string>public.audio</string>
+			</array>
+		</dict>
+		<dict>
+			<key>NSMenuItem</key>
+			<dict>
+				<key>default</key>
 				<string>Make It Fit with CloakTools</string>
 			</dict>
 			<key>NSMessage</key>

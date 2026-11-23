@@ -239,6 +239,7 @@ struct WorkbenchView: View {
         case .pdf: model.beginPDFReview()
         case .fileList: model.presentFileList()
         case .fileSet: model.chooseFileSetFolder()
+        case .optimize: model.presentOptimizer()
         case .fit: model.chooseImageToFit()
         case .pages: model.choosePDFToOrganize()
         case .exportMedia: model.chooseMediaToExport()

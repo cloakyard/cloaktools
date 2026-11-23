@@ -39,6 +39,7 @@ enum WorkbenchCategory: String, CaseIterable, Identifiable {
             .init(title: "Use again", tools: [.templates, .savedSets, .presets])
         ]
         case .media: [
+            .init(title: "Optimize", tools: [.optimize]),
             .init(title: "Images", tools: [.fit, .convert]),
             .init(title: "PDFs", tools: [.pdf, .pages]),
             .init(title: "Media and saved exports", tools: [.exportMedia, .recipes])
@@ -80,6 +81,7 @@ enum WorkbenchTool: String, CaseIterable, Identifiable {
     case presets = "Folder presets"
     case fit = "Make an image fit a size limit"
     case pages = "Organize PDF pages"
+    case optimize = "Optimize media files"
     case exportMedia = "Export video or audio"
     case recipes = "Saved export recipes"
     case cleanup = "Clean up text"
@@ -113,6 +115,7 @@ enum WorkbenchTool: String, CaseIterable, Identifiable {
         case .presets: "Reuse a destination, file type and filename."
         case .fit: "Preview the file size and dimensions before saving a copy."
         case .pages: "Select, reorder or rotate pages from one PDF."
+        case .optimize: "Compress images, PDFs, video and audio together and compare copy sizes."
         case .exportMedia: "Save an MP4 video or extract audio as M4A."
         case .recipes: "Apply saved export settings to another image or media file."
         case .cleanup: "Trim spaces, tidy blank lines and preview the result."
@@ -145,6 +148,7 @@ enum WorkbenchTool: String, CaseIterable, Identifiable {
         case .presets: "folder.badge.gearshape"
         case .fit: "arrow.down.right.and.arrow.up.left"
         case .pages: "square.grid.2x2"
+        case .optimize: "arrow.down.right.and.arrow.up.left"
         case .exportMedia: "play.rectangle"
         case .recipes: "slider.horizontal.3"
         case .cleanup: "text.alignleft"
@@ -174,6 +178,7 @@ enum WorkbenchTool: String, CaseIterable, Identifiable {
         case .digest: "markdown digest"
         case .createQR: "vcard wifi wi-fi contact business card network password email phone SMS calendar event location map text"
         case .cleanup: "trim spaces whitespace blank lines"
+        case .optimize: "optimize optimise batch downscale crop clipboard compression Clop"
         case .exportMedia: "extract audio mp4 m4a movie"
         case .example: "env JSON placeholder example copy"
         case .json: "validate minify pretty print"

@@ -164,3 +164,7 @@ local storage, files/clipboard, links/permissions, updates, diagnostics/removal 
 link. The main host’s unsandboxed status is explicit. About places the update controls after
 app/version information and before support links. Shared update wording matches CloakDrop and
 CloakRoll, with automatic checks/downloads off by default and ordinary server request data disclosed.
+
+## Media optimization
+
+A single batch review serves the Workbench, File menu, menu bar and Finder Service. The empty drop target gives way to file rows with measured sizes, Quick Look and individual errors. Export options start collapsed and follow the input types. A saved recipe uses the existing recipe editor. General settings control menu bar visibility, clipboard optimization and the watched folder independently. When the persistent icon is hidden, collecting from Finder still creates the temporary collection control.

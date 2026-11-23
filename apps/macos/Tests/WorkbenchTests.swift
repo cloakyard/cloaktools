@@ -14,7 +14,7 @@ import CloakToolsCore
 }
 
 @Test func workbenchSearchPrioritizesDirectMatchesAndFallsBackToCategories() {
-    #expect(WorkbenchTool.matching("PDF", developerEnabled: false) == [.pdf, .pages, .newFile])
+    #expect(WorkbenchTool.matching("PDF", developerEnabled: false) == [.pdf, .pages, .newFile, .optimize])
     #expect(WorkbenchTool.matching("Swift", developerEnabled: true) == [.newFile])
     #expect(WorkbenchTool.matching("Swift", developerEnabled: false).isEmpty)
     #expect(WorkbenchTool.matching("JSON", developerEnabled: true).first == .json)

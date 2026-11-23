@@ -12,7 +12,7 @@ struct ExportRecipeSection: View {
                 Button("Reload Recipes", action: model.reloadRecipes)
             }
             if model.exportRecipes.isEmpty {
-                Text("Save your usual settings from Make It Fit, Export Media or Convert Image.").foregroundStyle(.secondary)
+                Text("Save your usual settings from Optimize Media, Make It Fit, Export Media or Convert Image.").foregroundStyle(.secondary)
             }
             ForEach(model.exportRecipes) { recipe in
                 HStack(spacing: 10) {
