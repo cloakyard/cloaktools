@@ -40,6 +40,21 @@ targets:
       - path: ../../LICENSE
         buildPhase: resources
     postBuildScripts:
+      - name: Embed local media codecs and corresponding source
+        inputFiles:
+          - $(SRCROOT)/scripts/codecs/build.py
+          - $(SRCROOT)/scripts/codecs/sources.json
+          - $(SRCROOT)/scripts/codecs/embed.sh
+          - $(SRCROOT)/scripts/codecs/build_jxl.py
+          - $(SRCROOT)/scripts/codecs/jxl-sources.json
+        outputFiles:
+          - $(TARGET_BUILD_DIR)/$(CONTENTS_FOLDER_PATH)/Helpers/Media/ffmpeg
+          - $(TARGET_BUILD_DIR)/$(CONTENTS_FOLDER_PATH)/Helpers/Media/ffprobe
+          - $(TARGET_BUILD_DIR)/$(CONTENTS_FOLDER_PATH)/Helpers/Media/cjxl
+          - $(TARGET_BUILD_DIR)/$(CONTENTS_FOLDER_PATH)/Helpers/Media/djxl
+          - $(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Codec Sources.zip
+          - $(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/JPEG XL Sources.zip
+        script: /bin/bash "${SRCROOT}/scripts/codecs/embed.sh"
       - name: Sign Sparkle helpers for an explicit signing identity
         basedOnDependencyAnalysis: false
         script: /bin/bash "${SRCROOT}/../../scripts/sign-sparkle.sh"
@@ -169,7 +184,9 @@ targets:
   CloakToolsTests:
     type: bundle.unit-test
     platform: macOS
-    sources: [Tests]
+    sources:
+      - Tests
+      - Packages/CloakToolsCore/Tests/CloakToolsCoreTests/Support/MediaFixtures.swift
     dependencies:
       - target: CloakTools
       - package: CloakToolsCore

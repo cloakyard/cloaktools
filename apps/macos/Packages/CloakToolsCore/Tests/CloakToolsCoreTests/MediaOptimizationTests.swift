@@ -18,7 +18,7 @@ private func temporaryFolder() throws -> URL {
     let image = try QRCodeCreation.prepare("CloakTools optimization fixture")
     let url = try QRCodeCreation.save(image, in: folder, stem: "Source")
     let original = try Data(contentsOf: url)
-    for format in OptimizedImageFormat.allCases where format != .automatic {
+    for format in OptimizedImageFormat.allCases where format != .automatic && format != .originalJPEG && (format != .jxl || format.available) {
         var options = OptimizationOptions()
         options.imageFormat = format
         options.crop = .landscape
@@ -50,7 +50,7 @@ private func temporaryFolder() throws -> URL {
     defer { try? FileManager.default.removeItem(at: folder) }
     let url = folder.appendingPathComponent("Recording.caf")
     try MediaFixtures.audio(url)
-    for format in OptimizedAudioFormat.allCases {
+    for format in [OptimizedAudioFormat.automatic, .aac, .flac, .wav, .aiff] {
         var options = OptimizationOptions()
         options.audioFormat = format
         options.normalizeAudio = true
@@ -114,6 +114,15 @@ private func temporaryFolder() throws -> URL {
     #expect(CGImageSourceGetCount(reencoded) == 12)
     let first = try #require(CGImageSourceCreateImageAtIndex(reencoded, 0, nil))
     #expect(first.width == 45 && first.height == 45)
+    var animation = OptimizationOptions()
+    animation.imageFormat = .webp
+    let webp = try await MediaOptimization.prepare(gif.previewURL, options: animation)
+    let webpFrames = try #require(CGImageSourceCreateWithURL(webp.previewURL as CFURL, nil))
+    #expect(CGImageSourceGetCount(webpFrames) == 12)
+    #expect(CGImageSourceGetType(webpFrames) as String? == UTType.webP.identifier)
+    let timing = try #require(CGImageSourceCopyPropertiesAtIndex(webpFrames, 1, nil) as? [CFString: Any])
+    let info = try #require(timing[kCGImagePropertyWebPDictionary] as? [CFString: Any])
+    #expect(abs((info[kCGImagePropertyWebPUnclampedDelayTime] as? Double ?? 0) - 1.0 / 12) < 0.015)
 }
 
 private extension OptimizationOptions {

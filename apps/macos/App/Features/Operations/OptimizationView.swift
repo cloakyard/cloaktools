@@ -50,7 +50,7 @@ struct OptimizationView: View {
                         if review.includes(.image) {
                             field("Still image format") {
                                 Picker("Still image format", selection: $review.options.imageFormat) {
-                                    ForEach(OptimizedImageFormat.allCases.filter(\.available), id: \.self) { Text($0.title).tag($0) }
+                                    ForEach(OptimizedImageFormat.allCases.filter { $0.available && ($0 != .originalJPEG || review.hasJPEGXL || review.options.imageFormat == .originalJPEG) }, id: \.self) { Text($0.title).tag($0) }
                                 }
                             }
                             if review.options.imageFormat == .webp {
@@ -100,14 +100,22 @@ struct OptimizationView: View {
                                     ForEach(OptimizedAudioFormat.allCases, id: \.self) { Text($0.rawValue).tag($0) }
                                 }
                             }
-                            if [.automatic, .aac].contains(review.options.audioFormat) {
-                                field("AAC bitrate") {
-                                    Picker("AAC bitrate", selection: $review.options.audioBitrate) {
+                            if [.automatic, .aac, .mp3, .ogg].contains(review.options.audioFormat) {
+                                field("Audio bitrate") {
+                                    Picker("Audio bitrate", selection: $review.options.audioBitrate) {
                                         ForEach([48, 64, 96, 128, 160, 192, 256, 320], id: \.self) { Text("\($0) kbps").tag($0) }
                                     }
                                 }
                             }
-                            GridRow { Text("Volume"); Toggle("Normalize peaks to −1 dB", isOn: $review.options.normalizeAudio) }
+                            field("Loudness") {
+                                Picker("Loudness", selection: $review.options.loudnessTarget) {
+                                    Text("Original").tag(nil as Int?)
+                                    ForEach([-14, -16, -23], id: \.self) { Text("\($0) LUFS").tag(Optional($0)) }
+                                }
+                            }
+                            if review.options.loudnessTarget == nil {
+                                GridRow { Text("Peaks"); Toggle("Normalize to −1 dB", isOn: $review.options.normalizeAudio) }
+                            }
                         }
                     }.frame(maxWidth: .infinity, alignment: .leading).padding(.vertical, 6)
                     SaveExportRecipeButton(recipe: $review.recipe) { .optimize(review.options) }

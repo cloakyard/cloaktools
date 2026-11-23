@@ -59,10 +59,10 @@ No accounts, analytics, cloud processing, link prefetch or browsing-history pers
 
 ## Getting started
 
-Download the [beta DMG](https://github.com/cloakyard/cloaktools/releases/download/v0.6.0-beta.20261118.6/CloakTools-v0.6.0-beta.20261118.6.dmg) for **macOS 27 or later on Apple silicon**. Drag CloakTools to Applications. To build from source, install Xcode 27 and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
+Download the [beta DMG](https://github.com/cloakyard/cloaktools/releases/download/v0.6.0-beta.20261118.6/CloakTools-v0.6.0-beta.20261118.6.dmg) for **macOS 27 or later on Apple silicon**. Drag CloakTools to Applications. To build from source, install Xcode 27, CMake and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
 
 ```sh
-brew install xcodegen
+brew install xcodegen cmake
 git clone https://github.com/cloakyard/cloaktools.git
 cd cloaktools
 ./scripts/build-native.sh
@@ -77,7 +77,7 @@ Builds are locally ad-hoc signed and not notarized. Current recorded runtime che
 
 ### Native app
 
-`apps/macos/project.yml` is authoritative; XcodeGen creates the ignored Xcode project. The build is arm64-only, has no hardcoded Team ID and uses local ad-hoc signing. Development uses Xcode 27, Swift 6 and macOS system frameworks, with Sparkle 2 as an app-only dependency; the core uses a pinned libwebp build for WebP encoding.
+`apps/macos/project.yml` is authoritative; XcodeGen creates the ignored Xcode project. The build is arm64-only, has no hardcoded Team ID and uses local ad-hoc signing. Development uses Xcode 27, Swift 6 and macOS system frameworks, with Sparkle 2 as an app-only dependency; the core uses pinned libwebp for WebP encoding. The first native build downloads and verifies the codec sources. It builds standalone FFmpeg helpers and embeds their corresponding source archive. Installed copies process media offline.
 
 | Layer | Choice |
 |---|---|

@@ -2,10 +2,11 @@ import AVFoundation
 import Foundation
 
 public enum OptimizedAudioFormat: String, CaseIterable, Codable, Sendable {
-    case automatic = "Automatic", aac = "AAC", flac = "FLAC", wav = "WAV", aiff = "AIFF"
+    case automatic = "Automatic", aac = "AAC", mp3 = "MP3", ogg = "Ogg Opus", flac = "FLAC", wav = "WAV", aiff = "AIFF"
     var ext: String {
         switch self {
         case .automatic, .aac: "m4a"
+        case .ogg: "ogg"
         default: rawValue.lowercased()
         }
     }
@@ -45,6 +46,7 @@ enum AudioOptimization {
             if let limit = options.maximumBytes { bitrate = min(bitrate, Double(max(0, limit - 4096)) * 7.6 / seconds) }
             guard bitrate >= 16_000 || options.maximumBytes == nil else { throw OptimizationError.overBudget }
             settings[AVEncoderBitRateKey] = max(16_000, Int(bitrate))
+        case .mp3, .ogg: throw MediaExportError.unavailable
         case .flac:
             settings[AVFormatIDKey] = kAudioFormatFLAC
             settings[AVEncoderBitDepthHintKey] = 24

@@ -1,0 +1,5 @@
+The CloakTools app includes separately built command-line executables for local media conversion in Contents/Helpers/Media. FFmpeg and FFprobe are GPL-licensed builds with x265, SVT-AV1, libvpx, LAME and Opus. cjxl and djxl come from the JPEG XL project, with Highway, Brotli, skcms, libpng and libjpeg-turbo. The macOS SDK supplies the system libraries.
+
+The complete corresponding upstream sources, original copyright and license notices, version manifests and build scripts are in “Codec Sources.zip” and “JPEG XL Sources.zip” in Contents/Resources. Each source archive preserves its upstream license files. The CloakTools repository's MIT license applies to CloakTools' own code. These independent programs retain their upstream licenses.
+
+To rebuild on Apple silicon, use Xcode 27 command-line tools and CMake. Extract each ZIP in a writable folder with two writable parent directories, then run python3 build.py for FFmpeg or python3 build_jxl.py for JPEG XL. The scripts use the included archives, verify their SHA-256 digests, build static codec dependencies and check linked runtime libraries. The app invokes the executables directly.

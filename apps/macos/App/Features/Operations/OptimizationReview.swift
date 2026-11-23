@@ -26,7 +26,7 @@ enum OptimizationInput: Sendable {
     func prepare(_ options: OptimizationOptions) async throws -> OptimizedMedia {
         switch self {
         case let .file(url): try await MediaOptimization.prepare(url, options: options)
-        case let .clipboard(bytes): try MediaOptimization.clipboardImage(bytes, options: options)
+        case let .clipboard(bytes): try await MediaOptimization.clipboardImage(bytes, options: options)
         }
     }
 }
@@ -60,6 +60,9 @@ final class OptimizationReview {
                 task.error = nil
             }
         }
+    }
+    var hasJPEGXL: Bool {
+        rows.contains { if case let .file(url) = $0.input { url.pathExtension.lowercased() == "jxl" } else { false } }
     }
     var readyCount: Int { rows.filter { $0.result != nil && $0.output == nil }.count }
     var pendingCount: Int { rows.filter { $0.result == nil && $0.message == nil && $0.output == nil }.count }
@@ -109,13 +112,15 @@ final class OptimizationReview {
         } catch { task.error = error.localizedDescription }
     }
 
-    func chooseFiles() {
+    func chooseFiles() { add(Self.pickFiles()) }
+
+    static func pickFiles() -> [URL] {
         let panel = NSOpenPanel()
         panel.title = "Choose media to optimize"
         panel.prompt = "Add Files"
         panel.allowsMultipleSelection = true
         panel.allowedContentTypes = MediaOptimization.extensions.sorted().compactMap { UTType(filenameExtension: $0) }
-        if panel.runModal() == .OK { add(panel.urls) }
+        return panel.runModal() == .OK ? panel.urls : []
     }
 
     func remove(_ id: UUID) {

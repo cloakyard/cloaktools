@@ -1,0 +1,26 @@
+{
+  "jxl": [
+    "https://github.com/libjxl/libjxl/archive/v0.13.0.tar.gz",
+    "24d18c9af2d1f5a17730b3f8d3f70a5c16e5ac303f5d9d5fe9dc00cf7ca82af2"
+  ],
+  "brotli": [
+    "https://github.com/google/brotli/archive/db24a98aed38a16de78cc05ca15cdd8dc2a0d92d.tar.gz",
+    "113b9685dfc14dd2f3360d077283266eec2fbdfb0fe3e5600f11be151da0d68e"
+  ],
+  "highway": [
+    "https://github.com/google/highway/archive/457c891775a7397bdb0376bb1031e6e027af1c48.tar.gz",
+    "5124b0501c98d9930dbb065bfa1a5bbbd59ce0f12facb7e1e33aaef01a5f1f1a"
+  ],
+  "skcms": [
+    "https://github.com/google/skcms/archive/96d9171c94b937a1b5f0293de7309ac16311b722.tar.gz",
+    "9bb4b5bba0b7c04f6c2bce9ff713d61e23c9a20c4945161ae16290498ad74627"
+  ],
+  "libpng": [
+    "https://github.com/pnggroup/libpng/archive/872555f4ba910252783af1507f9e7fe1653be252.tar.gz",
+    "f7ebcdc408a26d45244d9ef3d35d732a5482a77c55d1d40bf1eb748030691097"
+  ],
+  "libjpeg-turbo": [
+    "https://github.com/libjpeg-turbo/libjpeg-turbo/archive/8ecba3647edb6dd940463fedf38ca33a8e2a73d1.tar.gz",
+    "ed729127097af5000bfeddc6b3e679c4363bb1618ebfc07efb6b47f576471b4b"
+  ]
+}

@@ -52,7 +52,7 @@ final class AutomaticOptimization {
         guard let type = [.png, NSPasteboard.PasteboardType(UTType.jpeg.identifier), .tiff].first(where: item.types.contains),
               let bytes = item.data(forType: type), board.changeCount == generation else { return false }
         let task = Task.detached(priority: .utility) {
-            let result = try MediaOptimization.clipboardImage(bytes)
+            let result = try await MediaOptimization.clipboardImage(bytes)
             let data = try Data(contentsOf: result.previewURL)
             return (data, result.previewURL.pathExtension)
         }

@@ -7,6 +7,13 @@ struct OptimizeCLI {
     cloakopt [--recipe NAME] [--stronger] [--limit-kb N] [--output FOLDER] [--] FILE ...
     cloakopt --list-recipes
 
+    --image-format automatic|png|jpeg|heic|avif|webp|jxl|original-jpeg
+    --video-format mp4|hevc|x265|webm|av1|gif
+    --audio-format automatic|aac|flac|wav|aiff|mp3|ogg
+    --scale PERCENT    --speed MULTIPLIER    --mute
+    --normalize-peak    --lufs N    --audio-kbps N
+    --crop original|square|landscape|portrait|paper|full-page
+
     Measures each local file. Supply an output folder to save new copies.
     Reports one JSON record per file. A failed input sets a nonzero exit status.
     """
@@ -36,6 +43,34 @@ struct OptimizeCLI {
                 switch arg {
                 case "--": flags = false
                 case "--stronger": options.aggressive = true
+                case "--image-format":
+                    guard let raw = iterator.next(), let format = OptimizedImageFormat(rawValue: raw.lowercased()) else { throw Usage("Choose an image format from --help.") }
+                    options.imageFormat = format
+                case "--video-format":
+                    let formats: [String: OptimizedVideoFormat] = ["mp4": .mp4, "hevc": .hevc, "x265": .x265, "webm": .webm, "av1": .av1, "gif": .gif]
+                    guard let raw = iterator.next(), let format = formats[raw.lowercased()] else { throw Usage("Choose a video format from --help.") }
+                    options.videoFormat = format
+                case "--audio-format":
+                    guard let raw = iterator.next(), let format = OptimizedAudioFormat.allCases.first(where: { $0 == .ogg ? raw.lowercased() == "ogg" : $0.rawValue.lowercased() == raw.lowercased() }) else { throw Usage("Choose an audio format from --help.") }
+                    options.audioFormat = format
+                case "--crop":
+                    let crops: [String: OptimizationCrop] = ["original": .original, "square": .square, "landscape": .landscape, "portrait": .portrait, "paper": .paper, "full-page": .fullPage]
+                    guard let raw = iterator.next(), let crop = crops[raw] else { throw Usage("Choose a crop from --help.") }
+                    options.crop = crop
+                case "--scale":
+                    guard let raw = iterator.next(), let value = Double(raw), (10...100).contains(value) else { throw Usage("Choose a scale of 10–100 percent.") }
+                    options.scale = value / 100
+                case "--speed":
+                    guard let raw = iterator.next(), let value = Double(raw), (0.25...4).contains(value) else { throw Usage("Choose a playback speed of 0.25–4.") }
+                    options.playbackSpeed = value
+                case "--mute": options.muteVideo = true
+                case "--normalize-peak": options.normalizeAudio = true; options.loudnessTarget = nil
+                case "--lufs":
+                    guard let raw = iterator.next(), let value = Int(raw), (-30 ... -10).contains(value) else { throw Usage("Choose a loudness of −30 to −10 LUFS.") }
+                    options.loudnessTarget = value
+                case "--audio-kbps":
+                    guard let raw = iterator.next(), let value = Int(raw), [48, 64, 96, 128, 160, 192, 256, 320].contains(value) else { throw Usage("Choose 48, 64, 96, 128, 160, 192, 256 or 320 kbps.") }
+                    options.audioBitrate = value
                 case "--output":
                     guard let path = iterator.next() else { throw Usage("--output needs an existing folder.") }
                     destination = URL(fileURLWithPath: path, isDirectory: true)
