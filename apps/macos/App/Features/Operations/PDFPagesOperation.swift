@@ -180,19 +180,19 @@ struct PDFPagesView: View {
             if let activity = operation.activity {
                 HStack(spacing: 8) { ProgressView().controlSize(.small); Text(operation.stopping ? "Stopping…" : activity).font(.callout) }
             }
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    Text(operation.output == nil ? "\(operation.includedCount) of \(operation.pages.count) pages included" : "Original preserved.").font(.caption).foregroundStyle(.secondary)
-                    Spacer(minLength: 0)
-                    if operation.busy {
-                        Button("Cancel", role: .cancel, action: operation.cancel).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.stopping)
-                    } else if operation.output != nil {
-                        Button("Done", action: close).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                    } else {
-                        Button("Cancel", role: .cancel, action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                        Button("Export Copy", action: operation.save).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                            .disabled(operation.source == nil || operation.includedCount == 0 || operation.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                    }
+            Text(operation.output == nil ? "\(operation.includedCount) of \(operation.pages.count) pages included" : "Original preserved.").font(.caption).foregroundStyle(.secondary)
+            DialogFooter {
+                if operation.busy {
+                    Button("Cancel", role: .cancel, action: operation.cancel).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.stopping)
+                } else if operation.output == nil {
+                    Button("Cancel", role: .cancel, action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+                }
+            } actions: {
+                if operation.output != nil && !operation.busy {
+                    DialogDoneButton(action: close)
+                } else if !operation.busy {
+                    Button("Export Copy", action: operation.save).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
+                        .disabled(operation.source == nil || operation.includedCount == 0 || operation.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
             }
         }.padding(20).frame(minWidth: 540, minHeight: 520)

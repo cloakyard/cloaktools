@@ -187,20 +187,20 @@ struct MediaOperationView: View {
                     else { ProgressView().controlSize(.small) }
                 }
             }
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    if !operation.busy && operation.source != nil && operation.compatibilityError == nil {
+            DialogFooter {
+                if operation.busy {
+                    Button("Cancel", role: .cancel, action: operation.cancel).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.stopping)
+                } else if operation.output == nil {
+                    Button("Cancel", role: .cancel, action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+                }
+            } actions: {
+                if operation.output != nil && !operation.busy {
+                    DialogDoneButton(action: close)
+                } else if !operation.busy {
+                    if operation.source != nil && operation.compatibilityError == nil {
                         SaveExportRecipeButton(recipe: $operation.recipe) { .media(operation.preset) }
                     }
-                    Spacer(minLength: 0)
-                    if operation.busy {
-                        Button("Cancel", role: .cancel, action: operation.cancel).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.stopping)
-                    } else if operation.output != nil {
-                        Button("Done", action: close).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                    } else {
-                        Button("Cancel", role: .cancel, action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                        Button("Export Copy", action: operation.export).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true)).disabled(operation.source == nil || operation.compatibilityError != nil || operation.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                    }
+                    Button("Export Copy", action: operation.export).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true)).disabled(operation.source == nil || operation.compatibilityError != nil || operation.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
             }
         }.padding(20).frame(minWidth: 440, minHeight: 440)

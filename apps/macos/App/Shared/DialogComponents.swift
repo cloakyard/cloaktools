@@ -33,6 +33,33 @@ struct DialogCard: ViewModifier {
     }
 }
 
+/// Every custom operation window and editing sheet uses the same logical button order.
+struct DialogFooter<Dismissal: View, Actions: View>: View {
+    @ViewBuilder var dismissal: Dismissal
+    @ViewBuilder var actions: Actions
+
+    var body: some View {
+        GlassEffectContainer(spacing: 8) {
+            HStack(spacing: 8) {
+                dismissal
+                Spacer(minLength: 8)
+                actions
+            }
+        }
+        .frame(maxWidth: .infinity)
+    }
+}
+
+struct DialogDoneButton: View {
+    let action: () -> Void
+    var body: some View {
+        Button("Done", action: action)
+            .keyboardShortcut(.defaultAction)
+            .modifier(DialogActionStyle(prominent: true))
+            .onExitCommand(perform: action)
+    }
+}
+
 struct DialogActionStyle: ViewModifier {
     var prominent = false
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency

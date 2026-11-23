@@ -185,15 +185,13 @@ struct LinkChooser: View {
             if let error = router.error {
                 ScrollView { Label(error, systemImage: "exclamationmark.triangle").foregroundStyle(.red).font(.callout) }.frame(maxHeight: 60)
             }
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    Button(copied ? "Copied" : "Copy Link", systemImage: copied ? "checkmark" : "link") { copied = router.copyLink() }
-                        .keyboardShortcut("c", modifiers: [.command, .shift]).modifier(DialogActionStyle())
-                    Spacer(minLength: 0)
-                    Button("Cancel", role: .cancel, action: router.finish).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                    Button(router.opening ? "Opening…" : "Open Once", action: router.openOnce)
-                        .keyboardShortcut(.defaultAction).disabled(router.selected == nil).modifier(DialogActionStyle(prominent: true))
-                }.disabled(router.opening)
+            DialogFooter {
+                Button("Cancel", role: .cancel, action: router.finish).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+            } actions: {
+                Button(copied ? "Copied" : "Copy Link", systemImage: copied ? "checkmark" : "link") { copied = router.copyLink() }
+                    .keyboardShortcut("c", modifiers: [.command, .shift]).modifier(DialogActionStyle())
+                Button(router.opening ? "Opening…" : "Open Once", action: router.openOnce)
+                    .keyboardShortcut(.defaultAction).disabled(router.selected == nil).modifier(DialogActionStyle(prominent: true))
             }
         }.padding(20).frame(minWidth: 420, minHeight: 380)
             .onChange(of: router.link?.id) { copied = false }

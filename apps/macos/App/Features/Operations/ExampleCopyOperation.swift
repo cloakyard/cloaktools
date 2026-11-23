@@ -136,22 +136,20 @@ struct ExampleCopyView: View {
                 Text("Local only · No history · Nothing runs or saves automatically")
                     .font(.caption).foregroundStyle(.secondary)
             }
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    if operation.savedURL == nil {
-                        Button(operation.busy ? "Cancel" : "Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.saving)
-                    }
-                    Spacer(minLength: 0)
-                    if operation.savedURL != nil {
-                        Button("Done", action: close).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                    } else if operation.prepared != nil {
-                        Button(operation.copied ? "Copied" : "Copy Example", action: operation.copy).modifier(DialogActionStyle()).disabled(operation.busy)
-                            .help("Copies the full example, even while viewing Source")
-                        Button("Save Example…", action: operation.save).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true))
-                            .disabled(operation.busy || operation.nameError != nil)
-                    } else {
-                        Button("Choose File…", action: operation.chooseFile).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy)
-                    }
+            DialogFooter {
+                if operation.savedURL == nil {
+                    Button(operation.busy ? "Cancel" : "Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.saving)
+                }
+            } actions: {
+                if operation.savedURL != nil {
+                    DialogDoneButton(action: close)
+                } else if operation.prepared != nil {
+                    Button(operation.copied ? "Copied" : "Copy Example", action: operation.copy).modifier(DialogActionStyle()).disabled(operation.busy)
+                        .help("Copies the full example, even while viewing Source")
+                    Button("Save Example…", action: operation.save).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true))
+                        .disabled(operation.busy || operation.nameError != nil)
+                } else {
+                    Button("Choose File…", action: operation.chooseFile).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy)
                 }
             }
         }.onExitCommand { if !operation.saving { close() } }

@@ -171,20 +171,18 @@ struct DeveloperTextView: View {
                 Text(isJSON ? "Local only · Up to 1 MiB · Numbers and key order are preserved." : operation.decoding ? "Local only · Up to 1 MiB · Whitespace and missing padding are accepted." : "Local only · Up to 1 MiB · URL-safe output omits padding.")
                     .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             }
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    Button("Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                    Spacer(minLength: 0)
-                    if !isJSON || operation.jsonAction != .validate {
-                        Button(operation.copied ? "Copied" : "Copy Result", action: operation.copy)
-                            .modifier(DialogActionStyle()).disabled(operation.result?.isEmpty != false || operation.running)
-                            .help("Copy the complete result to the clipboard")
-                    }
-                    Button(action: operation.run) {
-                        HStack(spacing: 8) { Text(operation.actionTitle); Text("⌘↩").foregroundStyle(.secondary) }
-                    }.keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true))
-                        .disabled(operation.input.isEmpty || operation.running)
+            DialogFooter {
+                Button("Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+            } actions: {
+                if !isJSON || operation.jsonAction != .validate {
+                    Button(operation.copied ? "Copied" : "Copy Result", action: operation.copy)
+                        .modifier(DialogActionStyle()).disabled(operation.result?.isEmpty != false || operation.running)
+                        .help("Copy the complete result to the clipboard")
                 }
+                Button(action: operation.run) {
+                    HStack(spacing: 8) { Text(operation.actionTitle); Text("⌘↩").foregroundStyle(.secondary) }
+                }.keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true))
+                    .disabled(operation.input.isEmpty || operation.running)
             }
         }.padding(20).frame(minWidth: 520, minHeight: 540)
     }

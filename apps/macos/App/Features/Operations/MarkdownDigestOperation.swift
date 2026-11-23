@@ -141,22 +141,20 @@ struct MarkdownDigestView: View {
                 Text("Full file contents are included. Review before sharing.").font(.callout).foregroundStyle(.secondary)
                 Text("Local only · Captured files stay unchanged · No folder scanning").font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             }
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    if operation.savedURL == nil {
-                        Button(operation.busy ? "Cancel" : "Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.saving)
-                    }
-                    Spacer(minLength: 0)
-                    if operation.savedURL != nil {
-                        Button("Done", action: close).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                    } else if operation.prepared != nil {
-                        Button(operation.copied ? "Copied" : "Copy Digest", action: operation.copy).modifier(DialogActionStyle()).disabled(operation.busy)
-                        Button("Save Digest…", action: operation.save).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy)
-                    } else if operation.files.isEmpty {
-                        Button("Choose Files…", action: operation.chooseFiles).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy)
-                    } else {
-                        Button("Preview Digest", action: operation.generate).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy || operation.nameError != nil)
-                    }
+            DialogFooter {
+                if operation.savedURL == nil {
+                    Button(operation.busy ? "Cancel" : "Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.saving)
+                }
+            } actions: {
+                if operation.savedURL != nil {
+                    DialogDoneButton(action: close)
+                } else if operation.prepared != nil {
+                    Button(operation.copied ? "Copied" : "Copy Digest", action: operation.copy).modifier(DialogActionStyle()).disabled(operation.busy)
+                    Button("Save Digest…", action: operation.save).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy)
+                } else if operation.files.isEmpty {
+                    Button("Choose Files…", action: operation.chooseFiles).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy)
+                } else {
+                    Button("Preview Digest", action: operation.generate).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy || operation.nameError != nil)
                 }
             }
         }.onExitCommand { if !operation.saving { close() } }

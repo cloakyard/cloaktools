@@ -127,16 +127,18 @@ struct PDFOperationView: View {
     @FocusState private var nameFocused: Bool
     var body: some View {
         if operation.items.isEmpty && operation.output == nil && !operation.busy {
-            ContentUnavailableView {
-                Label("Combine files into a PDF", systemImage: "doc.on.doc")
-            } description: {
-                Text("Choose up to 32 PDFs or images. You can arrange their order before creating the PDF.")
-            } actions: {
-                Button("Choose Files…", action: operation.chooseFiles)
-                    .modifier(DialogActionStyle(prominent: true)).keyboardShortcut(.defaultAction)
+            VStack(alignment: .leading, spacing: 16) {
+                ContentUnavailableView("Combine files into a PDF", systemImage: "doc.on.doc",
+                    description: Text("Choose up to 32 PDFs or images. You can arrange their order before creating the PDF."))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 OperationFeedback(cancellation: operation.cancellation, error: operation.error)
-                Button("Cancel", role: .cancel, action: close).keyboardShortcut(.cancelAction)
-            }
+                DialogFooter {
+                    Button("Cancel", role: .cancel, action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+                } actions: {
+                    Button("Choose Files…", action: operation.chooseFiles)
+                        .keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
+                }
+            }.padding(20)
         } else {
             editor
         }
@@ -198,18 +200,18 @@ struct PDFOperationView: View {
             if operation.output == nil { DestinationRow(folder: operation.destination, change: operation.chooseDestination).disabled(operation.busy) }
             OperationFeedback(activity: operation.busy ? (operation.preparing ? "Preparing files…" : "Assembling PDF…") : nil,
                               stopping: operation.stopping, cancellation: operation.cancellation, error: operation.error)
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    if !operation.busy && operation.output == nil { Text("Originals stay unchanged.").font(.caption).foregroundStyle(.secondary) }
-                    Spacer(minLength: 4)
-                    if operation.busy {
-                        Button("Cancel", role: .cancel, action: operation.cancel).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.stopping)
-                    } else if operation.output != nil {
-                        Button("Done", action: close).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                    } else {
-                        Button("Cancel", role: .cancel, action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                        Button("Create PDF", action: operation.start).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true)).disabled(operation.items.isEmpty || operation.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                    }
+            if !operation.busy && operation.output == nil { Text("Originals stay unchanged.").font(.caption).foregroundStyle(.secondary) }
+            DialogFooter {
+                if operation.busy {
+                    Button("Cancel", role: .cancel, action: operation.cancel).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.stopping)
+                } else if operation.output == nil {
+                    Button("Cancel", role: .cancel, action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+                }
+            } actions: {
+                if operation.output != nil && !operation.busy {
+                    DialogDoneButton(action: close)
+                } else if !operation.busy {
+                    Button("Create PDF", action: operation.start).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true)).disabled(operation.items.isEmpty || operation.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
             }
         }.padding(20).frame(minWidth: 440, minHeight: 460)

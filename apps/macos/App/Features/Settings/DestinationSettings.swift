@@ -98,13 +98,11 @@ struct DestinationEditor: View {
             Text("Pins change order only. Other compatible apps stay available. These choices do not change your Mac’s defaults.")
                 .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             if let error { Text(error).font(.callout).foregroundStyle(.red).fixedSize(horizontal: false, vertical: true) }
-            GlassEffectContainer(spacing: 8) {
-                HStack {
-                    Spacer()
-                    Button("Cancel", role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                    Button("Save Changes", action: save).keyboardShortcut(.defaultAction)
-                        .disabled(observed == nil || draft == observed).modifier(DialogActionStyle(prominent: true))
-                }
+            DialogFooter {
+                Button("Cancel", role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+            } actions: {
+                Button("Save Changes", action: save).keyboardShortcut(.defaultAction)
+                    .disabled(observed == nil || draft == observed).modifier(DialogActionStyle(prominent: true))
             }
         }.padding(20).frame(width: 480, height: 480).onAppear(perform: load)
     }

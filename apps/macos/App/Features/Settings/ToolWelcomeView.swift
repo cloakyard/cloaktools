@@ -45,14 +45,12 @@ struct ToolWelcomeView: View {
             Text("You can change this in Settings → General at any time.")
                 .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             OperationFeedback(error: error)
-            GlassEffectContainer(spacing: 8) {
-                HStack {
-                    Spacer()
-                    Button("Start Using CloakTools") {
-                        do { try model.completeToolSelection(developerEnabled: developerEnabled); dismiss() }
-                        catch { self.error = error.localizedDescription }
-                    }.keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                }
+            DialogFooter {
+            } actions: {
+                Button("Start Using CloakTools") {
+                    do { try model.completeToolSelection(developerEnabled: developerEnabled); dismiss() }
+                    catch { self.error = error.localizedDescription }
+                }.keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
             }
         }.padding(24).frame(width: 460)
             .onAppear { developerEnabled = model.preferences.developerToolsEnabled }

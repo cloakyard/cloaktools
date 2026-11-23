@@ -178,22 +178,20 @@ struct FileListView: View {
                 Text("Metadata only · No folder scanning · Sizes omit folders and links")
                     .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             }
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    if operation.savedURL == nil {
-                        Button(operation.busy ? "Cancel" : "Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.saving)
-                    }
-                    Spacer(minLength: 0)
-                    if operation.savedURL != nil {
-                        Button("Done", action: close).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                    } else if operation.prepared != nil {
-                        Button(operation.copied ? "Copied" : "Copy List", action: operation.copy).modifier(DialogActionStyle()).disabled(operation.busy)
-                        Button("Save List…", action: operation.save).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy || operation.nameError != nil)
-                    } else if operation.items.isEmpty {
-                        Button("Choose Items…", action: operation.chooseItems).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy)
-                    } else {
-                        Button("Preview Export", action: operation.preview).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy)
-                    }
+            DialogFooter {
+                if operation.savedURL == nil {
+                    Button(operation.busy ? "Cancel" : "Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.saving)
+                }
+            } actions: {
+                if operation.savedURL != nil {
+                    DialogDoneButton(action: close)
+                } else if operation.prepared != nil {
+                    Button(operation.copied ? "Copied" : "Copy List", action: operation.copy).modifier(DialogActionStyle()).disabled(operation.busy)
+                    Button("Save List…", action: operation.save).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy || operation.nameError != nil)
+                } else if operation.items.isEmpty {
+                    Button("Choose Items…", action: operation.chooseItems).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy)
+                } else {
+                    Button("Preview Export", action: operation.preview).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy)
                 }
             }
         }.onExitCommand { if !operation.saving { close() } }

@@ -200,18 +200,16 @@ struct QRCodeReadView: View {
                 Text("Local only · Review decoded text · Links are never opened")
                     .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             }
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    if operation.savedURL == nil { Button(operation.busy ? "Cancel" : "Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.saving) }
-                    Spacer(minLength: 0)
-                    if operation.savedURL != nil {
-                        Button("Done", action: close).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                    } else if operation.selectedCode?.text != nil {
-                        Button(operation.copied ? "Copied" : "Copy Text", action: operation.copyText).modifier(DialogActionStyle()).disabled(operation.busy || operation.selectedCode?.text?.isEmpty != false)
-                        Button(operation.saveTitle + "…", action: operation.save).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy || operation.nameError != nil)
-                    } else {
-                        Button("Choose Image…", action: operation.chooseImage).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy)
-                    }
+            DialogFooter {
+                if operation.savedURL == nil { Button(operation.busy ? "Cancel" : "Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.saving) }
+            } actions: {
+                if operation.savedURL != nil {
+                    DialogDoneButton(action: close)
+                } else if operation.selectedCode?.text != nil {
+                    Button(operation.copied ? "Copied" : "Copy Text", action: operation.copyText).modifier(DialogActionStyle()).disabled(operation.busy || operation.selectedCode?.text?.isEmpty != false)
+                    Button(operation.saveTitle + "…", action: operation.save).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy || operation.nameError != nil)
+                } else {
+                    Button("Choose Image…", action: operation.chooseImage).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy)
                 }
             }
         }.onExitCommand { if !operation.saving { close() } }

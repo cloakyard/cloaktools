@@ -27,9 +27,9 @@ struct TemplateDetails: View {
             }.frame(height: 140).modifier(DialogCard())
             if String(decoding: template.content, as: UTF8.self).count > 4096 { Text("Preview is limited to 4,096 characters. The full saved content is used.").font(.caption).foregroundStyle(.secondary) }
             if let error { Text(error).foregroundStyle(.red) }
-            HStack {
-                Spacer()
+            DialogFooter {
                 Button("Cancel", role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+            } actions: {
                 Button("Save") {
                     do {
                         var updated = template; updated.title = title; updated.suggestedName = filename

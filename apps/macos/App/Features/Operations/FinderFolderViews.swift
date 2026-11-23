@@ -25,15 +25,16 @@ private struct FolderReviewPage<Content: View, Actions: View>: View {
             }
             OperationFeedback(activity: task.activity, error: task.error)
             if let notice = task.notice { Text(notice).font(.callout).foregroundStyle(.secondary) }
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    Spacer(minLength: 0)
-                    if task.busy {
-                        Button("Cancel", action: task.cancel).modifier(DialogActionStyle()).keyboardShortcut(.cancelAction)
-                    } else {
-                        Button(output == nil && tool != .compare ? "Close" : "Done", action: close).modifier(DialogActionStyle()).keyboardShortcut(.cancelAction)
-                        actions
-                    }
+            DialogFooter {
+                if task.busy {
+                    Button("Cancel", action: task.cancel).modifier(DialogActionStyle()).keyboardShortcut(.cancelAction)
+                } else if output == nil {
+                    Button("Close", action: close).modifier(DialogActionStyle()).keyboardShortcut(.cancelAction)
+                }
+            } actions: {
+                if !task.busy {
+                    actions
+                    if output != nil { DialogDoneButton(action: close) }
                 }
             }
         }.padding(20).frame(minWidth: 440, minHeight: 420)
@@ -77,7 +78,7 @@ struct StructureReviewView: View {
             }
         } actions: {
             if review.structure == nil {
-                Button("Read Again", action: review.load).modifier(DialogActionStyle())
+                Button("Read Again", action: review.load).modifier(DialogActionStyle(prominent: true)).keyboardShortcut(.defaultAction)
             } else if !review.selection.isEmpty {
                 Button(review.hasSavedSet ? "Update File Set" : "Save File Set") { review.saveSet(using: saveSet) }
                     .modifier(DialogActionStyle()).disabled(review.matchesSavedSet)
@@ -182,7 +183,7 @@ struct ComparisonReviewView: View {
                 }
             } else { Spacer() }
         } actions: {
-            Button("Compare Again", action: review.compare).modifier(DialogActionStyle(prominent: true))
+            Button("Compare Again", action: review.compare).modifier(DialogActionStyle(prominent: true)).keyboardShortcut(.defaultAction)
         }
     }
 

@@ -116,22 +116,27 @@ struct OptimizationView: View {
             }.disabled(review.task.busy)
             OperationFeedback(activity: review.task.busy ? (review.current ?? review.task.activity) : nil, error: review.task.error)
             if let notice = review.task.notice { Text(notice).font(.callout).foregroundStyle(.secondary) }
-            HStack {
-                Spacer()
+            DialogFooter {
                 if review.task.busy {
-                    Button("Cancel", action: review.task.cancel).keyboardShortcut(.cancelAction)
-                } else {
-                    Button("Close", action: close).keyboardShortcut(.cancelAction)
-                    if review.pendingCount > 0 || review.readyCount == 0 {
-                        Button(review.pendingCount == 0 && !review.rows.isEmpty ? "Preview Again" : "Preview", action: review.preview)
-                            .modifier(DialogActionStyle(prominent: true)).disabled(review.rows.allSatisfy { $0.output != nil })
-                            .keyboardShortcut(.defaultAction)
-                    }
-                    if review.readyCount > 0 {
-                        Button("Save \(review.readyCount) \(review.readyCount == 1 ? "Copy" : "Copies")…") {
-                            if let folder = chooseFinderFolder("Save optimized copies", prompt: "Save Copies") { review.save(in: folder) }
-                        }.modifier(DialogActionStyle(prominent: review.pendingCount == 0))
-                        .keyboardShortcut(review.pendingCount == 0 ? .defaultAction : nil)
+                    Button("Cancel", action: review.task.cancel).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+                } else if !allSaved {
+                    Button("Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+                }
+            } actions: {
+                if !review.task.busy {
+                    if allSaved {
+                        DialogDoneButton(action: close)
+                    } else {
+                        if review.readyCount > 0 {
+                            Button("Save \(review.readyCount) \(review.readyCount == 1 ? "Copy" : "Copies")…") {
+                                if let folder = chooseFinderFolder("Save optimized copies", prompt: "Save Copies") { review.save(in: folder) }
+                            }.modifier(DialogActionStyle(prominent: review.pendingCount == 0))
+                            .keyboardShortcut(review.pendingCount == 0 ? .defaultAction : nil)
+                        }
+                        if review.pendingCount > 0 || review.readyCount == 0 {
+                            Button(review.pendingCount == 0 && !review.rows.isEmpty ? "Preview Again" : "Preview", action: review.preview)
+                                .keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true)).disabled(review.rows.isEmpty)
+                        }
                     }
                 }
             }
@@ -144,6 +149,8 @@ struct OptimizationView: View {
             Button("Move Original to Trash", role: .destructive) { review.trashOriginal(row) }
         } message: { row in Text("The saved optimized copy is kept. Finder can restore \(row.input.name) from Trash.") }
     }
+
+    private var allSaved: Bool { !review.rows.isEmpty && review.rows.allSatisfy { $0.output != nil } }
 
     private func bytes(_ count: Int) -> String { ByteCountFormatter.string(fromByteCount: Int64(count), countStyle: .file) }
     private func field<Content: View>(_ name: String, @ViewBuilder content: () -> Content) -> some View {

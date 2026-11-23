@@ -90,15 +90,12 @@ struct CopyOperationView: View {
                     if let error = operation.error { Label(error, systemImage: "exclamationmark.triangle").foregroundStyle(.red).font(.callout) }
                 }.frame(maxWidth: .infinity, alignment: .leading)
             }.scrollBounceBehavior(.basedOnSize)
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    if !operation.copied { Text("Replaces current clipboard.").font(.caption).foregroundStyle(.secondary) }
-                    Spacer(minLength: 4)
-                    Button(operation.copied ? "Done" : "Cancel", role: .cancel, action: close)
-                        .keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                    Button(operation.copyTitle, action: operation.copy).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                        .disabled(operation.content.isEmpty || operation.error != nil)
-                }
+            if !operation.copied { Text("Replaces current clipboard.").font(.caption).foregroundStyle(.secondary) }
+            DialogFooter {
+                Button("Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+            } actions: {
+                Button(operation.copyTitle, action: operation.copy).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
+                    .disabled(operation.content.isEmpty || operation.error != nil)
             }
         }.padding(20).frame(minWidth: 420, minHeight: 360)
     }

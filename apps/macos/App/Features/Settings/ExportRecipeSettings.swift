@@ -83,20 +83,18 @@ private struct ExportRecipeSaveSheet: View {
             if original != nil { Toggle("Save as a new recipe", isOn: $saveCopy).toggleStyle(.checkbox) }
             Text("No source, destination or filename is saved. This does not export a file or change conversion defaults.").font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             OperationFeedback(error: error)
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    Spacer()
-                    Button("Cancel", role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                    Button(original == nil || saveCopy ? "Save Recipe" : "Save Changes") {
-                        do {
-                            var value = draft; value.title = value.title.trimmingCharacters(in: .whitespacesAndNewlines)
-                            if saveCopy { value.id = UUID() }
-                            try AppModel.shared.saveRecipe(value, replacing: saveCopy ? nil : original)
-                            saved(value); dismiss()
-                        } catch { self.error = error.localizedDescription }
-                    }.keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                        .disabled(draft.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                }
+            DialogFooter {
+                Button("Cancel", role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+            } actions: {
+                Button(original == nil || saveCopy ? "Save Recipe" : "Save Changes") {
+                    do {
+                        var value = draft; value.title = value.title.trimmingCharacters(in: .whitespacesAndNewlines)
+                        if saveCopy { value.id = UUID() }
+                        try AppModel.shared.saveRecipe(value, replacing: saveCopy ? nil : original)
+                        saved(value); dismiss()
+                    } catch { self.error = error.localizedDescription }
+                }.keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
+                    .disabled(draft.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
         }.padding(20).frame(width: 440)
             .onAppear { nameFocused = true }
