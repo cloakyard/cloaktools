@@ -52,7 +52,7 @@
     "Spoken screen-reader acceptance",
     "Native release, signing and tool acceptance remain tracked separately"
   ],
-  "contractVersion": "1.8.2",
+  "contractVersion": "1.8.3",
   "viewCoverage": {
     "identity": [
       "36px mark",
