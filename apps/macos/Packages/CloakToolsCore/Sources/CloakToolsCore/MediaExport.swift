@@ -40,7 +40,6 @@ public enum MediaExportError: LocalizedError, Sendable {
 /// Owns a private disk capture until the last operation/playback reference is released.
 final class MediaCapture: Sendable {
     private let workspace: MediaWorkspace
-    let folder: URL
     let url: URL
     let byteCount: Int
     init(_ source: URL, acceptedExtensions: Set<String> = MediaExport.inputExtensions) throws {
@@ -52,26 +51,25 @@ final class MediaCapture: Sendable {
         guard fstat(input.fileDescriptor, &before) == 0, (before.st_mode & S_IFMT) == S_IFREG else { throw MediaExportError.unsupported }
         guard before.st_size > 0, before.st_size <= MediaExport.maximumInputBytes else { throw MediaExportError.limits }
         let workspace = try MediaWorkspace()
-        let directory = workspace.folder
-        let target = directory.appendingPathComponent("source.\(source.pathExtension.lowercased())")
-        do {
-            guard FileManager.default.createFile(atPath: target.path, contents: nil, attributes: [.posixPermissions: 0o600]) else { throw CocoaError(.fileWriteUnknown) }
-            let handle = try FileHandle(forWritingTo: target)
-            defer { try? handle.close() }
-            var count = 0
-            while let chunk = try input.read(upToCount: 1_048_576), !chunk.isEmpty {
-                try Task.checkCancellation()
-                count += chunk.count
-                guard count <= MediaExport.maximumInputBytes else { throw MediaExportError.limits }
-                try handle.write(contentsOf: chunk)
-            }
-            var after = stat()
-            guard fstat(input.fileDescriptor, &after) == 0, before.st_size == after.st_size, count == before.st_size,
-                  before.st_mtimespec.tv_sec == after.st_mtimespec.tv_sec, before.st_mtimespec.tv_nsec == after.st_mtimespec.tv_nsec,
-                  before.st_ctimespec.tv_sec == after.st_ctimespec.tv_sec, before.st_ctimespec.tv_nsec == after.st_ctimespec.tv_nsec else { throw MediaExportError.changed }
+        let target = workspace.folder.appendingPathComponent("source.\(source.pathExtension.lowercased())")
+        guard FileManager.default.createFile(atPath: target.path, contents: nil, attributes: [.posixPermissions: 0o600]) else { throw CocoaError(.fileWriteUnknown) }
+        let handle = try FileHandle(forWritingTo: target)
+        defer { try? handle.close() }
+        var count = 0
+        while let chunk = try input.read(upToCount: 1_048_576), !chunk.isEmpty {
             try Task.checkCancellation()
-            self.workspace = workspace; folder = directory; url = target; byteCount = count
-        } catch { try? FileManager.default.removeItem(at: directory); throw error }
+            count += chunk.count
+            guard count <= MediaExport.maximumInputBytes else { throw MediaExportError.limits }
+            try handle.write(contentsOf: chunk)
+        }
+        var after = stat()
+        guard fstat(input.fileDescriptor, &after) == 0, before.st_size == after.st_size, count == before.st_size,
+              before.st_mtimespec.tv_sec == after.st_mtimespec.tv_sec, before.st_mtimespec.tv_nsec == after.st_mtimespec.tv_nsec,
+              before.st_ctimespec.tv_sec == after.st_ctimespec.tv_sec, before.st_ctimespec.tv_nsec == after.st_ctimespec.tv_nsec else { throw MediaExportError.changed }
+        try Task.checkCancellation()
+        self.workspace = workspace
+        url = target
+        byteCount = count
     }
 }
 

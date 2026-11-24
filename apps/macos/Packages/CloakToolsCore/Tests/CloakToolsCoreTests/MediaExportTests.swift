@@ -17,7 +17,7 @@ private func mediaFolder() throws -> URL {
     #expect(!source.hasVideo && source.hasAudio && source.presets == [.audio])
     #expect(abs(source.duration - 2) < 0.01)
     #expect(source.sourceByteCount == original.count)
-    let mode = try FileManager.default.attributesOfItem(atPath: source.capture.folder.path)[.posixPermissions] as? Int
+    let mode = try FileManager.default.attributesOfItem(atPath: source.playbackURL.deletingLastPathComponent().path)[.posixPermissions] as? Int
     #expect(mode == 0o700)
     let fileMode = try FileManager.default.attributesOfItem(atPath: source.playbackURL.path)[.posixPermissions] as? Int
     #expect(fileMode == 0o600)

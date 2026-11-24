@@ -37,7 +37,6 @@ public struct PreparedQRCode: Sendable {
     public let width: Int
     public let inputByteCount: Int
     public let correction: QRCorrection
-    let symbolWidth: Int
     let pixelsPerModule: Int
     let margin: Int
 }
@@ -80,7 +79,7 @@ public enum QRCodeCreation {
         guard CGImageDestinationFinalize(destination) else { throw QRCodeError.generationFailed }
         try Task.checkCancellation()
         return .init(png: data as Data, width: side, inputByteCount: text.utf8.count, correction: options.correction,
-                     symbolWidth: symbol.width, pixelsPerModule: scale, margin: margin)
+                     pixelsPerModule: scale, margin: margin)
     }
     public static func save(_ code: PreparedQRCode, in folder: URL, stem: String) throws -> URL {
         try Task.checkCancellation()
