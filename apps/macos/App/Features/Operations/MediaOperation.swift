@@ -4,6 +4,18 @@ import AVKit
 import UniformTypeIdentifiers
 import CloakToolsCore
 
+@MainActor
+func chooseMediaSource(title: String) -> URL? {
+    let panel = NSOpenPanel()
+    panel.title = title
+    panel.prompt = "Choose Media"
+    panel.allowedContentTypes = MediaExport.inputExtensions.sorted().compactMap { UTType(filenameExtension: $0) }
+    panel.allowsMultipleSelection = false
+    panel.canChooseDirectories = false
+    panel.message = "Choose a local movie or audio file, up to 1 GB and 30 minutes."
+    return panel.runModal() == .OK ? panel.url : nil
+}
+
 @MainActor @Observable
 final class MediaOperation: Identifiable {
     let id = UUID()
@@ -209,7 +221,7 @@ struct MediaOperationView: View {
     private func duration(_ seconds: Double) -> String { String(format: "%d:%02d", Int(seconds) / 60, Int(seconds) % 60) }
 }
 
-private struct MediaPlayer: NSViewRepresentable {
+struct MediaPlayer: NSViewRepresentable {
     let player: AVPlayer
     func makeNSView(context: Context) -> AVPlayerView {
         let view = AVPlayerView(); view.controlsStyle = .inline; view.videoGravity = .resizeAspect

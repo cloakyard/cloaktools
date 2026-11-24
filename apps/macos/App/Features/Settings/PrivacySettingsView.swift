@@ -10,13 +10,13 @@ struct PrivacySettingsView: View {
                         .symbolRenderingMode(.hierarchical).foregroundStyle(.tint).accessibilityHidden(true)
                     VStack(alignment: .leading, spacing: 2) {
                         Text("Privacy Policy").font(.title2.bold()).accessibilityAddTraits(.isHeader)
-                        Text("Updated 23 November 2026").font(.callout).foregroundStyle(.secondary)
+                        Text("Updated 24 November 2026").font(.callout).foregroundStyle(.secondary)
                     }
                 }
                 VStack(alignment: .leading, spacing: 12) {
                     Text("At a glance").font(.subheadline.weight(.semibold))
                     Label("Files and text are processed on this Mac", systemImage: "internaldrive")
-                    Label("No accounts, advertising, analytics or telemetry", systemImage: "lock.shield")
+                    Label("CloakTools has no accounts, advertising or analytics", systemImage: "lock.shield")
                     Label("Save Copies preserves originals", systemImage: "doc.on.doc")
                 }
                 .padding(18)
@@ -44,6 +44,9 @@ struct PrivacySettingsView: View {
                 Media export uses private temporary source copies and staging files. Normal completion removes them; \
                 an abrupt exit can leave temporary files. Only recognized abandoned captures are cleaned up later.
                 """)
+            }
+            policySection("Subtitles") {
+                Text("Speech recognition and translation run on this Mac. macOS may download language models. Apple may collect translation usage and performance metrics, including the language pair. Audio and caption text stay on your device.")
             }
             policySection("Files and Clipboard") {
                 Text("""

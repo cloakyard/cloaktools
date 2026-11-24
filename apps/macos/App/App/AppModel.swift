@@ -396,15 +396,20 @@ final class AppModel {
             }
         } catch { showError(error) }
     }
-    func chooseMediaToExport() {
+    func chooseMediaToExport(subtitles: Bool = false) {
         guard hasRoomForOperation() else { return }
-        let panel = NSOpenPanel(); panel.title = "Export media"; panel.prompt = "Choose Media"
-        panel.allowedContentTypes = MediaExport.inputExtensions.sorted().compactMap { UTType(filenameExtension: $0) }
-        panel.allowsMultipleSelection = false; panel.canChooseDirectories = false
-        panel.message = "Choose a local movie or audio file, up to 1 GB and 30 minutes. The original stays unchanged."
-        guard panel.runModal() == .OK, let input = panel.url, hasRoomForOperation() else { return }
-        let operation = MediaOperation(sourceURL: input, revealOutput: preferences.revealConvertedFile)
-        display(operation)
+        guard let input = chooseMediaSource(title: subtitles ? "Generate subtitles" : "Export media"), hasRoomForOperation() else { return }
+        if subtitles {
+            let operation = SubtitleOperation(url: input)
+            operation.prepare()
+            presentEditor(.subtitles, id: operation.task.id, busy: { operation.busy }, finish: operation.finish,
+                          panel: FinderReviewWindow("Generate Subtitles", task: operation.task, finish: operation.finish,
+                                                    busy: { operation.busy }) { SubtitleView(operation: operation, close: $0) }) {
+                SubtitleView(operation: operation, close: $0)
+            }
+        } else {
+            display(MediaOperation(sourceURL: input, revealOutput: preferences.revealConvertedFile))
+        }
     }
     func chooseCopyFiles() {
         let panel = NSOpenPanel(); panel.title = "Copy names and paths"; panel.prompt = "Choose Items"

@@ -267,6 +267,16 @@ Choose a name and folder, then **Export Copy**. Progress and Cancel stay visible
 
 This is a full-clip exporter, without trimming or a target file-size guarantee. Inputs: ordinary self-contained MOV/MP4/M4V with H.264 or SDR HEVC, and M4A/MP3/WAV/AIFF/CAF with AAC, MP3 or PCM audio. Limits: 1 GB, 30 minutes, video up to a 4096 × 2160 bounding box at 60 fps, mono/stereo audio up to 96 kHz. Protected, HDR/wide-gamut, spatial/alpha and multiple video/audio tracks are rejected. Chapters, subtitles and source metadata are omitted. No dedicated Finder action is added in this slice.
 
+## Generate subtitles
+
+In the development build, open **File → Generate Subtitles…** or **Images, PDFs & Media → Generate subtitles**. Choose a local audio or video file, select its spoken language, then choose **Generate Captions**. **Download & Generate** appears when macOS needs the speech language. The tool accepts the same inputs and limits as Export Media and requires an audio track.
+
+Play a caption from its timestamp and edit its text. To export a single original-language SRT, choose **Export SRT…**. For translations, choose **Add Languages…**, select any available targets and choose **Translate**. Leave **Include original** selected to keep the source track too. Available targets depend on the spoken language and the models on this Mac. macOS can request a language download.
+
+Use **Review** to switch tracks. Each translation appears below its source and can be edited. A reading-speed hint marks captions that may need shortening. Editing an original caption clears the translated drafts so you can translate the corrected text. If a language fails, retry it or export the completed tracks.
+
+Choose a destination to save a new folder, such as **Interview subtitles**, containing UTF-8 files such as **Interview.en.srt** and **Interview.hi.srt**. Timestamp ranges match across languages. Repeated exports receive a numbered folder. [Verification record](verification/SUBTITLES.md)
+
 ## Recreate an export
 
 Choose **Save Recipe…** in Convert Image, Make It Fit or Export Media. Name the recipe and review its settings, then **Save Recipe**. Saving stores settings only; it does not export a file or change conversion defaults. Recipes save image format/quality/background, all fit limits, or a media preset. Sources, destinations and output filenames are chosen again each time.

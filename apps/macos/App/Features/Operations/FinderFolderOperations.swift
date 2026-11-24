@@ -167,12 +167,12 @@ func chooseFinderFolder(_ title: String, startingAt folder: URL? = nil, prompt: 
 @MainActor
 final class FinderReviewWindow: NSWindowController, NSWindowDelegate, OperationPanel {
     var onClose: (() -> Void)?
-    let task: FolderTask
+    let busy: () -> Bool
     let finish: () -> Void
 
-    init<Content: View>(_ title: String, task: FolderTask, finish: @escaping () -> Void,
+    init<Content: View>(_ title: String, task: FolderTask, finish: @escaping () -> Void, busy: (() -> Bool)? = nil,
                         @ViewBuilder content: (@escaping () -> Void) -> Content) {
-        self.task = task
+        self.busy = busy ?? { task.busy }
         self.finish = finish
         let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 610, height: 520),
                               styleMask: [.titled, .closable, .resizable], backing: .buffered, defer: false)
@@ -187,6 +187,6 @@ final class FinderReviewWindow: NSWindowController, NSWindowDelegate, OperationP
     }
 
     required init?(coder: NSCoder) { nil }
-    func windowShouldClose(_ sender: NSWindow) -> Bool { !task.busy }
+    func windowShouldClose(_ sender: NSWindow) -> Bool { !busy() }
     func windowWillClose(_ notification: Notification) { finish(); onClose?() }
 }

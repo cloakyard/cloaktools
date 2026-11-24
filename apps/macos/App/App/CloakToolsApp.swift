@@ -72,6 +72,7 @@ private struct WorkbenchCommands: Commands {
             Button("Restore an Original…", action: model.restoreOptimizationBackup)
             Button("Make It Fit…") { model.chooseImageToFit() }.keyboardShortcut("k", modifiers: [.command, .option])
             Button("Export Media…") { model.chooseMediaToExport() }.keyboardShortcut("e", modifiers: [.command, .option])
+            Button("Generate Subtitles…") { model.chooseMediaToExport(subtitles: true) }
             Menu("Recreate Export") {
                 ForEach(model.exportRecipes) { recipe in Button(recipe.title) { model.useRecipe(recipe) } }
                 if !model.exportRecipes.isEmpty { Divider() }

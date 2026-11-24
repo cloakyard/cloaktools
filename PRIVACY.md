@@ -1,8 +1,8 @@
 # Privacy policy
 
-**CloakTools · Updated 23 November 2026**
+**CloakTools · Updated 24 November 2026**
 
-CloakTools is a local Mac toolkit. It has no accounts, advertising, analytics, telemetry or automatic crash-report uploads. Update checks and downloads are off by default and can be managed in About.
+CloakTools is a local Mac toolkit with no app-operated accounts, advertising, analytics, telemetry or automatic crash-report uploads. Update checks and downloads are off by default and can be managed in About.
 
 <details>
 <summary>On this page</summary>
@@ -51,6 +51,8 @@ Make It Fit holds captured pixels and candidate output bytes in memory while cal
 Export Media makes an owner-only temporary copy of the selected source on your Mac before preview. The capture supports local playback and export even if the original changes afterward. It is removed when the operation closes normally. An app crash or abrupt exit can leave a copy in the account's temporary directory; on a later launch, CloakTools removes only recognized abandoned captures whose private ownership marker and inactive lease can be validated. Active or unknown entries are left alone. Export also uses an owner-only staging directory in your chosen destination, removed on normal completion/cancellation/error. A cloud provider may observe or synchronize temporary files inside a cloud-managed destination under its own policy.
 
 Export Media uses native frameworks. Optimize Media also uses bundled, local codec executables. External media references are forbidden and in-app external playback is disabled. Playback starts only when you press Play; Open in QuickTime explicitly hands the saved output to that application. Source metadata, chapters, subtitles and other extra tracks are omitted, but the actual picture and sound can still contain personal information. Export Media keeps no media library or export history. Optimize Media records saved paths as described above.
+
+Generate Subtitles in development builds uses the same private media capture. Apple Speech processes the selected audio on this Mac. Caption text, translations and edits stay in the open review until you explicitly export SRT files. macOS may download and retain shared language models. Apple says its Translation framework may collect API usage and performance metrics, including the app bundle ID and language pair. Those metrics exclude original and translated text. [Apple Translation](https://developer.apple.com/documentation/translation/translationsession)
 
 ## QR creation
 
@@ -128,7 +130,7 @@ Pinned destination names/identifiers, their order and optional web/email fallbac
 
 ## Network and diagnostics
 
-There are no analytics, ads, crash uploads or cloud processing. User-invoked website links open in an external app.
+CloakTools sends no analytics or crash reports and uses no ads or cloud processing. User-invoked website links open in an external app.
 
 Sparkle 2 checks for updates only when you choose Check for Updates or enable automatic checks in About settings. Automatic checks and automatic downloads are off by default. The app contacts its Cloakyard website for a signed update feed and GitHub Releases (including its asset delivery hosts) for update downloads. These providers receive ordinary request data such as your IP address, requested resource and the app/updater version in the user agent. No system profile, analytics, files or app activity are uploaded. Preferences and the last check time are stored locally. Downloads are signature-verified before extraction; optional automatic installation happens when the app quits.
 

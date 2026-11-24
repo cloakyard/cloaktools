@@ -99,6 +99,14 @@ public enum MediaExport {
     }
 
     public static func prepare(_ url: URL) async throws -> PreparedMedia {
+        try await prepare(url, forSubtitles: false)
+    }
+
+    public static func prepareForSubtitles(_ url: URL) async throws -> PreparedMedia {
+        try await prepare(url, forSubtitles: true)
+    }
+
+    private static func prepare(_ url: URL, forSubtitles: Bool) async throws -> PreparedMedia {
         let capture = try MediaCapture(url)
         let asset = localAsset(capture.url)
         let (playable, protected, duration) = try await asset.load(.isPlayable, .hasProtectedContent, .duration)
@@ -131,6 +139,13 @@ public enum MediaExport {
                 guard (1...2).contains(description.mChannelsPerFrame), description.mSampleRate.isFinite,
                       description.mSampleRate > 0, description.mSampleRate <= 96000 else { throw MediaExportError.limits }
             }
+        }
+        // Subtitles only read the captured audio. An available video encoder is unnecessary.
+        if forSubtitles {
+            try Task.checkCancellation()
+            guard !audio.isEmpty else { throw SubtitleError.noAudio }
+            return PreparedMedia(sourceURL: url, duration: seconds, width: width, height: height, frameRate: fps,
+                                 hasAudio: true, presets: [], capture: capture)
         }
         var presets: [MediaExportPreset] = []
         for preset in MediaExportPreset.allCases where preset == .audio ? !audio.isEmpty : !video.isEmpty {

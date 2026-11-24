@@ -242,6 +242,7 @@ struct WorkbenchView: View {
         case .optimize: model.presentOptimizer()
         case .fit: model.chooseImageToFit()
         case .pages: model.choosePDFToOrganize()
+        case .subtitles: model.chooseMediaToExport(subtitles: true)
         case .exportMedia: model.chooseMediaToExport()
         case .cleanup: model.presentTextCleanup()
         case .digest: model.presentMarkdownDigest()

@@ -89,6 +89,10 @@ M4V is accepted for inspection but was not separately verified as a container in
 
 Exports include the full selected media tracks with their timeline offsets. Chapters, subtitle/timed-metadata tracks and source metadata are omitted. Visible/audible content is retained. Output is validated before publication and capped at 2 GB after encoding, not during every native write. Originals are captured in private temporary files and never overwritten. Cancellation removes staging; crashes may leave temporary capture/staging files. Disk capacity, complex files and full upper-bound workloads need broader validation.
 
+### Subtitle files in development builds
+
+Generate Subtitles accepts the media inputs above with one audio track. Each selected language produces a separate UTF-8 SubRip (.srt) file with numbered captions and millisecond start and end times. A language tag precedes the extension. All tracks share the source timeline. Apple Speech supplies the times, and Apple Translation handles supported pairs locally.
+
 ## Copy As text formats
 
 Full paths, names and file URLs use one item per line; shell arguments use single-quoted POSIX arguments separated by spaces; Markdown uses escaped labels and angle-bracketed, encoded file URLs; JSON uses an array of absolute paths. File names and paths with embedded line breaks are preserved in plain text but can be ambiguous there; use JSON for a reversible list. The formatter never reads files, resolves symbolic links or executes a shell. Limits: 200 items, path lengths under 4,096 UTF-8 bytes, output up to 1 MiB; previews show up to 8,192 characters.

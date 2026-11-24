@@ -39,7 +39,7 @@ The [public beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-be
 | **Route links** | Separate web/email defaults with guarded restoration, ordered rules, pinned destinations, per-role fallback, an offline tester and explicit one-time bypass. |
 | **Work from Finder** | Workspace-scoped Finder menus, selected-item Services and compact native operation dialogs. |
 
-The development build also includes **Optimize Media** for mixed batches and an optional menu-bar launcher. See the [Clop parity record](docs/verification/CLOP-PARITY.md) for tested workflows and remaining gaps.
+The development build also includes **Generate Subtitles** for reviewed, multilingual SRT files, **Optimize Media** for mixed batches and an optional menu-bar launcher. See the [Clop parity record](docs/verification/CLOP-PARITY.md) for tested workflows and remaining gaps.
 
 ### Current boundaries
 
