@@ -80,7 +80,9 @@ const sections = [
 let frame = 0;
 function updateCurrent() {
   frame = 0;
-  const current = sections
+  // A short final section can reach the bottom of the page before its heading reaches the threshold.
+  const atBottom = scrollY > 0 && scrollY + innerHeight >= document.documentElement.scrollHeight - 1;
+  const current = atBottom ? sections.at(-1) : sections
     .filter((section) => section.getBoundingClientRect().top <= Math.min(innerHeight * 0.3, 180))
     .at(-1);
   for (const link of links) {

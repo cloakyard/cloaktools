@@ -52,7 +52,7 @@
     "Spoken screen-reader acceptance",
     "Native release, signing and tool acceptance remain tracked separately"
   ],
-  "contractVersion": "1.7.5",
+  "contractVersion": "1.8.2",
   "viewCoverage": {
     "identity": [
       "36px mark",
@@ -263,6 +263,7 @@
       "airImplemented": true,
       "validated": true,
       "evidence": [
+        "docs/air/landing-reveals-2026-11-24.md",
         "docs/air/AUDIT-2026-11-17.md",
         "docs/air/INTEGRATION-2026-11-17.md",
         "docs/air/RETINA-WORKBENCH-2026-11-18.md"
