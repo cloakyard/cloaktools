@@ -28,3 +28,20 @@ import Testing
     #expect(operation.translations.isEmpty && operation.pending == ["es"])
     #expect(operation.reviewLanguage == nil && !operation.canExport)
 }
+
+@MainActor @Test func subtitleCancellationNoticeReflectsWhatCanBeExported() throws {
+    let review = SubtitleOperation(url: URL(fileURLWithPath: "/Clip.mp4"))
+    review.spoken = "en-US"
+    review.cues = [.init(start: 0, end: 1000, text: "Hello")]
+    review.chooseLanguages(["es", "fr"], includeOriginal: false)
+    review.cancel()
+    #expect(!review.canExport)
+    #expect(review.task.notice == "Translation stopped.")
+
+    review.startTranslations()
+    let spanish = try #require(review.job)
+    review.complete(spanish, with: .success([.init(start: 0, end: 1000, text: "Hola")]))
+    review.cancel()
+    #expect(review.canExport && review.pending == ["fr"])
+    #expect(review.task.notice == "Translation stopped. You can export the completed tracks.")
+}

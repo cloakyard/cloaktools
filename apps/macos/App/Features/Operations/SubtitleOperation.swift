@@ -157,7 +157,7 @@ final class SubtitleOperation {
         if job != nil {
             queue.removeAll()
             job = nil
-            task.notice = "Translation stopped. Completed languages are ready to export."
+            task.notice = canExport ? "Translation stopped. You can export the completed tracks." : "Translation stopped."
         }
     }
 

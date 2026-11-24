@@ -44,3 +44,33 @@ import Testing
     let prepared = try await MediaExport.prepare(video)
     await #expect(throws: SubtitleError.noAudio) { try await Subtitles.transcribe(prepared, locale: .current) }
 }
+
+@Test func concurrentSubtitleExportsKeepEachLanguageSetTogether() async throws {
+    let fm = FileManager.default
+    let destination = fm.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    let existing = destination.appendingPathComponent("Clip subtitles")
+    try fm.createDirectory(at: existing, withIntermediateDirectories: true)
+    defer { try? fm.removeItem(at: destination) }
+    let marker = existing.appendingPathComponent("keep.txt")
+    try Data("Existing folder".utf8).write(to: marker)
+    let source = destination.appendingPathComponent("Clip.mp4")
+    let folders = try await withThrowingTaskGroup(of: URL.self) { group in
+        for index in 0..<8 {
+            group.addTask {
+                let en = [SubtitleCue(start: 0, end: 1000, text: "Hello \(index)")]
+                let fr = [SubtitleCue(start: 0, end: 1000, text: "Bonjour \(index)")]
+                let folder = try Subtitles.export(["en": en, "fr": fr], source: source, in: destination)
+                #expect(try Data(contentsOf: folder.appendingPathComponent("Clip.en.srt")) == Subtitles.srt(en))
+                #expect(try Data(contentsOf: folder.appendingPathComponent("Clip.fr.srt")) == Subtitles.srt(fr))
+                return folder
+            }
+        }
+        var published = Set<URL>()
+        for try await path in group { published.insert(path) }
+        return published
+    }
+    #expect(folders.count == 8)
+    #expect(try fm.contentsOfDirectory(atPath: destination.path).count == 9)
+    #expect(try fm.contentsOfDirectory(atPath: existing.path) == ["keep.txt"])
+    #expect(try Data(contentsOf: marker) == Data("Existing folder".utf8))
+}
