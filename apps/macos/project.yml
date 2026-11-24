@@ -14,7 +14,7 @@ settings:
     CODE_SIGN_IDENTITY: "-"
     ENABLE_HARDENED_RUNTIME: YES
     MARKETING_VERSION: "0.6.0"
-    CURRENT_PROJECT_VERSION: "20261118.6"
+    CURRENT_PROJECT_VERSION: "20261124.2"
     CLOAKTOOLS_RELEASE_CHANNEL: "Beta"
     CLOAKTOOLS_APP_GROUP: ""
     CLOAKTOOLS_SOURCE_ROOT: $(SRCROOT)
@@ -40,12 +40,32 @@ targets:
       - path: ../../LICENSE
         buildPhase: resources
     postBuildScripts:
+      - name: Embed local media codecs and corresponding source
+        inputFiles:
+          - $(SRCROOT)/scripts/codecs/build.py
+          - $(SRCROOT)/scripts/codecs/sources.json
+          - $(SRCROOT)/scripts/codecs/embed.sh
+          - $(SRCROOT)/scripts/codecs/build_jxl.py
+          - $(SRCROOT)/scripts/codecs/jxl-sources.json
+        outputFiles:
+          - $(TARGET_BUILD_DIR)/$(CONTENTS_FOLDER_PATH)/Helpers/Media/ffmpeg
+          - $(TARGET_BUILD_DIR)/$(CONTENTS_FOLDER_PATH)/Helpers/Media/ffprobe
+          - $(TARGET_BUILD_DIR)/$(CONTENTS_FOLDER_PATH)/Helpers/Media/cjxl
+          - $(TARGET_BUILD_DIR)/$(CONTENTS_FOLDER_PATH)/Helpers/Media/djxl
+          - $(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Codec Sources.zip
+          - $(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/JPEG XL Sources.zip
+        script: /bin/bash "${SRCROOT}/scripts/codecs/embed.sh"
       - name: Sign Sparkle helpers for an explicit signing identity
         basedOnDependencyAnalysis: false
         script: /bin/bash "${SRCROOT}/../../scripts/sign-sparkle.sh"
     dependencies:
       - package: Sparkle
       - package: CloakToolsCore
+      - target: cloakopt
+        embed: true
+        link: false
+        copy:
+          destination: executables
       - target: CloakToolsFinder
         embed: true
     settings:
@@ -98,6 +118,13 @@ targets:
             NSRequiredContext:
               NSApplicationIdentifier: com.apple.finder
           - NSMenuItem:
+              default: Optimize Media with CloakTools
+            NSMessage: optimizeMedia
+            NSPortName: CloakTools
+            NSSendFileTypes: [public.image, com.adobe.pdf, public.movie, public.audio]
+            NSRequiredContext:
+              NSApplicationIdentifier: com.apple.finder
+          - NSMenuItem:
               default: Make It Fit with CloakTools
             NSMessage: fitImage
             NSPortName: CloakTools
@@ -118,6 +145,16 @@ targets:
             NSSendFileTypes: [public.data]
             NSRequiredContext:
               NSApplicationIdentifier: com.apple.finder
+  cloakopt:
+    type: tool
+    platform: macOS
+    sources: [CLI]
+    dependencies:
+      - package: CloakToolsCore
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.cloakyard.cloaktools.cloakopt
+        SKIP_INSTALL: YES
   CloakToolsFinder:
     type: app-extension
     platform: macOS
@@ -147,7 +184,9 @@ targets:
   CloakToolsTests:
     type: bundle.unit-test
     platform: macOS
-    sources: [Tests]
+    sources:
+      - Tests
+      - Packages/CloakToolsCore/Tests/CloakToolsCoreTests/Support/MediaFixtures.swift
     dependencies:
       - target: CloakTools
       - package: CloakToolsCore

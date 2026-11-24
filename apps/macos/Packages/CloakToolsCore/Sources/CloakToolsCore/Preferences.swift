@@ -17,12 +17,28 @@ public enum SettingsCategory: String, CaseIterable, Codable, Sendable, Identifia
     }
 }
 
+public struct DropZoneKey: Codable, Equatable, Sendable {
+    public let code: UInt16
+    public let modifiers: UInt32
+    public let label: String
+    public init(code: UInt16, modifiers: UInt32, label: String) {
+        self.code = code
+        self.modifiers = modifiers
+        self.label = label
+    }
+}
+
 public struct Preferences: Codable, Equatable, Sendable {
     public var developerToolsEnabled = false
     public var hasChosenTools = false
     public var includeHelloWorld = false
     public var languageChoices: [String: Bool] = Dictionary(uniqueKeysWithValues: FileTemplate.allCases.filter(\.isProgramming).map { ($0.rawValue, true) })
     public var lastCategory: SettingsCategory = .general
+    public var optimizeCopiedImages = false
+    public var folderRules: [OptimizationFolderRule] = []
+    public var automationPaused = false
+    public var showMenuBarTools = true
+    public var dropZoneKey: DropZoneKey?
     public var revealCreatedFile = true
     public var revealConvertedFile = true
     public var openAfterCreation = false
@@ -30,11 +46,24 @@ public struct Preferences: Codable, Equatable, Sendable {
     public var favoriteTemplateIDs: Set<String> = []
     public init() {}
     private enum CodingKeys: String, CodingKey {
-        case developerToolsEnabled, hasChosenTools, includeHelloWorld, languageChoices, lastCategory, revealCreatedFile, revealConvertedFile, openAfterCreation, favoriteTemplateIDs, imageConversion
+        case optimizeCopiedImages, folderRules, automationPaused, showMenuBarTools, dropZoneKey, developerToolsEnabled, hasChosenTools, includeHelloWorld, languageChoices, lastCategory, revealCreatedFile, revealConvertedFile, openAfterCreation, favoriteTemplateIDs, imageConversion
     }
     public init(from decoder: any Decoder) throws {
         self.init()
         let values = try decoder.container(keyedBy: CodingKeys.self)
+        optimizeCopiedImages = try values.decodeIfPresent(Bool.self, forKey: .optimizeCopiedImages) ?? false
+        if let saved = try values.decodeIfPresent([OptimizationFolderRule].self, forKey: .folderRules) {
+            folderRules = saved
+        } else {
+            enum Legacy: CodingKey { case optimizationFolder }
+            let old = try decoder.container(keyedBy: Legacy.self)
+            if let folder = try old.decodeIfPresent(URL.self, forKey: .optimizationFolder) {
+                folderRules = [.init(folder: folder)]
+            }
+        }
+        automationPaused = try values.decodeIfPresent(Bool.self, forKey: .automationPaused) ?? false
+        dropZoneKey = try values.decodeIfPresent(DropZoneKey.self, forKey: .dropZoneKey)
+        showMenuBarTools = try values.decodeIfPresent(Bool.self, forKey: .showMenuBarTools) ?? true
         // Existing installations keep the catalog they already had; only fresh installs opt in.
         developerToolsEnabled = try values.decodeIfPresent(Bool.self, forKey: .developerToolsEnabled) ?? true
         hasChosenTools = try values.decodeIfPresent(Bool.self, forKey: .hasChosenTools) ?? true

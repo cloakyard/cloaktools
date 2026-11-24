@@ -90,14 +90,13 @@ struct RoutingSettingsView: View {
                         Spacer(minLength: 0)
                         Toggle("Enable \(rule.name)", isOn: Binding(get: { rule.enabled }, set: { routing.enable(rule, $0) }))
                             .labelsHidden().toggleStyle(.switch).controlSize(.small)
-                        Menu {
+                        RowActionsMenu(title: "Actions for \(rule.name)") {
                             Button("Edit Rule…") { editing = rule }
                             Button("Move Up") { routing.move(rule, by: -1) }.disabled(index == 0)
                             Button("Move Down") { routing.move(rule, by: 1) }.disabled(index == routing.rules.count - 1)
                             Divider()
                             Button("Delete Rule…", role: .destructive) { removing = rule }
-                        } label: { Image(systemName: "ellipsis") }
-                        .menuStyle(.borderlessButton).fixedSize().accessibilityLabel("Actions for \(rule.name)")
+                        }
                     }.padding(.vertical, 3)
                 }
                 Button("Add Rule…", systemImage: "plus") { editing = RoutingRule() }
@@ -147,15 +146,13 @@ struct OneTimeLink: View {
             TextField("https://example.com or mailto:…", text: $raw, axis: .vertical)
                 .lineLimit(2...3).textFieldStyle(.roundedBorder).accessibilityLabel("Link to open once")
             if let error { Text(error).foregroundStyle(.red).font(.callout) }
-            GlassEffectContainer(spacing: 8) {
-                HStack {
-                    Spacer()
-                    Button("Cancel", role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                    Button("Choose App") {
-                        do { _ = try IncomingLink(raw); dismiss(); router.receive(raw, forceChooser: true) }
-                        catch { self.error = error.localizedDescription }
-                    }.keyboardShortcut(.defaultAction).disabled(raw.isEmpty).modifier(DialogActionStyle(prominent: true))
-                }
+            DialogFooter {
+                Button("Cancel", role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+            } actions: {
+                Button("Choose App") {
+                    do { _ = try IncomingLink(raw); dismiss(); router.receive(raw, forceChooser: true) }
+                    catch { self.error = error.localizedDescription }
+                }.keyboardShortcut(.defaultAction).disabled(raw.isEmpty).modifier(DialogActionStyle(prominent: true))
             }
         }.padding(20).frame(width: 440)
     }
@@ -211,18 +208,16 @@ struct RuleEditor: View {
                 }
             }.scrollBounceBehavior(.basedOnSize)
             if let error { Text(error).font(.callout).foregroundStyle(.red).fixedSize(horizontal: false, vertical: true) }
-            GlassEffectContainer(spacing: 8) {
-                HStack {
-                    Spacer()
-                    Button("Cancel", role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                    Button("Save Rule") {
-                        do {
-                            if let app = destinations.first(where: { $0.bundleID == draft.destinationBundleID }) { draft.destinationName = app.name }
-                            try routing.save(draft); dismiss()
-                        } catch { self.error = error.localizedDescription }
-                    }.keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                        .disabled(draft.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || draft.destinationBundleID.isEmpty || draft.conditions.contains { $0.value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty })
-                }
+            DialogFooter {
+                Button("Cancel", role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+            } actions: {
+                Button("Save Rule") {
+                    do {
+                        if let app = destinations.first(where: { $0.bundleID == draft.destinationBundleID }) { draft.destinationName = app.name }
+                        try routing.save(draft); dismiss()
+                    } catch { self.error = error.localizedDescription }
+                }.keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
+                    .disabled(draft.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || draft.destinationBundleID.isEmpty || draft.conditions.contains { $0.value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty })
             }
         }.padding(20).frame(width: 460, height: 510)
             .onAppear(perform: refresh)
@@ -273,12 +268,10 @@ struct LinkTester: View {
                 }.frame(maxWidth: .infinity, alignment: .leading)
             }.frame(maxWidth: .infinity, maxHeight: .infinity).modifier(DialogCard())
             Text("No network requests, app launches or link history.").font(.caption).foregroundStyle(.secondary)
-            GlassEffectContainer(spacing: 8) {
-                HStack {
-                    Spacer()
-                    Button("Done") { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                    Button("Test Link", action: test).keyboardShortcut(.defaultAction).disabled(raw.isEmpty).modifier(DialogActionStyle(prominent: true))
-                }
+            DialogFooter {
+                Button("Close") { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+            } actions: {
+                Button("Test Link", action: test).keyboardShortcut(.defaultAction).disabled(raw.isEmpty).modifier(DialogActionStyle(prominent: true))
             }
         }.padding(20).frame(width: 460, height: 450)
             .onChange(of: raw) { clear() }.onChange(of: source) { clear() }.onChange(of: bypass) { clear() }

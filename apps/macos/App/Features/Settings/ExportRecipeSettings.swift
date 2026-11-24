@@ -3,6 +3,8 @@ import CloakToolsCore
 
 struct ExportRecipeSection: View {
     @Bindable var model: AppModel
+    @State private var newPipeline = false
+    @State private var editPipeline: ExportRecipe?
     @State private var renaming: ExportRecipe?
     @State private var removing: ExportRecipe?
     var body: some View {
@@ -12,7 +14,7 @@ struct ExportRecipeSection: View {
                 Button("Reload Recipes", action: model.reloadRecipes)
             }
             if model.exportRecipes.isEmpty {
-                Text("Save your usual settings from Make It Fit, Export Media or Convert Image.").foregroundStyle(.secondary)
+                Text("Save your usual settings from Optimize Media, Make It Fit, Export Media or Convert Image.").foregroundStyle(.secondary)
             }
             ForEach(model.exportRecipes) { recipe in
                 HStack(spacing: 10) {
@@ -24,17 +26,21 @@ struct ExportRecipeSection: View {
                     }
                     Spacer(minLength: 4)
                     Button("Use…") { model.useRecipe(recipe) }.accessibilityLabel("Use recipe \(recipe.title)")
-                    Menu {
+                    RowActionsMenu(title: "Actions for recipe \(recipe.title)") {
+                        if case let .optimize(options) = recipe.options, options.steps != nil {
+                            Button("Edit Pipeline…") { editPipeline = recipe }
+                        }
                         Button("Rename…") { renaming = recipe }
                         Button("Remove Recipe…", role: .destructive) { removing = recipe }
-                    } label: { Label("Actions for recipe \(recipe.title)", systemImage: "ellipsis").labelStyle(.iconOnly) }
-                    .menuStyle(.borderlessButton).fixedSize().accessibilityLabel("Actions for recipe \(recipe.title)")
-                    .help("Rename or remove \(recipe.title)")
+                    }
                 }.padding(.vertical, 3)
             }
+            Button("New Pipeline…") { newPipeline = true }
         } header: { Text("Export recipes") } footer: {
-            Text("Recipes save settings, not files. Choose a fresh source and review each export.")
+            Text("Recipes store output settings. Use one in a review or apply it automatically with a folder rule.")
         }
+        .sheet(isPresented: $newPipeline) { OptimizationPipelineEditor() }
+        .sheet(item: $editPipeline) { OptimizationPipelineEditor(original: $0) }
         .sheet(item: $renaming) { recipe in ExportRecipeSaveSheet(draft: recipe, original: recipe) { _ in } }
         .confirmationDialog("Remove this export recipe?", isPresented: Binding(get: { removing != nil }, set: { if !$0 { removing = nil } })) {
             if let recipe = removing { Button("Remove Recipe", role: .destructive) { model.removeRecipe(recipe); removing = nil } }
@@ -54,8 +60,8 @@ struct SaveExportRecipeButton: View {
                 let value = try options(); try value.validate()
                 editing = ExportRecipe(id: recipe?.id ?? UUID(), title: recipe?.title ?? value.toolName, options: value)
             } catch { self.error = error.localizedDescription }
-        }.buttonStyle(.link).font(.caption)
-            .help("Save output settings for another source; creates no exported file")
+        }
+            .help("Save these output settings as a recipe")
             .sheet(item: $editing) { draft in ExportRecipeSaveSheet(draft: draft, original: recipe) { recipe = $0 } }
             .alert("Check the export settings", isPresented: Binding(get: { error != nil }, set: { if !$0 { error = nil } })) {
                 Button("OK") { error = nil }
@@ -83,20 +89,18 @@ private struct ExportRecipeSaveSheet: View {
             if original != nil { Toggle("Save as a new recipe", isOn: $saveCopy).toggleStyle(.checkbox) }
             Text("No source, destination or filename is saved. This does not export a file or change conversion defaults.").font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             OperationFeedback(error: error)
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    Spacer()
-                    Button("Cancel", role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                    Button(original == nil || saveCopy ? "Save Recipe" : "Save Changes") {
-                        do {
-                            var value = draft; value.title = value.title.trimmingCharacters(in: .whitespacesAndNewlines)
-                            if saveCopy { value.id = UUID() }
-                            try AppModel.shared.saveRecipe(value, replacing: saveCopy ? nil : original)
-                            saved(value); dismiss()
-                        } catch { self.error = error.localizedDescription }
-                    }.keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                        .disabled(draft.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                }
+            DialogFooter {
+                Button("Cancel", role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+            } actions: {
+                Button(original == nil || saveCopy ? "Save Recipe" : "Save Changes") {
+                    do {
+                        var value = draft; value.title = value.title.trimmingCharacters(in: .whitespacesAndNewlines)
+                        if saveCopy { value.id = UUID() }
+                        try AppModel.shared.saveRecipe(value, replacing: saveCopy ? nil : original)
+                        saved(value); dismiss()
+                    } catch { self.error = error.localizedDescription }
+                }.keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
+                    .disabled(draft.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
         }.padding(20).frame(width: 440)
             .onAppear { nameFocused = true }

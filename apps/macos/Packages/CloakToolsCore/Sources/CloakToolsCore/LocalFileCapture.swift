@@ -1,7 +1,8 @@
 import Foundation
 
-enum LocalFileCapture {
-    static func read(_ url: URL, limit: Int) throws -> Data {
+public enum LocalFileCapture {
+    public static func read(_ url: URL, limit: Int) throws -> Data {
+        guard (0..<Int.max).contains(limit) else { throw CaptureError.tooLarge }
         try Task.checkCancellation()
         guard url.isFileURL else { throw CocoaError(.fileReadUnsupportedScheme) }
         let values = try url.resourceValues(forKeys: [.isRegularFileKey, .fileSizeKey])

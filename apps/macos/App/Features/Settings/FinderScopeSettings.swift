@@ -63,10 +63,10 @@ struct FinderFoldersSection: View {
                             Text(model.unavailable.contains(folder.id) ? "Choose again to renew access" : folder.path).font(.caption).foregroundStyle(.secondary).lineLimit(2).truncationMode(.middle)
                         }
                         Spacer(minLength: 8)
-                        Menu {
+                        RowActionsMenu(title: "Actions for Finder folder \(folder.name)") {
                             Button("Choose Again…") { model.choose(replacing: folder) }
                             Button("Remove from Finder Menus…", role: .destructive) { removing = folder }
-                        } label: { Image(systemName: "ellipsis") }.menuStyle(.borderlessButton).fixedSize().accessibilityLabel("Actions for Finder folder \(folder.name)")
+                        }
                     }
                 }
                 Button("Add Folder…", systemImage: "folder.badge.plus") { model.choose() }.disabled(model.error != nil || model.folders.count >= 16)

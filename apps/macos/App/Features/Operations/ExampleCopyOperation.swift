@@ -100,6 +100,10 @@ final class ExampleCopyWindow: NSWindowController, NSWindowDelegate {
 struct ExampleCopyView: View {
     @Bindable var operation: ExampleCopyOperation
     let close: () -> Void
+    private var dismissal: ReviewDismissButton {
+        ReviewDismissButton(busy: operation.busy, saving: operation.saving, cancel: operation.cancel, close: close)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             DialogHeading(title: "Example copy", subtitle: "Make a reusable example from a configuration.", symbol: "doc.on.doc")
@@ -127,7 +131,7 @@ struct ExampleCopyView: View {
                     HStack {
                         Label("Saved \(url.lastPathComponent)", systemImage: "checkmark.circle.fill").lineLimit(1).truncationMode(.middle)
                         Spacer()
-                        Button("Show in Finder") { NSWorkspace.shared.activateFileViewerSelecting([url]) }.buttonStyle(.link)
+                        ShowInFinderButton(url: url)
                     }.font(.callout).foregroundStyle(.green)
                 } else if operation.copied { Label("Example copied to clipboard", systemImage: "checkmark.circle.fill").font(.callout).foregroundStyle(.green) }
                 OperationFeedback(activity: operation.activity, error: operation.error ?? (operation.prepared == nil ? nil : operation.nameError))
@@ -136,25 +140,23 @@ struct ExampleCopyView: View {
                 Text("Local only · No history · Nothing runs or saves automatically")
                     .font(.caption).foregroundStyle(.secondary)
             }
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    if operation.savedURL == nil {
-                        Button(operation.busy ? "Cancel" : "Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.saving)
-                    }
-                    Spacer(minLength: 0)
-                    if operation.savedURL != nil {
-                        Button("Done", action: close).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                    } else if operation.prepared != nil {
-                        Button(operation.copied ? "Copied" : "Copy Example", action: operation.copy).modifier(DialogActionStyle()).disabled(operation.busy)
-                            .help("Copies the full example, even while viewing Source")
-                        Button("Save Example…", action: operation.save).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true))
-                            .disabled(operation.busy || operation.nameError != nil)
-                    } else {
-                        Button("Choose File…", action: operation.chooseFile).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true)).disabled(operation.busy)
-                    }
+            DialogFooter {
+                if operation.savedURL == nil {
+                    dismissal
+                }
+            } actions: {
+                if operation.savedURL != nil {
+                    DialogDoneButton(action: close)
+                } else if operation.prepared != nil {
+                    Button(operation.copied ? "Copied" : "Copy Example", action: operation.copy).modifier(DialogActionStyle()).disabled(operation.busy)
+                        .help("Copies the full example, even while viewing Source")
+                    ReviewDefaultButton(title: "Save Example…", action: operation.save)
+                        .disabled(operation.busy || operation.nameError != nil)
+                } else {
+                    ReviewDefaultButton(title: "Choose File…", action: operation.chooseFile).disabled(operation.busy)
                 }
             }
-        }.onExitCommand { if !operation.saving { close() } }
+        }.onExitCommand(perform: dismissal.perform)
         .padding(20).frame(minWidth: 520, minHeight: 560)
     }
     private var preview: some View {

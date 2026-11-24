@@ -2,7 +2,7 @@ import AppKit
 import CloakToolsCore
 import SwiftUI
 
-private struct FolderReviewPage<Content: View, Actions: View>: View {
+struct FolderReviewPage<Content: View, Actions: View>: View {
     let tool: WorkbenchTool
     let subtitle: String
     let task: FolderTask
@@ -14,26 +14,31 @@ private struct FolderReviewPage<Content: View, Actions: View>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             DialogHeading(title: tool.rawValue, subtitle: subtitle, symbol: tool.symbol)
-            content.disabled(task.busy)
+            VStack(alignment: .leading, spacing: 14) {
+                content
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .disabled(task.busy)
             if let output {
                 HStack {
                     Label("Created \(output.lastPathComponent)", systemImage: "checkmark.circle")
                         .lineLimit(1).help(output.path)
                     Spacer()
-                    Button("Reveal in Finder") { NSWorkspace.shared.activateFileViewerSelecting([output]) }.buttonStyle(.link)
+                    ShowInFinderButton(url: output)
                 }.modifier(DialogCard())
             }
             OperationFeedback(activity: task.activity, error: task.error)
             if let notice = task.notice { Text(notice).font(.callout).foregroundStyle(.secondary) }
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    Spacer(minLength: 0)
-                    if task.busy {
-                        Button("Cancel", action: task.cancel).modifier(DialogActionStyle()).keyboardShortcut(.cancelAction)
-                    } else {
-                        Button(output == nil && tool != .compare ? "Close" : "Done", action: close).modifier(DialogActionStyle()).keyboardShortcut(.cancelAction)
-                        actions
-                    }
+            DialogFooter {
+                if task.busy {
+                    Button("Cancel", action: task.cancel).modifier(DialogActionStyle()).keyboardShortcut(.cancelAction)
+                } else if output == nil {
+                    Button("Close", action: close).modifier(DialogActionStyle()).keyboardShortcut(.cancelAction)
+                }
+            } actions: {
+                if !task.busy {
+                    actions
+                    if output != nil { DialogDoneButton(action: close) }
                 }
             }
         }.padding(20).frame(minWidth: 440, minHeight: 420)
@@ -77,7 +82,7 @@ struct StructureReviewView: View {
             }
         } actions: {
             if review.structure == nil {
-                Button("Read Again", action: review.load).modifier(DialogActionStyle())
+                Button("Read Again", action: review.load).modifier(DialogActionStyle(prominent: true)).keyboardShortcut(.defaultAction)
             } else if !review.selection.isEmpty {
                 Button(review.hasSavedSet ? "Update File Set" : "Save File Set") { review.saveSet(using: saveSet) }
                     .modifier(DialogActionStyle()).disabled(review.matchesSavedSet)
@@ -106,7 +111,7 @@ struct SharingReviewView: View {
     var body: some View {
         FolderReviewPage(tool: .collect, subtitle: "Keep this collection open to add files from other Finder windows.",
                          task: review.task, output: review.output, close: close) {
-            if review.output == nil {
+            if review.output == nil && !review.files.isEmpty {
                 LabeledContent("New folder name") {
                     TextField("Folder name", text: $review.name).textFieldStyle(.roundedBorder).accessibilityLabel("New folder name")
                 }
@@ -141,11 +146,14 @@ struct SharingReviewView: View {
                 }
             }
         } actions: {
-            if review.output == nil {
+            if review.files.isEmpty {
+                Button("Choose Files…", action: review.chooseFiles)
+                    .modifier(DialogActionStyle(prominent: true)).keyboardShortcut(.defaultAction)
+            } else if review.output == nil {
                 Button("Save Copies…") {
                     if let folder = chooseFinderFolder("Choose where to save “\(review.name)”", prompt: "Save Copies") { review.save(in: folder) }
                 }.modifier(DialogActionStyle(prominent: true)).keyboardShortcut(.defaultAction)
-                    .disabled(review.files.isEmpty || nameProblem != nil)
+                    .disabled(nameProblem != nil)
             }
         }
     }
@@ -182,7 +190,7 @@ struct ComparisonReviewView: View {
                 }
             } else { Spacer() }
         } actions: {
-            Button("Compare Again", action: review.compare).modifier(DialogActionStyle(prominent: true))
+            Button("Compare Again", action: review.compare).modifier(DialogActionStyle(prominent: true)).keyboardShortcut(.defaultAction)
         }
     }
 

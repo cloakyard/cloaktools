@@ -190,7 +190,7 @@ struct OperationView: View {
                     if let output = operation.output {
                         Label("Created \(output.lastPathComponent)", systemImage: "checkmark.circle.fill").foregroundStyle(.green)
                         HStack(spacing: 14) {
-                            Button("Reveal in Finder") { NSWorkspace.shared.activateFileViewerSelecting([output]) }.buttonStyle(.link)
+                            ShowInFinderButton(url: output)
                             if !operation.isCreation {
                                 Button("Open in Preview", action: operation.openInPreview).buttonStyle(.link)
                             }
@@ -201,27 +201,28 @@ struct OperationView: View {
             DestinationRow(folder: operation.destination, change: operation.output == nil ? { operation.chooseDestination() } : nil).disabled(operation.busy)
             OperationFeedback(activity: operation.busy ? (operation.preparing ? "Preparing preview…" : operation.isCreation ? "Creating file…" : "Converting image…") : nil,
                               stopping: operation.stopping, cancellation: operation.cancelled ? "Cancelled. No output was published." : nil, error: operation.error)
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    if !operation.busy && !operation.isCreation && operation.preparedImage != nil {
+            if !operation.busy && operation.output == nil && (operation.isCreation || operation.preparedImage == nil) {
+                Text("Never replaces existing files.").font(.caption).foregroundStyle(.secondary)
+            }
+            DialogFooter {
+                if operation.busy {
+                    Button("Cancel", role: .cancel, action: operation.cancel).keyboardShortcut(.cancelAction)
+                        .modifier(DialogActionStyle()).disabled(operation.stopping)
+                } else if operation.output == nil {
+                    Button("Cancel", role: .cancel, action: close).keyboardShortcut(.cancelAction)
+                        .modifier(DialogActionStyle())
+                }
+            } actions: {
+                if operation.output != nil && !operation.busy {
+                    DialogDoneButton(action: close)
+                } else if !operation.busy {
+                    if !operation.isCreation && operation.preparedImage != nil {
                         SaveExportRecipeButton(recipe: $operation.recipe) { .image(operation.conversionOptions) }
-                    } else if !operation.busy && operation.output == nil {
-                        Text("Never replaces existing files.").font(.caption).foregroundStyle(.secondary)
-                    }
-                    Spacer(minLength: 4)
-                    if operation.busy {
-                        Button("Cancel", role: .cancel, action: operation.cancel).keyboardShortcut(.cancelAction)
-                            .modifier(DialogActionStyle()).disabled(operation.stopping)
-                    } else if operation.output != nil {
-                        Button("Done", action: close).keyboardShortcut(.defaultAction)
-                            .modifier(DialogActionStyle(prominent: true))
-                    } else {
-                        Button("Cancel", role: .cancel, action: close).keyboardShortcut(.cancelAction)
                             .modifier(DialogActionStyle())
-                        Button(operation.isCreation ? "Create" : "Convert", action: operation.start).keyboardShortcut(.defaultAction)
-                            .modifier(DialogActionStyle(prominent: true))
-                            .disabled(operation.isCreation ? operation.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty : (operation.preparedImage == nil || !operation.conversionOptions.format.isAvailable))
                     }
+                    Button(operation.isCreation ? "Create" : "Convert", action: operation.start).keyboardShortcut(.defaultAction)
+                        .modifier(DialogActionStyle(prominent: true))
+                        .disabled(operation.isCreation ? operation.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty : (operation.preparedImage == nil || !operation.conversionOptions.format.isAvailable))
                 }
             }
         }.padding(20).frame(minWidth: 420, minHeight: 320)

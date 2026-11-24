@@ -140,3 +140,81 @@ private func textPDF(_ labels: [String]) throws -> Data {
     }
     #expect(throws: ToolError.self) { try FinderIntent(url: FinderIntent.assemble(files: Array(repeating: URL(fileURLWithPath: "/tmp/a"), count: 33)).url) }
 }
+
+@Test func scannedPDFPreservesInkGeometryAndSearchablePagesWithinMeasuredLimit() async throws {
+    let folder = try pdfFolder()
+    defer { try? FileManager.default.removeItem(at: folder) }
+    let url = folder.appendingPathComponent("Scan.pdf")
+    var box = CGRect(x: 0, y: 0, width: 200, height: 300)
+    let rgb = CGColorSpace(name: CGColorSpace.sRGB)!
+    let bitmap = try #require(CGContext(data: nil, width: 400, height: 600, bitsPerComponent: 8, bytesPerRow: 1600, space: rgb, bitmapInfo: CGImageAlphaInfo.noneSkipLast.rawValue))
+    bitmap.setFillColor(CGColor(gray: 1, alpha: 1))
+    bitmap.fill(CGRect(x: 0, y: 0, width: 400, height: 600))
+    bitmap.setFillColor(CGColor(gray: 0, alpha: 1))
+    bitmap.fill(CGRect(x: 20, y: 420, width: 150, height: 90))
+    for y in 0..<90 {
+        for x in 0..<100 {
+            bitmap.setFillColor(CGColor(red: CGFloat((x * 37 + y * 13) % 253) / 255, green: CGFloat((x * 29 + y) % 255) / 255, blue: 0.5, alpha: 1))
+            bitmap.fill(CGRect(x: 195 + x * 2, y: 20 + y * 2, width: 2, height: 2))
+        }
+    }
+    let pdf = NSMutableData()
+    let consumer = try #require(CGDataConsumer(data: pdf))
+    let context = try #require(CGContext(consumer: consumer, mediaBox: &box, nil))
+    context.beginPDFPage(nil)
+    let scanImage = try #require(bitmap.makeImage())
+    context.draw(scanImage, in: box)
+    context.endPDFPage()
+    context.beginPDFPage(nil)
+    context.draw(scanImage, in: box)
+    context.setTextDrawingMode(.invisible)
+    context.textPosition = .init(x: 10, y: 100)
+    CTLineDraw(CTLineCreateWithAttributedString(NSAttributedString(string: "Original OCR layer")), context)
+    context.endPDFPage()
+    context.closePDF()
+    let doc = try #require(PDFDocument(data: textPDF(["Searchable fixture"])))
+    let rasterDocument = try #require(PDFDocument(data: pdf as Data))
+    let scan = try #require(rasterDocument.page(at: 0))
+    let ocr = try #require(rasterDocument.page(at: 1))
+    doc.insert(ocr, at: doc.pageCount)
+    let annotated = try #require(PDFDocument(data: pdf as Data)?.page(at: 0))
+    let note = PDFAnnotation(bounds: CGRect(x: 10, y: 30, width: 15, height: 15), forType: .text, withProperties: nil)
+    note.contents = "Keep my note"
+    annotated.addAnnotation(note)
+    doc.insert(annotated, at: doc.pageCount)
+    scan.rotation = 90
+    scan.setBounds(CGRect(x: 2, y: 4, width: 195, height: 290), for: .cropBox)
+    doc.insert(scan, at: 0)
+    let original = try #require(doc.dataRepresentation())
+    try original.write(to: url)
+    var options = OptimizationOptions()
+    options.scanDPI = 150
+    let first = try await MediaOptimization.prepare(url, options: options)
+    options.maximumBytes = first.outputBytes - 400
+    let fit = try await MediaOptimization.prepare(url, options: options)
+    #expect(fit.outputBytes <= first.outputBytes - 400)
+    #expect(try Data(contentsOf: #require(fit.comparisonOriginal)) == original)
+    let checked = try #require(PDFDocument(url: fit.previewURL))
+    #expect(checked.pageCount == 4 && checked.page(at: 1)?.string?.contains("Searchable fixture") == true)
+    #expect(checked.page(at: 2)?.string?.contains("Original OCR layer") == true)
+    #expect(checked.page(at: 3)?.annotations.contains { $0.contents == "Keep my note" } == true)
+    let output = try #require(checked.page(at: 0))
+    #expect(output.rotation == 90 && output.bounds(for: .cropBox) == scan.bounds(for: .cropBox))
+    func sample(_ page: PDFPage) throws -> [UInt8] {
+        let ctx = try #require(CGContext(data: nil, width: 200, height: 300, bitsPerComponent: 8, bytesPerRow: 800, space: rgb, bitmapInfo: CGImageAlphaInfo.noneSkipLast.rawValue))
+        ctx.drawPDFPage(try #require(page.pageRef))
+        let p = try #require(ctx.data).assumingMemoryBound(to: UInt8.self)
+        return [(50, 70), (50, 230), (90, 150)].map { p[$0.1 * 800 + $0.0 * 4] }
+    }
+    let before = try sample(scan), after = try sample(output)
+    #expect(before.min()! < 15 && before.max()! > 235)
+    #expect(zip(before, after).allSatisfy { abs(Int($0) - Int($1)) <= 20 })
+    var pipeline = OptimizationOptions()
+    pipeline.steps = [.scanPDF(dpi: 150), .fit(bytes: first.outputBytes - 400)]
+    let staged = try await MediaOptimization.prepare(url, options: pipeline)
+    #expect(staged.outputBytes <= first.outputBytes - 400)
+    #expect(try Data(contentsOf: #require(staged.comparisonOriginal)) == original)
+    options.maximumBytes = 1000
+    await #expect(throws: OptimizationError.overBudget) { try await MediaOptimization.prepare(url, options: options) }
+    #expect(try Data(contentsOf: url) == original)
+}

@@ -59,7 +59,7 @@ import Testing
     let info = try #require(Bundle.main.infoDictionary)
     #expect(info["CloakToolsReleaseChannel"] as? String == "Beta")
     let services = try #require(info["NSServices"] as? [[String: Any]])
-    let types = ["fitImage": ImageConversion.inputTypes.map(\.identifier), "folderActions": ["public.folder"],
+    let types = ["optimizeMedia": ["public.image", "com.adobe.pdf", "public.movie", "public.audio"], "fitImage": ImageConversion.inputTypes.map(\.identifier), "folderActions": ["public.folder"],
                  "collectCopies": ["public.data"], "copyAs": ["public.item"], "readQR": QRCodeReading.inputTypes.map(\.identifier)]
     #expect(services.count == types.count)
     #expect(services.allSatisfy { $0["NSSendTypes"] == nil })

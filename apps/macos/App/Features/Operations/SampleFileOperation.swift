@@ -108,6 +108,10 @@ final class SampleFileWindow: NSWindowController, NSWindowDelegate {
 struct SampleFileView: View {
     @Bindable var operation: SampleFileOperation
     let close: () -> Void
+    var dismissal: ReviewDismissButton {
+        ReviewDismissButton(busy: operation.busy, saving: operation.saving, cancel: operation.cancel, close: close)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             DialogHeading(title: "Sample files", subtitle: "Synthetic data for trying things out.", symbol: "doc.badge.gearshape")
@@ -163,35 +167,31 @@ struct SampleFileView: View {
                     HStack {
                         Label("Saved \(url.lastPathComponent)", systemImage: "checkmark.circle.fill").lineLimit(1).truncationMode(.middle)
                         Spacer()
-                        Button("Show in Finder") { NSWorkspace.shared.activateFileViewerSelecting([url]) }.buttonStyle(.link)
+                        ShowInFinderButton(url: url)
                     }.font(.callout).foregroundStyle(.green)
                 } else if operation.copied { Label("Copied to clipboard", systemImage: "checkmark.circle.fill").font(.callout).foregroundStyle(.green) }
                 OperationFeedback(activity: operation.activity?.title, error: operation.error ?? operation.inputError ?? (operation.prepared == nil ? nil : operation.nameError))
                 Text("Local only · No real personal data · Same settings, same content")
                     .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             }
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    if operation.savedURL == nil {
-                        Button(operation.busy ? "Cancel" : "Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.saving)
+            DialogFooter {
+                if operation.savedURL == nil {
+                    dismissal
+                }
+            } actions: {
+                if operation.savedURL != nil {
+                    DialogDoneButton(action: close)
+                } else if let prepared = operation.prepared {
+                    if prepared.canCopyText {
+                        Button(operation.copied ? "Copied" : "Copy Text", action: operation.copy).modifier(DialogActionStyle()).disabled(operation.busy)
+                            .help("Copy the full text, including content beyond the preview")
                     }
-                    Spacer(minLength: 0)
-                    if operation.savedURL != nil {
-                        Button("Done", action: close).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                    } else if let prepared = operation.prepared {
-                        if prepared.canCopyText {
-                            Button(operation.copied ? "Copied" : "Copy Text", action: operation.copy).modifier(DialogActionStyle()).disabled(operation.busy)
-                                .help("Copy the full text, including content beyond the preview")
-                        }
-                        Button("Save File…", action: operation.save).keyboardShortcut(.return, modifiers: .command)
-                            .modifier(DialogActionStyle(prominent: true)).disabled(operation.busy || operation.nameError != nil)
-                    } else {
-                        Button("Generate", action: operation.generate).keyboardShortcut(.return, modifiers: .command)
-                            .modifier(DialogActionStyle(prominent: true)).disabled(operation.busy || operation.inputError != nil)
-                    }
+                    ReviewDefaultButton(title: "Save File…", action: operation.save).disabled(operation.busy || operation.nameError != nil)
+                } else {
+                    ReviewDefaultButton(title: "Generate", action: operation.generate).disabled(operation.busy || operation.inputError != nil)
                 }
             }
-        }.onExitCommand { if !operation.saving { close() } }
+        }.onExitCommand(perform: dismissal.perform)
         .padding(20).frame(minWidth: 500, minHeight: 540)
     }
 }

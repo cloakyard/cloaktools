@@ -39,9 +39,11 @@ The [public beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-be
 | **Route links** | Separate web/email defaults with guarded restoration, ordered rules, pinned destinations, per-role fallback, an offline tester and explicit one-time bypass. |
 | **Work from Finder** | Workspace-scoped Finder menus, selected-item Services and compact native operation dialogs. |
 
+The development build also includes **Optimize Media** for mixed batches and an optional menu-bar launcher. See the [Clop parity record](docs/verification/CLOP-PARITY.md) for tested workflows and remaining gaps.
+
 ### Current boundaries
 
-Shortcuts actions and additional Finder-folder configuration are implemented, but execution needs a matching team signing identity and further live verification. Signing and notarization are deferred. Verified Edge/profile routing, spoken VoiceOver, macOS 27.0 runtime acceptance and broader installer/filesystem/codec coverage remain open. See the [roadmap](docs/ROADMAP.md) and [latest native verification](docs/verification/ROADMAP-IMPLEMENTATION.md).
+Shortcuts actions and additional Finder-folder configuration are implemented, but execution needs a matching team signing identity and further live verification. Signing and notarization are deferred. Verified Edge/profile routing, spoken VoiceOver, macOS 27.0 runtime acceptance and broader installer/filesystem/codec coverage remain open. See the [roadmap](docs/ROADMAP.md) and [native feature verification](docs/verification/NATIVE-FEATURE-AUDIT.md).
 
 Standalone OCR, basic batch renaming, ZIP tools, Keep Awake and generic inspection are outside the active roadmap because macOS already supplies those workflows. Existing overlapping tools remain available in compact secondary groups; see the [macOS feature audit](docs/MACOS-FEATURE-AUDIT.md).
 
@@ -53,14 +55,14 @@ If a destination app or default change is unavailable, use **Settings → Links 
 
 ## Privacy
 
-No accounts, analytics, cloud processing, link prefetch or browsing-history persistence. Processing and settings stay local. Sparkle update checks/downloads are manual unless you enable them in About. See [update publishing](docs/UPDATES.md). Cloud-managed folders and chosen destination apps follow their own policies. Files are published as new copies, with explicit review and bounded inputs. Read [Privacy](PRIVACY.md) and [Security](SECURITY.md) for exact storage and reporting boundaries.
+No accounts, analytics, cloud processing, link prefetch or browsing-history persistence. Processing and settings stay local. Sparkle update checks/downloads are manual unless you enable them in About. See [update publishing](docs/UPDATES.md). Cloud-managed folders and chosen destination apps follow their own policies. Manual exports publish reviewed new copies. Development builds can also optimize newly copied images or apply a saved recipe to new files in folders you choose. Both automations start off. Read [Privacy](PRIVACY.md) and [Security](SECURITY.md) for exact storage and reporting boundaries.
 
 ## Getting started
 
-Download the [beta DMG](https://github.com/cloakyard/cloaktools/releases/download/v0.6.0-beta.20261118.6/CloakTools-v0.6.0-beta.20261118.6.dmg) for **macOS 27 or later on Apple silicon**. Drag CloakTools to Applications. To build from source, install Xcode 27 and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
+Download the [beta DMG](https://github.com/cloakyard/cloaktools/releases/download/v0.6.0-beta.20261118.6/CloakTools-v0.6.0-beta.20261118.6.dmg) for **macOS 27 or later on Apple silicon**. Drag CloakTools to Applications. To build from source, install Xcode 27, CMake and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
 
 ```sh
-brew install xcodegen
+brew install xcodegen cmake
 git clone https://github.com/cloakyard/cloaktools.git
 cd cloaktools
 ./scripts/build-native.sh
@@ -75,7 +77,7 @@ Builds are locally ad-hoc signed and not notarized. Current recorded runtime che
 
 ### Native app
 
-`apps/macos/project.yml` is authoritative; XcodeGen creates the ignored Xcode project. The build is arm64-only, has no hardcoded Team ID and uses local ad-hoc signing. Development uses Xcode 27, Swift 6 and macOS system frameworks, with Sparkle 2 as an app-only dependency; the headless core has no third-party dependencies.
+`apps/macos/project.yml` is authoritative; XcodeGen creates the ignored Xcode project. The build is arm64-only, has no hardcoded Team ID and uses local ad-hoc signing. Development uses Xcode 27, Swift 6 and macOS system frameworks, with Sparkle 2 as an app-only dependency; the core uses pinned libwebp for WebP encoding. The first native build downloads and verifies the codec sources. It builds standalone FFmpeg helpers and embeds their corresponding source archive. Installed copies process media offline.
 
 | Layer | Choice |
 |---|---|
@@ -96,7 +98,7 @@ node scripts/check-air-design.mjs
 node scripts/check-air-portability.mjs
 ```
 
-The **November 16, 2026** native audit passed **224 core tests and 8 hosted app tests**. This is dated evidence, not a claim that browser checks revalidate native behavior. See [the native audit](docs/verification/ROADMAP-IMPLEMENTATION.md) for exact coverage and remaining gates. Website verification is recorded separately in [the Air audit](docs/air/AUDIT-2026-11-17.md).
+The November 23, 2026 design audit passed **248 core tests and 39 hosted app tests**. See the [design consistency audit](docs/air/DESIGN-CONSISTENCY-2026-11-23.md) for native layouts, keyboard behavior and website coverage, and the [feature and usability audit](docs/verification/NATIVE-FEATURE-AUDIT.md) for workflow checks.
 
 ### Website
 

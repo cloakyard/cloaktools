@@ -40,13 +40,23 @@ struct SettingsView: View {
 
     private var general: some View {
         Group {
+            Section("Automatic optimization") {
+                Toggle("Optimize new clipboard images", isOn: preference(\.optimizeCopiedImages))
+                Text("Replaces a newly copied image only when a smaller version is ready.").font(.caption).foregroundStyle(.secondary)
+                FolderRuleSettings(model: model)
+                if let status = model.automaticOptimization.clipboardStatus { Text(status).font(.caption) }
+            }
+            Section("Menu bar") {
+                Toggle("Show CloakTools in the menu bar", isOn: preference(\.showMenuBarTools))
+                DropZoneShortcutSetting(model: model)
+            }
             Section {
                 Toggle("Developer Tools", isOn: preference(\.developerToolsEnabled))
             } header: { Text("Your tools") } footer: {
                 Text("Adds JSON, Base64, code starters, sample files and developer copy formats. Turning it off preserves saved items, language choices and open drafts.")
             }
             Section {
-                Toggle("Reveal the new file in Finder", isOn: preference(\.revealCreatedFile))
+                Toggle("Show the new file in Finder", isOn: preference(\.revealCreatedFile))
                 Toggle("Open after creation", isOn: preference(\.openAfterCreation))
             } header: { Text("After creating a file") } footer: {
                 Text(model.preferences.developerToolsEnabled ? "Text and source files open in TextEdit. PDFs and clipboard images open in Preview." : "Text files open in TextEdit. PDFs and clipboard images open in Preview.")
@@ -62,7 +72,7 @@ struct SettingsView: View {
                     LabeledContent("Shortcuts actions", value: "Unavailable in this build")
                 }
             } header: { Text("Use with Shortcuts") } footer: {
-                Text(AutomationAvailability.hasSigningIdentity ? "Choose CloakTools in the Shortcuts action library to fit an image, collect a Markdown digest or review a file set." : "Shortcuts requires a build with a signing identity. You can fit an image, collect a Markdown digest or review a file set in the Workbench.")
+                Text(AutomationAvailability.hasSigningIdentity ? "Choose CloakTools in the Shortcuts action library to optimize media, fit an image, create a Markdown digest or review a file set." : "Shortcuts requires a build with a signing identity. You can optimize media, fit an image, create a Markdown digest or review a file set in the Workbench.")
             }
         }
     }
@@ -79,6 +89,7 @@ struct SettingsView: View {
             Section {
                 LabeledContent("Folder Actions with CloakTools", value: "Create, reuse or compare")
                 LabeledContent("Copy or Export File List with CloakTools", value: "Select files or folders")
+                LabeledContent("Optimize Media with CloakTools", value: "Select media files")
                 LabeledContent("Make It Fit with CloakTools", value: "Select a photo")
                 LabeledContent("Read QR Code from Image with CloakTools", value: "Select a still image")
                 LabeledContent("Collect Copies for Sharing with CloakTools", value: "Select files")
@@ -131,7 +142,7 @@ struct SettingsView: View {
                     }
                 }
                 LabeledContent("Location", value: "Beside the original")
-                Toggle("Reveal the converted copy in Finder", isOn: preference(\.revealConvertedFile))
+                Toggle("Show the converted copy in Finder", isOn: preference(\.revealConvertedFile))
             } header: { Text("Image conversion defaults") } footer: {
                 Text("These defaults apply when you start a conversion. Open conversions keep their current settings.")
             }

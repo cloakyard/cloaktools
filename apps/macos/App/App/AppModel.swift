@@ -6,7 +6,8 @@ import UniformTypeIdentifiers
 
 @MainActor @Observable
 final class AppModel {
-    static let shared = AppModel()
+    static let shared = AppModel(history: RecentOptimizations(file: PreferencesStore.standard.url.deletingLastPathComponent().appendingPathComponent("recent-optimizations.json")))
+    let recentOptimizations: RecentOptimizations
     private let store = PreferencesStore.standard
     var preferences: Preferences
     var customTemplates: [CustomTemplate] = []
@@ -20,6 +21,10 @@ final class AppModel {
     private let recipeStore = ExportRecipeStore.standard
     var exportRecipes: [ExportRecipe] = []
     var recipeError: String?
+    private(set) var dropZone: OptimizationDropZone?
+    let automaticOptimization = AutomaticOptimization()
+    private let dropZoneShortcut = DropZoneShortcut()
+    private(set) var dropZoneShortcutError: String?
     let workbench = WorkbenchNavigation()
     var settingsTab: SettingsCategory = .general
     var persistenceError: String?
@@ -30,6 +35,9 @@ final class AppModel {
     let defaultHandlers = DefaultHandlerSettings()
     let finderScopes = FinderScopeSettings()
     private(set) var sharingReview: SharingReview?
+    private(set) var optimizer: OptimizationReview?
+    private(set) weak var lastOptimizer: OptimizationReview?
+    private(set) var finderCollectionActive = false
     private var sharingStatus: SharingStatus?
     private var operationWindows: [UUID: NSWindowController] = [:]
     private func hasRoomForOperation() -> Bool {
@@ -42,7 +50,8 @@ final class AppModel {
         }
         return true
     }
-    init() {
+    init(history: RecentOptimizations = RecentOptimizations()) {
+        recentOptimizations = history
         do { preferences = try store.load() }
         catch { preferences = Preferences(); persistenceError = "Settings could not be read: \(error.localizedDescription)" }
         do { customTemplates = try library.load() }
@@ -50,6 +59,7 @@ final class AppModel {
         reloadPresets()
         reloadFileSets()
         reloadRecipes()
+        automaticOptimization.didSave = { output, _, _ in history.add(output, batch: UUID()) }
     }
     var allTemplateSources: [TemplateSource] { FileTemplate.allCases.map(TemplateSource.builtIn) + customTemplates.map(TemplateSource.custom) }
     var visibleCustomTemplates: [CustomTemplate] { customTemplates.filter { preferences.tools.includes(.custom($0)) } }
@@ -72,11 +82,13 @@ final class AppModel {
     }
     func saveRecipe(_ recipe: ExportRecipe, replacing original: ExportRecipe?) throws {
         exportRecipes = try recipeStore.upsert(recipe, replacing: original); recipeError = nil
+        configureAutomaticOptimization()
     }
     func removeRecipe(_ recipe: ExportRecipe) {
         do {
             let updated = try recipeStore.load().filter { $0.id != recipe.id }
             try recipeStore.save(updated); exportRecipes = updated; recipeError = nil
+            configureAutomaticOptimization()
         } catch { recipeError = error.localizedDescription }
     }
     func useRecipe(_ selected: ExportRecipe) {
@@ -88,6 +100,9 @@ final class AppModel {
             panel.message = "\(recipe.options.summary). Choose a fresh source; nothing exports until you confirm."
             panel.canChooseDirectories = false; panel.allowsMultipleSelection = false
             switch recipe.options {
+            case .optimize:
+                panel.allowsMultipleSelection = true
+                panel.allowedContentTypes = MediaOptimization.extensions.sorted().compactMap { UTType(filenameExtension: $0) }
             case .image, .fit: panel.allowedContentTypes = ImageConversion.inputTypes
             case .media: panel.allowedContentTypes = MediaExport.inputExtensions.sorted().compactMap { UTType(filenameExtension: $0) }
             }
@@ -96,6 +111,8 @@ final class AppModel {
                 // Recheck the limit when an asynchronous picker returns.
                 guard self.hasRoomForOperation() else { return }
                 switch recipe.options {
+                case .optimize:
+                    self.presentOptimizer(files: panel.urls, recipe: recipe)
                 case .image:
                     let operation = FileOperation(intent: .convert(image: source), preferences: snapshot, sources: [], recipe: recipe)
                     self.display(operation)
@@ -216,8 +233,60 @@ final class AppModel {
     }
     func update(_ edit: (inout Preferences) -> Void) {
         var updated = preferences; edit(&updated); updated.normalizeToolSelection()
-        do { try store.save(updated); preferences = updated; persistenceError = nil }
+        do {
+            try store.save(updated)
+            let visibilityChanged = preferences.showMenuBarTools != updated.showMenuBarTools
+            preferences = updated
+            configureAutomaticOptimization()
+            if visibilityChanged { updateSharingStatus() }
+            persistenceError = nil
+        }
         catch { persistenceError = "Settings could not be saved: \(error.localizedDescription)" }
+    }
+    func restoreOptimizationBackup() {
+        let picker = NSOpenPanel()
+        picker.title = "Choose an original from a CloakTools Backup folder"
+        picker.prompt = "Review Backup"
+        guard picker.runModal() == .OK, let file = picker.url else { return }
+        do {
+            let backup = try OptimizationBackup(backupFile: file)
+            let review = NSAlert()
+            review.messageText = "Restore “\(backup.originalURL.lastPathComponent)”?"
+            review.informativeText = "The original will return to \(backup.originalURL.path). The current optimized version will move into the backup folder."
+            review.addButton(withTitle: "Restore Original")
+            review.addButton(withTitle: "Cancel").keyEquivalent = "\u{1b}"
+            if review.runModal() == .alertFirstButtonReturn {
+                try backup.restore()
+                recentOptimizations.restored(backup.backupURL)
+                NSWorkspace.shared.activateFileViewerSelecting([backup.originalURL])
+            }
+        } catch { showError(error) }
+    }
+
+    func showDropZone() {
+        if dropZone == nil {
+            let zone = OptimizationDropZone(model: self)
+            zone.onClose = { [weak self] in self?.dropZone = nil }
+            dropZone = zone
+        }
+        dropZone?.showAtPointer()
+    }
+
+    func configureAutomaticOptimization() {
+        let available = dropZoneShortcut.configure(preferences.dropZoneKey) { [weak self] in self?.showDropZone() }
+        dropZoneShortcutError = available ? nil : "This shortcut is unavailable. Record a different combination."
+        automaticOptimization.configure(clipboard: preferences.optimizeCopiedImages && !preferences.automationPaused,
+                                        rules: preferences.automationPaused ? [] : preferences.folderRules, recipes: exportRecipes)
+    }
+    func saveFolderRule(_ rule: OptimizationFolderRule) throws {
+        try rule.validate(alongside: preferences.folderRules)
+        var value = preferences
+        if let i = value.folderRules.firstIndex(where: { $0.id == rule.id }) { value.folderRules[i] = rule }
+        else { value.folderRules.append(rule) }
+        try store.save(value)
+        preferences = value
+        automaticOptimization.retryStoppedRule(rule.id)
+        configureAutomaticOptimization()
     }
     func completeToolSelection(developerEnabled: Bool) throws {
         var updated = preferences
@@ -519,6 +588,71 @@ extension AppModel {
         if let first = chooseFinderFolder("Choose the first folder to compare") { present(.compare(first: first, second: nil)) }
     }
 
+    private func updateSharingStatus() {
+        guard finderCollectionActive, !preferences.showMenuBarTools, let review = sharingReview else {
+            sharingStatus?.remove()
+            sharingStatus = nil
+            return
+        }
+        if sharingStatus == nil { sharingStatus = SharingStatus { [weak self] in self?.collectForSharing([]) } }
+        sharingStatus?.update(count: review.files.count, error: review.task.error)
+    }
+
+    /// A Drop Zone selection is explicit, even when the user selects Standard.
+    func presentDropZoneFiles(_ files: [URL], recipeID: UUID?) throws {
+        guard !files.isEmpty else { return }
+        var chosen: ExportRecipe?
+        if let recipeID {
+            guard let recipe = exportRecipes.first(where: { $0.id == recipeID }), case .optimize = recipe.options else {
+                throw ExportRecipeError.changed
+            }
+            chosen = recipe
+        }
+        presentOptimizer(files: files, recipe: chosen, standardBatch: chosen == nil)
+    }
+
+    func presentOptimizer(files: [URL] = [], paste: Bool = false, recipe: ExportRecipe? = nil, standardBatch: Bool = false) {
+        let options: OptimizationOptions
+        if case let .optimize(saved) = recipe?.options { options = saved } else { options = .init() }
+        if let current = optimizer, recipe != nil || (standardBatch && (current.options != options || current.recipe != nil)) {
+            guard hasRoomForOperation() else { return }
+            let independent = OptimizationReview(history: recentOptimizations)
+            lastOptimizer = independent
+            independent.options = options
+            independent.recipe = recipe
+            independent.add(files)
+            let panel = FinderReviewWindow("Optimize Media", task: independent.task, finish: {}) { close in
+                OptimizationView(review: independent, close: close)
+            }
+            operationWindows[independent.task.id] = panel
+            panel.onClose = { [weak self] in self?.operationWindows[independent.task.id] = nil }
+            panel.showWindow(nil)
+            panel.window?.makeKeyAndOrderFront(nil)
+            NSApp.activate()
+            return
+        }
+        if optimizer == nil {
+            guard hasRoomForOperation() else { return }
+            optimizer = OptimizationReview(history: recentOptimizations)
+        }
+        guard let review = optimizer else { return }
+        lastOptimizer = review
+        if let recipe, case let .optimize(options) = recipe.options { review.recipe = recipe; review.options = options }
+        review.add(files)
+        if paste { review.addClipboard() }
+        if let controller = operationWindows[review.task.id] {
+            controller.window?.makeKeyAndOrderFront(nil)
+            NSApp.activate()
+        } else if workbench.drafts[.optimize] != nil {
+            workbench.show(.optimize)
+            workbench.showWindow?()
+        } else {
+            showReview(.optimize, task: review.task, finish: { [weak self] in self?.optimizer = nil }) { close in
+                OptimizationView(review: review, close: close)
+            }
+        }
+    }
+
     func collectForSharing(_ files: [URL]) {
         if sharingReview == nil {
             guard hasRoomForOperation() else { return }
@@ -526,13 +660,10 @@ extension AppModel {
         }
         guard let review = sharingReview else { return }
         if !files.isEmpty {
-            if sharingStatus == nil {
-                sharingStatus = SharingStatus { [weak self] in self?.collectForSharing([]) }
-                review.onChange = { [weak self, weak review] in
-                    guard let review else { return }
-                    self?.sharingStatus?.update(count: review.files.count, error: review.task.error)
-                }
-                review.onChange?()
+            if !finderCollectionActive {
+                finderCollectionActive = true
+                review.onChange = { [weak self] in self?.updateSharingStatus() }
+                updateSharingStatus()
             }
             review.add(files)
             return
@@ -544,6 +675,7 @@ extension AppModel {
             workbench.show(.collect); workbench.showWindow?()
         } else {
             showReview(.collect, task: review.task, finish: { [weak self] in
+                self?.finderCollectionActive = false
                 self?.sharingStatus?.remove()
                 self?.sharingStatus = nil
                 self?.sharingReview = nil

@@ -122,26 +122,26 @@ struct ClipboardView: View {
                     }
                     if let output = operation.output {
                         Label("Created \(output.lastPathComponent)", systemImage: "checkmark.circle.fill").foregroundStyle(.green)
-                        Button("Reveal in Finder") { NSWorkspace.shared.activateFileViewerSelecting([output]) }.buttonStyle(.link)
+                        ShowInFinderButton(url: output)
                     }
                 }.frame(maxWidth: .infinity, alignment: .leading)
             }.scrollBounceBehavior(.basedOnSize)
             DestinationRow(folder: operation.destination, change: operation.output == nil ? { operation.chooseDestination() } : nil).disabled(operation.busy)
             OperationFeedback(activity: operation.busy ? (operation.preparing ? "Preparing preview…" : "Creating file…") : nil,
                               stopping: operation.stopping, cancellation: operation.cancelled ? "Cancelled. No file was created." : nil, error: operation.error)
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    if !operation.busy && operation.output == nil { Text("Never replaces existing files.").font(.caption).foregroundStyle(.secondary) }
-                    Spacer(minLength: 4)
-                    if operation.busy {
-                        Button("Cancel", role: .cancel, action: operation.cancel).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.stopping)
-                    } else if operation.output != nil {
-                        Button("Done", action: close).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                    } else {
-                        Button("Cancel", role: .cancel, action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                        Button("Create", action: operation.start).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                            .disabled(operation.document == nil || operation.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                    }
+            if !operation.busy && operation.output == nil { Text("Never replaces existing files.").font(.caption).foregroundStyle(.secondary) }
+            DialogFooter {
+                if operation.busy {
+                    Button("Cancel", role: .cancel, action: operation.cancel).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.stopping)
+                } else if operation.output == nil {
+                    Button("Cancel", role: .cancel, action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+                }
+            } actions: {
+                if operation.output != nil && !operation.busy {
+                    DialogDoneButton(action: close)
+                } else if !operation.busy {
+                    Button("Create", action: operation.start).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
+                        .disabled(operation.document == nil || operation.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
             }
         }.padding(20).frame(minWidth: 420, minHeight: 380)

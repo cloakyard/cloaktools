@@ -23,11 +23,10 @@ struct FolderPresetSection: View {
                     }
                     Spacer(minLength: 4)
                     Button("Use…") { model.presentPreset(preset) }.accessibilityLabel("Use preset \(preset.title)")
-                    Menu {
+                    RowActionsMenu(title: "Actions for preset \(preset.title)") {
                         Button("Edit Preset…") { editing = preset }
                         Button("Remove Preset…", role: .destructive) { removing = preset }
-                    } label: { Image(systemName: "ellipsis") }
-                        .menuStyle(.borderlessButton).fixedSize().accessibilityLabel("Actions for preset \(preset.title)")
+                    }
                 }.padding(.vertical, 3)
             }
             Button("Add Folder Preset…", systemImage: "plus") {
@@ -108,16 +107,14 @@ struct FolderPresetEditor: View {
             }.scrollBounceBehavior(.basedOnSize)
             DestinationRow(folder: draft.folder, change: chooseFolder)
             OperationFeedback(error: error)
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    Text("Saves choices, not a file.").font(.caption).foregroundStyle(.secondary)
-                    Spacer(minLength: 0)
-                    Button("Cancel", role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                    Button("Save Preset") {
-                        do { try model.savePreset(draft); dismiss() } catch { self.error = error.localizedDescription }
-                    }.keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                        .disabled(source == nil || draft.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || draft.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                }
+            Text("Saves choices, not a file.").font(.caption).foregroundStyle(.secondary)
+            DialogFooter {
+                Button("Cancel", role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+            } actions: {
+                Button("Save Preset") {
+                    do { try model.savePreset(draft); dismiss() } catch { self.error = error.localizedDescription }
+                }.keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
+                    .disabled(source == nil || draft.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || draft.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
         }.padding(20).frame(width: 480, height: 400)
             .onAppear { titleFocused = true }

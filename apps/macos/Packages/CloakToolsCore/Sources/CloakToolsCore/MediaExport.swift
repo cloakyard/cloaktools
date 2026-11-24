@@ -43,9 +43,9 @@ final class MediaCapture: Sendable {
     let folder: URL
     let url: URL
     let byteCount: Int
-    init(_ source: URL) throws {
+    init(_ source: URL, acceptedExtensions: Set<String> = MediaExport.inputExtensions) throws {
         try Task.checkCancellation()
-        guard source.isFileURL, MediaExport.inputExtensions.contains(source.pathExtension.lowercased()) else { throw MediaExportError.unsupported }
+        guard source.isFileURL, acceptedExtensions.contains(source.pathExtension.lowercased()) else { throw MediaExportError.unsupported }
         let input = try FileHandle(forReadingFrom: source)
         defer { try? input.close() }
         var before = stat()
@@ -147,14 +147,25 @@ public enum MediaExport {
     }
 
     public static func export(_ source: PreparedMedia, preset: MediaExportPreset, in folder: URL, name: String,
+                              adjustments: OptimizationOptions? = nil,
                               progress: @escaping @Sendable (Double) async -> Void = { _ in }) async throws -> URL {
         try SafeOutput.validate(stem: name)
         try Task.checkCancellation()
         guard source.presets.contains(preset) else { throw MediaExportError.unavailable }
         guard folder.isFileURL, (try? folder.resourceValues(forKeys: [.isDirectoryKey]).isDirectory) == true else { throw ToolError.unavailableFolder }
-        let composition = try await composition(localAsset(source.capture.url), audioOnly: preset == .audio)
+        try adjustments?.validate()
+        let muted = preset != .audio && adjustments?.muteVideo == true
+        let composition = try await composition(localAsset(source.capture.url), audioOnly: preset == .audio, muted: muted)
+        if source.hasVideo, let speed = adjustments?.playbackSpeed, speed != 1 {
+            let duration = try await composition.load(.duration)
+            composition.scaleTimeRange(CMTimeRange(start: .zero, duration: duration), toDuration: CMTimeMultiplyByFloat64(duration, multiplier: 1 / speed))
+        }
         let expectedDuration = try await composition.load(.duration).seconds
         guard let session = AVAssetExportSession(asset: composition, presetName: preset.identifier), session.supportedFileTypes.contains(preset.fileType) else { throw MediaExportError.unavailable }
+        if let adjustments, preset != .audio, adjustments.crop.aspect != nil || adjustments.scale != 1 {
+            session.videoComposition = try await geometry(composition, source: source, preset: preset, options: adjustments)
+        }
+        if let limit = adjustments?.maximumBytes { session.fileLengthLimit = Int64(limit) }
         session.metadata = []
         session.shouldOptimizeForNetworkUse = preset != .audio
         let directory = folder.appendingPathComponent(".cloaktools-media-\(UUID())", isDirectory: true)
@@ -179,7 +190,7 @@ public enum MediaExport {
         let video = try await check.loadTracks(withMediaType: .video), audio = try await check.loadTracks(withMediaType: .audio)
         guard playable, duration.seconds.isFinite, duration.seconds > 0,
               abs(duration.seconds - expectedDuration) <= max(0.25, expectedDuration * 0.001),
-              preset == .audio ? (video.isEmpty && audio.count == 1) : (video.count == 1 && audio.count == (source.hasAudio ? 1 : 0)) else { throw MediaExportError.invalidOutput }
+              preset == .audio ? (video.isEmpty && audio.count == 1) : (video.count == 1 && audio.count == (source.hasAudio && !muted ? 1 : 0)) else { throw MediaExportError.invalidOutput }
         if let track = video.first {
             let (formats, size, transform) = try await track.load(.formatDescriptions, .naturalSize, .preferredTransform)
             let displayed = CGRect(origin: .zero, size: size).applying(transform).size
@@ -199,10 +210,30 @@ public enum MediaExport {
         return output
     }
 
+    private static func geometry(_ composition: AVComposition, source: PreparedMedia, preset: MediaExportPreset,
+                                 options: OptimizationOptions) async throws -> AVVideoComposition {
+        guard let track = try await composition.loadTracks(withMediaType: .video).first else { throw MediaExportError.unavailable }
+        let (natural, transform) = try await track.load(.naturalSize, .preferredTransform)
+        let display = CGRect(origin: .zero, size: natural).applying(transform)
+        let crop = options.crop.centered(in: display)
+        let longEdge = preset == .video720 ? 1280.0 : 1920.0
+        let shortEdge = preset == .video720 ? 720.0 : 1080.0
+        let scale = min(options.scale, longEdge / max(crop.width, crop.height), shortEdge / min(crop.width, crop.height))
+        let width = max(2, (crop.width * scale / 2).rounded(.down) * 2)
+        let height = max(2, (crop.height * scale / 2).rounded(.down) * 2)
+        var layer = AVVideoCompositionLayerInstruction.Configuration(assetTrack: track)
+        layer.setTransform(transform.concatenating(.init(translationX: -crop.minX, y: -crop.minY))
+            .concatenating(.init(scaleX: width / crop.width, y: height / crop.height)), at: .zero)
+        let range = CMTimeRange(start: .zero, duration: try await composition.load(.duration))
+        let instruction = AVVideoCompositionInstruction(configuration: .init(layerInstructions: [.init(configuration: layer)], timeRange: range))
+        let frame = CMTime(value: 1, timescale: Int32(max(1, min(60, source.frameRate.rounded()))))
+        return AVVideoComposition(configuration: .init(frameDuration: frame, instructions: [instruction], renderSize: CGSize(width: width, height: height)))
+    }
+
     /// Include only the chosen media tracks; don't copy chapters, subtitle or timed metadata tracks.
-    private static func composition(_ asset: AVAsset, audioOnly: Bool) async throws -> AVMutableComposition {
+    private static func composition(_ asset: AVAsset, audioOnly: Bool, muted: Bool = false) async throws -> AVMutableComposition {
         let output = AVMutableComposition()
-        for type in audioOnly ? [AVMediaType.audio] : [.video, .audio] {
+        for type in audioOnly ? [AVMediaType.audio] : (muted ? [.video] : [.video, .audio]) {
             for source in try await asset.loadTracks(withMediaType: type) {
                 try Task.checkCancellation()
                 let range = try await source.load(.timeRange)

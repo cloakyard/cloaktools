@@ -150,23 +150,23 @@ struct DefaultHandlerReview: View {
                     }
                 }
             }.scrollBounceBehavior(.basedOnSize).disabled(applying)
-            if applying { HStack(spacing: 8) { ProgressView().controlSize(.small); Text("Waiting for macOS…").font(.callout) } }
-            if let error { Text(error).font(.callout).foregroundStyle(.red).fixedSize(horizontal: false, vertical: true) }
-            GlassEffectContainer(spacing: 8) {
-                HStack {
-                    if let result, !result.complete {
-                        Button("Review Again", action: load).modifier(DialogActionStyle())
-                    }
-                    Spacer(minLength: 0)
-                    Button(result == nil ? "Cancel" : "Done", role: .cancel) { dismiss() }
-                        .keyboardShortcut(result == nil ? .cancelAction : .defaultAction).modifier(DialogActionStyle())
-                    if result == nil {
-                        Button(kind == .useCloakTools ? "Use CloakTools" : "Restore Apps", action: apply)
-                            .keyboardShortcut(.defaultAction).disabled(plan == nil || plan?.steps.isEmpty == true)
-                            .modifier(DialogActionStyle(prominent: true))
-                    }
-                }.disabled(applying)
-            }
+            OperationFeedback(activity: applying ? "Waiting for macOS…" : nil, error: error)
+            DialogFooter {
+                if result == nil {
+                    Button("Cancel", role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+                }
+            } actions: {
+                if let result, !result.complete {
+                    Button("Review Again", action: load).modifier(DialogActionStyle())
+                }
+                if result == nil {
+                    Button(kind == .useCloakTools ? "Use CloakTools" : "Restore Apps", action: apply)
+                        .keyboardShortcut(.defaultAction).disabled(plan == nil || plan?.steps.isEmpty == true)
+                        .modifier(DialogActionStyle(prominent: true))
+                } else {
+                    DialogDoneButton { dismiss() }
+                }
+            }.disabled(applying)
         }.padding(20).frame(width: 460, height: result == nil ? (role == .web ? 380 : 330) : (role == .web ? 300 : 280))
             .interactiveDismissDisabled(applying).onAppear(perform: load)
             .onChange(of: selected) { updatePlan() }

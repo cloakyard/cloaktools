@@ -143,7 +143,7 @@ struct FileSetView: View {
                     Label(output.lastPathComponent, systemImage: "checkmark.circle.fill").font(.headline).foregroundStyle(.green)
                     Text("\(operation.fileCount) files · \(operation.prepared?.byteCount.formatted() ?? "0") bytes").foregroundStyle(.secondary)
                     Text("Existing files and folders were kept.").font(.callout).foregroundStyle(.secondary)
-                    Button("Reveal in Finder") { NSWorkspace.shared.activateFileViewerSelecting([output]) }.buttonStyle(.link)
+                    ShowInFinderButton(url: output)
                 }.frame(maxWidth: .infinity, alignment: .leading).modifier(DialogCard())
                 Spacer(minLength: 0)
             } else {
@@ -209,22 +209,20 @@ struct FileSetView: View {
             }
     }
     private var actions: some View {
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    if !operation.busy && operation.output == nil {
-                        if reviewing { Button("Edit Contents", action: operation.edit).modifier(DialogActionStyle()) }
-                        else { Button("Save Set…") { saving = true }.buttonStyle(.link).disabled(operation.validation != nil) }
-                    }
-                    Spacer(minLength: 0)
-                    if operation.busy {
-                        Button("Cancel", role: .cancel, action: operation.cancel).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.stopping)
-                    } else if operation.output != nil {
-                        Button("Done", action: close).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                    } else {
-                        Button("Cancel", role: .cancel, action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                        Button(reviewing ? "Create Folder" : "Review…") { reviewing ? operation.create() : operation.review() }
-                            .keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true)).disabled(operation.validation != nil)
-                    }
+            DialogFooter {
+                if operation.busy {
+                    Button("Cancel", role: .cancel, action: operation.cancel).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.stopping)
+                } else if operation.output == nil {
+                    Button("Cancel", role: .cancel, action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+                }
+            } actions: {
+                if operation.output != nil && !operation.busy {
+                    DialogDoneButton(action: close)
+                } else if !operation.busy {
+                    if reviewing { Button("Edit Contents", action: operation.edit).modifier(DialogActionStyle()) }
+                    else { Button("Save Set…") { saving = true }.modifier(DialogActionStyle()).disabled(operation.validation != nil) }
+                    Button(reviewing ? "Create Folder" : "Review…") { reviewing ? operation.create() : operation.review() }
+                        .keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true)).disabled(operation.validation != nil)
                 }
             }
     }
@@ -273,17 +271,15 @@ private struct FileSetEntryEditor: View {
                 Text("Use / for subfolders. Parent folders are created automatically. Hidden names and .. are not allowed.").font(.caption).foregroundStyle(.secondary)
             }.modifier(DialogCard())
             OperationFeedback(error: error)
-            GlassEffectContainer(spacing: 8) {
-                HStack {
-                    Spacer()
-                    Button("Cancel", role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                    Button("Keep Item") {
-                        do {
-                            try FileSetDefinition(entries: [entry]).validate(sources: sources)
-                            save(entry); dismiss()
-                        } catch { self.error = error.localizedDescription }
-                    }.keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true)).disabled(entry.path.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                }
+            DialogFooter {
+                Button("Cancel", role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+            } actions: {
+                Button("Keep Item") {
+                    do {
+                        try FileSetDefinition(entries: [entry]).validate(sources: sources)
+                        save(entry); dismiss()
+                    } catch { self.error = error.localizedDescription }
+                }.keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true)).disabled(entry.path.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
         }.padding(20).frame(width: 440).onAppear { pathFocused = true }
             .onChange(of: entry) { error = nil }
@@ -303,18 +299,16 @@ private struct FileSetSaveSheet: View {
             TextField("Set name", text: $title).textFieldStyle(.roundedBorder).focused($focused)
             Text("Saves paths, file types and the content policy. Choose a destination each time you use it. No files are created now.").font(.callout).foregroundStyle(.secondary)
             OperationFeedback(error: error)
-            GlassEffectContainer(spacing: 8) {
-                HStack {
-                    Spacer()
-                    Button("Cancel", role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                    Button(existing ? "Save Changes" : "Save Set") {
-                        do {
-                            var definition = operation.definition; definition.title = title.trimmingCharacters(in: .whitespacesAndNewlines)
-                            try AppModel.shared.saveFileSet(definition)
-                            operation.savedMessage = "Saved “\(definition.title)” in New Files."; dismiss()
-                        } catch { self.error = error.localizedDescription }
-                    }.keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true)).disabled(title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                }
+            DialogFooter {
+                Button("Cancel", role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
+            } actions: {
+                Button(existing ? "Save Changes" : "Save Set") {
+                    do {
+                        var definition = operation.definition; definition.title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+                        try AppModel.shared.saveFileSet(definition)
+                        operation.savedMessage = "Saved “\(definition.title)” in New Files."; dismiss()
+                    } catch { self.error = error.localizedDescription }
+                }.keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true)).disabled(title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
         }.padding(20).frame(width: 440).onAppear {
             title = AppModel.shared.fileSets.first { $0.id == operation.definition.id }?.title ?? operation.definition.title; focused = true

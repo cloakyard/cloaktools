@@ -70,12 +70,12 @@ public enum ImageConversion {
         catch LocalFileCapture.CaptureError.tooLarge { throw ToolError.imageTooLarge }
     }
 
-    static func prepare(bytes: Data, sourceURL input: URL) throws -> PreparedImage {
+    static func prepare(bytes: Data, sourceURL input: URL, acceptedTypes: [UTType] = inputTypes) throws -> PreparedImage {
         try Task.checkCancellation()
         guard bytes.count <= 100_000_000 else { throw ToolError.imageTooLarge }
         guard let source = CGImageSourceCreateWithData(bytes as CFData, [kCGImageSourceShouldCache: false] as CFDictionary),
               let identifier = CGImageSourceGetType(source) as String?,
-              inputTypes.contains(where: { $0.identifier == identifier }), CGImageSourceGetCount(source) == 1,
+              acceptedTypes.contains(where: { $0.identifier == identifier }), CGImageSourceGetCount(source) == 1,
               let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [CFString: Any],
               let width = properties[kCGImagePropertyPixelWidth] as? Int,
               let height = properties[kCGImagePropertyPixelHeight] as? Int else { throw ToolError.unsupportedImage }
@@ -91,7 +91,7 @@ public enum ImageConversion {
         let thumbnail = try render(image, width: max(1, Int(Double(image.width) * scale)), height: max(1, Int(Double(image.height) * scale)))
         let preview = try encode(thumbnail, options: .init())
         try Task.checkCancellation()
-        let format = identifier == UTType.jpeg.identifier ? "JPEG" : identifier == UTType.png.identifier ? "PNG" : identifier == UTType.tiff.identifier ? "TIFF" : "HEIC"
+        let format = identifier == UTType.jpeg.identifier ? "JPEG" : identifier == UTType.png.identifier ? "PNG" : identifier == UTType.tiff.identifier ? "TIFF" : ([UTType.heic.identifier, UTType.heif.identifier].contains(identifier) ? "HEIC" : (UTType(identifier)?.preferredFilenameExtension?.uppercased() ?? identifier))
         return PreparedImage(sourceURL: input, sourceFormat: format, sourceByteCount: bytes.count, thumbnailPNG: preview, image: image)
     }
 

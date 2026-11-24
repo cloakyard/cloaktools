@@ -93,6 +93,10 @@ final class TextCleanupWindow: NSWindowController, NSWindowDelegate {
 struct TextCleanupView: View {
     @Bindable var operation: TextCleanupOperation
     let close: () -> Void
+    private var dismissal: ReviewDismissButton {
+        ReviewDismissButton(busy: operation.busy, saving: operation.saving, cancel: operation.cancel, close: close)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             DialogHeading(title: "Text cleanup", subtitle: "Tidy the spacing. Keep your words.", symbol: "text.alignleft")
@@ -125,7 +129,7 @@ struct TextCleanupView: View {
                     HStack {
                         Label("Saved \(url.lastPathComponent)", systemImage: "checkmark.circle.fill").lineLimit(1).truncationMode(.middle)
                         Spacer(minLength: 4)
-                        Button("Show in Finder") { NSWorkspace.shared.activateFileViewerSelecting([url]) }.buttonStyle(.link)
+                        ShowInFinderButton(url: url)
                     }.font(.callout).foregroundStyle(.green)
                 } else if operation.copied { Label("Result copied to clipboard", systemImage: "checkmark.circle.fill").font(.callout).foregroundStyle(.green) }
                 else if let result = operation.prepared {
@@ -138,26 +142,24 @@ struct TextCleanupView: View {
                 Text("Local only · Up to 1 MiB · No history or automatic clipboard access")
                     .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             }
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    if operation.savedURL == nil {
-                        Button(operation.busy ? "Cancel" : "Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle()).disabled(operation.saving)
-                    }
-                    Spacer(minLength: 0)
-                    if operation.savedURL != nil {
-                        Button("Done", action: close).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                    } else if let result = operation.prepared {
-                        Button(operation.copied ? "Copied" : "Copy Result", action: operation.copy).modifier(DialogActionStyle()).disabled(operation.busy || result.text.isEmpty)
-                            .help("Copy the complete cleaned result, including text beyond the preview")
-                        Button("Save Text…", action: operation.save).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true))
-                            .disabled(operation.busy || operation.nameError != nil)
-                    } else {
-                        Button("Preview Changes", action: operation.preview).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true))
-                            .disabled(operation.busy || operation.input.isEmpty)
-                    }
+            DialogFooter {
+                if operation.savedURL == nil {
+                    dismissal
+                }
+            } actions: {
+                if operation.savedURL != nil {
+                    DialogDoneButton(action: close)
+                } else if let result = operation.prepared {
+                    Button(operation.copied ? "Copied" : "Copy Result", action: operation.copy).modifier(DialogActionStyle()).disabled(operation.busy || result.text.isEmpty)
+                        .help("Copy the complete cleaned result, including text beyond the preview")
+                    Button("Save Text…", action: operation.save).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true))
+                        .disabled(operation.busy || operation.nameError != nil)
+                } else {
+                    Button("Preview Changes", action: operation.preview).keyboardShortcut(.return, modifiers: .command).modifier(DialogActionStyle(prominent: true))
+                        .disabled(operation.busy || operation.input.isEmpty)
                 }
             }
-        }.onExitCommand { if !operation.saving { close() } }
+        }.onExitCommand(perform: dismissal.perform)
         .padding(20).frame(minWidth: 540, minHeight: 570)
     }
     private var editor: some View {

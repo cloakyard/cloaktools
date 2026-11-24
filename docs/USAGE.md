@@ -54,7 +54,7 @@ Apple silicon, macOS **27.0 or later**. Built and exercised on macOS 27.2.1 (26B
 
 ## Build, install, and first run
 
-Install Xcode 27 and XcodeGen (`brew install xcodegen`), then from this repository:
+Install Xcode 27, CMake and XcodeGen (`brew install xcodegen cmake`), then from this repository:
 
 ```sh
 ./scripts/build-native.sh
@@ -99,7 +99,7 @@ Image mode accepts files/decoded images up to 10 MiB, 40 megapixels per frame an
 
 ## Sample files
 
-Open **Developer Tools → Generate sample files** or **File → Developer Tools → Sample Files…**. Choose JSON, CSV, Text or Binary, then a record count or file size. **Generate** (⌘Return) shows a preview and exact byte count without writing a file. Enter a name and choose **Save File…**, then a folder. Existing names receive a numbered copy. Success offers Show in Finder and Done.
+Open **Developer Tools → Generate sample files** or **File → Developer Tools → Sample Files…**. Choose JSON, CSV, Text or Binary, then a record count or file size. **Generate** (Return or ⌘Return) shows a preview and exact byte count without writing a file. Enter a name and choose **Save File…**, then a folder. Existing names receive a numbered copy. Success offers Show in Finder and Done.
 
 JSON and CSV contain 1–10,000 deterministic records: an ID, synthetic name, `example.com` email, boolean and note. Notes cycle through plain text, commas, quotes, multiline text and Unicode. CSV uses UTF-8, a header, quoted fields and CRLF record endings. Text repeats ASCII content to the exact byte count; Binary creates zero-filled `.bin` data. Size accepts whole numbers from 1 byte through 32 MiB, with Bytes/KiB/MiB units (1 KiB = 1,024 bytes). The last text line may be partial. Binary files are useful for size checks, not representative compression tests.
 
@@ -275,7 +275,7 @@ Use **File → Recreate Export** or **Images, PDFs & Media → Saved export reci
 
 The recipe row menu can rename or remove its saved definition. **Save Recipe…** in a reused operation offers **Save Changes** or **Save as a new recipe**. Cancel leaves the library unchanged. An older draft cannot overwrite a changed or removed recipe; reopen the current version or save a new copy. Already-open operations retain their captured settings. Removing a recipe leaves exported files intact.
 
-Up to 32 recipes, with 1–80-character names, are stored locally in `export-recipes.json`. An unreadable or unsupported library is kept intact and reported instead of replaced. Recipes do not store export history, auto-run, watch folders or batch-process sources. PDF assembly/page recipes are outside this slice. Existing source, format, size and safe-publication limits still apply.
+Up to 32 recipes, with 1–80-character names, are stored locally in `export-recipes.json`. An unreadable or unsupported library is kept intact and reported instead of replaced. Saving a recipe stores its settings. In the development build, an Optimize Media recipe can also process a batch or run automatically when you assign it to a folder rule. PDF assembly and page organization use their own reviews. Existing source, format, size and safe-publication limits still apply.
 
 ## File lists
 
@@ -283,7 +283,7 @@ From Finder, select the items, choose **Copy or Export File List** and then **Ex
 
 Open **Text & Sharing → Export a file list** or **File → File List…**. Choose up to 200 files or folders, review their order, and use the arrows or Remove to arrange them. CSV is selected initially; Markdown is also available. Expand **Columns** to choose kind, size in bytes, modified date in UTC or full path. Names are always included; dates and full paths start off.
 
-**Preview Export** (⌘Return) prepares the exact list. Switch between **Items** and **Export**, then explicitly **Copy List** or name and **Save List…**. Both actions use the complete prepared export, even while Items is visible. Saving makes a new `.csv` or `.md` file, with numbered names on collisions. Changing columns, order or selection requires a fresh preview.
+**Preview Export** (Return or ⌘Return) prepares the exact list. Switch between **Items** and **Export**, then explicitly **Copy List** or name and **Save List…**. Both actions use the complete prepared export, even while Items is visible. Saving makes a new `.csv` or `.md` file, with numbered names on collisions. Changing columns, order or selection requires a fresh preview.
 
 Only selected metadata is read. File contents are not opened, folders are not scanned, and final symbolic links are listed without following their targets. Sizes are file bytes, with blank cells for folders and links. Captured details stay fixed until **Refresh**; a failed refresh/addition retains the previous list. Full paths may reveal private folder names, so review before sharing. CSV quotes every field and prefixes formula-like cells with an apostrophe. Markdown escapes markup and displays embedded line breaks/tabs as visible symbols. The preview shows up to 65,536 characters; output is capped at 2 MiB. This everyday tool is available in either tool mode.
 
@@ -386,6 +386,29 @@ The [complete roadmap](ROADMAP.md) retains all six subsequent milestones. Milest
 
 ## Shortcuts and additional Finder folders
 
-Three App Intents are implemented: **Make Image Fit**, **Make Markdown Digest**, and **Review Saved File Set**. Image and digest actions return files to the next Shortcuts action; they do not save beside sources. File-set automation opens the existing destination/review flow and never creates silently. Developer Tools filtering still applies to saved sets.
+The public beta includes **Make Image Fit**, **Make Markdown Digest** and **Review Saved File Set**. The development build also includes **Optimize Media File**. The image, digest and optimization actions return a file to the next Shortcuts action. File-set automation opens the existing destination/review flow and never creates silently. Developer Tools filtering still applies to saved sets.
 
 On this Mac, the Shortcuts library discovers the actions, but macOS rejects live execution without a team signing identity. General explains this limitation instead of offering a failing launch path. Use the equivalent tools directly in the local preview. Additional Finder folders likewise require matching app-group signing; Add/Renew/Remove and bounded bookmark storage are implemented behind that gate. Both features require signed runtime verification before release.
+
+## Optimize Media in the development build
+
+Open **Images, PDFs & Media → Optimize media files**, **File → Optimize Media…** or the wrench-and-screwdriver menu bar item. In Finder, select media and choose **Services → Optimize Media with CloakTools**. Add files, drop them onto the review, or paste copied files or an image. A batch accepts up to 100 items.
+
+Choose **Preview** to measure the output. Each row shows the input and output size or the reason the file was skipped. Quick Look opens the prepared result. Copy places an encoded image on the clipboard. **Save Copies…** asks for a destination and assigns numbered names when needed. You can cancel a batch and keep completed previews. Files already compact or within their size limit show the reason and count as finished. Use **Preview Current File** in a row’s actions to read an edited source again. Closing the review releases its previews.
+
+**Export options** shows controls relevant to the selected files. Choose a still-image format, crop, scale, byte limit, video speed, mute, animated GIF output, audio format or AAC bitrate. Use **Save Recipe…** to reuse a combination from the menu bar. A PDF crop changes the visible page box. Restore PDF media box reveals the full original page area in a new copy. Cropping a PDF does not redact its hidden contents.
+
+In **Settings → General**, **Optimize new clipboard images** replaces a newly copied image when its encoding saves space. **Add Folder Rule…** lets you choose a folder, file type and recipe. New matching files go to **Optimized Copies** inside it. Existing files are skipped when a rule starts or resumes. Both General settings and the menu bar offer **Pause Automation** and **Resume Automation**. If the watched directory moves or is replaced while monitoring, edit the rule to select the current folder. Both settings start off. The Workbench and Finder Service also work when the menu bar icon is hidden.
+
+Use **Recipe → New Pipeline…** in the review to name a sequence such as resize, convert to WebP and fit under 500 KB. Change the order with the step menu. Choose the saved name in the review, Drop Zone or a folder rule. Steps apply to matching file types. The preview shows each file’s measured result before a manual save.
+
+For a scanned PDF, expand **Export options → PDF images**, choose a scan resolution and optionally set a size limit. **Compare PDF…** shows the captured original and result at the same page and zoom. Text, OCR and annotated pages are kept. An unattainable limit produces a per-file message.
+
+The bundled command-line tool lives at `CloakTools.app/Contents/MacOS/cloakopt`. Run it with `--help`. Supplying local files prints measured results as JSON lines. Add `--output <folder>` to publish the copies, or use `--recipe <name>` to apply a saved optimization recipe.
+
+For a same-format preview, the row’s actions menu also offers **Replace Original…**. Confirmation exchanges the two files and keeps the original in a visible backup folder beside the source. For multiple same-format previews, **Replace Originals…** keeps a backup for each. **File → Recent Results** reveals saved outputs and offers **Undo Last Replacement Batch…**, including after restart. Edited files are skipped and reported individually. **Clear Recent Results** forgets paths while keeping files and backups. Use **Restore Original** during the review or **Reveal Backup** to locate it. After using **Save Copies…**, the actions menu can move the original to Trash. The app checks the reviewed file before replacing or trashing it.
+
+
+**Show Drop Zone** opens a floating target near the pointer. Drop local files or choose a saved optimization recipe there. A prepared item has a drag handle in its review and the latest result appears in the drop zone. Record a system-wide **Show Drop Zone shortcut** in General to call it from another app. After closing a review or relaunching, **File → Restore an Original…** accepts the original inside a CloakTools Backup folder and reviews its destination.
+
+The development build also encodes animated WebP, JPEG XL, HEVC (hardware or x265), VP9 WebM, AV1 MKV, MP3 and Ogg Opus locally. For JPEG XL, a JPEG with original geometry keeps a recoverable copy of its exact JPEG bytes. Choose **Reconstruct original JPEG** to recover them. Audio loudness targets use LUFS. Run the bundled `cloakopt --help` for command-line format, crop, scale, speed, bitrate and loudness options.

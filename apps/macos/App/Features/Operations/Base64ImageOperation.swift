@@ -95,6 +95,10 @@ struct Base64ImageView: View {
     @Bindable var operation: Base64ImageOperation
     @Binding var showImages: Bool
     let close: () -> Void
+    private var dismissal: ReviewDismissButton {
+        ReviewDismissButton(busy: operation.busy, saving: operation.saving, cancel: operation.cancel, close: close)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             Base64Heading(showImages: $showImages).disabled(operation.busy)
@@ -111,7 +115,7 @@ struct Base64ImageView: View {
                     HStack {
                         Label("Saved \(url.lastPathComponent)", systemImage: "checkmark.circle.fill").lineLimit(1).truncationMode(.middle)
                         Spacer()
-                        Button("Show in Finder") { NSWorkspace.shared.activateFileViewerSelecting([url]) }.buttonStyle(.link)
+                        ShowInFinderButton(url: url)
                     }.font(.callout).foregroundStyle(.green)
                 } else if operation.copied { Label("Copied to clipboard", systemImage: "checkmark.circle.fill").font(.callout).foregroundStyle(.green) }
                 else if operation.decoded != nil { Label("Image decoded", systemImage: "checkmark.circle.fill").font(.callout).foregroundStyle(.green) }
@@ -119,35 +123,30 @@ struct Base64ImageView: View {
                 Text("Local only · Original image bytes, metadata and animation are kept.")
                     .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             }
-            GlassEffectContainer(spacing: 8) {
-                HStack(spacing: 8) {
-                    if operation.savedURL == nil {
-                        Button(operation.busy ? "Cancel" : "Close", action: close).keyboardShortcut(.cancelAction).modifier(DialogActionStyle())
-                            .disabled(operation.saving)
-                    }
-                    Spacer(minLength: 0)
-                    if operation.decoding {
-                        if operation.savedURL != nil {
-                            Button("Done", action: close).keyboardShortcut(.defaultAction).modifier(DialogActionStyle(prominent: true))
-                        } else if operation.decoded != nil {
-                            Button("Save Image…", action: operation.save).keyboardShortcut(.return, modifiers: .command)
-                                .modifier(DialogActionStyle(prominent: true)).disabled(operation.busy || operation.nameError != nil)
-                        } else {
-                            Button("Decode", action: operation.run).keyboardShortcut(.return, modifiers: .command)
-                                .modifier(DialogActionStyle(prominent: true)).disabled(operation.input.isEmpty || operation.busy)
-                        }
-                    } else if operation.source == nil {
-                        Button("Choose Image…", action: operation.chooseImage).keyboardShortcut(.return, modifiers: .command)
-                            .modifier(DialogActionStyle(prominent: true)).disabled(operation.busy)
+            DialogFooter {
+                if operation.savedURL == nil {
+                    dismissal
+                }
+            } actions: {
+                if operation.decoding {
+                    if operation.savedURL != nil {
+                        DialogDoneButton(action: close)
+                    } else if operation.decoded != nil {
+                        Button("Save Image…", action: operation.save).keyboardShortcut(.return, modifiers: .command)
+                            .modifier(DialogActionStyle(prominent: true)).disabled(operation.busy || operation.nameError != nil)
                     } else {
-                        Button(operation.copied ? "Copied" : "Copy Result", action: operation.copy).modifier(DialogActionStyle())
-                            .disabled(operation.encoded == nil || operation.busy).help("Copies the complete Base64, including any data URL prefix")
-                        Button("Encode", action: operation.run).keyboardShortcut(.return, modifiers: .command)
-                            .modifier(DialogActionStyle(prominent: true)).disabled(operation.source == nil || operation.busy)
+                        Button("Decode", action: operation.run).keyboardShortcut(.return, modifiers: .command)
+                            .modifier(DialogActionStyle(prominent: true)).disabled(operation.input.isEmpty || operation.busy)
                     }
+                } else if operation.source == nil {
+                    ReviewDefaultButton(title: "Choose Image…", action: operation.chooseImage).disabled(operation.busy)
+                } else {
+                    Button(operation.copied ? "Copied" : "Copy Result", action: operation.copy).modifier(DialogActionStyle())
+                        .disabled(operation.encoded == nil || operation.busy).help("Copies the complete Base64, including any data URL prefix")
+                    ReviewDefaultButton(title: "Encode", action: operation.run).disabled(operation.source == nil || operation.busy)
                 }
             }
-        }.onExitCommand { if !operation.saving { close() } }
+        }.onExitCommand(perform: dismissal.perform)
         .padding(20).frame(minWidth: 520, minHeight: 540)
     }
 
