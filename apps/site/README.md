@@ -42,7 +42,7 @@ The unused-code audit is `npx --yes knip@6.48.0` from this directory. Its explic
 
 ## Design and assets
 
-[DESIGN.md](DESIGN.md) contains the full Air 1.8.2 contract and product appendix. `src/styles/air.css` is unchanged upstream CSS; `global.css` holds product composition and `artwork.css` isolates decorative paper/native-capture exceptions. [Bundle provenance](../../docs/air/bundle.json) pins upstream files by SHA-256. Neither build nor runtime reads sibling repositories.
+[DESIGN.md](DESIGN.md) contains the full Air 1.8.3 contract and product appendix. `src/styles/air.css` is unchanged upstream CSS; `global.css` holds product composition and `artwork.css` isolates decorative paper/native-capture exceptions. [Bundle provenance](../../docs/air/bundle.json) pins upstream files by SHA-256. Neither build nor runtime reads sibling repositories.
 
 `npm run sync:assets` derives the circular mark and copies canonical native captures and the OG card. See [asset sources](../../assets/README.md) and [social regeneration](../../docs/air/social-previews.md). Product-specific social content is in [artwork/social.json](../../artwork/social.json). Build first, render with `node ../../docs/air/render-social.mjs`, then rebuild and verify. The renderer requires an explicitly installed `puppeteer-core` or `PUPPETEER_MODULE` path and Chrome; these are authoring tools, not website dependencies. Automated browser tools must follow their host’s browser-use rules.
 
