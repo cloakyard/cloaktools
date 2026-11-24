@@ -5,14 +5,20 @@ description: Install the CloakTools public beta or build it from source.
 ---
 ## Requirements
 
-CloakTools targets **macOS 27 or later on Apple silicon**. Development requires Xcode 27, its command-line tools, and XcodeGen. The current source has been built on macOS 27.2.1 with the macOS 27.2 SDK.
+CloakTools targets **macOS 27 or later on Apple silicon**. Development requires Xcode 27, its command-line tools, CMake and XcodeGen. The current source has been built on macOS 27.2.1 with the macOS 27.2 SDK.
 
 ## Install the public beta
 
-1. Download the [CloakTools 0.6.0 beta DMG](https://github.com/cloakyard/cloaktools/releases/download/v0.6.0-beta.20261118.6/CloakTools-v0.6.0-beta.20261118.6.dmg). The [release notes](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-beta.20261118.6) include the build number and SHA-256 checksums.
+1. Download the [CloakTools 0.7.0 beta DMG](https://github.com/cloakyard/cloaktools/releases/download/v0.7.0-beta.20261124.3/CloakTools-v0.7.0-beta.20261124.3.dmg). The [release notes](https://github.com/cloakyard/cloaktools/releases/tag/v0.7.0-beta.20261124.3) include the build number and SHA-256 checksums.
 2. Open the disk image, drag CloakTools to Applications, eject the image and open the installed copy.
 3. This beta is ad-hoc signed and unnotarized. If macOS blocks first launch, review [Apple’s instructions](https://support.apple.com/en-us/102445) before choosing whether to open it.
 4. Choose **Settings → About → Check for Updates**. Automatic checks and downloads are optional. Future updates arrive through a signed feed.
+
+## New in this beta
+
+Choose **File → Generate Subtitles…** to transcribe a recording on your Mac. Review the captions, add translation languages if needed, then export one SRT per language. macOS can download language models on first use.
+
+Choose **File → Optimize Media…** to prepare smaller copies of images, PDFs, audio and video. Review the changes before saving. The menu-bar launcher and automatic clipboard and folder workflows are optional.
 
 ## Build from source
 

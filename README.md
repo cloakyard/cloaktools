@@ -7,7 +7,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
   <img src="https://img.shields.io/badge/platform-macOS%2027%2B%20%C2%B7%20Apple%20silicon-lightgrey" alt="Requires macOS 27+, Apple silicon only">
-  <img src="https://img.shields.io/badge/beta-0.6.0-3067CD" alt="Public beta 0.6.0">
+  <img src="https://img.shields.io/badge/beta-0.7.0-3067CD" alt="Public beta 0.7.0">
   <img src="https://img.shields.io/badge/Swift-6-F05138?logo=swift&logoColor=white" alt="Swift 6">
   <img src="https://img.shields.io/badge/SwiftUI-Liquid%20Glass-8A2BE2" alt="SwiftUI · Liquid Glass">
 </p>
@@ -23,7 +23,7 @@
 
 A native macOS toolkit for creating files, preparing copies and opening links in the right app. Everyday tools are included; Developer Tools is an optional first-run choice. The SwiftUI app is separate from its Air website. The capture above shows Finder Tools in the Workbench, with separate native Settings.
 
-The [public beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-beta.20261118.6) is **0.6.0, build 20261118.6**. Download the DMG from the release page or check for updates in About. See [release instructions](docs/RELEASE.md) for the signing boundary and [the usage guide](docs/USAGE.md) for every implemented workflow.
+The [public beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.7.0-beta.20261124.3) is **0.7.0, build 20261124.3**. Download the DMG from the release page or check for updates in About. See [release instructions](docs/RELEASE.md) for the signing boundary and [the usage guide](docs/USAGE.md) for every implemented workflow.
 
 ## Features
 
@@ -39,7 +39,7 @@ The [public beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-be
 | **Route links** | Separate web/email defaults with guarded restoration, ordered rules, pinned destinations, per-role fallback, an offline tester and explicit one-time bypass. |
 | **Work from Finder** | Workspace-scoped Finder menus, selected-item Services and compact native operation dialogs. |
 
-The development build also includes **Generate Subtitles** for reviewed, multilingual SRT files, **Optimize Media** for mixed batches and an optional menu-bar launcher. See the [Clop parity record](docs/verification/CLOP-PARITY.md) for tested workflows and remaining gaps.
+The 0.7.0 beta adds **Generate Subtitles** for reviewed, multilingual SRT files, **Optimize Media** for mixed batches and an optional menu-bar launcher. See the [Clop parity record](docs/verification/CLOP-PARITY.md) for tested workflows and remaining gaps.
 
 ### Current boundaries
 
@@ -55,11 +55,11 @@ If a destination app or default change is unavailable, use **Settings → Links 
 
 ## Privacy
 
-No accounts, analytics, cloud processing, link prefetch or browsing-history persistence. Processing and settings stay local. Sparkle update checks/downloads are manual unless you enable them in About. See [update publishing](docs/UPDATES.md). Cloud-managed folders and chosen destination apps follow their own policies. Manual exports publish reviewed new copies. Development builds can also optimize newly copied images or apply a saved recipe to new files in folders you choose. Both automations start off. Read [Privacy](PRIVACY.md) and [Security](SECURITY.md) for exact storage and reporting boundaries.
+No accounts, analytics, cloud processing, link prefetch or browsing-history persistence. Processing and settings stay local. Sparkle update checks/downloads are manual unless you enable them in About. See [update publishing](docs/UPDATES.md). Cloud-managed folders and chosen destination apps follow their own policies. Manual exports publish reviewed new copies. The app can also optimize newly copied images or apply a saved recipe to new files in folders you choose. Both automations start off. Read [Privacy](PRIVACY.md) and [Security](SECURITY.md) for exact storage and reporting boundaries.
 
 ## Getting started
 
-Download the [beta DMG](https://github.com/cloakyard/cloaktools/releases/download/v0.6.0-beta.20261118.6/CloakTools-v0.6.0-beta.20261118.6.dmg) for **macOS 27 or later on Apple silicon**. Drag CloakTools to Applications. To build from source, install Xcode 27, CMake and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
+Download the [beta DMG](https://github.com/cloakyard/cloaktools/releases/download/v0.7.0-beta.20261124.3/CloakTools-v0.7.0-beta.20261124.3.dmg) for **macOS 27 or later on Apple silicon**. Drag CloakTools to Applications. To build from source, install Xcode 27, CMake and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
 
 ```sh
 brew install xcodegen cmake

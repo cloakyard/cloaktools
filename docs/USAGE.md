@@ -1,10 +1,10 @@
 # CloakTools usage guide
 
-This guide follows the development Workbench. The published 0.6.0 beta uses the earlier settings sidebar. Commands run from the repository root unless stated otherwise. For an overview, build status and contribution guidance, see the [project README](../README.md).
+This guide follows the public 0.7.0 beta Workbench. Commands run from the repository root unless stated otherwise. For an overview, build status and contribution guidance, see the [project README](../README.md).
 
 **Small tasks. Less friction.** A native macOS toolkit in the Cloakyard family.
 
-Canonical website: [tools.cloakyard.com](https://tools.cloakyard.com). The [source repository](https://github.com/cloakyard/cloaktools) is available; the [public beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-beta.20261118.2) includes the installer and checksums.
+Canonical website: [tools.cloakyard.com](https://tools.cloakyard.com). The [source repository](https://github.com/cloakyard/cloaktools) is available; the [public beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.7.0-beta.20261124.3) includes the installer and checksums.
 
 ![CloakTools first-run tool choice](../assets/screenshots/tools-welcome-light.png)
 
@@ -269,7 +269,7 @@ This is a full-clip exporter, without trimming or a target file-size guarantee. 
 
 ## Generate subtitles
 
-In the development build, open **File → Generate Subtitles…** or **Images, PDFs & Media → Generate subtitles**. Choose a local audio or video file, select its spoken language, then choose **Generate Captions**. **Download & Generate** appears when macOS needs the speech language. The tool accepts the same inputs and limits as Export Media and requires an audio track.
+Open **File → Generate Subtitles…** or **Images, PDFs & Media → Generate subtitles**. Choose a local audio or video file, select its spoken language, then choose **Generate Captions**. **Download & Generate** appears when macOS needs the speech language. The tool accepts the same inputs and limits as Export Media and requires an audio track.
 
 Play a caption from its timestamp and edit its text. To export a single original-language SRT, choose **Export SRT…**. For translations, choose **Add Languages…**, select any available targets and choose **Translate**. Leave **Include original** selected to keep the source track too. Available targets depend on the spoken language and the models on this Mac. macOS can request a language download.
 
@@ -396,11 +396,11 @@ The [complete roadmap](ROADMAP.md) retains all six subsequent milestones. Milest
 
 ## Shortcuts and additional Finder folders
 
-The public beta includes **Make Image Fit**, **Make Markdown Digest** and **Review Saved File Set**. The development build also includes **Optimize Media File**. The image, digest and optimization actions return a file to the next Shortcuts action. File-set automation opens the existing destination/review flow and never creates silently. Developer Tools filtering still applies to saved sets.
+The public beta includes **Make Image Fit**, **Make Markdown Digest** and **Review Saved File Set**. The 0.7.0 beta also includes **Optimize Media File**. The image, digest and optimization actions return a file to the next Shortcuts action. File-set automation opens the existing destination/review flow and never creates silently. Developer Tools filtering still applies to saved sets.
 
 On this Mac, the Shortcuts library discovers the actions, but macOS rejects live execution without a team signing identity. General explains this limitation instead of offering a failing launch path. Use the equivalent tools directly in the local preview. Additional Finder folders likewise require matching app-group signing; Add/Renew/Remove and bounded bookmark storage are implemented behind that gate. Both features require signed runtime verification before release.
 
-## Optimize Media in the development build
+## Optimize Media
 
 Open **Images, PDFs & Media → Optimize media files**, **File → Optimize Media…** or the wrench-and-screwdriver menu bar item. In Finder, select media and choose **Services → Optimize Media with CloakTools**. Add files, drop them onto the review, or paste copied files or an image. A batch accepts up to 100 items.
 
@@ -421,4 +421,4 @@ For a same-format preview, the row’s actions menu also offers **Replace Origin
 
 **Show Drop Zone** opens a floating target near the pointer. Drop local files or choose a saved optimization recipe there. A prepared item has a drag handle in its review and the latest result appears in the drop zone. Record a system-wide **Show Drop Zone shortcut** in General to call it from another app. After closing a review or relaunching, **File → Restore an Original…** accepts the original inside a CloakTools Backup folder and reviews its destination.
 
-The development build also encodes animated WebP, JPEG XL, HEVC (hardware or x265), VP9 WebM, AV1 MKV, MP3 and Ogg Opus locally. For JPEG XL, a JPEG with original geometry keeps a recoverable copy of its exact JPEG bytes. Choose **Reconstruct original JPEG** to recover them. Audio loudness targets use LUFS. Run the bundled `cloakopt --help` for command-line format, crop, scale, speed, bitrate and loudness options.
+The 0.7.0 beta also encodes animated WebP, JPEG XL, HEVC (hardware or x265), VP9 WebM, AV1 MKV, MP3 and Ogg Opus locally. For JPEG XL, a JPEG with original geometry keeps a recoverable copy of its exact JPEG bytes. Choose **Reconstruct original JPEG** to recover them. Audio loudness targets use LUFS. Run the bundled `cloakopt --help` for command-line format, crop, scale, speed, bitrate and loudness options.

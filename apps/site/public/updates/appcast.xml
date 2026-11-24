@@ -9,6 +9,30 @@ IMPORTANT: This file was signed by Sparkle. Any modifications to this file requi
         <description>Signed updates for CloakTools.</description>
         <language>en</language>
         <item>
+            <title>0.7.0</title>
+            <pubDate>Tue, 24 Nov 2026 16:38:46 +0530</pubDate>
+            <sparkle:version>20261124.3</sparkle:version>
+            <sparkle:shortVersionString>0.7.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>27.0</sparkle:minimumSystemVersion>
+            <description sparkle:format="markdown"><![CDATA[# CloakTools 0.7.0 beta (build 20261124.3)
+
+**Generate Subtitles** turns a local video or audio recording into timed SRT files. Choose the spoken language, review and edit the captions, then add any supported translations. Each exported language uses the same timestamps. Speech and translation run on your Mac. macOS may download language models on first use.
+
+**Optimize Media** prepares smaller copies of images, PDFs, audio and video in one batch. Compare sizes before saving, reuse export recipes and undo a batch where supported. The menu-bar launcher, clipboard optimization and watched folders are optional.
+
+## Install or update
+
+- **Already using CloakTools?** Open **Settings → About → Check for Updates…**, then choose **Install Update** and **Install and Relaunch**.
+- **First install?** Download **CloakTools-v0.7.0-beta.20261124.3.dmg** and drag CloakTools to Applications. This beta requires Apple silicon and macOS 27 or later. It is ad-hoc signed and unnotarized. [Apple’s guidance for opening apps](https://support.apple.com/en-us/102445)
+- **Verify a download.** The attached **SHA256SUMS.txt** covers both the DMG and the Sparkle ZIP. Sparkle checks the signed feed and verifies the ZIP before extraction.
+
+## Tested and known limits
+
+The release candidate passed 252 core tests and 41 hosted app tests on macOS 27.2.1. Subtitle validation covered a full 30-minute recording, interrupted translations and matching cue times across languages. Review generated captions for recognition and translation errors. Live Shortcuts execution and additional signed Finder folder scopes require a provisioned build. macOS 27.0 and spoken VoiceOver still need live verification.
+]]></description>
+            <enclosure url="https://github.com/cloakyard/cloaktools/releases/download/v0.7.0-beta.20261124.3/CloakTools-20261124.3.zip" length="91217480" type="application/octet-stream" sparkle:edSignature="ENe9AN8v9L9sZDWQaCLUUxgbXVTzKr7rHp7+jkWsZ5pD+1DbfGSpY7P8P2ZrZ+SC372pftf+2fTFWLkaht2oAA=="/>
+        </item>
+        <item>
             <title>0.6.0</title>
             <pubDate>Wed, 18 Nov 2026 20:42:06 +0530</pubDate>
             <sparkle:version>20261118.6</sparkle:version>
@@ -19,6 +43,6 @@ IMPORTANT: This file was signed by Sparkle. Any modifications to this file requi
     </channel>
 </rss>
 <!-- sparkle-signatures:
-edSignature: tk3SczIBEi+DLhvgThpuf37AGuQ4uObf0ecb00YEfLPq1zrVhfYXIFq0oDUYa4TqWQlMsXqBfunK8y6R+MZlAg==
-length: 1262
+edSignature: 2xHu4CHen7Z3QyNixrVa6eZmEFUnoT74DKWAY460isaZiGx4yHl5x8v4KY7nVV9HfxoGTSGzzL3AlP8L7J1IBA==
+length: 3673
 -->

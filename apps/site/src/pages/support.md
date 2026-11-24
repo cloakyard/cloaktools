@@ -5,7 +5,7 @@ description: Practical help for the CloakTools public beta.
 ---
 ## Installing and updating
 
-Download the [official beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-beta.20261118.6) and follow the [installation guide](/install/). In the installed app, open **Settings → About → Check for Updates**. If the feed cannot be reached, retry when you are online. The same release page provides the DMG for manual installation.
+Download the [official beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.7.0-beta.20261124.3) and follow the [installation guide](/install/). In the installed app, open **Settings → About → Check for Updates**. If the feed cannot be reached, retry when you are online. The same release page provides the DMG for manual installation.
 
 ## A tool has moved
 

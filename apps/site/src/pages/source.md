@@ -5,9 +5,9 @@ description: A small native core, a thin app, and an independent website.
 ---
 ## Source is available
 
-The [CloakTools source repository](https://github.com/cloakyard/cloaktools) includes the native app, this website, build instructions and verification records. Download the [public beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.6.0-beta.20261118.6) or follow the [installation and source build guide](/install/).
+The [CloakTools source repository](https://github.com/cloakyard/cloaktools) includes the native app, this website, build instructions and verification records. Download the [public beta](https://github.com/cloakyard/cloaktools/releases/tag/v0.7.0-beta.20261124.3) or follow the [installation and source build guide](/install/).
 
-The app is written in Swift using SwiftUI, AppKit, FinderSync, Core Image, ImageIO, Vision, PDFKit and AVFoundation/AVKit. The app embeds Sparkle 2 for signed updates. Its headless core has no third-party dependencies, browser engine, bundled language runtime or cloud rules service. The website is a separate static Astro build using a pinned local copy of **Cloakyard Air 1.7.5**.
+The app is written in Swift using SwiftUI, AppKit, FinderSync, Core Image, ImageIO, Vision, PDFKit and AVFoundation/AVKit. The app embeds Sparkle 2 for signed updates. The native package uses libwebp, and the app bundles local media codecs with corresponding source archives. Apple Speech and Translation handle subtitle generation on the Mac. The website is a separate static Astro build using a pinned local copy of **Cloakyard Air 1.8.3**.
 
 ## Project structure
 
@@ -43,4 +43,4 @@ The local repository includes the full macOS feature audit and the revised roadm
 
 CloakTools uses the [MIT License](/license/). Contributions should include focused verification and preserve user files. Native app and website checks are independent. See the repository’s contribution and security documents before submitting a change.
 
-The 0.6.0 verification passed 240 core tests and 23 hosted app tests. Live checks cover light/dark and contrast/transparency layouts, reduced-motion navigation, keyboard-driven image fitting, Shortcuts action discovery and exact link delivery. All tested system settings were restored. Shortcuts execution is blocked by the ad-hoc signing identity; signed Finder-folder checks and notarization are deferred. Spoken VoiceOver, macOS 27.0 and broader installer/filesystem/codec checks remain open. The public beta includes signed Sparkle updates with optional automatic checks.
+The 0.7.0 release candidate passed 252 core tests and 41 hosted app tests. Subtitle checks covered a 30-minute recording, first-use French speech models, multilingual SRT timing and interrupted translations. Shortcuts execution and additional Finder folders require a provisioned build. The public beta is ad-hoc signed and unnotarized. Spoken VoiceOver, macOS 27.0 and broader installer coverage remain open.

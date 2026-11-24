@@ -1,6 +1,6 @@
 # Local packages and future releases
 
-Version 0.6.0 targets Apple silicon and macOS 27+. Signing and notarization are deferred by the project owner, who does not currently have a paid Apple developer account. The local preview is usable without that account. Additional signed Finder folders and live Shortcuts execution are not supported by this ad-hoc package.
+Version 0.7.0 targets Apple silicon and macOS 27+. Signing and notarization are deferred by the project owner, who does not currently have a paid Apple developer account. The local preview is usable without that account. Additional signed Finder folders and live Shortcuts execution are not supported by this ad-hoc package.
 
 ## Local preview
 
@@ -11,7 +11,7 @@ python3 scripts/release.py --preview
 
 The script generates the normal XcodeGen project and builds Release serially into `apps/macos/build/PreviewRelease`. It verifies the app and embedded Finder extension with `codesign --verify --deep --strict`, checks version/build agreement and arm64 architecture, and writes a new timestamped directory under `apps/macos/build/Packages` containing:
 
-- `CloakTools-0.6.0-local-preview.zip`
+- `CloakTools-0.7.0-local-preview.zip`
 - `SHA256SUMS` and `manifest.json`
 - `README.txt` and the build log
 
