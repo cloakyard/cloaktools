@@ -104,7 +104,7 @@ The static website lives in [`apps/site`](apps/site/README.md), with its own ins
 
 ## Design and assets
 
-The website follows the complete portable [Air contract and product appendix](apps/site/DESIGN.md), with a pinned local Air 1.7.5 bundle. [Native design](NATIVE_DESIGN.md) preserves SwiftUI, SF Symbols and macOS conventions.
+The website follows the complete portable [Air contract and product appendix](apps/site/DESIGN.md), with a pinned local Air 1.8.2 bundle. [Native design](NATIVE_DESIGN.md) preserves SwiftUI, SF Symbols and macOS conventions.
 
 [Asset documentation](assets/README.md) owns the editable Icon Composer source, circular web mark, actual light/dark app captures and shared Air social card. The unique finite animation fans three documents into a tool tray, with a static fallback and deliberate replay. Social metadata uses the same 1200 × 630 card recipe as CloakDrop and CloakRoll.
 

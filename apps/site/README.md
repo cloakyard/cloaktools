@@ -38,11 +38,11 @@ node ../../scripts/check-readmes.mjs
 
 Verification runs standalone Air integrity/portability checks, Astro diagnostics, builds seven routes, checks navigation/anchors/assets, complete reading contents, landmarks, metadata, pinned Air hashes and the shared OG image. Browser acceptance additionally covers every route at the Air viewport matrix, both themes, keyboard focus, native menu/contents behavior, zoom, reduced motion, forced colors and no JavaScript. The [dated audit](../../docs/air/AUDIT-2026-11-17.md) distinguishes measured checks from runtime limits.
 
-The unused-code audit is `npx --yes knip@6.45.1` from this directory. Its explicit `Reading.astro` entry is used by Markdown frontmatter; shared Air reference modules are standalone authoring assets, not runtime dependencies.
+The unused-code audit is `npx --yes knip@6.48.0` from this directory. Its explicit `Reading.astro` entry is used by Markdown frontmatter; shared Air reference modules are standalone authoring assets, not runtime dependencies.
 
 ## Design and assets
 
-[DESIGN.md](DESIGN.md) contains the full Air 1.7.5 contract and product appendix. `src/styles/air.css` is unchanged upstream CSS; `global.css` holds product composition and `artwork.css` isolates decorative paper/native-capture exceptions. [Bundle provenance](../../docs/air/bundle.json) pins upstream files by SHA-256. Neither build nor runtime reads sibling repositories.
+[DESIGN.md](DESIGN.md) contains the full Air 1.8.2 contract and product appendix. `src/styles/air.css` is unchanged upstream CSS; `global.css` holds product composition and `artwork.css` isolates decorative paper/native-capture exceptions. [Bundle provenance](../../docs/air/bundle.json) pins upstream files by SHA-256. Neither build nor runtime reads sibling repositories.
 
 `npm run sync:assets` derives the circular mark and copies canonical native captures and the OG card. See [asset sources](../../assets/README.md) and [social regeneration](../../docs/air/social-previews.md). Product-specific social content is in [artwork/social.json](../../artwork/social.json). Build first, render with `node ../../docs/air/render-social.mjs`, then rebuild and verify. The renderer requires an explicitly installed `puppeteer-core` or `PUPPETEER_MODULE` path and Chrome; these are authoring tools, not website dependencies. Automated browser tools must follow their host’s browser-use rules.
 

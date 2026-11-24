@@ -39,4 +39,4 @@ jobs:
       - run: node ../../scripts/check-readmes.mjs
       - run: npm run verify
       - run: npm run check:worker
-      - run: npx --yes knip@6.45.1
+      - run: npx --yes knip@6.48.0

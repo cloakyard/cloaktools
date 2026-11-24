@@ -18,16 +18,16 @@
     "test:air-links": "node ../../scripts/test-air-links.mjs"
   },
   "dependencies": {
-    "astro": "7.4.12",
-    "@astrojs/sitemap": "3.7.5"
+    "astro": "7.4.13",
+    "@astrojs/sitemap": "3.7.6"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
     "typescript": "6.0.3",
-    "wrangler": "4.162.0"
+    "wrangler": "4.167.0"
   },
   "engines": {
     "node": ">=26.0.0"
   },
-  "packageManager": "npm@12.2.2"
+  "packageManager": "npm@12.2.3"
 }
